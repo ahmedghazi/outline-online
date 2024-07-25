@@ -1,0 +1,30 @@
+import { SliderUI } from "@/app/types/schema";
+import React from "react";
+import Figure from "../ui/Figure";
+import Slider from "../ui/slick-slider";
+import clsx from "clsx";
+
+type Props = {
+  input: SliderUI;
+};
+
+const ModuleSliderUI = ({ input }: Props) => {
+  return (
+    <div
+      className={clsx(
+        "module moduke--slider-ui",
+        input.size && `col-span-${input.size}`
+      )}>
+      <Slider settingsOverride={{ adaptiveHeight: true }}>
+        {input.items?.map((item, i) => (
+          <div className='slide' key={i}>
+            <Figure asset={item.image?.asset} width={600} />
+            <figcaption className='py-2'>{item.caption}</figcaption>
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+};
+
+export default ModuleSliderUI;

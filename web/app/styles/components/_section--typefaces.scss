@@ -1,0 +1,42 @@
+.section--typefaces {
+  min-height: calc(var(--vh) * 100);
+  padding: var(--space-md) var(--space-lg);
+  padding-top: var(--header-height);
+
+  .items {
+    border-top: var(--border);
+  }
+  .item {
+    border-bottom: var(--border);
+    padding: 0.5rem 0;
+
+    .typeface--item {
+      display: flex;
+      justify-content: space-between;
+      &.is-active {
+        .title {
+          font-size: var(--text-xl);
+        }
+      }
+    }
+
+    .title {
+      font-size: var(--text-lg);
+      transition: font-size 0.2s;
+      flex: 2;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .actions {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: end;
+    }
+  }
+}

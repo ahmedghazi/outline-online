@@ -1,0 +1,27 @@
+.modules {
+  section {
+    width: 100%;
+    // margin-bottom: var(--space-xl);
+    &:last-child {
+      // margin-bottom: 0;
+    }
+
+    &.module--liste-talent-ui {
+      // @media screen and (min-width: 1080px) {
+      //   padding-left: 186px;
+      //   padding-right: 186px;
+      // }
+    }
+
+    &.module--images {
+      @media screen and (min-width: 1080px) {
+        // .col-span-1.row-span-1 {
+        //   width: calc(100% / 3 - var(--space-md) / 1);
+        // }
+        // .col-span-2.row-span-2 {
+        //   width: calc(100% / 3 * 2);
+        // }
+      }
+    }
+  }
+}

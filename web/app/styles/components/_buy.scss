@@ -1,0 +1,48 @@
+._row {
+}
+.buy-modal {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  padding: var(--header-height) var(--space-lg);
+  background-color: white;
+  .body {
+    max-height: calc(var(--vh) * 100 - var(--header-height) * 2);
+    overflow-y: auto;
+  }
+  & > .items {
+    border-top: var(--border);
+  }
+  .typeface-item {
+    &.is-active {
+      & > ._row {
+        border: none;
+      }
+      .btn-toggle {
+        transform: rotate(45deg);
+      }
+    }
+    .btn-toggle {
+      transition: transform 0.2s;
+    }
+    .group {
+      border-bottom: var(--border);
+    }
+    ._row {
+      padding: 0.5em 0;
+      &:not(:last-child) {
+        border-bottom: var(--border);
+      }
+    }
+  }
+
+  .label {
+    padding: 0.5em 0;
+  }
+
+  .atc-all {
+    display: block;
+    width: 100%;
+    padding: 0.3em;
+  }
+}

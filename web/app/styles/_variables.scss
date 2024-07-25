@@ -1,0 +1,60 @@
+/* BASE VARIABLES
+ *******************/
+:root {
+  --app-height: 100vh;
+  --header-height: 60px;
+  --color-bg: #efefef;
+  --color-primary: #000;
+  --color-secondary: #fff;
+  --color-hover: #333;
+  --color-muted: #999999;
+  --color-gray: #ebeded;
+  --color-green: #00e509;
+
+  --font-primary: "Literature-Regular", "Helvetica Neue", "HelveticaNeueRoman",
+    "HelveticaNeue-Roman", "Helvetica Neue Roman", "TeXGyreHerosRegular",
+    "Helvetica", "Arial", sans-serif;
+
+  --space-xs: 0.4em; //5
+  --space-sm: 0.625em; //10
+  --space-md: 1.25rem; //20
+  --space-lg: 2.5rem; //40
+  --space-xl: 3.75rem; //60
+  --space-xxl: 6.25rem; //100
+
+  --text-md-mobile: 1rem; //16px
+
+  --text-xs: 0.73333333rem; //11px
+  --text-sm: 0.86666667rem; //13px
+  --text-md: 0.875rem; //14px
+  --text-lg: 3.375rem;
+  --text-xl: 10vw;
+
+  /*
+  xs: 8pt 10px
+  md: 12pt 16px
+  lg: 18pt 24px
+  xl: 30pt 40px
+  */
+
+  // --cubic: cubic-bezier(0.53, 0, 0.36, 1);
+  --cubic: cubic-bezier(0.775, 0, 0.17, 1.005);
+
+  // --text-xl: clamp(26px, 5.21vw, 75px);
+
+  --border-width: 1px;
+  --border: var(--border-width) solid;
+  --border-width-lg: 2px;
+  --border-lg: var(--border-width-lg) solid;
+
+  --gutter: 9px;
+
+  --screen-sm: 768px;
+  --screen-md: 1080px;
+  --screen-lg: 1441px;
+}
+
+/* Breakpoints */
+$sm: 768px;
+$md: 1080px;
+$lg: 1441px;

@@ -1,0 +1,139 @@
+img {
+  max-width: 100%;
+}
+
+// .hidden {
+//   display: none;
+// }
+
+.center-x-y {
+  // @include center_it;
+  display: grid;
+  place-items: center;
+}
+
+// .ar-a4 {
+//   img {
+//     aspect-ratio: 1/1.414;
+//   }
+// }
+figure {
+}
+ul.list-with-comma {
+  display: flex;
+  li {
+    display: flex;
+  }
+  li:not(:last-child):after {
+    content: ", ";
+    color: inherit;
+    padding-right: 0.2em;
+  }
+}
+
+.outline {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: var(--border);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &.is-rounded {
+    border-radius: 2rem;
+  }
+  &.is-rounded::before,
+  &.is-rounded::after {
+    border-radius: 2rem;
+  }
+}
+
+.b-t {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    height: var(--border-width);
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-primary);
+    // opacity: 0.5;
+  }
+}
+.b-b {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    height: var(--border-width);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-primary);
+    // opacity: 0.5;
+  }
+}
+
+.hide-sb {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.hide-s::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.lome-logo {
+  // @include debugSquare(176px);
+}
+
+ul.list-with-comma {
+  li {
+    display: flex;
+  }
+  li:not(:last-child):after {
+    content: ", ";
+    color: inherit;
+    padding-right: 0.2em;
+  }
+}
+
+@keyframes wave {
+  from {
+    flex: 2 0 1rem !important;
+  }
+
+  to {
+    flex: 2 0 10rem !important;
+  }
+}
+
+.gradient {
+  background: rgb(235, 234, 229);
+  background: linear-gradient(
+    90deg,
+    rgba(235, 234, 229, 1) 100% rgba(235, 234, 229, 0) 0%
+  );
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.col-span-8 {
+  grid-column: span 8 / span 8;
+}
+.col-span-9 {
+  grid-column: span 9 / span 9;
+}
+@media (min-width: 1080px) {
+  .md\:grid-cols-16 {
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+  }
+  .md\:col-span-8 {
+    grid-column: span 8 / span 8;
+  }
+}

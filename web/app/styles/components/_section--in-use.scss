@@ -1,0 +1,38 @@
+.section--in-use {
+  height: calc(var(--vh) * 100 - calc(var(--header-height) * 2));
+  position: relative;
+  overflow: clip;
+  .thumbnails {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(var(--vw) * 100);
+    overflow-x: scroll;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+
+    .thumbnail {
+      flex-shrink: 0;
+      img {
+        height: toRem(40) !important;
+        width: auto !important;
+      }
+    }
+  }
+  .modal {
+    position: absolute;
+    inset: var(--header-height);
+    display: flex;
+    justify-content: center;
+    img {
+      height: calc(
+        var(--vh) * 100 - calc(var(--header-height) * 2) - 1em
+      ) !important;
+      width: auto !important;
+    }
+    figcaption {
+      text-align: center;
+    }
+  }
+}

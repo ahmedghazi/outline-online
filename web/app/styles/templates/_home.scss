@@ -1,0 +1,19 @@
+html:has(.template--home) {
+  overflow: hidden;
+  body {
+    overflow: auto;
+  }
+}
+body[data-template="is-home"],
+.template--home {
+  scroll-snap-type: y proximity;
+  .content--home > section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+  }
+}
+
+@media all and (max-width: $sm) {
+  .page-home {
+  }
+}

@@ -1,0 +1,28 @@
+body[data-template="is-trials"],
+.template--trials {
+  main {
+    // padding-top: var(--header-height);
+  }
+
+  .list {
+    border-top: var(--border);
+  }
+  ._row {
+    border-bottom: var(--border);
+    padding: 0.5em 0;
+  }
+  .btn-toggle {
+    transition: transform 0.2s;
+  }
+  .item {
+    &.is-active {
+      .btn-toggle {
+        transform: rotate(90deg);
+      }
+    }
+    .grid {
+    }
+  }
+  @media all and (max-width: $md) {
+  }
+}
