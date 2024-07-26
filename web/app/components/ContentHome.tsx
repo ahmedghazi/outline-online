@@ -13,8 +13,8 @@ const ContentHome = ({ input }: Props) => {
   return (
     <div className='content--home'>
       {/* {input.obj3ds && <section className='obj3ds'>obj3ds</section>} */}
-      <section className='obj3ds'>obj3ds</section>
-      {/* {input.obj3ds && <Obj3dsAll input={input.obj3ds} />} */}
+      {/* <section className='obj3ds'>obj3ds</section> */}
+      {input.obj3ds && <Obj3ds input={input.obj3ds} />}
       {input.typefaces && <SectionTypeFaces input={input.typefaces} />}
       {input.inUse && <SectionInUse input={input.inUse} />}
     </div>
