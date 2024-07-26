@@ -3,7 +3,7 @@ import { Home } from "../types/schema";
 import SectionInUse from "./SectionInUse";
 import SectionTypeFaces from "./SectionTypeFaces";
 import Obj3ds from "./Obj3ds";
-import Obj3dsAll from "./Obj3dsAll";
+// import Obj3dsAll from "./Obj3dsAll";
 
 type Props = {
   input: Home;

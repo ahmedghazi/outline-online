@@ -18,8 +18,10 @@ const BundleUI = ({ input, title }: Props) => {
           {input.price && (
             <AddToCart
               price={input.price}
-              name={`Bundle ${title} — ${input.title}` || ""}
+              title={`Bundle ${title} — ${input.title}` || ""}
               category='bundle'
+              id='eeeeee'
+              blurb='blurb'
             />
           )}
         </div>

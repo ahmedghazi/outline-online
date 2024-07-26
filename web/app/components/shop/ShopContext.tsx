@@ -80,7 +80,7 @@ function licenseTypeReducer(state: any, action: any) {
 
 type ContextProps = {
   ready: boolean;
-  licenses: LicenseSize[];
+  licenses: LicenseSize[] | undefined;
   // userStatus: string;
   // customer: any;
   cartObject: any;
@@ -95,8 +95,8 @@ type ContextProps = {
   setLicenseSizeProfil: Function;
   dataAttributes: Array<string> | null;
   setDataAttributes: Function;
-  isVip: boolean;
-  setIsVip: Function;
+  // isVip: boolean;
+  // setIsVip: Function;
   // variant: {
   //   scope: string;
   //   value: Variant | null;
@@ -166,12 +166,12 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
 
     if (!currentProduct) return;
 
-    const _dataAttributes = _getDataAttributes(
-      currentProduct,
-      licenseTypeProfil,
-      licenseSizeProfil
-    );
-    if (_dataAttributes) setDataAttributes(_dataAttributes);
+    // const _dataAttributes = _getDataAttributes(
+    //   currentProduct,
+    //   licenseTypeProfil,
+    //   licenseSizeProfil
+    // );
+    // if (_dataAttributes) setDataAttributes(_dataAttributes);
   }, [currentProduct, licenseTypeProfil, licenseSizeProfil]);
 
   // const _getDataAttributes = () => {

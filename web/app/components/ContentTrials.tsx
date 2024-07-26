@@ -89,7 +89,7 @@ const ContentTrials = ({ input }: Props) => {
             <TypeFaceItem key={i} input={item} />
           ))}
       </div>
-      <Dialog>
+      {/* <Dialog>
         <div className='form'>
           Licencee Information:      Website: example.com     *Email:
           info@example.com Name:     *First Name:     *Last Name: Company:    
@@ -97,7 +97,7 @@ const ContentTrials = ({ input }: Props) => {
           *City:     County: *Country: ✓ I agree with the EULA ● ✓ Subscribe to
           Outline Online Newsletter! ●
         </div>
-      </Dialog>
+      </Dialog> */}
 
       <div className='infos'>
         <div className='grid md:grid-cols-8 gap-md'>

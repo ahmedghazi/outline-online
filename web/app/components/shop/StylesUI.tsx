@@ -20,8 +20,10 @@ const StylesUI = ({ input, title }: Props) => {
             <AddToCart
               price={input.price}
               // name={input.title || ""}
-              name={`${title} — ${input.title}` || ""}
+              title={`${title} — ${input.title}` || ""}
               category='style'
+              id='xxxx'
+              blurb='xxxx'
             />
           )}
         </div>

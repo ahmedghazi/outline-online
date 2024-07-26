@@ -1,5 +1,5 @@
 "use client";
-import { _localizeText } from "@/app/utils/utils";
+// import { _localizeText } from "@/app/utils/utils";
 import { publish } from "pubsub-js";
 import React, { useEffect, useRef, useState } from "react";
 import useShop from "./ShopContext";
