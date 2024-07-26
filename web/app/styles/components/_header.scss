@@ -11,12 +11,30 @@ header {
     opacity: 0;
   }
 
-  #nav-primary ul {
-    display: flex;
-    justify-content: space-around;
+  #nav-primary {
+    // position: sticky;
+    // transform: translateY(
+    //   calc(var(--vh) * 50 - var(--header-height) / 2 - 0.5em)
+    // );
+    ul {
+      display: flex;
+      justify-content: space-around;
+    }
   }
 
   @media all and (max-width: $md) {
     padding: var(--space-sm);
+  }
+}
+
+body[data-template="is-home"] {
+  &.has-scrolled #nav-primary {
+    transform: translateY(0);
+  }
+  #nav-primary {
+    transition: transform 0.2s;
+    transform: translateY(
+      calc(var(--vh) * 50 - var(--header-height) / 2 - 0.5em)
+    );
   }
 }

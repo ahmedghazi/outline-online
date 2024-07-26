@@ -12,7 +12,7 @@ function Controls() {
   // Get notified on changes to state
   const snap = useSnapshot(state);
   const scene = useThree((state) => state.scene);
-  console.log(snap);
+  // console.log(snap);
   return (
     <>
       {/* As of drei@7.13 transform-controls can refer to the target by children, or the object prop */}
@@ -61,7 +61,7 @@ const Trinkets = (props) => {
             ))}
           </Stage>
         </Suspense>
-        <Controls />
+        {/* <Controls /> */}
         {/* <OrbitControls ref={ref} makeDefault /> */}
       </Canvas>
     </section>

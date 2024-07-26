@@ -7,6 +7,7 @@ import { _linkResolver } from "../utils/utils";
 import Link from "next/link";
 import ScreenTime from "./ui/ScreenTime";
 import Buy from "./Buy";
+import NavPrimary from "./NavPrimary";
 
 type Props = {
   settings: Settings;
@@ -29,22 +30,10 @@ const Header = ({ settings, productsCart }: Props) => {
           </div>
         </div>
       </div>
-      <nav id='nav-primary'>
-        <ul className='flex'>
-          {settings.navPrimary?.map((item, i) => (
-            <li key={i}>
-              <Link href={_linkResolver(item.link)}>{item.label}</Link>
-            </li>
-          ))}
-
-          <li>
-            <Buy productsCart={productsCart} />
-          </li>
-          <li className=''>
-            <Cart />
-          </li>
-        </ul>
-      </nav>
+      <NavPrimary
+        navPrimary={settings.navPrimary}
+        productsCart={productsCart}
+      />
     </header>
   );
 };
