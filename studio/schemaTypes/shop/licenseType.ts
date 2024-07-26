@@ -29,6 +29,13 @@ export default defineField({
       title: 'price',
       name: 'price',
       type: 'number',
+      description: 'Price if solo, no other license type selected',
+    }),
+    defineField({
+      title: 'price multi',
+      name: 'priceMulti',
+      type: 'number',
+      description: 'Price if selected with another license type',
     }),
   ],
 })

@@ -594,9 +594,16 @@ export type LicenseType = {
   /**
    * price — `number`
    *
-   *
+   * Price if solo, no other license type selected
    */
   price?: number;
+
+  /**
+   * price multi — `number`
+   *
+   * Price if selected with another license type
+   */
+  priceMulti?: number;
 };
 
 export type LicenseSize = {
@@ -977,18 +984,16 @@ export type Obj3d = {
   gltf?: { _type: "file"; asset: SanityReference<any> };
 
   /**
-   * obj — `file`
+   * image — `image`
    *
-   *
+   * Image Fallback
    */
-  obj?: { _type: "file"; asset: SanityReference<any> };
-
-  /**
-   * mtl — `file`
-   *
-   *
-   */
-  mtl?: { _type: "file"; asset: SanityReference<any> };
+  image?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
 
   /**
    * link — `reference`

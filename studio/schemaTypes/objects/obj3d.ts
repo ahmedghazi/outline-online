@@ -16,13 +16,18 @@ export default defineField({
       name: 'gltf',
       type: 'file',
     }),
+    // defineField({
+    //   name: 'obj',
+    //   type: 'file',
+    // }),
+    // defineField({
+    //   name: 'mtl',
+    //   type: 'file',
+    // }),
     defineField({
-      name: 'obj',
-      type: 'file',
-    }),
-    defineField({
-      name: 'mtl',
-      type: 'file',
+      name: 'image',
+      type: 'image',
+      description: 'Image Fallback',
     }),
     defineField({
       name: 'link',

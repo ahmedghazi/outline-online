@@ -37,6 +37,7 @@ node 18.18.0
 
 # to do
 
+-
 - trials text
 - trials process
 - infos/lincensing -> grid
@@ -46,3 +47,5 @@ node 18.18.0
   -- home intro header top nav, nav centered
   -- nav typefaces
   -- footer sticky bottom
+  -- license type price if single or multi
+  - trinket gltf or svg

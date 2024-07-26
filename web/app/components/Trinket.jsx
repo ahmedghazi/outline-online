@@ -1,39 +1,37 @@
 "use client";
-import { useRef } from "react";
-import {
-  // ContactShadows,
-  Environment,
-  OrbitControls,
-  // PerspectiveCamera,
-} from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-// import { useGLTF } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
+import React, { useRef, useState } from "react";
+import { useLoader, useFrame } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+// import { TransformControls } from "@react-three/drei";
+import { proxy, useSnapshot } from "valtio";
 
-const Trinket = ({ input }) => {
-  const gltf = useLoader(GLTFLoader, input.gltf.asset.url);
-  // console.log(input);
+const state = proxy({ current: null, mode: 0 });
+
+const Trinket = (props) => {
+  const gltf = useLoader(GLTFLoader, props.input.gltf.asset.url);
+  const meshRef = useRef();
+  // const snap = useSnapshot(state);
+  // Set up state for the hovered and active state
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
+  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useFrame(
+    (state, delta) => (meshRef.current.rotation.x += delta * Math.random() * 1)
+  );
+  // Return view, these are regular three.js elements expressed in JSX
+
   return (
-    <div className='flex justify-center items-center h-screen'>
-      <Canvas
-        className='!h-[500px] !w-[500px]'
-        // camera={{ position, fov }}
-        style={
-          {
-            // width: "100%",
-            // height: "100%",
-          }
-        }>
-        <color attach='background' args={["#fff"]} />
-        <Environment preset='studio' />
-        {/* <PerspectiveCamera makeDefault position={[2, 3.9, 4.1]} /> */}
-        <OrbitControls />
-        {/* <Model position={[0, -2, 0]} /> */}
-        <primitive object={gltf.scene} />
-        {/* <ContactShadows /> */}
-      </Canvas>
-    </div>
+    <>
+      <primitive
+        {...props}
+        ref={meshRef}
+        object={gltf.scene}
+        children-0-castShadow
+        dispotse={null}
+        // Click sets the mesh as the new target
+        onClick={(e) => (e.stopPropagation(), (state.current = props.name))}
+      />
+    </>
   );
 };
 
