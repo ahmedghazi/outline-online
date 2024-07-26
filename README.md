@@ -41,3 +41,8 @@ node 18.18.0
 - trials process
 - infos/lincensing -> grid
 - webhook email
+- home nav intro
+  -- header / footer bg white
+  -- home intro header top nav, nav centered
+  -- nav typefaces
+  -- footer sticky bottom
