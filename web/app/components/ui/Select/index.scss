@@ -1,31 +1,31 @@
-.select-ui {
-  select {
-    appearance: none;
-    /* safari */
-    -webkit-appearance: none;
+// .select-ui {
+//   select {
+//     appearance: none;
+//     /* safari */
+//     -webkit-appearance: none;
 
-    background-color: var(--color-gray);
-    padding: 0px 5px 0px 2rem;
-    height: 24px;
-    max-width: 188px;
-    border-radius: 0.313rem;
-    color: #000;
-    cursor: pointer;
-  }
-  position: relative;
-  &::before {
-    --size: 0.3rem;
-    position: absolute;
-    content: "";
-    left: 8px;
-    pointer-events: none;
-  }
-  &::before {
-    border-top: var(--size) solid transparent;
-    border-bottom: var(--size) solid transparent;
-    border-left: var(--size) solid black;
+//     background-color: var(--color-gray);
+//     padding: 0px 5px 0px 2rem;
+//     height: 24px;
+//     max-width: 188px;
+//     border-radius: 0.313rem;
+//     color: #000;
+//     cursor: pointer;
+//   }
+//   position: relative;
+//   &::before {
+//     --size: 0.3rem;
+//     position: absolute;
+//     content: "";
+//     left: 8px;
+//     pointer-events: none;
+//   }
+//   &::before {
+//     border-top: var(--size) solid transparent;
+//     border-bottom: var(--size) solid transparent;
+//     border-left: var(--size) solid black;
 
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
+//     top: 50%;
+//     transform: translateY(-50%);
+//   }
+// }

@@ -12,8 +12,16 @@ type Props = {
 const Select = (props: Props) => {
   return (
     <div className='select-ui'>
-      <select onChange={(e) => props.onChange(JSON.parse(e.target.value))}>
-        {props.label && <option defaultValue=''>{props.label}</option>}
+      <select
+        onChange={(e) => {
+          console.log(e.target.value);
+          if (e.target.value) props.onChange(JSON.parse(e.target.value));
+        }}>
+        {props.label && (
+          <option defaultValue='' value=''>
+            {props.label}
+          </option>
+        )}
         {props.options &&
           props.options.map((item, i) => (
             <option key={i} value={JSON.stringify(item)}>

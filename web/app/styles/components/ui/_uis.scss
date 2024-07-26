@@ -40,12 +40,56 @@
   }
 }
 
+.select-ui {
+  max-width: 188px;
+  position: relative;
+  display: inline-block;
+  select {
+    display: inline-block;
+    width: 100%;
+    appearance: none;
+    /* safari */
+    -webkit-appearance: none;
+
+    background-color: var(--color-gray);
+    padding: 0px 5px 0px 2rem;
+    height: 24px;
+    max-width: 188px;
+    border-radius: 0.313rem;
+    color: #000;
+    cursor: pointer;
+  }
+  &::before {
+    --size: 0.3rem;
+    position: absolute;
+    content: "";
+    left: 8px;
+    pointer-events: none;
+  }
+  &::before {
+    border-top: var(--size) solid transparent;
+    border-bottom: var(--size) solid transparent;
+    border-left: var(--size) solid black;
+
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.color-ui {
+  display: flex;
+  background-color: var(--color-gray);
+  border-radius: 0.313rem;
+  padding: 3px 5px;
+  input {
+    position: absolute;
+    visibility: hidden;
+  }
+}
+
 .checkbox-ui {
   display: inline-block;
   cursor: pointer;
-  // -webkit-user-select: none;
-  // -moz-user-select: none;
-  // -ms-user-select: none;
   user-select: none;
   label {
     position: relative;

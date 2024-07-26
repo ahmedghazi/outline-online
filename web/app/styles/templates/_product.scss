@@ -84,6 +84,10 @@ body[data-template="is-product"],
           resize: both;
           overflow: auto;
           font-size: 2em;
+          width: 64rem;
+          height: 9em;
+          font-family: var(--type-family);
+          color: var(--type-color);
         }
         .btn-close {
           position: absolute;
@@ -94,8 +98,10 @@ body[data-template="is-product"],
           z-index: 20;
         }
         .footer {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+          // display: grid;
+          // grid-template-columns: repeat(4, minmax(0, 1fr));
+          display: flex;
+          justify-content: space-between;
           position: absolute;
           bottom: 0;
           padding: var(--space-md);

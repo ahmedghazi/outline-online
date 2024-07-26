@@ -5,6 +5,7 @@ import TesterSpacing from "./TesterSpacing";
 import Select from "../ui/Select";
 import { KeyValString, Style } from "@/app/types/schema";
 import clsx from "clsx";
+import TesterColor from "./TesterColor";
 
 type Props = {
   input: Style[];
@@ -13,6 +14,10 @@ type Props = {
 const CompositionTool = ({ input }: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
+  const defaultStyle = input.length > 0 ? input[0].typeface?.slug?.current : "";
+  const [currentStyle, setCurrentStyle] = useState<string | undefined>(
+    defaultStyle
+  );
 
   const _stylisticSets = useMemo(() => {
     let arr: KeyValString[] = [];
@@ -30,11 +35,39 @@ const CompositionTool = ({ input }: Props) => {
     return arr;
   }, []);
 
+  const _styles = useMemo(() => {
+    const arr: KeyValString[] = input.map((item) => {
+      return {
+        _type: "keyValString",
+        key: item.title,
+        val: item.typeface?.slug?.current,
+      };
+    });
+    return arr;
+  }, []);
+  // console.log(_styles);
+
   const _handleStylisticSets = (ss: KeyValString) => {
     // console.log(ss);
     if (!ref.current) return;
     if (!ss || !ss.val) return;
     ref.current.style.setProperty("--type-features", ss.val);
+  };
+
+  const _handleStyles = (s: KeyValString) => {
+    // console.log(s);
+    if (!ref.current) return;
+    if (!s || !s.val) return;
+    // ref.current.style.fontFamily = s.val;
+    ref.current.style.setProperty("--type-family", s.val);
+    setCurrentStyle(s.val);
+  };
+
+  const _handleColor = (hex: string) => {
+    if (!ref.current) return;
+    if (!hex) return;
+    ref.current.style.setProperty("--type-color", hex);
+    // setCurrentStyle(s.val);
   };
 
   return (
@@ -54,6 +87,9 @@ const CompositionTool = ({ input }: Props) => {
           <div className='faden-kreuz faden-kreuz--bl'></div>
           <div
             className='text-editor text-lg'
+            style={{
+              fontFamily: currentStyle,
+            }}
             ref={ref}
             contentEditable={true}
             suppressContentEditableWarning={true}
@@ -74,8 +110,19 @@ const CompositionTool = ({ input }: Props) => {
         {ref && ref.current && (
           <div className='footer '>
             <TesterSize initialValue='28' target={ref.current} />
-            <TesterSpacing initialValue='1' target={ref.current} />
+            <TesterSpacing initialValue='0' target={ref.current} />
             <TesterLeading initialValue='28' target={ref.current} />
+            {/* {input.map((item, i) => (
+
+            ))} */}
+            {_styles && _styles.length > 0 && (
+              <Select
+                options={_styles}
+                onChange={_handleStyles}
+                label='Family'
+              />
+            )}
+
             {_stylisticSets && _stylisticSets.length > 0 && (
               <Select
                 options={_stylisticSets}
@@ -83,6 +130,16 @@ const CompositionTool = ({ input }: Props) => {
                 label='Stylistic Sets'
               />
             )}
+            <TesterColor onChange={_handleColor} />
+            {/* <div className='color-ui'>
+              <label htmlFor='type-color'>Select your favorite color:</label>
+              <input
+                type='color'
+                id='type-color'
+                name='type-color'
+                value='#000'
+              />
+            </div> */}
           </div>
         )}
       </div>
