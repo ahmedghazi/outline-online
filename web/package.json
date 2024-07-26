@@ -26,7 +26,8 @@
     "sass": "^1.74.1",
     "styled-components": "^6.1.8",
     "three": "^0.165.0",
-    "throttle-debounce": "^5.0.0"
+    "throttle-debounce": "^5.0.0",
+    "valtio": "^1.13.2"
   },
   "devDependencies": {
     "@types/jsonp": "^0.2.3",

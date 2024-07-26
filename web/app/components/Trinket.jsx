@@ -1,19 +1,19 @@
 "use client";
 import { useRef } from "react";
 import {
-  ContactShadows,
+  // ContactShadows,
   Environment,
   OrbitControls,
-  PerspectiveCamera,
+  // PerspectiveCamera,
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+// import { useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Trinket = ({ input }) => {
   const gltf = useLoader(GLTFLoader, input.gltf.asset.url);
-  console.log(input);
+  // console.log(input);
   return (
     <div className='flex justify-center items-center h-screen'>
       <Canvas
