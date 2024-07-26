@@ -1,9 +1,93 @@
-import React from "react";
+import React, { useMemo, useRef, useState } from "react";
+import TesterSize from "./TesterSize";
+import TesterLeading from "./TesterLeading";
+import TesterSpacing from "./TesterSpacing";
+import Select from "../ui/Select";
+import { KeyValString, Style } from "@/app/types/schema";
+import clsx from "clsx";
 
-type Props = {};
+type Props = {
+  input: Style[];
+};
 
-const CompositionTool = (props: Props) => {
-  return <div>CompositionTool</div>;
+const CompositionTool = ({ input }: Props) => {
+  const [active, setActive] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const _stylisticSets = useMemo(() => {
+    let arr: KeyValString[] = [];
+    input.forEach((el) => {
+      if (el.typeface?.stylisticSets && el.typeface?.stylisticSets.length > 0) {
+        el.typeface?.stylisticSets.forEach((s) => {
+          if (arr.some((e) => e.key === s.key)) {
+          } else {
+            arr.push(s);
+          }
+        });
+      }
+    });
+
+    return arr;
+  }, []);
+
+  const _handleStylisticSets = (ss: KeyValString) => {
+    // console.log(ss);
+    if (!ref.current) return;
+    if (!ss || !ss.val) return;
+    ref.current.style.setProperty("--type-features", ss.val);
+  };
+
+  return (
+    <div className={clsx("composition-tool", active && "is-active")}>
+      <button className='btn-toggle button-ui' onClick={() => setActive(true)}>
+        Composition Tool
+      </button>
+      <div className='modal'>
+        <button className='btn-close' onClick={() => setActive(false)}>
+          ╳
+        </button>
+
+        <div className='inner'>
+          <div className='faden-kreuz faden-kreuz--tl'></div>
+          <div className='faden-kreuz faden-kreuz--tr'></div>
+          <div className='faden-kreuz faden-kreuz--br'></div>
+          <div className='faden-kreuz faden-kreuz--bl'></div>
+          <div
+            className='text-editor text-lg'
+            ref={ref}
+            contentEditable={true}
+            suppressContentEditableWarning={true}
+            spellCheck='false'
+            autoCorrect='off'>
+            This website exists as an ongoing collaborative experiment in
+            digital publishing and information sharing. Because this website
+            functions as a wiki, all members of the School of Art
+            community—graduate students, faculty, staff, and alums—have the
+            ability to add new content and pages, and to edit most of the site’s
+            existing content. Content is the property of its various authors.
+            When you contribute to this site, you agree to abide by Yale
+            University academic and network use policy, and to act as a
+            responsible member of our community.
+          </div>
+        </div>
+
+        {ref && ref.current && (
+          <div className='footer '>
+            <TesterSize initialValue='28' target={ref.current} />
+            <TesterSpacing initialValue='1' target={ref.current} />
+            <TesterLeading initialValue='28' target={ref.current} />
+            {_stylisticSets && _stylisticSets.length > 0 && (
+              <Select
+                options={_stylisticSets}
+                onChange={_handleStylisticSets}
+                label='Stylistic Sets'
+              />
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default CompositionTool;

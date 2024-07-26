@@ -4,9 +4,10 @@ import TypeTester from "./TypeTester";
 import useType from "./TypeContext";
 import TesterSize from "./TesterSize";
 import TesterLeading from "./TesterLeading";
+import TesterSpacing from "./TesterSpacing";
 import Select from "../ui/Select";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
-import TesterSpacing from "./TesterSpacing";
+import CompositionTool from "./CompositionTool";
 
 type Props = {
   input: Style[];
@@ -33,7 +34,7 @@ const TypeTesterHero = ({ input }: Props) => {
   }, []);
 
   const _handleStylisticSets = (ss: KeyValString) => {
-    console.log(ss);
+    // console.log(ss);
     if (!ref.current) return;
     if (!ss || !ss.val) return;
     ref.current.style.setProperty("--type-features", ss.val);
@@ -41,7 +42,6 @@ const TypeTesterHero = ({ input }: Props) => {
 
   return (
     <section className='type-tester--hero'>
-      {/* <pre>{JSON.stringify(type)}</pre> */}
       <div className='items' ref={ref}>
         {input.map((item, i) => (
           <div
@@ -49,17 +49,15 @@ const TypeTesterHero = ({ input }: Props) => {
             style={{
               fontFamily: item.typeface?.slug?.current,
             }}>
-            <TypeTester title={item.typeface?.title || item.title || ""} />
+            {/* <TypeTester title={item.typeface?.title || item.title || ""} /> */}
+            <div className='item'>
+              {item.typeface?.title || item.title || ""}
+            </div>
           </div>
         ))}
       </div>
-      {/* <TypeTester
-        title={listStylesName}
-        fontName={type?.slug?.current}
-        styles={input}
-        // base64={type?.typefaceFile?.base64}
-      /> */}
-      {ref && ref.current && (
+      <CompositionTool input={input} />
+      {/* {ref && ref.current && (
         <div className='footer '>
           <TesterSize initialValue='72' target={ref.current} />
           <TesterSpacing initialValue='1' target={ref.current} />
@@ -71,11 +69,9 @@ const TypeTesterHero = ({ input }: Props) => {
               label='Stylistic Sets'
             />
           )}
-          {/* <Select />
-          <Select />
-          <Select /> */}
+
         </div>
-      )}
+      )} */}
     </section>
   );
 };

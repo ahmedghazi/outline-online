@@ -10,32 +10,114 @@ body[data-template="is-product"],
   }
   .type-tester--hero {
     position: relative;
-    // padding-top: var(--header-height);
-    // max-width: 100vw;
-    // max-height: 100vh;
-    // overflow: clip;
 
     .items {
       height: calc(var(--vh) * 100);
       @include flex_center_h_v;
       flex-direction: column;
+      font-feature-settings: var(--type-features);
+      .item {
+        font-size: 8vw;
+      }
     }
-    .type-tester {
-      // height: calc(var(--vh) * 100);
-      // @include flex_center_h_v;
-      // flex-direction: column;
+    .composition-tool {
+      // display: none;
+      &.is-active .modal {
+        display: block;
+      }
+      .btn-toggle {
+        position: absolute;
+        left: 50%;
+        bottom: calc(var(--space-md) + 0em);
+        transform: translateX(-50%);
+      }
+      .modal {
+        display: none;
+        background-color: white;
+        position: fixed;
+        inset: 0;
+        padding: calc(var(--header-height) * 2) calc(var(--space-lg) + 25px)
+          var(--space-md);
+        .inner {
+          display: inline-block;
+        }
+        .faden-kreuz {
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          &::before,
+          &::after {
+            content: "";
+            background-color: black;
+            position: absolute;
+            display: inline-block;
+          }
+          &::before {
+            width: 1px;
+            height: 100%;
+          }
+          &::after {
+            width: 100%;
+            height: 1px;
+          }
+          &--tl {
+            transform: rotate(-180deg);
+            left: -25px;
+            top: -25px;
+          }
+          &--tr {
+            transform: rotate(-90deg);
+            right: -25px;
+            top: -25px;
+          }
+          &--br {
+            right: -25px;
+            bottom: -25px;
+          }
+          &--bl {
+            transform: rotate(90deg);
+            bottom: -25px;
+            left: -25px;
+          }
+        }
+        .text-editor {
+          resize: both;
+          overflow: auto;
+          font-size: 2em;
+        }
+        .btn-close {
+          position: absolute;
+          left: 50%;
+          bottom: calc(var(--space-md) + 0.4em);
+          transform: translateX(-50%);
+          color: red;
+          z-index: 20;
+        }
+        .footer {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          position: absolute;
+          bottom: 0;
+          padding: var(--space-md);
+        }
+      }
     }
-    .contenteditable {
-      // height: calc(var(--vh) * 100 - var(--header-height));
-      // width: 100%;
-      // @include flex_center_h_v;
+    // .type-tester {
+    //   // height: calc(var(--vh) * 100);
+    //   // @include flex_center_h_v;
+    //   // flex-direction: column;
+    // }
+    // .contenteditable {
+    //   // height: calc(var(--vh) * 100 - var(--header-height));
+    //   // width: 100%;
+    //   // @include flex_center_h_v;
 
-      white-space: pre-line;
+    //   white-space: pre-line;
 
-      text-align: center;
-      text-overflow: clip;
-      // overflow-y: scroll;
-    }
+    //   text-align: center;
+    //   text-overflow: clip;
+    //   // overflow-y: scroll;
+    // }
     .footer {
       position: absolute;
       bottom: 0;
@@ -57,6 +139,39 @@ body[data-template="is-product"],
     }
     .module--sidebar-ui {
       grid-row: span 8 / span 8;
+    }
+  }
+
+  .glyphs {
+    // display: grid;
+    .grid {
+      // border-top: var(--border);
+      // border-left: var(--border);
+      grid-template-columns: repeat(16, minmax(0, 1fr));
+      gap: 0;
+    }
+    .item {
+      // width: calc(6.04em - 2px);
+      // height: calc(6.04em - 2px);
+      aspect-ratio: 1 / 1;
+      // height: 100%;
+      text-align: center;
+      display: flex;
+      -moz-box-align: center;
+      align-items: center;
+      -moz-box-pack: center;
+      justify-content: center;
+      // border-right: var(--border);
+      // border-bottom: var(--border);
+      transition: font-size 0.2s, transform 0.2s;
+      @include debugOutline(-0.5px, black);
+      background-color: white;
+      font-size: var(--text-lg);
+      &:hover {
+        // font-size: var(--text-xl);
+        transform: scale(1.5);
+        z-index: 99;
+      }
     }
   }
 

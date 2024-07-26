@@ -1,0 +1,30 @@
+.range-ui {
+  background-color: var(--color-gray);
+  border-radius: 0.313rem;
+  padding: 3px 5px;
+  max-width: 188px;
+  label {
+    position: absolute;
+    pointer-events: none;
+    left: 2.3em;
+  }
+  .value {
+    position: absolute;
+    right: 5px;
+    // top: 3px;
+  }
+  input {
+    appearance: none;
+    background-color: none;
+    border: none;
+    max-width: calc(100% - 2.5em);
+    line-height: 1;
+    &::-moz-range-thumb,
+    &::-webkit-slider-thumb {
+      appearance: none;
+      background: currentColor;
+      width: 7.5px;
+      height: 9px;
+    }
+  }
+}

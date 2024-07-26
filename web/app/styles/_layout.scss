@@ -29,6 +29,7 @@ main {
   top: 0;
   width: var(--space-lg);
   height: 100vh;
+  pointer-events: none;
   &--left {
     left: 0;
   }
