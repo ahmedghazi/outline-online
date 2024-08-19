@@ -10,6 +10,7 @@ import PageTransition from "./components/ui/PageTransition";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { ShopWrapper } from "./components/shop/ShopContext";
+import BuyModal from "./components/shop/BuyModal";
 
 export const metadata = {
   metadataBase: new URL(website.url),
@@ -51,6 +52,7 @@ export default async function RootLayout({
                 <span></span>
               </div>
               <Header settings={settings} productsCart={productsCart} />
+              <BuyModal productsCart={productsCart} />
               <main>{children}</main>
               <div className='dashes dashes--right'>
                 <span></span>

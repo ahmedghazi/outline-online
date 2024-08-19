@@ -12,6 +12,7 @@ import Checkbox from "../ui/Checkbox";
 import Price from "./Price";
 import useShop from "./ShopContext";
 import AddToCart from "./AddToCart";
+import { subscribe, unsubscribe } from "pubsub-js";
 
 type CartProductProps = {
   input: Product;
@@ -117,7 +118,7 @@ const CartProduct = ({ input }: CartProductProps) => {
 };
 
 type Props = {
-  input: Product[];
+  productsCart: Product[];
 };
 
 declare global {
@@ -126,8 +127,9 @@ declare global {
   }
 }
 
-const BuyModal = ({ input }: Props) => {
+const BuyModal = ({ productsCart }: Props) => {
   // const [active, setActive] = useState<boolean>(false);
+  const [active, setActive] = useState<boolean>(false);
   const [buttonStatus, setButtonStatus] = useState("Add To Cart");
 
   const {
@@ -142,6 +144,13 @@ const BuyModal = ({ input }: Props) => {
 
   useEffect(() => {
     _setDefaultLicenses();
+    const token = subscribe("BUY_MODAL_ACTIVE", (e, d) => {
+      setActive(d);
+    });
+
+    return () => {
+      unsubscribe(token);
+    };
   }, []);
 
   const _setDefaultLicenses = () => {
@@ -185,7 +194,7 @@ const BuyModal = ({ input }: Props) => {
     }
   };
   return (
-    <div className='buy-modal'>
+    <div className={clsx("buy-modal", active ? "block" : "hidden")}>
       <div className='header'>
         {licenses && (
           <div className='_row grid md:grid-cols-8'>
@@ -221,7 +230,7 @@ const BuyModal = ({ input }: Props) => {
       </div>
       <div className='body overflow-y-auto h-screen-'>
         <div className='items'>
-          {input.map((item, i) => (
+          {productsCart.map((item, i) => (
             <CartProduct input={item} key={i} />
           ))}
         </div>

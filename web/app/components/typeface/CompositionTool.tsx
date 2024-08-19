@@ -6,6 +6,7 @@ import Select from "../ui/Select";
 import { KeyValString, Style } from "@/app/types/schema";
 import clsx from "clsx";
 import TesterColor from "./TesterColor";
+import TesterParagraph from "./TesterParagraph";
 
 type Props = {
   input: Style[];
@@ -131,6 +132,7 @@ const CompositionTool = ({ input }: Props) => {
               />
             )}
             <TesterColor onChange={_handleColor} />
+            <TesterParagraph target={ref.current} />
             {/* <div className='color-ui'>
               <label htmlFor='type-color'>Select your favorite color:</label>
               <input
