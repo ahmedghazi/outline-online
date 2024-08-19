@@ -19,6 +19,17 @@ header {
     ul {
       display: flex;
       justify-content: space-around;
+      li:hover .submenu {
+        display: block;
+      }
+      .submenu {
+        display: none;
+        position: absolute;
+        padding-bottom: 1em;
+        a {
+          display: block;
+        }
+      }
     }
   }
 
@@ -30,11 +41,24 @@ header {
 body[data-template="is-home"] {
   &.has-scrolled #nav-primary {
     transform: translateY(0);
+    .submenu {
+      transform: translateY(0);
+      li.is-half {
+        margin-bottom: 0;
+      }
+    }
   }
   #nav-primary {
     transition: transform 0.2s;
     transform: translateY(
       calc(var(--vh) * 50 - var(--header-height) / 2 - 0.5em)
     );
+    .submenu {
+      transform: translateY(calc(-50% - 0.6em));
+      .is-half {
+        transition: margin-bottom 0.2s;
+        margin-bottom: 1.2em;
+      }
+    }
   }
 }

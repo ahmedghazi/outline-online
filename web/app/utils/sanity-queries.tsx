@@ -20,12 +20,21 @@ export async function getSettings(): Promise<Settings> {
 
       navPrimary[]{
         ...,
-
-        _type == 'linkInternal' => {
+        _type == 'menuItem' => {
           ...,
-          link->{
-            _type,
-            slug
+          link{
+            ...,
+            link->{
+              _type,
+              slug
+            }
+          },
+          subMenu[]{
+            ...,
+             link->{
+              _type,
+              slug
+            }
           }
         }
       },

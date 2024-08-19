@@ -241,7 +241,7 @@ export interface Settings extends SanityDocument {
    *
    *
    */
-  navPrimary?: Array<SanityKeyed<LinkInternal> | SanityKeyed<LinkExternal>>;
+  navPrimary?: Array<SanityKeyed<MenuItem> | SanityKeyed<LinkExternal>>;
 
   /**
    * Naviguation Secondary — `array`
@@ -830,6 +830,23 @@ export type LinkModal = {
    *
    */
   target?: "modal-works";
+};
+
+export type MenuItem = {
+  _type: "menuItem";
+  /**
+   * link — `linkInternal`
+   *
+   *
+   */
+  link?: LinkInternal;
+
+  /**
+   * Sub menu — `array`
+   *
+   *
+   */
+  subMenu?: Array<SanityKeyed<LinkInternal> | SanityKeyed<LinkExternal>>;
 };
 
 export type Seo = {

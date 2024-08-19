@@ -28,6 +28,7 @@ import blockContent from './objects/blockContent'
 import linkExternal from './objects/linkExternal'
 import linkInternal from './objects/linkInternal'
 import linkModal from './objects/linkModal'
+import menuItem from './objects/menuItem'
 import seo from './objects/seo'
 import embed from './objects/embed'
 import keyVal from './objects/keyVal'
@@ -64,6 +65,7 @@ export const schemaTypes = [
   linkExternal,
   linkInternal,
   linkModal,
+  menuItem,
   seo,
   embed,
   keyVal,

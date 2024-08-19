@@ -73,7 +73,7 @@ export default defineType({
       type: 'array',
       of: [
         {
-          type: 'linkInternal',
+          type: 'menuItem',
         },
         {
           type: 'linkExternal',

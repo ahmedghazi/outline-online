@@ -78,9 +78,11 @@
 
 .color-ui {
   display: flex;
+  align-items: center;
   background-color: var(--color-gray);
   border-radius: 0.313rem;
   padding: 3px 5px;
+  max-width: 188px;
   input {
     position: absolute;
     visibility: hidden;
