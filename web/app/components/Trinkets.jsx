@@ -57,7 +57,8 @@ const Trinkets = (props) => {
                 position={[
                   Math.random() * space,
                   Math.random() * space,
-                  Math.random() * space,
+                  0,
+                  // Math.random() * space,
                 ]}
                 // scale={0.4}
                 scale={[0.1, 0.1, 0.1]}
@@ -66,7 +67,7 @@ const Trinkets = (props) => {
           </Stage>
         </Suspense>
         {/* <Controls /> */}
-        {/* <OrbitControls ref={ref} makeDefault /> */}
+        <OrbitControls ref={ref} makeDefault={false} />
       </Canvas>
     </section>
   );

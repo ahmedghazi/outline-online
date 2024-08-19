@@ -16,6 +16,7 @@ header {
     // transform: translateY(
     //   calc(var(--vh) * 50 - var(--header-height) / 2 - 0.5em)
     // );
+    transition: transform 0.2s;
     ul {
       display: flex;
       justify-content: space-around;
@@ -64,7 +65,7 @@ body[data-template="is-home"] {
     }
   }
   #nav-primary {
-    transition: transform 0.2s;
+    // transition: transform 0.2s;
     transform: translateY(
       calc(var(--vh) * 50 - var(--header-height) / 2 - 0.5em)
     );
