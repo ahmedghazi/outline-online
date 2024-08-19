@@ -97,6 +97,10 @@ export const homeQuery = groq`*[_type == "home"][0]{
       asset->{
         url
       }
+    },
+    link->{
+      _type,
+      slug
     }
   },
   typefaces[]->{
