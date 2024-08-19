@@ -31,6 +31,18 @@ header {
           display: block;
         }
       }
+      .menu-item--buy {
+        .btn--buy {
+          background-color: blue;
+          color: white;
+          border-top-right-radius: 1em;
+          text-align: center;
+          width: 13vw;
+          @media all and (max-width: $md) {
+            width: 100%;
+          }
+        }
+      }
     }
   }
 

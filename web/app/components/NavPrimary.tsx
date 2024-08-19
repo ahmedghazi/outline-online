@@ -51,17 +51,17 @@ const NavPrimary = ({ navPrimary, productsCart }: Props) => {
   };
   // console.log(navPrimary);
   return (
-    <nav
-      ref={ref}
-      id='nav-primary'
-      style={
-        {
-          // transform: y !== null ? `translateY(${y}px)` : "",
-        }
-      }>
+    <nav ref={ref} id='nav-primary'>
       <ul className='flex'>
         {navPrimary?.map((item, i) => (
-          <li key={i}>
+          <li
+            key={i}
+            className={
+              (item &&
+                item._type === "menuItem" &&
+                `menu-item--${item.link?.label?.toLowerCase()}`) ||
+              ""
+            }>
             {item && item._type === "menuItem" && (
               <>
                 <Link href={_linkResolver(item.link?.link)}>
@@ -91,10 +91,10 @@ const NavPrimary = ({ navPrimary, productsCart }: Props) => {
           </li>
         ))}
 
-        <li>
+        <li className='menu-item--buy'>
           <Buy productsCart={productsCart} />
         </li>
-        <li className=''>
+        <li className='menu-item--cart'>
           <Cart />
         </li>
       </ul>
