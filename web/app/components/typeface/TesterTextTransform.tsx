@@ -18,12 +18,13 @@ const TesterTextTransform = ({ target }: Props) => {
   }, [val]);
 
   const _onClick = () => {
-    const newVal = val + 1 < values.length ? val + 1 : 1;
+    const newVal = val + 1 < values.length ? val + 1 : 0;
     setVal(newVal);
   };
 
   const _update = () => {
-    target.style.textTransform = `${values[val]}`;
+    // target.style.textTransform = `${values[val]}`;
+    target.style.setProperty("--type-textTransform", `${values[val]}`);
   };
   const style: CSSProperties = {
     textTransform: values[val] as
@@ -35,7 +36,7 @@ const TesterTextTransform = ({ target }: Props) => {
   return (
     <div className='type-text-transform controls'>
       <button className='case-toggle' onClick={_onClick} style={style}>
-        aa {values[val]}
+        aa
       </button>
     </div>
   );

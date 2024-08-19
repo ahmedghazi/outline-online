@@ -113,9 +113,7 @@ const CompositionTool = ({ input }: Props) => {
             <TesterSize initialValue='28' target={ref.current} />
             <TesterSpacing initialValue='0' target={ref.current} />
             <TesterLeading initialValue='28' target={ref.current} />
-            {/* {input.map((item, i) => (
 
-            ))} */}
             {_styles && _styles.length > 0 && (
               <Select
                 options={_styles}
@@ -133,15 +131,6 @@ const CompositionTool = ({ input }: Props) => {
             )}
             <TesterColor onChange={_handleColor} />
             <TesterParagraph target={ref.current} />
-            {/* <div className='color-ui'>
-              <label htmlFor='type-color'>Select your favorite color:</label>
-              <input
-                type='color'
-                id='type-color'
-                name='type-color'
-                value='#000'
-              />
-            </div> */}
           </div>
         )}
       </div>

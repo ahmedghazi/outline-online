@@ -22,7 +22,8 @@ const TesterColumns = ({ target }: Props) => {
   };
 
   const _update = () => {
-    target.style.columnCount = `${val}`;
+    // target.style.columnCount = `${val}`;
+    target.style.setProperty("--type-columnCount", `${val}`);
   };
 
   return (

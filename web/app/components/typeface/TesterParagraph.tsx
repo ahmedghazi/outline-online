@@ -19,7 +19,8 @@ const TesterParagraph = ({ target }: Props) => {
   }, [textTransform]);
 
   const _update = () => {
-    target.style.textTransform = textTransform;
+    target.style.setProperty("--type-transform", textTransform);
+    // target.style.textTransform = textTransform;
   };
 
   return (

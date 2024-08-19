@@ -88,6 +88,9 @@ body[data-template="is-product"],
           height: 9em;
           font-family: var(--type-family);
           color: var(--type-color);
+          text-align: var(--type-textAlign);
+          text-transform: var(--type-textTransform);
+          column-count: var(--type-columnCount);
         }
         .btn-close {
           position: absolute;

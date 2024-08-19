@@ -16,6 +16,7 @@ const TesterAlign = ({ target }: Props) => {
 
   const _update = () => {
     target.style.textAlign = val;
+    target.style.setProperty("--type-textAlign", `${val}`);
   };
 
   return (
