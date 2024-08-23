@@ -30,6 +30,7 @@ main {
   width: var(--space-lg);
   height: 100vh;
   pointer-events: none;
+  z-index: 251;
   &--left {
     left: 0;
   }

@@ -23,40 +23,155 @@
     // color: var(--color-primary);
     // box-shadow: unset;
   }
-  @media (min-width: 768px) {
-    .snipcart-cart-summary--edit.snipcart-modal__container {
-      width: calc(100% / 3);
-    }
-  }
+  // @media (min-width: 768px) {
+  //   .snipcart-cart-summary--edit.snipcart-modal__container {
+  //     width: calc(100% / 3);
+  //   }
+  // }
+  // .snipcart-modal__container {
+  //   z-index: 251;
+  // }
+  // .snipcart-test-banner {
+  //   position: absolute;
+  // }
+  // .snipcart-cart-summary-side .snipcart-cart__secondary-header {
+  //   padding: 0px var(--space-md);
+  //   min-height: unset;
+  //   height: auto;
+  //   flex: 0;
+  //   border-bottom: var(--border);
+  // }
+  // .snipcart-layout__content--side {
+  //   border-left: var(--border) black;
+  // }
   .snipcart-modal__container {
     z-index: 251;
   }
-  .snipcart-test-banner {
-    position: absolute;
+  .snipcart-cart-header {
+    padding: 0 var(--space-md);
+    width: 100%;
   }
-  .snipcart-cart-summary-side .snipcart-cart__secondary-header {
-    padding: 0px var(--space-md);
-    min-height: unset;
-    height: auto;
-    flex: 0;
+  .snipcart-item-list {
     border-bottom: var(--border);
   }
-  .snipcart-layout__content--side {
-    border-left: var(--border) black;
+  .snipcart-item-line {
+    box-shadow: none;
+    border-top: var(--border);
+    padding: 0.5em 0;
+    .snipcart-item-line__container {
+      margin: 0;
+      padding: 0;
+    }
+    .snipcart-item-line__product {
+      .snipcart-item-line__header {
+      }
+      .snipcart-item-line__content {
+        .snipcart-item-line__body {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          .snipcart-item-line__variants {
+            grid-column: span 3 / span 3;
+          }
+        }
+      }
+      .snipcart-item-line__info,
+      .snipcart-item-line__variants {
+        padding: 0;
+      }
+      .snipcart-item-custom-fields {
+        gap: var(--space-md);
+        .snipcart-item-custom-fields__field {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  .snipcart-button-icon.is-danger {
+    background-color: transparent;
+    padding: 0;
+  }
+  .snipcart-base-button {
+    padding: 0 1em;
+    border-radius: 0;
   }
 
+  .snipcart-input {
+    height: auto;
+    &:hover,
+    &:focus {
+      box-shadow: none;
+    }
+    input {
+      line-height: unset;
+    }
+  }
+  button[type="submit"],
+  input[type="submit"] {
+    width: auto;
+    height: auto;
+  }
+  .snipcart__box {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .snipcart-form {
+    .snipcart__box {
+      padding-top: 0;
+    }
+  }
+  .snipcart__box--slim {
+    padding: 0 32px;
+    background-color: transparent;
+    // border-top: var(--border);
+    // border-bottom: var(--border);
+  }
+  .snipcart-cart-summary {
+    background-color: transparent;
+  }
+  .snipcart-cart-summary__content {
+    padding: 0;
+    margin-bottom: var(--space-md);
+  }
+  .snipcart-cart-summary__separator {
+    border-color: black;
+    width: 100%;
+    margin: 0.5em 0;
+  }
+  .snipcart-cart-summary__actions {
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+    border-bottom: var(--border);
+  }
+  .snipcart-summary-fees__notice {
+    display: none;
+  }
+  .snipcart-cart-summary-item {
+    margin-right: 0;
+  }
+  .snipcart-featured-payment-methods--no-background {
+    // margin-top: 0;
+  }
+  .snipcart-flash-message--error {
+    color: white;
+  }
+  .snipcart-featured-payment-methods__title {
+    top: 0;
+  }
+  .snipcart__box--gray {
+    background-color: transparent;
+  }
   /* -----------------
         Colors
     ----------------- */
-  --color-default: hsl(0, 0%, 90%);
+  --color-default: hsl(0, 0%, 0%);
   --color-alt: hsl(0, 0%, 50%);
   // --color-icon: hsl(200, 90%, 40%);
-  --color-icon: var(--color-secondary);
+  --color-icon: var(--color-primary);
   --color-success: hsl(144, 50%, 55%);
   --color-error: hsl(6, 55%, 60%);
 
   // --color-link: hsl(220, 70%, 55%);
-  --color-link: var(--color-secondary);
+  --color-link: var(--color-primary);
   --color-link-hover: hsl(220, 70%, 65%);
   --color-link-active: var(--color-link);
   --color-link-focus: var(--color-link);
@@ -77,7 +192,7 @@
   --color-inputIcon-error: var(--color-error);
   --color-inputPlaceholder: var(--color-alt);
 
-  --color-buttonPrimary: var(--color-default);
+  --color-buttonPrimary: var(--color-bg);
   --color-buttonPrimary-hover: hsl(0, 0%, 100%);
   --color-buttonPrimary-active: var(--color-buttonPrimary);
   --color-buttonPrimary-focus: var(--color-buttonPrimary);
@@ -101,7 +216,7 @@
   --color-buttonDanger-success: var(--color-default);
   --color-buttonDanger-error: var(--color-default);
 
-  --color-badge: var(--color-link);
+  --color-badge: #999999;
   --color-badge-active: var(--color-link);
   --color-badge-disabled: var(--color-alt);
 
@@ -116,8 +231,8 @@
   --borderColor-link-active: currentColor;
   --borderColor-link-focus: currentColor;
 
-  --borderColor-input: hsla(0, 0%, 100%, 10%);
-  --borderColor-input-hover: hsl(200, 90%, 40%);
+  --borderColor-input: hsla(0, 0%, 100%, 0);
+  --borderColor-input-hover: hsla(200, 90%, 40%, 0);
   --borderColor-input-focus: var(--borderColor-input-hover);
   --borderColor-input-checked: var(--borderColor-input-hover);
   --borderColor-input-disabled: hsl(210, 10%, 20%);
@@ -144,13 +259,13 @@
   /* -----------------
         Background colors
     ----------------- */
-  --bgColor-default: hsl(0, 0%, 0%);
-  --bgColor-alt: hsl(0, 0%, 0%);
+  --bgColor-default: var(--color-bg);
+  --bgColor-alt: #fff;
   --bgColor-success: hsl(144, 70%, 15%);
   --bgColor-error: hsl(6, 50%, 15%);
   --bgColor-info: hsl(210, 55%, 15%);
 
-  --bgColor-modal: hsl(210, 10%, 7%);
+  --bgColor-modal: var(--color-bg);
   --bgColor-modalVeil: hsla(210, 10%, 7%, 0.75);
 
   --bgColor-link: none;
@@ -158,16 +273,16 @@
   --bgColor-link-active: none;
   --bgColor-link-focus: hsl(210, 55%, 10%);
 
-  --bgColor-input: hsl(210, 10%, 10%);
   --bgColor-input: black;
-  --bgColor-input-hover: var(--bgColor-input);
-  --bgColor-input-focus: var(--bgColor-input);
+  --bgColor-input: #d3d8db;
+  --bgColor-input-hover: #999999;
+  --bgColor-input-focus: #999999;
   --bgColor-input-checked: var(--borderColor-input-hover);
   --bgColor-input-disabled: hsl(210, 10%, 14%);
-  --bgColor-input-error: var(--bgColor-input);
+  --bgColor-input-error: #999999;
   --bgColor-input-autofill: hsl(210, 60%, 15%);
 
-  --bgColor-buttonPrimary: hsl(220, 70%, 22%);
+  --bgColor-buttonPrimary: blue;
   --bgColor-buttonPrimary-hover: hsl(220, 70%, 30%);
   --bgColor-buttonPrimary-active: var(--bgColor-buttonPrimary);
   --bgColor-buttonPrimary-focus: var(--bgColor-buttonPrimary);
@@ -192,7 +307,7 @@
   --bgColor-buttonDanger-error: hsl(6, 60%, 35%);
 
   --bgColor-badge: hsl(210, 55%, 10%);
-  --bgColor-badge-active: hsl(210, 60%, 15%);
+  --bgColor-badge-active: #00e509;
   --bgColor-badge-disabled: hsl(210, 10%, 11%);
 
   /* -----------------
@@ -200,6 +315,7 @@
     ----------------- */
 
   --shadow-default: 0px 20px 24px -20px hsla(0, 0%, 0%, 0.5);
+  --shadow-default: none;
   --shadow-tooltip: 0px 8px 16px hsla(220, 70%, 22%, 0.5);
 
   --shadow-link-focus: 0px 6px 4px -3px hsla(200, 90%, 40%, 0.5);

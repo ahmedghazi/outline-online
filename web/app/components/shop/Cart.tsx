@@ -64,13 +64,13 @@ const Cart = () => {
           className='snipcart-checkout'
           aria-label='open cart'
           title='open cart'>
-          cart
+          <span className='label'>CART</span>
+          {count > 0 && (
+            <span className='snipcart-items-count text-green absolute'>
+              ({count})
+            </span>
+          )}
         </button>
-        {count > 0 && (
-          <div className='snipcart-items-count text-green absolute'>
-            ({count})
-          </div>
-        )}
       </div>
     </div>
   );

@@ -1,9 +1,29 @@
-.cookie {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: white;
-  // border-top: $border;
-  // padding: $margeXS $margeS;
+.cookie-consent {
+  .inner {
+  }
+  .buttons {
+    button {
+      background-color: #d3d8db;
+      flex: 1;
+      border-top-left-radius: 1em;
+      position: relative;
+      &.bg-green {
+        background-color: var(--color-green);
+      }
+      &:first-child {
+        &::after {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: 1em;
+          right: -1em;
+          background-color: #d3d8db;
+        }
+      }
+    }
+  }
+  .text {
+    background-color: var(--color-gray);
+    padding: 0 1em;
+  }
 }

@@ -32,8 +32,8 @@ const Clock = () => {
     setTime(`${hour}:${minute} ${ampm}`);
     // console.log(now);
   };
-
-  return <div className='clock'>{ready && <>Time: {time}</>}</div>;
+  //Local Time: 03:17 pm (CET)
+  return <div className='clock'>{ready && <>Local Time: {time} (CET)</>}</div>;
 };
 
 export default Clock;

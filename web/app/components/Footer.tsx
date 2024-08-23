@@ -8,7 +8,7 @@ type Props = {
 
 const Footer = ({ settings }: Props) => {
   return (
-    <footer>
+    <footer id='site-footer'>
       <CookieWrapper settings={settings} />
       <nav id='nav-sacondary'>
         <ul>

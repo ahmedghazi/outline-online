@@ -21,10 +21,11 @@ const Header = ({ settings, productsCart }: Props) => {
       <div className='sup-header'>
         <div className='flex justify-between'>
           <div className='item'>Metadata</div>
-          <div className='item'>Location: Switzerland (CH)</div>
+          <div className='item'>Operation: Switzerland (CH)</div>
           <div className='item'>
             <Clock />
           </div>
+          <div className='item'>Global: UTC+1, EST+5, CST+6, PST+8</div>
           <div className='item'>
             <ScreenTime />
           </div>

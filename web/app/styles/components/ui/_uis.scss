@@ -137,6 +137,39 @@
     display: inline-block;
   }
 }
+.snipcart-checkbox {
+  & + label::before,
+  & + label::after {
+    content: "";
+    height: 10px;
+    width: 9px;
+    border: var(--border);
+    border-radius: 1em;
+    display: inline-block;
+    margin-right: 10px;
+    background-color: transparent;
+  }
+  & + label::after {
+    opacity: 0;
+  }
+  &:checked + label::before {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+  &:checked + label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: black;
+    box-shadow: unset;
+    height: 10px;
+    width: 9px;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
 
 .paragraph-ui {
   display: flex;

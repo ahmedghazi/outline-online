@@ -168,7 +168,7 @@ const AddToCart = (props: Props) => {
     },
     url: pathname,
     description: blurb || "",
-    name: `Tupeface name ${title}` || "",
+    name: `Typeface name ${title}` || "",
     quantity: 1,
     stackable: "never",
     shippable: false,

@@ -7,11 +7,11 @@ const CookieWrapper = (props: any) => {
   // const settings = await getSettings();
   // console.log(settings);
   return (
-    <div>
-      {props.settings.messageCookie && props.settings.messageCookie.en && (
+    <>
+      {props.settings.messageCookie && (
         <CookieConsent message={props.settings.messageCookie} />
       )}
-    </div>
+    </>
   );
 };
 

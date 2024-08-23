@@ -1,13 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { hasCookie, setCookie } from "cookies-next";
-import { BlockContent, LocaleBlockContent } from "@/app/types/schema";
+import { BlockContent } from "@/app/types/schema";
 import { PortableText } from "@portabletext/react";
 import components from "@/app/utils/portableTextComponents";
-import { _localizeField, _localizeText } from "@/app/utils/utils";
 
 type Props = {
-  message: LocaleBlockContent;
+  message: BlockContent;
 };
 
 const CookieConsent = ({ message }: Props) => {
@@ -27,14 +26,17 @@ const CookieConsent = ({ message }: Props) => {
   }
 
   return (
-    <div className='cartouche cartouche--box z-50 cookie-consent'>
-      <div className='inner flex flex-col place-items-end justify-end w-full'>
-        <PortableText value={message} components={components} />
-        <button
-          className=' py-2 px-8  underline- uppercase cartouche cartouche--gray'
-          onClick={() => acceptCookie()}>
-          {_localizeText("accept")}
-        </button>
+    <div className='z-50 cookie-consent flex justify-end'>
+      <div className='inner '>
+        <div className='flex buttons'>
+          <button>Read more</button>
+          <button className='bg-green' onClick={() => acceptCookie()}>
+            Agree
+          </button>
+        </div>
+        <div className='text'>
+          <PortableText value={message} components={components} />
+        </div>
       </div>
     </div>
   );

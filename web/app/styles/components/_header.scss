@@ -3,7 +3,7 @@ header {
   width: 100%;
   top: 0;
   // padding: var(--space-sm) var(--space-lg);
-  padding: 13px var(--space-lg) 0;
+  padding: 13px var(--space-lg) 6px;
   z-index: 50;
   transition: transform 0.2s var(--cubic), opacity 0.2s var(--cubic);
   &.is-down {
@@ -50,6 +50,11 @@ header {
             width: 100%;
           }
         }
+      }
+    }
+    .menu-item--cart {
+      .snipcart-items-count {
+        right: -2.5em;
       }
     }
   }
