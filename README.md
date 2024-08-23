@@ -40,12 +40,12 @@ node 18.18.0
 -
 - trials text
 - trials process
-- infos/lincensing -> grid
+- #infos/lincensing -> grid
 - webhook email
 - home nav intro
-  -- header / footer bg white
-  -- home intro header top nav, nav centered
-  -- nav typefaces
-  -- footer sticky bottom
-  -- license type price if single or multi
-  - trinket gltf or svg
+  - - #header / footer bg white
+  - - #home intro header top nav, nav centered
+  - - #nav typefaces
+- #footer sticky bottom
+- license type price if single or multi
+- trinket gltf or svg

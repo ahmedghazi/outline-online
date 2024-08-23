@@ -37,7 +37,7 @@ const Trinkets = (props) => {
         shadows
         dpr={[1, 2]}
         // camera={{ fov: 50 }}
-        camera={{ fov: 35, zoom: 1, near: 1, far: 1000 }}
+        // camera={{ fov: 35, zoom: 1, near: 1, far: 1000 }}
         style={{
           width: "calc(var(--vw) * 100)",
           height: "calc(var(--vh) * 100)",
@@ -54,20 +54,14 @@ const Trinkets = (props) => {
                 input={item}
                 name={i + 10}
                 key={i}
-                position={[
-                  Math.random() * space,
-                  Math.random() * space,
-                  0,
-                  // Math.random() * space,
-                ]}
-                // scale={0.4}
-                scale={[0.1, 0.1, 0.1]}
+                position={[Math.random() * space, Math.random() * space, 0]}
+                scale={0.1}
               />
             ))}
           </Stage>
         </Suspense>
         {/* <Controls /> */}
-        <OrbitControls ref={ref} makeDefault={false} />
+        {/* <OrbitControls ref={ref} makeDefault={false} /> */}
       </Canvas>
     </section>
   );

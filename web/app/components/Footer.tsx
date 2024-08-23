@@ -1,5 +1,6 @@
 import React from "react";
 import { Settings } from "../types/schema";
+import CookieWrapper from "./ui/CookieWrapper";
 
 type Props = {
   settings: Settings;
@@ -8,6 +9,7 @@ type Props = {
 const Footer = ({ settings }: Props) => {
   return (
     <footer>
+      <CookieWrapper settings={settings} />
       <nav id='nav-sacondary'>
         <ul>
           {settings.navSecondary &&

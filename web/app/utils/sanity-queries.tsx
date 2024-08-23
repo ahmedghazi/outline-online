@@ -89,10 +89,9 @@ export const homeQuery = groq`*[_type == "home"][0]{
     ${seo}
   },
 
-
-  obj3ds[]{
+  trinkets[]{
     ...,
-    gltf{
+    file{
       ...,
       asset->{
         url
@@ -103,6 +102,19 @@ export const homeQuery = groq`*[_type == "home"][0]{
       slug
     }
   },
+  // obj3ds[]{
+  //   ...,
+  //   gltf{
+  //     ...,
+  //     asset->{
+  //       url
+  //     }
+  //   },
+  //   link->{
+  //     _type,
+  //     slug
+  //   }
+  // },
   typefaces[]->{
     ${productCard}
   },

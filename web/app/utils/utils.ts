@@ -76,3 +76,9 @@ export const _date = (d: string) => {
 //     }, wait);
 //   };
 // };
+
+export const _randomNum = (number: number) => {
+  const min = number * -1;
+  const max = number * 1;
+  return Math.random() * (max - min) + min;
+};

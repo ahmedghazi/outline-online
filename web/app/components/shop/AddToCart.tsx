@@ -123,7 +123,7 @@ const AddToCart = (props: Props) => {
       const _productToRemove = products.filter(
         (item) => item.id !== productData.id
       );
-      console.log(_productToRemove);
+      // console.log(_productToRemove);
       setProducts(_productToRemove);
     }
   }, [active]);

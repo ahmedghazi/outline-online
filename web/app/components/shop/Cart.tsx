@@ -61,13 +61,13 @@ const Cart = () => {
       <div className='flex gap-02e'>
         {/* <span className='snipcart-items-count'>3</span> */}
         <button
-          className='snipcart-checkout z-10- relative- block- cartouche'
+          className='snipcart-checkout'
           aria-label='open cart'
           title='open cart'>
           cart
         </button>
         {count > 0 && (
-          <div className='snipcart-items-count pl-02e- text-green'>
+          <div className='snipcart-items-count text-green absolute'>
             ({count})
           </div>
         )}

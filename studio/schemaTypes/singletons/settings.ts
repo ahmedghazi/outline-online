@@ -104,6 +104,13 @@ export default defineType({
     }),
 
     defineField({
+      name: 'messageCookie',
+      title: 'Message Cookie',
+      type: 'blockContent',
+      group: 'misc',
+    }),
+
+    defineField({
       name: 'message404',
       title: 'Message 404',
       type: 'blockContent',

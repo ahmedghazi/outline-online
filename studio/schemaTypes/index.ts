@@ -37,6 +37,7 @@ import interTitre from './objects/interTitre'
 import figure from './objects/figure'
 import labelPrice from './objects/labelPrice'
 import obj3d from './objects/obj3d'
+import trinket from './objects/trinket'
 import textDropDown from './objects/textDropDown'
 import keyValString from './objects/keyValString'
 
@@ -75,6 +76,7 @@ export const schemaTypes = [
   figure,
   labelPrice,
   obj3d,
+  trinket,
   textDropDown,
 
   // moduleImages,

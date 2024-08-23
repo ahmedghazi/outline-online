@@ -75,6 +75,13 @@ export interface Home extends SanityDocument {
   obj3ds?: Array<SanityKeyed<Obj3d>>;
 
   /**
+   * Trinkets list — `array`
+   *
+   *
+   */
+  trinkets?: Array<SanityKeyed<Trinket>>;
+
+  /**
    * Typefaces list — `array`
    *
    *
@@ -256,6 +263,13 @@ export interface Settings extends SanityDocument {
    *
    */
   licenseSizes?: Array<SanityKeyed<LicenseSize>>;
+
+  /**
+   * Message Cookie — `blockContent`
+   *
+   *
+   */
+  messageCookie?: BlockContent;
 
   /**
    * Message 404 — `blockContent`
@@ -1008,6 +1022,37 @@ export type Obj3d = {
    *
    */
   gltf?: { _type: "file"; asset: SanityReference<any> };
+
+  /**
+   * image — `image`
+   *
+   * Image Fallback
+   */
+  image?: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * link — `reference`
+   *
+   *
+   */
+  link?: SanityReference<
+    Infos | PageModulaire | Home | Product | Licensing | Trials
+  >;
+};
+
+export type Trinket = {
+  _type: "trinket";
+  /**
+   * file — `file`
+   *
+   *
+   */
+  file?: { _type: "file"; asset: SanityReference<any> };
 
   /**
    * image — `image`
