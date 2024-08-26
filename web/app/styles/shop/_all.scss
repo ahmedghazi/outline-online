@@ -160,6 +160,13 @@
   .snipcart__box--gray {
     background-color: transparent;
   }
+  .snipcart-item-list .snipcart-item-line__header button svg {
+    display: none;
+  }
+  .snipcart-item-list .snipcart-item-line__header button::after {
+    content: "×";
+    line-height: 50%;
+  }
   /* -----------------
         Colors
     ----------------- */
