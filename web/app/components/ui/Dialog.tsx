@@ -3,10 +3,10 @@ import React, { ReactNode, useEffect, useRef } from "react";
 type Props = {
   children: ReactNode;
   openModal: boolean;
-  closeModal: Function;
+  // closeModal: Function;
 };
 
-const Dialog = ({ openModal, closeModal, children }: Props) => {
+const Dialog = ({ openModal, children }: Props) => {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -22,8 +22,12 @@ const Dialog = ({ openModal, closeModal, children }: Props) => {
       ref={ref}
       // onCancel={closeModal}
     >
+      <div className='header'>
+        <button className='text-red' onClick={() => ref.current?.close()}>
+          ╳
+        </button>
+      </div>
       {children}
-      <button onClick={() => closeModal()}>Close</button>
     </dialog>
   );
 };

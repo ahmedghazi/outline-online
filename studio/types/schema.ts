@@ -589,6 +589,43 @@ export interface Vendor extends SanityDocument {
   description?: BlockContent;
 }
 
+/**
+ * Link Expire
+ *
+ *
+ */
+export interface LinkExpire extends SanityDocument {
+  _type: "linkExpire";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Url — `url`
+   *
+   *
+   */
+  url?: string;
+
+  /**
+   * expired — `boolean`
+   *
+   *
+   */
+  expired?: boolean;
+
+  /**
+   * Hit count — `number`
+   *
+   *
+   */
+  count?: number;
+}
+
 export type LicenseType = {
   _type: "licenseType";
   /**
@@ -1200,4 +1237,5 @@ export type Documents =
   | Tag
   | Product
   | Typeface
-  | Vendor;
+  | Vendor
+  | LinkExpire;

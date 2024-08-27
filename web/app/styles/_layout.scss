@@ -5,6 +5,10 @@ html {
   //   default;
   overflow: hidden;
 }
+html,
+body {
+  background-color: white;
+}
 body {
   overflow-y: auto;
   // background-color: var(--color-bg);

@@ -68,14 +68,21 @@
                   <item-image class="snipcart-item-line__image"></item-image>
                 </figure>
 
-                <h2
-                  class="snipcart-item-line__title snipcart__font--xlarge snipcart__font--secondary snipcart__font--black">
-                  {{ item.name }}
-                </h2>
                 <div>
+                  <h2
+                    class="snipcart-item-line__title snipcart__font--xlarge snipcart__font--secondary snipcart__font--black">
+                    {{ item.name }}
+                  </h2>
+                  <div class="snipcart-item-line__info">
+                    <item-description v-if="showDescription"></item-description>
+                  </div>
+                </div>
+                <div class="flex flex-row-reverse gap-md">
                   <button-icon icon="trash" label="item.remove_item" styling="danger" @click="removeItem"></button-icon>
-                  <item-plans :item="item" v-if="!adding && isSubscribable"></item-plans>
-                  <item-quantity class="snipcart-item-line__quantity" v-if="!adding && !isSubscribable"
+                  <item-price :item="item" :selected-plan="selectedPlan" class="snipcart__font--xlarge">
+                  </item-price>
+                  <!-- <item-plans :item="item" v-if="!adding && isSubscribable"></item-plans> -->
+                  <!-- <item-quantity class="snipcart-item-line__quantity" v-if="!adding && !isSubscribable"
                     :disabled="outOfStock || isSubscribable"></item-quantity>
                   <template v-if="isSubscribable && !adding">
                     <span class="snipcart-form__label snipcart__font--tiny">
@@ -83,16 +90,16 @@
                     </span>
                     <item-price :item="item" :selected-plan="selectedPlan" class="snipcart__font--xlarge">
                     </item-price>
-                  </template>
+                  </template> -->
                 </div>
               </div>
 
               <div class="snipcart-item-line__content">
                 <div class="snipcart-item-line__body">
-                  <item-custom-fields v-if="!adding"></item-custom-fields>
-                  <div class="snipcart-item-line__info">
+                  <!-- <div class="snipcart-item-line__info">
                     <item-description v-if="showDescription"></item-description>
-                  </div>
+                  </div> -->
+                  <item-custom-fields v-if="!adding"></item-custom-fields>
                 </div>
               </div>
             </div>

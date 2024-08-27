@@ -1,9 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import { Product, Trials } from "../types/schema";
+import React, { useEffect, useState } from "react";
+import { Product, Style, Trials } from "../types/schema";
 import clsx from "clsx";
 import Dialog from "./ui/Dialog";
 import Checkbox from "./ui/Checkbox";
+import { usePageContext } from "../context/PageContext";
+import useShop from "./shop/ShopContext";
+import TrialsDownload from "./TrialsDownload";
 
 type TypeFaceItemProps = {
   input: Product;
@@ -20,6 +23,8 @@ TO DO
 */
 const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
   const [active, setActive] = useState<boolean>(false);
+  const { setTrials } = useShop();
+  // console.log(input);
   return (
     <div className={clsx("item", active && "is-active")}>
       <div className='_row grid md:grid-cols-8 gap-md-'>
@@ -40,8 +45,13 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
         <div className='flex justify-end'>
           <Checkbox
             name={input.title || ""}
-            onChange={(e: any) => {
-              console.log(input.title, e);
+            onChange={(checked: boolean) => {
+              if (checked && input.styles) {
+                const styles = input.styles;
+                setTrials((prev: any) => [...prev, ...styles]);
+              }
+              // console.log(input.title, checked);
+              // if (checked) setTrials((prev: any) => [...prev, input]);
             }}
           />
         </div>
@@ -55,8 +65,9 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
                   <div className='title'>{item.title}</div>
                   <Checkbox
                     name={item.title || ""}
-                    onChange={(e: any) => {
-                      console.log(input.title, e);
+                    onChange={(checked: boolean) => {
+                      console.log(input.title, checked);
+                      if (checked) setTrials((prev: any) => [...prev, item]);
                     }}
                   />
                 </div>
@@ -73,9 +84,15 @@ type Props = {
   input: Trials;
 };
 const ContentTrials = ({ input }: Props) => {
+  // const [items, setItems] = useState<Style[]>([]);
+  const { trials } = useShop();
+  useEffect(() => {
+    console.log(trials);
+  }, [trials]);
+
   return (
-    <div className='content-trials pt-header-height px-lg'>
-      <div className='list mb-xl'>
+    <div className='content-trials min-h-screen pt-header-height px-lg'>
+      <div className='list mb-xl min-h-full '>
         {input.typefaces &&
           input.typefaces.map((item, i) => (
             <TypeFaceItem key={i} input={item} />
@@ -89,17 +106,11 @@ const ContentTrials = ({ input }: Props) => {
             <TypeFaceItem key={i} input={item} />
           ))}
       </div>
-      {/* <Dialog>
-        <div className='form'>
-          Licencee Information:      Website: example.com     *Email:
-          info@example.com Name:     *First Name:     *Last Name: Company:    
-          Name: . . Location: address:     Postbox: *Street:     *ZIP Code:
-          *City:     County: *Country: ✓ I agree with the EULA ● ✓ Subscribe to
-          Outline Online Newsletter! ●
-        </div>
-      </Dialog> */}
+      <Dialog openModal={trials.length > 0}>
+        <TrialsDownload />
+      </Dialog>
 
-      <div className='infos'>
+      <div className='infos absolute bottom-header-height'>
         <div className='grid md:grid-cols-8 gap-md'>
           <h2 className='md:col-start-4'>Trial Downloads:</h2>
           <div className='text md:col-span-4'>

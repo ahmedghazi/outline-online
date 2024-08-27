@@ -13,6 +13,7 @@ import {
   LicenseType,
   Product,
   SanityKeyed,
+  Style,
   Variant,
 } from "@/app/types/schema";
 import { usePathname } from "next/navigation";
@@ -95,6 +96,8 @@ type ContextProps = {
   setLicenseSizeProfil: Function;
   dataAttributes: Array<string> | null;
   setDataAttributes: Function;
+  trials: Style[];
+  setTrials: Function;
   // isVip: boolean;
   // setIsVip: Function;
   // variant: {
@@ -141,6 +144,7 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
 
   const [dataAttributes, setDataAttributes] = useState<Array<string>>([""]);
   const [isVip, setIsVip] = useState<boolean>(false);
+  const [trials, setTrials] = useState([]);
 
   const pathname = usePathname();
 
@@ -285,6 +289,8 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
         setLicenseSizeProfil,
         dataAttributes,
         setDataAttributes,
+        trials,
+        setTrials,
       }}>
       {children}
     </ShopContext.Provider>

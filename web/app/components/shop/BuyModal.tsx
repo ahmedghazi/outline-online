@@ -161,7 +161,7 @@ const BuyModal = ({ productsCart }: Props) => {
 
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
     const items = licenseTypeProfil?.filter((el) => el.label === val.label);
-    if (checked) console.log(checked, val, items);
+    // if (checked) console.log(checked, val, items);
     if ((items && items.length > 0) || !checked) {
       //remove
       setLicenseTypeProfil({ type: "REMOVE", payload: val });
