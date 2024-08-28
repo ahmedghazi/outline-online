@@ -10,13 +10,13 @@ import {
 
 const imageBuilder = createImageUrlBuilder(sanityConfig);
 
-type SanityImage = {
-  _type: "image";
-  assetId: string;
-  asset: SanityImageAsset;
-  crop?: SanityImageCrop;
-  hotspot?: SanityImageHotspot;
-};
+// type SanityImage = {
+//   _type: "image";
+//   assetId: string;
+//   asset: SanityImageAsset;
+//   crop?: SanityImageCrop;
+//   hotspot?: SanityImageHotspot;
+// };
 
 export function urlFor(source: SanityImageAsset, maxWidth: number = 2000): any {
   // console.log(source.assetId);

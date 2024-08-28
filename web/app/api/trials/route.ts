@@ -1,3 +1,4 @@
+//https://mailtrap.io/blog/nodemailer-gmail/
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
