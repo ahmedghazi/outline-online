@@ -16,11 +16,12 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
   const body = await req.json(); // res now contains body
   console.log(body);
   const { items, user } = body.content;
+  console.log(items);
   const params: SendProps = {
     destination: user.email,
     payload: body,
   };
-  const _sendResponse = _sendEmail(params);
+  const _sendResponse = await _sendEmail(params);
   return new NextResponse(JSON.stringify(_sendResponse), {
     status: 201,
     headers: { "Content-Type": "application/json" },

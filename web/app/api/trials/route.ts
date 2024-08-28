@@ -5,20 +5,19 @@ import { headers } from "next/headers";
 import sendGridMail from "@sendgrid/mail";
 import nodemailer from "nodemailer";
 // import dotenv from "dotenv";
-
 // require("dotenv").config();
-
-import sanityClient from "@sanity/client";
+// import sanityClient from "@sanity/client";
+import { client } from "../../utils/sanity-client";
 import { Style, Typeface } from "@/app/types/schema";
 
-const client = sanityClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: "2021-08-29",
-  useCdn: true,
-  withCredentials: true,
-  token: process.env.SANITY_API_READ_TOKEN,
-});
+// const client = sanityClient({
+//   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+//   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+//   apiVersion: "2021-08-29",
+//   useCdn: true,
+//   withCredentials: true,
+//   token: process.env.SANITY_API_READ_TOKEN,
+// });
 
 type SendProps = {
   payload: any;
