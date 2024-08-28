@@ -67,7 +67,6 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     } else {
       const response_error = {
         ok: false,
-
         status: "error",
         message: "something went wrong with the email",
         // raw: error,
@@ -81,7 +80,6 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     console.log(error);
     const response_error = {
       ok: false,
-
       status: "error",
       message: error.message,
       raw: error,
@@ -158,7 +156,13 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
     to: destination,
     subject: "Your fonts :)",
     // text: "le message: " + JSON.stringify(payload),
-    html: JSON.stringify(payload),
+    html: `
+      <p>hi ${destination}</p>
+      <p>Thx for your request.</p>
+      <p>You will found attached the trials font you selected.</p>
+      <p>We offer trial fonts with bextended Western Latin character sets including numbers, and punctuation. Trial font files provided are strictly limited for testing and pitching purposes. By downloading the files, you accept Outline Online’s End User Licence Agreement (EULA). If you download the trial files, and would then like to use the font for a published project, your client will need to purchase the appropriate licence.</p>
+      <p>Cheers from Outline Online.</p>
+    `,
     attachments: payload,
   };
 
