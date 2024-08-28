@@ -40,8 +40,8 @@ const TrialsDownload = (props: Props) => {
   const getButtonMsg = () => {
     switch (status) {
       case "sending":
-        return "...";
-      case "sent":
+        return "Please wait...";
+      case "success":
         return "Thanks, check your email :)";
       case "error":
         return "ERROR";
@@ -82,6 +82,7 @@ const TrialsDownload = (props: Props) => {
       const data = await res.json();
       console.log(data);
       if (data.ok) {
+        setStatus("success");
       }
       // if (setSearchResult) setSearchResult(data);
       document.body.classList.remove("is-fetching");

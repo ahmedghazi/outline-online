@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import sendGridMail from "@sendgrid/mail";
+import nodemailer from "nodemailer";
 // import dotenv from "dotenv";
 
 // require("dotenv").config();
@@ -41,33 +42,51 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 
     const zipFiles = await _collectTypefacesZip(typefacesId);
     const _downloadButtons = await _generateDownloadButtons(zipFiles);
-    console.log("zipFiles");
-    console.log(zipFiles);
-    // console.log(data);
+    const _attachments = await _generateAttachments(zipFiles);
+    // console.log("zipFiles");
+    // console.log(zipFiles);
+    console.log(_attachments);
 
-    // const params: SendProps = {
-    //   payload: zipFiles,
-    //   destination: destination,
-    // };
-    // const _sendEmailresult = await _sendEmail(params);
-
-    const json_response = {
-      // message: "success",
-      data: JSON.stringify(_downloadButtons),
+    const params: SendProps = {
+      destination: destination,
+      payload: _attachments,
     };
-    // console.log(json_response);
-    return new NextResponse(JSON.stringify(json_response), {
-      status: 201,
-      headers: { "Content-Type": "application/json" },
-    });
+    // _sendEmail(destination, _downloadButtons);
+    const _sendEmailresult = await _sendEmail(params);
+    if (_sendEmailresult.status === "success") {
+      const response_success = {
+        ok: true,
+        message: "success",
+        data: JSON.stringify(_sendEmailresult),
+      };
+      // console.log(response_success);
+      return new NextResponse(JSON.stringify(response_success), {
+        status: 201,
+        headers: { "Content-Type": "application/json" },
+      });
+    } else {
+      const response_error = {
+        ok: false,
+
+        status: "error",
+        message: "something went wrong with the email",
+        // raw: error,
+      };
+      return new NextResponse(JSON.stringify(response_error), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
   } catch (error: any) {
     console.log(error);
-    const error_response = {
+    const response_error = {
+      ok: false,
+
       status: "error",
       message: error.message,
       raw: error,
     };
-    return new NextResponse(JSON.stringify(error_response), {
+    return new NextResponse(JSON.stringify(response_error), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
@@ -87,11 +106,27 @@ const _collectTypefacesZip = async (_ids: any) => {
     }
   }`;
   const res = await client.fetch(query, { _ids: _ids });
+  const validData = res.filter((el: Typeface) => el.zip !== null);
   // const data = await res.json();
   // console.log(res);
-  return res;
+  return validData;
 };
 
+const _generateAttachments = (items: any) => {
+  return items.map((item: Typeface) => {
+    if (item.zip) {
+      return {
+        filename: `${item.title}-${item.style}.zip`,
+        path: item.zip.asset.url,
+      };
+    } else {
+      return {
+        filename: "no zip found",
+        path: "",
+      };
+    }
+  });
+};
 const _generateDownloadButtons = (items: any) => {
   return items.map((item: Typeface) => {
     if (item.zip) {
@@ -103,9 +138,58 @@ const _generateDownloadButtons = (items: any) => {
 };
 
 const _sendEmail = async ({ destination, payload }: SendProps) => {
-  sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+  // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
   console.log("_sending to :", destination);
-  const str = JSON.stringify(payload);
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      // user: process.env.SENDER_EMAIL,
+      // pass: process.env.SENDER_PASSWORD,
+      user: "oswaldnomadness@gmail.com",
+      // pass: "$$$vviirrggiill***",
+      pass: "dbom dpcq mtrt hduk",
+    },
+    secure: true,
+  });
+
+  var mailOptions = {
+    from: process.env.SENDER_EMAIL,
+    to: destination,
+    subject: "Your fonts :)",
+    // text: "le message: " + JSON.stringify(payload),
+    html: JSON.stringify(payload),
+    attachments: payload,
+  };
+
+  try {
+    const res = await transporter.sendMail(mailOptions);
+    console.log(res);
+    return {
+      status: "success",
+      raw: res,
+    };
+  } catch (error) {
+    console.log(error);
+    //throw new Error(error);
+    return {
+      status: "error",
+      raw: error,
+    };
+  }
+
+  // transporter.sendMail(mailOptions, function (error, info) {
+  //   if (error) {
+  //     console.log(error);
+  //     throw new Error(error);
+  //   } else {
+  //     console.log("Email Sent");
+  //     console.log(info);
+  //     return info;
+  //   }
+  // });
+
+  // const str = JSON.stringify(payload);
   // const btns =
   // const html = `
   //     <div>
@@ -119,23 +203,23 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
   //        outline online
   //     </div>
   //   `;
-  const mail = {
-    from: process.env.SENDER_EMAIL || "hello@ahmedghazi.com",
-    to: destination,
-    subject: "Your fonts :)",
-    // html,
-    templateId: "d-45468a3d093f4d6d9ab8a51d68de256f",
-    dynamic_template_data: {
-      subject: "Download Your fonts",
-      destination: destination,
-      download_link: payload,
-    },
-  };
-  console.log(mail);
-  const res = await sendGridMail.send(mail);
-  // console.log(res);
-  console.log(`Email sent`);
-  return res;
+  // const mail = {
+  //   from: process.env.SENDER_EMAIL || "hello@ahmedghazi.com",
+  //   to: destination,
+  //   subject: "Your fonts :)",
+  //   // html,
+  //   templateId: "d-45468a3d093f4d6d9ab8a51d68de256f",
+  //   dynamic_template_data: {
+  //     subject: "Download Your fonts",
+  //     destination: destination,
+  //     download_link: payload,
+  //   },
+  // };
+  // console.log(mail);
+  // const res = await sendGridMail.send(mail);
+  // // console.log(res);
+  // console.log(`Email sent`);
+  // return res;
 };
 // const _mutation = async (data: Podcast) => {
 //   const client = createClient({
