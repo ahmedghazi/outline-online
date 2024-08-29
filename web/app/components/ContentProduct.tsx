@@ -45,12 +45,10 @@ const ContentProduct = ({ input }: Props) => {
   }, [type]);
 
   const _setDefaultTypeface = () => {
-    const regular = input.styles?.filter(
-      (el) => el.typeface?.style === "regular"
-    );
+    const regular = input.styles?.filter((el) => el.items?.style === "regular");
     if (regular && regular?.length === 1) {
       // console.log(dispatchType);
-      dispatchType(regular[0].typeface);
+      dispatchType(regular[0].items);
     }
   };
 
@@ -58,7 +56,7 @@ const ContentProduct = ({ input }: Props) => {
     let arr: Typeface[] = [];
     input.styles?.forEach((el) => {
       // console.log(el.typeface);
-      if (el.typeface) arr.push(el.typeface);
+      if (el.items) arr.push(el.items);
     });
     dispatchTypes(arr);
   };

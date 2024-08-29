@@ -83,6 +83,10 @@ const CartProduct = ({ input }: CartProductProps) => {
                       title={item.title || ""}
                       blurb={"ze blurb"}
                       price={item.price || 20000}
+                      metadata={{
+                        type: "bundle",
+                        typefaces: item.items ? item.items : [],
+                      }}
                     />
                   </div>
                 </div>
@@ -105,6 +109,10 @@ const CartProduct = ({ input }: CartProductProps) => {
                       title={item.title || ""}
                       blurb={"ze blurb"}
                       price={item.price || 20000}
+                      metadata={{
+                        type: "style",
+                        typefaces: item.items ? [item.items] : [],
+                      }}
                     />
                   </div>
                 </div>

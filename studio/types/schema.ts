@@ -812,11 +812,11 @@ export type Style = {
   price?: number;
 
   /**
-   * typeface — `reference`
+   * items — `reference`
    *
-   *
+   * rename this (cf bundles)
    */
-  typeface?: SanityReference<Typeface>;
+  items?: SanityReference<Typeface>;
 };
 
 export type BlockContent = Array<SanityKeyed<SanityBlock>>;

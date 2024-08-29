@@ -41,7 +41,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     const destination = clientInfos.email;
 
     const zipFiles = await _collectTypefacesZip(typefacesId);
-    const _downloadButtons = await _generateDownloadButtons(zipFiles);
+    // const _downloadButtons = await _generateDownloadButtons(zipFiles);
     const _attachments = await _generateAttachments(zipFiles);
     // console.log("zipFiles");
     // console.log(zipFiles);
@@ -125,15 +125,15 @@ const _generateAttachments = (items: any) => {
     }
   });
 };
-const _generateDownloadButtons = (items: any) => {
-  return items.map((item: Typeface) => {
-    if (item.zip) {
-      return `<a href="${item.zip.asset.url}">${item.title} - ${item.style}</a>`;
-    } else {
-      return "no zip found";
-    }
-  });
-};
+// const _generateDownloadButtons = (items: any) => {
+//   return items.map((item: Typeface) => {
+//     if (item.zip) {
+//       return `<a href="${item.zip.asset.url}">${item.title} - ${item.style}</a>`;
+//     } else {
+//       return "no zip found";
+//     }
+//   });
+// };
 
 const _sendEmail = async ({ destination, payload }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");

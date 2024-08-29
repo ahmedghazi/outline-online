@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
 import useShop from "./ShopContext";
 import { usePathname } from "next/navigation";
-import { LabelPrice, LicenseType, Product } from "@/app/types/schema";
+import {
+  LabelPrice,
+  LicenseType,
+  Product,
+  Style,
+  Typeface,
+} from "@/app/types/schema";
 import Price from "./Price";
 
+type MetadataProps = {
+  type: string;
+  typefaces: Typeface[];
+};
 type Props = {
   id: string;
   price: number;
   title: string;
   blurb: string;
   category?: string;
+  metadata: MetadataProps;
   // url: string;
   // description: string;
   // dataattributes: Array<string> | null;
@@ -30,7 +41,7 @@ interface ProductData {
 }
 
 const AddToCart = (props: Props) => {
-  const { price, title, blurb, category, id } = props;
+  const { price, title, blurb, category, id, metadata } = props;
   const {
     // dataAttributes,
     // currentProduct,
@@ -168,7 +179,7 @@ const AddToCart = (props: Props) => {
     },
     url: pathname,
     description: blurb || "",
-    name: `Typeface name ${title}` || "",
+    name: `${title}` || "",
     quantity: 1,
     stackable: "never",
     shippable: false,
@@ -177,8 +188,9 @@ const AddToCart = (props: Props) => {
     //   ..._getDataAttributes(),
     //   // ...websiteData,
     // ],
-    metadata: JSON.stringify(licenseSizeProfil),
+    metadata: JSON.stringify(metadata),
   };
+  // console.log(metadata);
 
   return (
     <div
@@ -208,7 +220,7 @@ const AddToCart = (props: Props) => {
             data-item-max-quantity='1'
             data-item-stackable='never'
             {..._getDataAttributes()?.dataAttributes}
-            data-item-metadata={JSON.stringify(licenseSizeProfil)}></input>
+            data-item-metadata={JSON.stringify(metadata)}></input>
           <span className='checkmark'></span>
         </div>
         {/* <pre>{JSON.stringify(_getDataAttributes(), null, 2)}</pre> */}

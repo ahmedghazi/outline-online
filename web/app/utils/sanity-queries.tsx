@@ -65,11 +65,18 @@ export async function getProductsCart(): Promise<Product[]> {
       title,
       styles[]{
         ...,
-        typeface->
+        items->{
+          _id,
+          title
+        }
       },
       bundles[]{
         ...,
-        typeface->
+        items[]->{
+          // ...,
+          _id,
+          title
+        }
       },
       licenseSizes[]{
         ...
@@ -186,7 +193,7 @@ export const productQuery = groq`*[_type == "product" && slug.current == $slug][
   },
   styles[]{
 		...,
-		typeface->
+		items->
 	}
 }`;
 

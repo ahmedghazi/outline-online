@@ -2,6 +2,7 @@ import { NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { client } from "../../utils/sanity-client";
+import { Typeface } from "@/app/types/schema";
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -13,19 +14,66 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     });
   }
 
-  const body = await req.json(); // res now contains body
-  console.log(body);
-  const { items, user } = body.content;
-  console.log(items);
-  const params: SendProps = {
-    destination: user.email,
-    payload: body,
-  };
-  const _sendResponse = await _sendEmail(params);
-  return new NextResponse(JSON.stringify(_sendResponse), {
-    status: 201,
-    headers: { "Content-Type": "application/json" },
-  });
+  try {
+    const body = await req.json(); // res now contains body
+    // console.log(body);
+    const { eventName } = body;
+    if (eventName === "order.completed") {
+      const { items, user } = body.content;
+      // console.log(items);
+
+      /**
+       * on a les items,
+       * dans items, parser metadata
+       * on a besoin des zip
+       */
+      const _typefacesId = _collectTypefacesId(items);
+      const _zipFiles = await _collectTypefacesZip(_typefacesId);
+      const _attachments = await _generateAttachments(_zipFiles);
+      console.log(_attachments);
+
+      const params: SendProps = {
+        destination: user.email,
+        payload: _attachments,
+      };
+      const _sendEmailresult = await _sendEmail(params);
+      if (_sendEmailresult.status === "success") {
+        const response_success = {
+          ok: true,
+          message: "success",
+          data: JSON.stringify(_sendEmailresult),
+        };
+        // console.log(response_success);
+        return new NextResponse(JSON.stringify(response_success), {
+          status: 201,
+          headers: { "Content-Type": "application/json" },
+        });
+      } else {
+        const response_error = {
+          ok: false,
+          status: "error",
+          message: "something went wrong with the email",
+          // raw: error,
+        };
+        return new NextResponse(JSON.stringify(response_error), {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+    }
+  } catch (error: any) {
+    console.log(error);
+    const response_error = {
+      ok: false,
+      status: "error",
+      message: error.message,
+      raw: error,
+    };
+    return new NextResponse(JSON.stringify(response_error), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 }
 
 type SendProps = {
@@ -33,7 +81,57 @@ type SendProps = {
   destination: string;
 };
 
+const _collectTypefacesId = (items: any) => {
+  let _ids: String[] = [];
+  items.forEach((element: any) => {
+    const metadata = JSON.parse(element.metadata);
+    const { typefaces } = metadata;
+    const _typefacesId = typefaces.map((item: any) => item._id);
+    _ids = [..._ids, ..._typefacesId];
+  });
+  return _ids;
+};
+
+const _collectTypefacesZip = async (_ids: any) => {
+  const query = `*[_type == "typeface"
+    && _id in $_ids
+  ]{
+    title,
+    style,
+    zip{
+      asset->{
+        url
+      }
+    }
+  }`;
+
+  const res = await client.fetch(query, { _ids: _ids });
+  const validData = res.filter((el: Typeface) => el.zip !== null);
+  // const data = await res.json();
+  // console.log(res);
+  return validData;
+};
+
+const _generateAttachments = (items: any) => {
+  return items.map((item: Typeface) => {
+    if (item.zip) {
+      return {
+        filename: `${item.title}-${item.style}.zip`,
+        path: item.zip.asset.url,
+      };
+    } else {
+      return {
+        filename: "no zip found",
+        path: "",
+      };
+    }
+  });
+};
+
 const _sendEmail = async ({ destination, payload }: SendProps) => {
+  // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+  console.log("_sending to :", destination);
+
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -48,17 +146,16 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
 
   var mailOptions = {
     from: process.env.SENDER_EMAIL,
-    to: "hello@ahmedghazi.com",
-    subject: "Ydebug order completed",
-    html: JSON.stringify(payload),
-    // html: `
-    //   <p>hi ${destination}</p>
-    //   <p>Thx for your request.</p>
-    //   <p>You will found attached the trials font you selected.</p>
-    //   <p>We offer trial fonts with bextended Western Latin character sets including numbers, and punctuation. Trial font files provided are strictly limited for testing and pitching purposes. By downloading the files, you accept Outline Online’s End User Licence Agreement (EULA). If you download the trial files, and would then like to use the font for a published project, your client will need to purchase the appropriate licence.</p>
-    //   <p>Cheers from Outline Online.</p>
-    // `,
-    // attachments: payload,
+    to: destination,
+    subject: "Your fonts :)",
+    // text: "le message: " + JSON.stringify(payload),
+    html: `
+      <p>hi ${destination}</p>
+      <p>Thx for your request.</p>
+      <p>You will found attached the fonts you bought.</p>
+      <p>Cheers from Outline Online.</p>
+    `,
+    attachments: payload,
   };
 
   try {

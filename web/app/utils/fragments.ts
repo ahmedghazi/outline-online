@@ -37,7 +37,7 @@ export const productCard = `
 	price,
 	styles[]{
 		...,
-		typeface->
+		items->
 	}
 `;
 

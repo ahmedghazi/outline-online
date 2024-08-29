@@ -33,9 +33,10 @@ export default defineField({
     }),
 
     defineField({
-      title: 'typeface',
-      name: 'typeface',
+      title: 'items',
+      name: 'items',
       type: 'reference',
+      description: 'rename this (cf bundles)',
       to: [
         {
           type: 'typeface',

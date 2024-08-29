@@ -15,7 +15,7 @@ type Props = {
 const CompositionTool = ({ input }: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
-  const defaultStyle = input.length > 0 ? input[0].typeface?.slug?.current : "";
+  const defaultStyle = input.length > 0 ? input[0].items?.slug?.current : "";
   const [currentStyle, setCurrentStyle] = useState<string | undefined>(
     defaultStyle
   );
@@ -23,8 +23,8 @@ const CompositionTool = ({ input }: Props) => {
   const _stylisticSets = useMemo(() => {
     let arr: KeyValString[] = [];
     input.forEach((el) => {
-      if (el.typeface?.stylisticSets && el.typeface?.stylisticSets.length > 0) {
-        el.typeface?.stylisticSets.forEach((s) => {
+      if (el.items?.stylisticSets && el.items?.stylisticSets.length > 0) {
+        el.items?.stylisticSets.forEach((s) => {
           if (arr.some((e) => e.key === s.key)) {
           } else {
             arr.push(s);
@@ -41,7 +41,7 @@ const CompositionTool = ({ input }: Props) => {
       return {
         _type: "keyValString",
         key: item.title,
-        val: item.typeface?.slug?.current,
+        val: item.items?.slug?.current,
       };
     });
     return arr;

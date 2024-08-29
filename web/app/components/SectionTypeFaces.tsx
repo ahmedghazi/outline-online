@@ -51,8 +51,8 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
               // value={JSON.stringify(input.styles[0])}
             >
               {input.styles?.map((item, i) => (
-                <option key={i * 10} value={JSON.stringify(item.typeface)}>
-                  {item.typeface?.title}
+                <option key={i * 10} value={JSON.stringify(item.items)}>
+                  {item.items?.title}
                 </option>
               ))}
             </select>
@@ -76,7 +76,7 @@ const SectionTypeFaces = ({ input }: Props) => {
           <div key={i} className='item'>
             {item && item.styles && item.styles.length > 0 && (
               <TypeContextProvider>
-                <Item input={item} defaultStyle={item.styles[0].typeface} />
+                <Item input={item} defaultStyle={item.styles[0].items} />
               </TypeContextProvider>
             )}
           </div>
@@ -85,7 +85,7 @@ const SectionTypeFaces = ({ input }: Props) => {
           <div key={i} className='item'>
             {item && item.styles && item.styles.length > 0 && (
               <TypeContextProvider>
-                <Item input={item} defaultStyle={item.styles[0].typeface} />
+                <Item input={item} defaultStyle={item.styles[0].items} />
               </TypeContextProvider>
             )}
           </div>

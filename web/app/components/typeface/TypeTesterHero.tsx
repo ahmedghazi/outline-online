@@ -20,8 +20,8 @@ const TypeTesterHero = ({ input }: Props) => {
   const _stylisticSets = useMemo(() => {
     let arr: KeyValString[] = [];
     input.forEach((el) => {
-      if (el.typeface?.stylisticSets && el.typeface?.stylisticSets.length > 0) {
-        el.typeface?.stylisticSets.forEach((s) => {
+      if (el.items?.stylisticSets && el.items?.stylisticSets.length > 0) {
+        el.items?.stylisticSets.forEach((s) => {
           if (arr.some((e) => e.key === s.key)) {
           } else {
             arr.push(s);
@@ -47,12 +47,10 @@ const TypeTesterHero = ({ input }: Props) => {
           <div
             key={i}
             style={{
-              fontFamily: item.typeface?.slug?.current,
+              fontFamily: item.items?.slug?.current,
             }}>
-            {/* <TypeTester title={item.typeface?.title || item.title || ""} /> */}
-            <div className='item'>
-              {item.typeface?.title || item.title || ""}
-            </div>
+            {/* <TypeTester title={item.items?.title || item.title || ""} /> */}
+            <div className='item'>{item.items?.title || item.title || ""}</div>
           </div>
         ))}
       </div>

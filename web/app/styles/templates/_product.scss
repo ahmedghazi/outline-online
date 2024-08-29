@@ -28,14 +28,16 @@ body[data-template="is-product"],
       .btn-toggle {
         position: absolute;
         left: 50%;
-        bottom: calc(var(--space-md) + 0em);
+        bottom: calc(var(--header-height) + 0em);
         transform: translateX(-50%);
+        z-index: 251;
       }
       .modal {
         display: none;
         background-color: white;
         position: fixed;
         inset: 0;
+        z-index: 251;
         padding: calc(var(--header-height) * 2) calc(var(--space-lg) + 25px)
           var(--space-md);
         .inner {

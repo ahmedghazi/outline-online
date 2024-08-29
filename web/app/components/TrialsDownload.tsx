@@ -56,7 +56,7 @@ const TrialsDownload = (props: Props) => {
   }, [state]);
 
   const _collectTypefacesId = () => {
-    const ids = trials.map((item, i) => item.typeface?._id);
+    const ids = trials.map((item, i) => item.items?._id);
     return ids;
   };
 
@@ -73,7 +73,7 @@ const TrialsDownload = (props: Props) => {
       typefacesId: typefacesId,
     };
     console.log(payload);
-
+    return;
     try {
       const res = await fetch("/api/trials", {
         method: "POST",

@@ -97,14 +97,6 @@ const ContentTrials = ({ input }: Props) => {
           input.typefaces.map((item, i) => (
             <TypeFaceItem key={i} input={item} />
           ))}
-        {input.typefaces &&
-          input.typefaces.map((item, i) => (
-            <TypeFaceItem key={i} input={item} />
-          ))}
-        {input.typefaces &&
-          input.typefaces.map((item, i) => (
-            <TypeFaceItem key={i} input={item} />
-          ))}
       </div>
       <Dialog openModal={trials.length > 0}>
         <TrialsDownload />
