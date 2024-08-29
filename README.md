@@ -49,3 +49,19 @@ node 18.18.0
 - #footer sticky bottom
 - license type price if single or multi
 - trinket gltf or svg
+
+# To do cart
+
+- re think atc metadata
+  {
+  productID: xxx,
+  type: bundle,
+  ref: bundle.ref
+  }
+  {
+  productID: xxx,
+  type: style
+  ref: style.ref
+  }
+- re name product.styles => product.singles
+  [bundle, single]

@@ -393,13 +393,6 @@ export interface Product extends SanityDocument {
   subTitle?: string;
 
   /**
-   * Product variants — `array`
-   *
-   * ex licence web, desktop, Base price defined here, company size will increment base price, bundle or single style will give the final price
-   */
-  variants?: Array<SanityKeyed<Variants>>;
-
-  /**
    * licenseSizes — `array`
    *
    *
@@ -411,14 +404,14 @@ export interface Product extends SanityDocument {
    *
    *
    */
-  bundles?: Array<SanityKeyed<Bundle>>;
+  bundles?: Array<SanityKeyed<ProductBundle>>;
 
   /**
-   * Styles — `array`
+   * singles — `array`
    *
    *
    */
-  styles?: Array<SanityKeyed<Style>>;
+  singles?: Array<SanityKeyed<ProductSingle>>;
 
   /**
    * Blurb — `string`
@@ -757,8 +750,8 @@ export type TypefaceFile = {
   base64?: string;
 };
 
-export type Bundle = {
-  _type: "bundle";
+export type ProductBundle = {
+  _type: "productBundle";
   /**
    * Title — `string`
    *
@@ -781,11 +774,70 @@ export type Bundle = {
   price?: number;
 
   /**
-   * items — `array`
+   * Typefaces — `array`
    *
    *
    */
-  items?: Array<SanityKeyedReference<Typeface>>;
+  typefaces?: Array<SanityKeyedReference<Typeface>>;
+
+  /**
+   * Zip File — `file`
+   *
+   * Digital good client will receive
+   */
+  zip?: { _type: "file"; asset: SanityReference<any> };
+
+  /**
+   * Zip File Trials — `file`
+   *
+   * Digital good client will receive
+   */
+  zipTrials?: { _type: "file"; asset: SanityReference<any> };
+};
+
+export type ProductSingle = {
+  _type: "productSingle";
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Description — `string`
+   *
+   *
+   */
+  description?: string;
+
+  /**
+   * Price — `number`
+   *
+   * Based on base price (licence type + size), ex base price is 50 CHF, this can add 60 CHF, result: 110 CHF
+   */
+  price?: number;
+
+  /**
+   * Typeface — `reference`
+   *
+   * rename this (cf bundles)
+   */
+  typeface?: SanityReference<Typeface>;
+
+  /**
+   * Zip File — `file`
+   *
+   * Digital good client will receive
+   */
+  zip?: { _type: "file"; asset: SanityReference<any> };
+
+  /**
+   * Zip File Trials — `file`
+   *
+   * Digital good client will receive
+   */
+  zipTrials?: { _type: "file"; asset: SanityReference<any> };
 };
 
 export type Style = {

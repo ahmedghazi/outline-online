@@ -12,6 +12,7 @@ import {
   LicenseSize,
   LicenseType,
   Product,
+  ProductSingle,
   SanityKeyed,
   Style,
   Variant,
@@ -96,7 +97,7 @@ type ContextProps = {
   setLicenseSizeProfil: Function;
   dataAttributes: Array<string> | null;
   setDataAttributes: Function;
-  trials: Style[];
+  trials: ProductSingle[];
   setTrials: Function;
   // isVip: boolean;
   // setIsVip: Function;

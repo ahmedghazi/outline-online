@@ -1,12 +1,12 @@
 "use client";
-import { Style } from "@/app/types/schema";
+import { ProductSingle, Style } from "@/app/types/schema";
 import React, { useEffect, useRef } from "react";
 import { alphabets } from "./alphabets";
 import useType from "./TypeContext";
 // import useType from "./typeContext";
 
 type Props = {
-  input: Style;
+  input: ProductSingle;
 };
 
 const Glyphs = ({ input }: Props) => {
@@ -47,8 +47,8 @@ const Glyphs = ({ input }: Props) => {
       <div className='mb-md'>
         <h3>Basic latin</h3>
         <div className='grid md:grid-cols-10-  md:grid-cols-16 '>
-          {input.items?.glyphs &&
-            input.items?.glyphs.map((item, i) => (
+          {input.typeface?.glyphs &&
+            input.typeface?.glyphs.map((item, i) => (
               <div className='item md:col-span-2' key={i}>
                 <div>{item}</div>
               </div>

@@ -35,9 +35,17 @@ export const productCard = `
   slug,
   title,
 	price,
-	styles[]{
+	singles[]{
 		...,
-		items->
+		typeface->{
+			slug,
+			_id,
+			// _key,
+			title,
+			typefaceFile{
+				base64
+			}
+		}
 	}
 `;
 

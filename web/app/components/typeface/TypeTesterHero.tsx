@@ -1,4 +1,4 @@
-import { KeyValString, Style } from "@/app/types/schema";
+import { KeyValString, ProductSingle, Style } from "@/app/types/schema";
 import React, { useMemo, useRef } from "react";
 import TypeTester from "./TypeTester";
 import useType from "./TypeContext";
@@ -10,7 +10,7 @@ import { div } from "three/examples/jsm/nodes/Nodes.js";
 import CompositionTool from "./CompositionTool";
 
 type Props = {
-  input: Style[];
+  input: ProductSingle[];
 };
 
 const TypeTesterHero = ({ input }: Props) => {
@@ -20,8 +20,8 @@ const TypeTesterHero = ({ input }: Props) => {
   const _stylisticSets = useMemo(() => {
     let arr: KeyValString[] = [];
     input.forEach((el) => {
-      if (el.items?.stylisticSets && el.items?.stylisticSets.length > 0) {
-        el.items?.stylisticSets.forEach((s) => {
+      if (el.typeface?.stylisticSets && el.typeface?.stylisticSets.length > 0) {
+        el.typeface?.stylisticSets.forEach((s) => {
           if (arr.some((e) => e.key === s.key)) {
           } else {
             arr.push(s);
@@ -43,33 +43,21 @@ const TypeTesterHero = ({ input }: Props) => {
   return (
     <section className='type-tester--hero'>
       <div className='items' ref={ref}>
+        {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
         {input.map((item, i) => (
           <div
             key={i}
             style={{
-              fontFamily: item.items?.slug?.current,
+              fontFamily: item.typeface?.slug?.current,
             }}>
-            {/* <TypeTester title={item.items?.title || item.title || ""} /> */}
-            <div className='item'>{item.items?.title || item.title || ""}</div>
+            {/* <TypeTester title={item.typeface?.title || item.title || ""} /> */}
+            <div className='item'>
+              {item.typeface?.title || item.title || ""}
+            </div>
           </div>
         ))}
       </div>
       <CompositionTool input={input} />
-      {/* {ref && ref.current && (
-        <div className='footer '>
-          <TesterSize initialValue='72' target={ref.current} />
-          <TesterSpacing initialValue='1' target={ref.current} />
-          <TesterLeading initialValue='80' target={ref.current} />
-          {_stylisticSets && _stylisticSets.length > 0 && (
-            <Select
-              options={_stylisticSets}
-              onChange={_handleStylisticSets}
-              label='Stylistic Sets'
-            />
-          )}
-
-        </div>
-      )} */}
     </section>
   );
 };

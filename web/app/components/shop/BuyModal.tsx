@@ -28,6 +28,16 @@ input checkbox snipcart, on change set Products
 # TO DO
 Default is first license type
 
+{
+  productID: xxx,
+  type: bundle,
+  ref: bundle.ref
+}
+{
+  productID: xxx,
+  type: style
+  ref: style.ref
+}
 */
 const CartProduct = ({ input }: CartProductProps) => {
   const [active, setActive] = useState<boolean>(false);
@@ -68,7 +78,7 @@ const CartProduct = ({ input }: CartProductProps) => {
                     <div className='flex'>
                       <div className='title'>{item.title}</div>
                       <ul className='flex'>
-                        {item.items?.map((_item, j) => (
+                        {item.typefaces?.map((_item, j) => (
                           <li key={j} className='text-gray  '>
                             {_item.title}
                           </li>
@@ -85,7 +95,7 @@ const CartProduct = ({ input }: CartProductProps) => {
                       price={item.price || 20000}
                       metadata={{
                         type: "bundle",
-                        typefaces: item.items ? item.items : [],
+                        typefaces: item.typefaces ? item.typefaces : [],
                       }}
                     />
                   </div>
@@ -98,7 +108,7 @@ const CartProduct = ({ input }: CartProductProps) => {
           <div className='grid md:grid-cols-8'>
             <div className='label text-muted col-span-2'>Single Styles</div>
             <div className='items col-span-6'>
-              {input.styles?.map((item, i) => (
+              {input.singles?.map((item, i) => (
                 <div className='item _row grid md:grid-cols-6' key={i}>
                   <div className='title col-span-4'>{item.title}</div>
 
@@ -111,7 +121,7 @@ const CartProduct = ({ input }: CartProductProps) => {
                       price={item.price || 20000}
                       metadata={{
                         type: "style",
-                        typefaces: item.items ? [item.items] : [],
+                        typefaces: item.typeface ? [item.typeface] : [],
                       }}
                     />
                   </div>
@@ -242,12 +252,6 @@ const BuyModal = ({ productsCart }: Props) => {
             <CartProduct input={item} key={i} />
           ))}
         </div>
-
-        {/* <h2>products</h2>
-        <h2>licenseTypeProfil</h2>
-        <pre>{JSON.stringify(licenseTypeProfil, null, 2)}</pre>
-        <h2>licenseSizeProfil</h2>
-        <pre>{JSON.stringify(licenseSizeProfil, null, 2)}</pre> */}
       </div>
       <div className='footer'>
         {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
@@ -260,7 +264,6 @@ const BuyModal = ({ productsCart }: Props) => {
           </button>
         )}
       </div>
-      {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
     </div>
   );
 };

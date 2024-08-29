@@ -12,7 +12,8 @@ import variants from './shop/variants'
 import variant from './shop/variant'
 import typeface from './shop/typeface'
 import typefaceFile from './shop/typefaceFile'
-import bundle from './shop/bundle'
+import productBundle from './shop/productBundle'
+import productSingle from './shop/productSingle'
 import style from './shop/style'
 import vendor from './shop/vendor'
 import licenseType from './shop/licenseType'
@@ -61,7 +62,8 @@ export const schemaTypes = [
   variants,
   variant,
   typefaceFile,
-  bundle,
+  productBundle,
+  productSingle,
   style,
 
   blockContent,

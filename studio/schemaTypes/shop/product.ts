@@ -82,21 +82,21 @@ export default defineType({
     //   group: 'editorial',
     // }),
 
-    defineField({
-      title: 'Product variants',
-      name: 'variants',
-      type: 'array',
-      description:
-        'ex licence web, desktop, Base price defined here, company size will increment base price, bundle or single style will give the final price',
-      of: [
-        {
-          title: 'Variants',
-          type: 'variants',
-        },
-      ],
-      group: 'shop',
-      hidden: true,
-    }),
+    // defineField({
+    //   title: 'Product variants',
+    //   name: 'variants',
+    //   type: 'array',
+    //   description:
+    //     'ex licence web, desktop, Base price defined here, company size will increment base price, bundle or single style will give the final price',
+    //   of: [
+    //     {
+    //       title: 'Variants',
+    //       type: 'variants',
+    //     },
+    //   ],
+    //   group: 'shop',
+    //   hidden: true,
+    // }),
 
     // defineField({
     //   name: 'noticeInternal',
@@ -125,23 +125,34 @@ export default defineType({
       type: 'array',
       of: [
         {
-          type: 'bundle',
+          type: 'productBundle',
         },
       ],
       group: 'shop',
     }),
-
     defineField({
-      name: 'styles',
-      title: 'Styles',
+      name: 'singles',
+      title: 'singles',
       type: 'array',
       of: [
         {
-          type: 'style',
+          type: 'productSingle',
         },
       ],
       group: 'shop',
     }),
+    // defineField({
+    //   name: 'styles',
+    //   title: 'Styles',
+    //   type: 'array',
+    //   of: [
+    //     {
+    //       type: 'style',
+    //     },
+    //   ],
+    //   group: 'shop',
+    //   hidden: true,
+    // }),
 
     defineField({
       name: 'blurb',

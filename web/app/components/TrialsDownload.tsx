@@ -51,15 +51,15 @@ const TrialsDownload = (props: Props) => {
   };
 
   useEffect(() => {
-    console.log(Object.keys(state), requiredLength);
-    setOkToSend(Object.keys(state).length === requiredLength);
+    // console.log(Object.keys(state), requiredLength);
+    setOkToSend(Object.keys(state).length >= requiredLength);
   }, [state]);
 
   const _collectTypefacesId = () => {
-    const ids = trials.map((item, i) => item.items?._id);
+    const ids = trials.map((item, i) => item.typeface?._id);
     return ids;
   };
-
+  console.log(trials);
   const _onSubmit = async (evt: React.SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (!okToSend) return;
@@ -67,13 +67,16 @@ const TrialsDownload = (props: Props) => {
     document.body.classList.add("is-fetching");
 
     const typefacesId = _collectTypefacesId();
-    console.log(typefacesId);
+    // console.log(typefacesId);
+    // return;
+    if (!typefacesId[0]) return;
+    // console.log(typefacesId);
     const payload = {
       clientInfos: state,
       typefacesId: typefacesId,
     };
     console.log(payload);
-    return;
+    // return;
     try {
       const res = await fetch("/api/trials", {
         method: "POST",

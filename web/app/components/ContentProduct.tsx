@@ -45,18 +45,21 @@ const ContentProduct = ({ input }: Props) => {
   }, [type]);
 
   const _setDefaultTypeface = () => {
-    const regular = input.styles?.filter((el) => el.items?.style === "regular");
+    console.log(input.singles);
+    const regular = input.singles?.filter(
+      (el) => el.typeface?.style === "regular"
+    );
     if (regular && regular?.length === 1) {
       // console.log(dispatchType);
-      dispatchType(regular[0].items);
+      dispatchType(regular[0].typeface);
     }
   };
 
   const _loadAllTypefaces = () => {
     let arr: Typeface[] = [];
-    input.styles?.forEach((el) => {
+    input.singles?.forEach((el) => {
       // console.log(el.typeface);
-      if (el.items) arr.push(el.items);
+      if (el.typeface) arr.push(el.typeface);
     });
     dispatchTypes(arr);
   };
@@ -74,46 +77,13 @@ const ContentProduct = ({ input }: Props) => {
           opacity: type ? 1 : 0,
         } as React.CSSProperties
       }>
-      {input.styles && <TypeTesterHero input={input.styles} />}
+      {input.singles && <TypeTesterHero input={input.singles} />}
 
       <section className='content mb-lg'>
         {input.content && <Modules input={input.content} />}
       </section>
 
-      {input.styles && <Glyphs input={input.styles[0]} />}
-
-      {/* <div className='mb-lg'>
-        <LicenseTypeUI input={input} />
-      </div>
-
-      <div className='mb-lg'>
-        <LicenseSizeUI input={input} />
-      </div>
-
-      <div className={clsx("packages", hasLicences ? "block" : "hidden")}>
-        <div className='mb-md'>3. Select your packages</div>
-
-        <div className='bundles mb-lg b-b'>
-          <h2>Bundles</h2>
-          {input.bundles?.map((item, i) => (
-            <div className='bundle' key={i}>
-              <BundleUI input={item} title={input.title} />
-            </div>
-          ))}
-        </div>
-        <div className='styles'>
-          <h2>Styles</h2>
-          {input.styles?.map((item, i) => (
-            <div className='style' key={i}>
-              <StylesUI input={item} title={input.title} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <pre>{JSON.stringify(licenseTypeProfil, null, 2)}</pre>
-      <pre>{JSON.stringify(licenseSizeProfil, null, 2)}</pre>
-      <pre>{JSON.stringify(dataAttributes, null, 2)}</pre> */}
+      {input.singles && <Glyphs input={input.singles[0]} />}
     </div>
   );
 };

@@ -41,7 +41,7 @@ const Trinket = (props) => {
     },
     { pointerEvents: true }
   );
-  console.log(position);
+  // console.log(position);
   const _onClick = (e) => {
     e.stopPropagation();
     // console.log(props.input);

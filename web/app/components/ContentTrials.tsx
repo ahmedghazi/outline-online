@@ -34,8 +34,8 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
           <button className='btn-toggle'>►</button>
           <h2>{input.title}</h2>
         </div>
-        {input.styles && (
-          <div className='styles'>{input.styles.length} styles</div>
+        {input.singles && (
+          <div className='styles'>{input.singles.length} styles</div>
         )}
         <div></div>
         <div></div>
@@ -46,12 +46,10 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
           <Checkbox
             name={input.title || ""}
             onChange={(checked: boolean) => {
-              if (checked && input.styles) {
-                const styles = input.styles;
+              if (checked && input.singles) {
+                const styles = input.singles;
                 setTrials((prev: any) => [...prev, ...styles]);
               }
-              // console.log(input.title, checked);
-              // if (checked) setTrials((prev: any) => [...prev, input]);
             }}
           />
         </div>
@@ -59,14 +57,14 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
       {active && (
         <div className='detail'>
           <div className='grid md:grid-cols-8 gap-md-'>
-            {input.styles?.map((item, i) => (
+            {input.singles?.map((item, i) => (
               <div className='item col-start-3 col-span-6' key={i}>
                 <div className='_row flex justify-between'>
                   <div className='title'>{item.title}</div>
                   <Checkbox
                     name={item.title || ""}
                     onChange={(checked: boolean) => {
-                      console.log(input.title, checked);
+                      console.log(item.title, checked);
                       if (checked) setTrials((prev: any) => [...prev, item]);
                     }}
                   />

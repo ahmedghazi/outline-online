@@ -3,7 +3,7 @@ import {FaLayerGroup, FaShapes} from 'react-icons/fa'
 
 export default defineField({
   title: 'Bundle',
-  name: 'bundle',
+  name: 'productBundle',
   type: 'object',
   icon: FaLayerGroup,
   preview: {
@@ -38,8 +38,8 @@ export default defineField({
     }),
 
     defineField({
-      title: 'items',
-      name: 'items',
+      title: 'Typefaces',
+      name: 'typefaces',
       type: 'array',
       of: [
         {
@@ -51,6 +51,18 @@ export default defineField({
           ],
         },
       ],
+    }),
+    defineField({
+      title: 'Zip File',
+      name: 'zip',
+      type: 'file',
+      description: 'Digital good client will receive',
+    }),
+    defineField({
+      title: 'Zip File Trials',
+      name: 'zipTrials',
+      type: 'file',
+      description: 'Digital good client will receive',
     }),
   ],
 })

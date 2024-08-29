@@ -167,6 +167,12 @@
     content: "×";
     line-height: 50%;
   }
+  .outline {
+    border: none;
+    &::before {
+      display: none;
+    }
+  }
   /* -----------------
         Colors
     ----------------- */
@@ -287,7 +293,7 @@
   --bgColor-input-checked: var(--borderColor-input-hover);
   --bgColor-input-disabled: hsl(210, 10%, 14%);
   --bgColor-input-error: #999999;
-  --bgColor-input-autofill: hsl(210, 60%, 15%);
+  --bgColor-input-autofill: #d3d8db;
 
   --bgColor-buttonPrimary: blue;
   --bgColor-buttonPrimary-hover: hsl(220, 70%, 30%);

@@ -16,11 +16,11 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
   const [active, setActive] = useState<boolean>(false);
   // const [style, setStyle] = useState<Style>(defaultStyle);
   const { type, dispatchType } = useType();
-  // console.log(type);
+  console.log(type);
   useEffect(() => {
     dispatchType(defaultStyle);
   }, []);
-  // console.log(input.styles);
+  // console.log(input.singles);
   // console.log(style.typeface);
   // const defaulttypeface
   return (
@@ -38,7 +38,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
         {type?.title}
       </div>
       <div className='actions'>
-        {input.styles && input.styles.length > 0 && (
+        {input.singles && input.singles.length > 0 && (
           <div>
             <select
               name='styles'
@@ -48,11 +48,11 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
                 // setStyle(JSON.parse(e.target.value));
                 dispatchType(JSON.parse(e.target.value));
               }}
-              // value={JSON.stringify(input.styles[0])}
+              // value={JSON.stringify(input.singles[0])}
             >
-              {input.styles?.map((item, i) => (
-                <option key={i * 10} value={JSON.stringify(item.items)}>
-                  {item.items?.title}
+              {input.singles?.map((item, i) => (
+                <option key={i * 10} value={JSON.stringify(item.typeface)}>
+                  {item.typeface?.title}
                 </option>
               ))}
             </select>
@@ -74,18 +74,18 @@ const SectionTypeFaces = ({ input }: Props) => {
       <div className='items'>
         {input.map((item, i) => (
           <div key={i} className='item'>
-            {item && item.styles && item.styles.length > 0 && (
+            {item && item.singles && item.singles.length > 0 && (
               <TypeContextProvider>
-                <Item input={item} defaultStyle={item.styles[0].items} />
+                <Item input={item} defaultStyle={item.singles[0].typeface} />
               </TypeContextProvider>
             )}
           </div>
         ))}
         {input.map((item, i) => (
           <div key={i} className='item'>
-            {item && item.styles && item.styles.length > 0 && (
+            {item && item.singles && item.singles.length > 0 && (
               <TypeContextProvider>
-                <Item input={item} defaultStyle={item.styles[0].items} />
+                <Item input={item} defaultStyle={item.singles[0].typeface} />
               </TypeContextProvider>
             )}
           </div>
