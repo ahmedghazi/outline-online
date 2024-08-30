@@ -6,6 +6,7 @@ body[data-template="is-trials"],
 
   .list {
     border-top: var(--border);
+    border-bottom: var(--border);
   }
   ._row {
     border-bottom: var(--border);
@@ -18,6 +19,10 @@ body[data-template="is-trials"],
     transition: transform 0.2s;
   }
   .item {
+    border-bottom: var(--border);
+    &:last-child {
+      border: none;
+    }
     &.is-active {
       .btn-toggle {
         transform: rotate(90deg);

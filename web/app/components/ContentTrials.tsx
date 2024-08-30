@@ -108,7 +108,7 @@ const ContentTrials = ({ input }: Props) => {
             <TypeFaceItem key={i} input={item} />
           ))}
       </div>
-      <pre>{JSON.stringify(trials, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(trials, null, 2)}</pre> */}
       <Dialog openModal={trials.length > 0}>
         <TrialsDownload />
       </Dialog>

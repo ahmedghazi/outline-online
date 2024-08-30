@@ -114,7 +114,7 @@ const _generateAttachments = (items: any) => {
   return items.map((item: Typeface) => {
     if (item.zip) {
       return {
-        filename: `${item.title}-${item.style}.zip`,
+        filename: `${item.title}.zip`,
         path: item.zip.asset.url,
       };
     } else {
