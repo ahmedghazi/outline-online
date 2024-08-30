@@ -2,33 +2,34 @@ body[data-template="is-trials"],
 .template--trials {
   main {
     // padding-top: var(--header-height);
-  }
 
-  .list {
-    border-top: var(--border);
-    border-bottom: var(--border);
-  }
-  ._row {
-    border-bottom: var(--border);
-    padding: 0.5em 0;
-    &:last-child {
-      border: none;
+    .list {
+      // border-top: var(--border);
+      border-bottom: var(--border);
     }
-  }
-  .btn-toggle {
-    transition: transform 0.2s;
-  }
-  .item {
-    border-bottom: var(--border);
-    &:last-child {
-      border: none;
+    ._row {
+      border-top: var(--border);
+      // border-bottom: var(--border);
+      padding: 0.5em 0;
+      // &:last-child {
+      //   border: none;
+      // }
     }
-    &.is-active {
-      .btn-toggle {
-        transform: rotate(90deg);
+    .btn-toggle {
+      transition: transform 0.2s;
+    }
+    .item {
+      // border-bottom: var(--border);
+      &:last-child {
+        border: none;
       }
-    }
-    .grid {
+      &.is-active {
+        .btn-toggle {
+          transform: rotate(90deg);
+        }
+      }
+      .grid {
+      }
     }
   }
   @media all and (max-width: $md) {
