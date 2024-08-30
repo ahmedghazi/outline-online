@@ -36,11 +36,13 @@ export const productCard = `
   title,
 	price,
 	singles[]{
-		...,
+		_key,
+		_type,
+		title,
 		typeface->{
+			_type,
 			slug,
 			_id,
-			// _key,
 			title,
 			typefaceFile{
 				base64

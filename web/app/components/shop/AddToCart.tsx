@@ -194,7 +194,7 @@ const AddToCart = (props: Props) => {
 
   return (
     <div
-      className='add-to-cart'
+      className='add-to-cart cursor-pointer'
       onClick={() => {
         setActive(!active);
       }}>

@@ -10,6 +10,9 @@ body[data-template="is-trials"],
   ._row {
     border-bottom: var(--border);
     padding: 0.5em 0;
+    &:last-child {
+      border: none;
+    }
   }
   .btn-toggle {
     transition: transform 0.2s;

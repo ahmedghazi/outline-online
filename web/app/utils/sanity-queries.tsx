@@ -64,23 +64,21 @@ export async function getProductsCart(): Promise<Product[]> {
     *[_type == "product"]{
       title,
       singles[]{
-        // ...,
-        // _key,
-        _id,
+        _key,
         title,
+        price,
         typeface->{
           _id,
-          title
+          title,
         }
       },
       bundles[]{
-        // ...,
         _key,
         title,
+        price,
         typefaces[]->{
-          // ...,
           _id,
-          title
+          title,
         }
       },
       licenseSizes[]{

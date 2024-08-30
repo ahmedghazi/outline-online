@@ -28,7 +28,7 @@ body[data-template="is-product"],
       .btn-toggle {
         position: absolute;
         left: 50%;
-        bottom: calc(var(--header-height) + 0em);
+        bottom: calc(var(--footer-height) + 0em);
         transform: translateX(-50%);
         z-index: 251;
       }

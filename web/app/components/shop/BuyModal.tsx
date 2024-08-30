@@ -46,7 +46,7 @@ const CartProduct = ({ input }: CartProductProps) => {
   // console.log(input.bundles);
   return (
     <div className={clsx("typeface-item", active && "is-active")}>
-      <div className='_row'>
+      <div className='_row py-05e'>
         <div
           className={clsx("flex gap-sm col-span-2 cursor-pointer")}
           onClick={() => setActive(!active)}>
@@ -70,18 +70,16 @@ const CartProduct = ({ input }: CartProductProps) => {
       <div className={clsx("detail", active ? "block" : "hidden")}>
         <div className='group'>
           <div className='grid md:grid-cols-8'>
-            <div className='label text-muted col-span-2'>Bundles</div>
+            <div className='label text-muted- col-span-2'>Bundles</div>
             <div className='items col-span-6'>
               {input.bundles?.map((item, i) => (
                 <div className='item _row grid md:grid-cols-6' key={i}>
                   <div className='title col-span-4'>
-                    <div className='flex'>
+                    <div className='flex gap-sm'>
                       <div className='title'>{item.title}</div>
-                      <ul className='flex'>
+                      <ul className='flex text-muted gap-sm'>
                         {item.typefaces?.map((_item, j) => (
-                          <li key={j} className='text-gray  '>
-                            {_item.title}
-                          </li>
+                          <li key={j}>{_item.title}</li>
                         ))}
                       </ul>
                     </div>
@@ -92,7 +90,7 @@ const CartProduct = ({ input }: CartProductProps) => {
                       id={item._key || ""}
                       title={item.title || ""}
                       blurb={"ze blurb"}
-                      price={item.price || 20000}
+                      price={item.price || 20000000000}
                       metadata={{
                         type: "bundle",
                         typefaces: item.typefaces ? item.typefaces : [],
@@ -106,7 +104,7 @@ const CartProduct = ({ input }: CartProductProps) => {
         </div>
         <div className='group'>
           <div className='grid md:grid-cols-8'>
-            <div className='label text-muted col-span-2'>Single Styles</div>
+            <div className='label text-muted- col-span-2'>Single Styles</div>
             <div className='items col-span-6'>
               {input.singles?.map((item, i) => (
                 <div className='item _row grid md:grid-cols-6' key={i}>
@@ -118,7 +116,7 @@ const CartProduct = ({ input }: CartProductProps) => {
                       id={item._key || ""}
                       title={item.title || ""}
                       blurb={"ze blurb"}
-                      price={item.price || 20000}
+                      price={item.price || 20000000000}
                       metadata={{
                         type: "style",
                         typefaces: item.typeface ? [item.typeface] : [],
@@ -213,6 +211,7 @@ const BuyModal = ({ productsCart }: Props) => {
   };
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
+      {/* <pre>{JSON.stringify(productsCart, null, 2)}</pre> */}
       <div className='header'>
         {licenses && (
           <div className='_row grid md:grid-cols-8'>

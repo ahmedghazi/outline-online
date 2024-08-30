@@ -36,6 +36,8 @@ const config: Config = {
       black: "black",
       red: "#ff0000",
       gray: "var(--color-gray)",
+      hover: "var(--color-hover)",
+      muted: "var(--color-muted)",
       green: "var(--color-green)",
     },
     fontSize: {

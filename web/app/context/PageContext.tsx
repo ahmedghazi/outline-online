@@ -61,6 +61,16 @@ export const PageContextProvider = (props: PageContextProps) => {
         headerBounding.height + "px"
       );
     }
+    const footer = document.querySelector("footer");
+    let footerBoundig = {} || { height: 50 };
+    if (footer) {
+      footerBoundig = footer.getBoundingClientRect();
+
+      document.documentElement.style.setProperty(
+        "--footer-height",
+        footerBoundig.height + "px"
+      );
+    }
   };
 
   const _handlePageTemplate = () => {

@@ -23,7 +23,7 @@ TO DO
 */
 const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
   const [active, setActive] = useState<boolean>(false);
-  const { setTrials } = useShop();
+  const { trials, setTrials } = useShop();
   // console.log(input);
   return (
     <div className={clsx("item", active && "is-active")}>
@@ -49,6 +49,11 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
               if (checked && input.singles) {
                 const styles = input.singles;
                 setTrials((prev: any) => [...prev, ...styles]);
+              } else {
+                // const newArr = trials.filter(
+                //   (el: any) => el._key !== item._key
+                // );
+                // setTrials(newArr);
               }
             }}
           />
@@ -64,8 +69,15 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
                   <Checkbox
                     name={item.title || ""}
                     onChange={(checked: boolean) => {
-                      console.log(item.title, checked);
-                      if (checked) setTrials((prev: any) => [...prev, item]);
+                      // console.log(item.title, checked);
+                      if (checked) {
+                        setTrials((prev: any) => [...prev, item]);
+                      } else {
+                        const newArr = trials.filter(
+                          (el: any) => el._key !== item._key
+                        );
+                        setTrials(newArr);
+                      }
                     }}
                   />
                 </div>
@@ -96,6 +108,7 @@ const ContentTrials = ({ input }: Props) => {
             <TypeFaceItem key={i} input={item} />
           ))}
       </div>
+      <pre>{JSON.stringify(trials, null, 2)}</pre>
       <Dialog openModal={trials.length > 0}>
         <TrialsDownload />
       </Dialog>

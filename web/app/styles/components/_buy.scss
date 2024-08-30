@@ -27,7 +27,12 @@
       border-bottom: var(--border);
     }
     ._row {
-      padding: 0.5em 0;
+      // padding: 0.5em 0;
+      // background-color: red;
+      & > .title,
+      .add-to-cart {
+        padding: 0.5em 0;
+      }
       &:not(:last-child) {
         border-bottom: var(--border);
       }

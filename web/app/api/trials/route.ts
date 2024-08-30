@@ -142,11 +142,11 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      // user: process.env.SENDER_EMAIL,
-      // pass: process.env.SENDER_PASSWORD,
-      user: "oswaldnomadness@gmail.com",
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.SENDER_PASSWORD,
+      // user: "oswaldnomadness@gmail.com",
       // pass: "$$$vviirrggiill***",
-      pass: "dbom dpcq mtrt hduk",
+      // pass: "dbom dpcq mtrt hduk",
     },
     secure: true,
   });
