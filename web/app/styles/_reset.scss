@@ -202,7 +202,7 @@ th {
 q {
   &:before,
   &:after {
-    content: '';
+    content: "";
   }
 }
 
@@ -275,13 +275,13 @@ button {
 }
 
 input {
-  &[type='button'],
-  &[type='reset'],
-  &[type='submit'] {
+  &[type="button"],
+  &[type="reset"],
+  &[type="submit"] {
     cursor: pointer;
     -webkit-appearance: button;
   }
-  &[type='search'] {
+  &[type="search"] {
     -webkit-appearance: textfield;
     &::-webkit-search-decoration {
       -webkit-appearance: none;
@@ -309,18 +309,18 @@ textarea {
 /* 'alert' has a basic style, since it's useful to have it standing out for testing purposes. */
 
 /* SRCSET */
-img[data-sizes='auto'] {
+img[data-sizes="auto"] {
   display: block;
   width: 100%;
 }
 
 ::-moz-selection {
   /* Code for Firefox */
-  color: blue;
+  // color: blue;
 }
 
 ::selection {
-  color: blue;
+  // color: blue;
 }
 
 iframe {

@@ -28,6 +28,10 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
       <div
         className='title'
         onClick={() => setActive(!active)}
+        contentEditable={true}
+        suppressContentEditableWarning={true}
+        spellCheck='false'
+        autoCorrect='off'
         style={{
           fontFamily: type?.slug?.current,
         }}>

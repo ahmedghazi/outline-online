@@ -52,16 +52,5 @@ node 18.18.0
 
 # To do cart
 
-- re think atc metadata
-  {
-  productID: xxx,
-  type: bundle,
-  ref: bundle.ref
-  }
-  {
-  productID: xxx,
-  type: style
-  ref: style.ref
-  }
-- re name product.styles => product.singles
-  [bundle, single]
+- trials click all get full family trial
+- trials only full pack

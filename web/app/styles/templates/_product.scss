@@ -103,10 +103,10 @@ body[data-template="is-product"],
           z-index: 20;
         }
         .footer {
-          // display: grid;
-          // grid-template-columns: repeat(4, minmax(0, 1fr));
-          display: flex;
-          justify-content: space-between;
+          display: grid;
+          grid-template-columns: repeat(8, minmax(0, 1fr));
+          // display: flex;
+          // justify-content: space-between;
           position: absolute;
           bottom: 0;
           padding: var(--space-md);

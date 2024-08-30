@@ -65,8 +65,8 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
             {input.singles?.map((item, i) => (
               <div className='item col-start-3 col-span-6' key={i}>
                 <div className='_row flex justify-between'>
-                  <div className='title'>{item.title}</div>
-                  <Checkbox
+                  <div className='title text-muted'>{item.title}</div>
+                  {/* <Checkbox
                     name={item.title || ""}
                     onChange={(checked: boolean) => {
                       // console.log(item.title, checked);
@@ -79,7 +79,7 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
                         setTrials(newArr);
                       }
                     }}
-                  />
+                  /> */}
                 </div>
               </div>
             ))}

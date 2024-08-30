@@ -24,7 +24,8 @@ header {
     // transform: translateY(
     //   calc(var(--vh) * 50 - var(--header-height) / 2 - 0.5em)
     // );
-    transition: transform 0.2s;
+    transition: transform 0.65s;
+    // transition: transform 1s;
     ul {
       display: flex;
       justify-content: space-around;
