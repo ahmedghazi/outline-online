@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { BaseSyntheticEvent, useEffect, useState } from "react";
 
 type Props = {
   name: string;
@@ -6,11 +6,18 @@ type Props = {
   onChange: Function;
 };
 
-const Checkbox = ({ name, checked, onChange }: Props) => {
-  const [active, setActive] = useState<boolean>(false);
-
+const Checkbox = ({ name, checked = false, onChange }: Props) => {
+  // const defaultChecked = checked ? checked : false;
+  const [active, setActive] = useState<boolean>(checked);
+  // const [checked, setChecked] = useState<boolean>(false);
+  // console.log(name, checked);
   useEffect(() => {
-    if (checked) setActive(true);
+    // console.log(checked);
+    if (checked) {
+      setTimeout(() => {
+        setActive(true);
+      }, 150);
+    }
   }, []);
 
   useEffect(() => {
@@ -18,15 +25,30 @@ const Checkbox = ({ name, checked, onChange }: Props) => {
     onChange(active);
   }, [active]);
 
+  const _handleChange = (e: BaseSyntheticEvent) => {
+    console.log(name, e.target.value);
+    // const val = e.target.value === "on" ? true : false;
+    // setActive(val);
+    setTimeout(() => {
+      setActive((prev) => !prev);
+    }, 150);
+  };
+
   return (
     <div className='checkbox-ui'>
       <label htmlFor={name}>
+        {checked && name + " is checked"}
         <input
           type='checkbox'
-          checked={active}
           name={name}
           id={name}
-          onChange={(e) => setActive(!active)}
+          // defaultChecked={checked ? checked : active}
+          checked={active}
+          onChange={_handleChange}
+          // onChange={(e) => {
+          // console.log(e, checked);
+          // setActive(checked ? checked : !active);
+          // }}
         />
         <span className='checkmark'></span>
         <span className='label'>{name}</span>

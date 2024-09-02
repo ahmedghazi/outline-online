@@ -21,6 +21,43 @@ const TrialsDownload = (props: Props) => {
   const [state, setState] = useState<any[string]>([]);
   const [status, setStatus] = useState<string>("");
   const { trials } = useShop();
+  const groups = [
+    {
+      title: "LICENCEE INFORMATION",
+      fields: [
+        { type: "text", name: "website", required: false },
+        { type: "email", name: "email", required: true },
+      ],
+    },
+
+    {
+      title: "NAME",
+      fields: [
+        { type: "text", name: "first_name", required: false },
+        { type: "text", name: "last_name", required: true },
+      ],
+    },
+
+    {
+      title: "COMPANY",
+      fields: [
+        { type: "text", name: "name", required: false },
+        { type: "text", name: "location", required: false },
+      ],
+    },
+
+    {
+      title: "ADDRESS",
+      fields: [
+        { type: "text", name: "postbox", required: false },
+        { type: "text", name: "street", required: false },
+        { type: "text", name: "zipcode", required: false },
+        { type: "text", name: "city", required: false },
+        { type: "text", name: "county", required: false },
+        { type: "text", name: "country", required: false },
+      ],
+    },
+  ];
   const fields = [
     { type: "text", name: "website", required: false },
     { type: "email", name: "email", required: true },
@@ -59,7 +96,7 @@ const TrialsDownload = (props: Props) => {
     const ids = trials.map((item, i) => item.typeface?._id);
     return ids;
   };
-  console.log(trials);
+  // console.log(trials);
   const _onSubmit = async (evt: React.SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (!okToSend) return;
@@ -99,10 +136,9 @@ const TrialsDownload = (props: Props) => {
 
   return (
     <div className='trials-download'>
-      <div className='px-md'>Licencee Information:</div>
       <form action='' className='form-trials' onSubmit={_onSubmit}>
         <div className='client-infos'>
-          {fields.map((item, i) => (
+          {/* {fields.map((item, i) => (
             <div className='form-row' key={i}>
               {item.required && <span className='text-red'>*</span>}
               <label htmlFor={item.name}>{item.name}:</label>
@@ -118,8 +154,33 @@ const TrialsDownload = (props: Props) => {
                     [item.name]: target.value,
                   }));
                 }}
-                // defaultValue={state[item.name]}
               />
+            </div>
+          ))} */}
+          {groups.map((item, i) => (
+            <div className='form-group' key={i}>
+              <div className='title'>{item.title}</div>
+              <div className='fields'>
+                {item.fields.map((field, i) => (
+                  <div className='form-row' key={i}>
+                    {field.required && <span className='text-red'>*</span>}
+                    <label htmlFor={field.name}>{field.name}:</label>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      placeholder={field.name}
+                      required={field.required}
+                      role='textbox'
+                      onChange={({ target }) => {
+                        setState((prev: any) => ({
+                          ...prev,
+                          [field.name]: target.value,
+                        }));
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

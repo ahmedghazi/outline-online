@@ -20,6 +20,7 @@ const Buy = ({ productsCart }: Props) => {
 
   useEffect(() => {
     publish("BUY_MODAL_ACTIVE", active);
+    document.body.classList.toggle("has-scrolled", active);
   }, [active]);
 
   return (

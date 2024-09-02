@@ -32,7 +32,7 @@ TypeContextProps) => {
   const [types, dispatchTypes] = useState<Typeface[] | null>([]);
   const [type, dispatchType] = useState<Typeface | null>(null);
   // console.log({ typeface });
-  console.log(type);
+  // console.log(type);
   useEffect(() => {
     if (type) _loadFont(type);
     if (types) {

@@ -65,7 +65,7 @@ header {
       .menu-item--buy {
         .btn--buy {
           color: var(--color-blue);
-          border-top-right-radius: 1em;
+          border-top-right-radius: var(--radius);
           text-align: center;
           width: 13vw;
           transition: color 0.2s, background-color 0.2s;

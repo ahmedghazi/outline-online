@@ -10,6 +10,7 @@ import TrialsDownload from "./TrialsDownload";
 
 type TypeFaceItemProps = {
   input: Product;
+  defaultActive?: boolean;
 };
 
 /*
@@ -21,7 +22,7 @@ TO DO
 - - email send (pj, link dl)
 - - link dl expire
 */
-const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
+const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
   const [active, setActive] = useState<boolean>(false);
   const { trials, setTrials } = useShop();
   // console.log(input);
@@ -43,15 +44,18 @@ const TypeFaceItem = ({ input }: TypeFaceItemProps) => {
         <div></div>
 
         <div className='flex justify-end'>
+          {/* {defaultActive && "defaultActive"} */}
           <Checkbox
-            name={input.title || ""}
+            name={input.title?.toLowerCase() || ""}
+            checked={defaultActive}
             onChange={(checked: boolean) => {
+              console.log(checked);
               if (checked && input.singles) {
                 const styles = input.singles;
                 setTrials((prev: any) => [...prev, ...styles]);
               } else {
                 // const newArr = trials.filter(
-                //   (el: any) => el._key !== item._key
+                //   (el: any) => el._key !== input.bundles.
                 // );
                 // setTrials(newArr);
               }
@@ -95,18 +99,27 @@ type Props = {
 };
 const ContentTrials = ({ input }: Props) => {
   // const [items, setItems] = useState<Style[]>([]);
+  const [allActive, setAllActive] = useState<boolean>(false);
   const { trials } = useShop();
   useEffect(() => {
-    console.log(trials);
+    // console.log(trials);
   }, [trials]);
 
   return (
     <div className='content content-trials min-h-screen pt-header-height px-lg'>
-      <div className='list mb-xl min-h-full '>
+      <div className='list min-h-full '>
         {input.typefaces &&
           input.typefaces.map((item, i) => (
-            <TypeFaceItem key={i} input={item} />
+            <TypeFaceItem key={i} input={item} defaultActive={allActive} />
           ))}
+      </div>
+      <div className='footer'>
+        <Checkbox
+          name={"Download Selected"}
+          onChange={(checked: boolean) => {
+            setAllActive(checked);
+          }}
+        />
       </div>
       {/* <pre>{JSON.stringify(trials, null, 2)}</pre> */}
       <Dialog openModal={trials.length > 0}>

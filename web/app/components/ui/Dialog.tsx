@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useRef } from "react";
-
+import Draggable from "react-draggable";
 type Props = {
   children: ReactNode;
   openModal: boolean;
@@ -18,17 +18,19 @@ const Dialog = ({ openModal, children }: Props) => {
   }, [openModal]);
 
   return (
-    <dialog
-      ref={ref}
-      // onCancel={closeModal}
-    >
-      <div className='header'>
-        <button className='text-red' onClick={() => ref.current?.close()}>
-          ╳
-        </button>
-      </div>
-      {children}
-    </dialog>
+    <Draggable>
+      <dialog
+        ref={ref}
+        // onCancel={closeModal}
+      >
+        <div className='header'>
+          <button className='text-red' onClick={() => ref.current?.close()}>
+            ╳
+          </button>
+        </div>
+        {children}
+      </dialog>
+    </Draggable>
   );
 };
 

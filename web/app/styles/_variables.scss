@@ -2,6 +2,8 @@
  *******************/
 :root {
   --app-height: 100vh;
+  --vh: 100vh;
+  --vw: 100vw;
   --header-height: 60px;
   --color-bg: #efefef;
   --color-primary: #000;
@@ -51,6 +53,8 @@
   --border: var(--border-width) solid;
   --border-width-lg: 2px;
   --border-lg: var(--border-width-lg) solid;
+
+  --radius: 1em;
 
   --gutter: 9px;
 

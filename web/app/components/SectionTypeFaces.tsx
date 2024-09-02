@@ -1,6 +1,12 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { Product, SanityKeyed, Style, Typeface } from "../types/schema";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import {
+  KeyValString,
+  Product,
+  SanityKeyed,
+  Style,
+  Typeface,
+} from "../types/schema";
 import Link from "next/link";
 import { _linkResolver } from "../utils/utils";
 import clsx from "clsx";
@@ -8,6 +14,7 @@ import TypeCard from "./typeface/TypeCard";
 import useType, { TypeContextProvider } from "./typeface/TypeContext";
 import useInViewPort from "../hooks/useInViewport";
 import { publish } from "pubsub-js";
+import Select from "./ui/Select";
 
 type ItemProps = {
   input: Product;
@@ -18,13 +25,37 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
   const [active, setActive] = useState<boolean>(false);
   // const [style, setStyle] = useState<Style>(defaultStyle);
   const { type, dispatchType } = useType();
-  console.log(type);
+
   useEffect(() => {
     dispatchType(defaultStyle);
   }, []);
+
+  const _handleStyles = (s: KeyValString) => {
+    // console.log(s);
+    // if (!ref.current) return;
+    if (!s || !s.val) return;
+    // ref.current.style.fontFamily = s.val;
+    // ref.current.style.setProperty("--type-family", s.val);
+    // setCurrentStyle(s.val);
+    dispatchType(JSON.parse(s.val));
+  };
   // console.log(input.singles);
   // console.log(style.typeface);
   // const defaulttypeface
+  const _singles = useMemo(() => {
+    if (!input.singles) return;
+    const arr: KeyValString[] = input.singles.map((item) => {
+      return {
+        _type: "keyValString",
+        key: item.title,
+        // val: JSON.stringify(item.typeface?.slug?.current),
+        val: JSON.stringify(item.typeface),
+      };
+    });
+    return arr;
+  }, []);
+  // console.log(_singles);
+
   return (
     <div className={clsx("typeface--item", active && "is-active")}>
       <div
@@ -46,7 +77,14 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
       <div className='actions'>
         {input.singles && input.singles.length > 0 && (
           <div>
-            <select
+            {_singles && _singles.length > 0 && (
+              <Select
+                options={_singles}
+                onChange={_handleStyles}
+                label='Family'
+              />
+            )}
+            {/* <select
               name='styles'
               id=''
               onChange={(e) => {
@@ -61,7 +99,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
                   {item.typeface?.title}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
         )}
 

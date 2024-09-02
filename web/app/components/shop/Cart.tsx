@@ -3,6 +3,7 @@
 import { publish } from "pubsub-js";
 import React, { useEffect, useRef, useState } from "react";
 import useShop from "./ShopContext";
+import { usePathname } from "next/navigation";
 
 const Cart = () => {
   const [count, setCount] = useState<number>(0);
@@ -45,16 +46,21 @@ const Cart = () => {
     }
   }, [cartObject]);
 
-  // const _onClose = () => {
-  //   // const { Snipcart } = window;
-  //   // if (!Snipcart) return;
+  const pathname = usePathname();
+  useEffect(() => {
+    _onClose();
+  }, [pathname]);
 
-  //   // Snipcart.api.theme.cart.close();
-  //   const btnClose: HTMLElement = document.querySelector(
-  //     ".snipcart-modal__close"
-  //   ) as HTMLElement;
-  //   if (btnClose) btnClose.click();
-  // };
+  const _onClose = () => {
+    // const { Snipcart } = window;
+    // if (!Snipcart) return;
+
+    // Snipcart.api.theme.cart.close();
+    const btnClose: HTMLElement = document.querySelector(
+      ".snipcart-modal__close"
+    ) as HTMLElement;
+    if (btnClose) btnClose.click();
+  };
 
   return (
     <div className='cart' ref={cartRef}>
@@ -65,11 +71,9 @@ const Cart = () => {
           aria-label='open cart'
           title='open cart'>
           <span className='label'>CART</span>
-          {count > 0 && (
-            <span className='snipcart-items-count text-green absolute'>
-              ({count})
-            </span>
-          )}
+          <span className='snipcart-items-count- text-green pl-02e'>
+            ({count})
+          </span>
         </button>
       </div>
     </div>
