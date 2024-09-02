@@ -101,7 +101,7 @@ const ContentTrials = ({ input }: Props) => {
   }, [trials]);
 
   return (
-    <div className='content-trials min-h-screen pt-header-height px-lg'>
+    <div className='content content-trials min-h-screen pt-header-height px-lg'>
       <div className='list mb-xl min-h-full '>
         {input.typefaces &&
           input.typefaces.map((item, i) => (

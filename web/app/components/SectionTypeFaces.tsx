@@ -1,11 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Product, SanityKeyed, Style, Typeface } from "../types/schema";
 import Link from "next/link";
 import { _linkResolver } from "../utils/utils";
 import clsx from "clsx";
 import TypeCard from "./typeface/TypeCard";
 import useType, { TypeContextProvider } from "./typeface/TypeContext";
+import useInViewPort from "../hooks/useInViewport";
+import { publish } from "pubsub-js";
 
 type ItemProps = {
   input: Product;
@@ -73,8 +75,15 @@ type Props = {
   input: Product[];
 };
 const SectionTypeFaces = ({ input }: Props) => {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const inViewport = useInViewPort(targetRef, { threshold: 0.5 });
+  console.log(inViewport);
+  useEffect(() => {
+    publish("IS_PRODUCT", inViewport);
+  }, [inViewport]);
+
   return (
-    <section className='section--typefaces'>
+    <section className='section--typefaces' ref={targetRef}>
       <div className='items'>
         {input.map((item, i) => (
           <div key={i} className='item'>

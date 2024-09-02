@@ -212,56 +212,60 @@ const BuyModal = ({ productsCart }: Props) => {
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
       {/* <pre>{JSON.stringify(productsCart, null, 2)}</pre> */}
-      <div className='header'>
-        {licenses && (
-          <div className='_row grid md:grid-cols-8'>
-            <div className='label'>Company Size</div>
-            <div className='input'>
-              <Select
-                options={licenses}
-                onChange={(val: string) => setLicenseSizeProfil(val)}
-              />
-            </div>
-            <div></div>
-            <div></div>
-            <div className='label'>Licenses</div>
-            <div className='licenses md:col-span-3 py-05e'>
-              <div className='flex justify-between'>
-                {licenseSizeProfil?.licenseType?.map((item, i) => (
-                  <div className='input flex gap-sm' key={i}>
-                    <Checkbox
-                      name={item.label || ""}
-                      checked={i === 0}
-                      onChange={(checked: boolean) => {
-                        // console.log(checked, item.label);
-                        _updateLicenseType(checked, item);
-                      }}
-                    />
-                    {/* <div className='label !p-0'>{item.label}</div> */}
+      <div className='outter'>
+        <div className='inner'>
+          <div className='header'>
+            {licenses && (
+              <div className='_row grid md:grid-cols-8'>
+                <div className='label'>Company Size</div>
+                <div className='input'>
+                  <Select
+                    options={licenses}
+                    onChange={(val: string) => setLicenseSizeProfil(val)}
+                  />
+                </div>
+                <div></div>
+                <div></div>
+                <div className='label'>Licenses</div>
+                <div className='licenses md:col-span-3 py-05e'>
+                  <div className='flex justify-between'>
+                    {licenseSizeProfil?.licenseType?.map((item, i) => (
+                      <div className='input flex gap-sm' key={i}>
+                        <Checkbox
+                          name={item.label || ""}
+                          checked={i === 0}
+                          onChange={(checked: boolean) => {
+                            // console.log(checked, item.label);
+                            _updateLicenseType(checked, item);
+                          }}
+                        />
+                        {/* <div className='label !p-0'>{item.label}</div> */}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
+            )}
+          </div>
+          <div className='body overflow-y-auto- h-screen-'>
+            <div className='items'>
+              {productsCart.map((item, i) => (
+                <CartProduct input={item} key={i} />
+              ))}
             </div>
           </div>
-        )}
-      </div>
-      <div className='body overflow-y-auto h-screen-'>
-        <div className='items'>
-          {productsCart.map((item, i) => (
-            <CartProduct input={item} key={i} />
-          ))}
+          <div className='footer'>
+            {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
+            {products.length > 0 && (
+              <button onClick={_addToCart} className='atc-all bg-green block'>
+                {buttonStatus}{" "}
+                <span className='length'>
+                  {products.length} product{products.length > 1 && "s"}
+                </span>
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-      <div className='footer'>
-        {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
-        {products.length > 0 && (
-          <button onClick={_addToCart} className='atc-all bg-green block'>
-            {buttonStatus}{" "}
-            <span className='length'>
-              {products.length} product{products.length > 1 && "s"}
-            </span>
-          </button>
-        )}
       </div>
     </div>
   );

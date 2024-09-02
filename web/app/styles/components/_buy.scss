@@ -2,13 +2,24 @@
   position: fixed;
   z-index: 1;
   inset: 0;
-  padding: var(--header-height) var(--space-lg);
-  background-color: white;
-  .body {
+  padding: var(--header-height) 0;
+  .outter {
+    padding: 0 var(--space-lg);
+    height: 100%;
     max-height: calc(var(--vh) * 100 - var(--header-height) * 2);
     overflow-y: auto;
+    .inner {
+      background-color: var(--color-gray);
+      height: 100%;
+      padding-top: var(--space-sm);
+    }
   }
-  & > .items {
+  .header {
+    margin-bottom: var(--space-md);
+  }
+  .body {
+  }
+  & .body > .items {
     border-top: var(--border);
   }
   .typeface-item {
@@ -22,6 +33,7 @@
     }
     .btn-toggle {
       transition: transform 0.2s;
+      // transform-origin: center right;
     }
     .group {
       border-bottom: var(--border);

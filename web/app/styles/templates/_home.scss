@@ -10,6 +10,9 @@ body[data-template="is-home"],
   .content--home > section {
     scroll-snap-align: start;
     min-height: 100vh;
+    &.section--typefaces {
+      padding-top: calc(var(--header-height) * 2);
+    }
   }
 }
 

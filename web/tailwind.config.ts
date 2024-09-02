@@ -36,9 +36,13 @@ const config: Config = {
       black: "black",
       red: "#ff0000",
       gray: "var(--color-gray)",
+      "gray-25": "var(--color-gray-25)",
+      "gray-50": "var(--color-gray-50)",
+      "gray-100": "var(--color-gray-100)",
       hover: "var(--color-hover)",
       muted: "var(--color-muted)",
       green: "var(--color-green)",
+      blue: "var(--color-blue)",
     },
     fontSize: {
       "sm--md": ["var(--text-sm--md)", "1.2"],

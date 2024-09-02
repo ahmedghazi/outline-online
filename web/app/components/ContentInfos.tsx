@@ -10,7 +10,7 @@ type Props = {
 
 const ContentInfos = ({ input }: Props) => {
   return (
-    <div className='content--infos pt-header-height px-lg'>
+    <div className='content content--infos pt-header-height px-lg'>
       <div className='grid md:grid-cols-8'>
         <div className='col-span-5 col-start-4 mb-lg'>
           {input.about && (

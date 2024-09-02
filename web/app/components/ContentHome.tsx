@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Home } from "../types/schema";
 import SectionInUse from "./SectionInUse";
 import SectionTypeFaces from "./SectionTypeFaces";
 // import Obj3ds from "./Obj3ds";
 import Trinkets from "./Trinkets";
 import TrinketsFromGPT from "./TrinketsFromGPT";
+import useInViewPort from "../hooks/useInViewport";
 
 type Props = {
   input: Home;

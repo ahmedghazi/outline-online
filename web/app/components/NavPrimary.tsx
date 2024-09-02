@@ -1,26 +1,64 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { LinkExternal, LinkInternal, MenuItem } from "../types/schema";
+import {
+  LinkExternal,
+  LinkInternal,
+  MenuItem,
+  SanityKeyed,
+} from "../types/schema";
 import Link from "next/link";
 import { _linkResolver } from "../utils/utils";
 import Buy from "./Buy";
 import Cart from "./shop/Cart";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { subscribe, unsubscribe } from "pubsub-js";
+// import useInViewPort from "../hooks/useInViewport";
 
-type Props = {
+type NavLinkProps = {
+  input: LinkInternal | LinkExternal;
+};
+
+const NavLink = ({ input }: NavLinkProps) => {
+  const pathname = usePathname();
+
+  const href = _linkResolver(input.link);
+  const ariaCurrent = href === pathname ? "page" : undefined;
+  // console.log(href, ariaCurrent);
+  return (
+    <Link href={href} aria-current={ariaCurrent}>
+      {input.label}
+    </Link>
+  );
+};
+
+type NavProps = {
   navPrimary: Array<MenuItem | LinkExternal> | undefined;
   productsCart: any;
 };
-
-const NavPrimary = ({ navPrimary, productsCart }: Props) => {
+const NavPrimary = ({ navPrimary, productsCart }: NavProps) => {
   const [y, setY] = useState<number | string | null>(null);
   const ref = useRef<HTMLElement | null>(null);
   const pathname = usePathname();
+  const [isProduct, setIsProduct] = useState<boolean>(false);
+
+  useEffect(() => {
+    const token = subscribe("IS_PRODUCT", (e, d) => {
+      setIsProduct(d);
+    });
+
+    return () => {
+      unsubscribe(token);
+    };
+  }, []);
 
   useEffect(() => {
     // console.log(pathname);
+    setIsProduct(false);
     if (pathname === "/") {
       document.body.addEventListener("scroll", _handleScroll);
+    }
+    if (pathname.indexOf("product") > -1) {
+      setIsProduct(true);
     }
 
     return () => {
@@ -28,30 +66,17 @@ const NavPrimary = ({ navPrimary, productsCart }: Props) => {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    document.body.classList.toggle("is-product", isProduct);
+  }, [isProduct]);
+
   const _handleScroll = () => {
-    // console.log(document.body.scrollTop);
     document.body.classList.toggle("has-scrolled", document.body.scrollTop > 0);
   };
 
-  // useEffect(() => {
-  //   if (!ref.current) return;
-  //   if (pathname === "/") {
-  //     // const initialY = window.getComputedStyle(ref.current).transform;
-  //     const initialY =
-  //       "calc(var(--vh) * 50 - var(--header-height) / 2 - 0.5em)";
-  //     setY(initialY);
-  //     console.log(initialY);
-  //     _handleNavAnimation();
-  //   }
-  // }, []);
-
-  const _handleNavAnimation = () => {
-    // console.log(document.body.scrollTop);
-    // setY(500);
-  };
-  // console.log(navPrimary);
   return (
     <nav ref={ref} id='nav-primary'>
+      {/* <pre>{JSON.stringify(navPrimary, null, 2)}</pre> */}
       <ul className='flex'>
         {navPrimary?.map((item, i) => (
           <li
@@ -64,9 +89,10 @@ const NavPrimary = ({ navPrimary, productsCart }: Props) => {
             }>
             {item && item._type === "menuItem" && (
               <>
-                <Link href={_linkResolver(item.link?.link)}>
+                {/* <Link href={_linkResolver(item.link?.link)}>
                   {item.link?.label}
-                </Link>
+                </Link> */}
+                {item.link && <NavLink input={item.link} />}
                 {item.subMenu && item.subMenu?.length > 0 && (
                   <ul className='submenu'>
                     {item.subMenu?.length > 0 &&
@@ -79,9 +105,7 @@ const NavPrimary = ({ navPrimary, productsCart }: Props) => {
                               ? "is-half"
                               : ""
                           }>
-                          <Link href={_linkResolver(subItem.link)}>
-                            {subItem.label}
-                          </Link>
+                          <NavLink input={subItem} />
                         </li>
                       ))}
                   </ul>

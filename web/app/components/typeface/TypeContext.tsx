@@ -47,7 +47,7 @@ TypeContextProps) => {
     //if (!ref.current) return;
     // return;
 
-    console.log(item);
+    // console.log(item);
     if (!item || !item.slug) return;
     const font = new FontFace(
       item.slug?.current || "",

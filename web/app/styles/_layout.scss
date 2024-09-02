@@ -22,6 +22,12 @@ body {
 main {
   min-height: var(--app-height, 100vh);
   position: relative;
+  & > [data-template]:not(.template--product, .template--home) {
+    padding-top: calc(var(--header-height) * 2);
+    & > .content.pt-header-height {
+      padding-top: 0;
+    }
+  }
 }
 
 .h-app {

@@ -69,7 +69,7 @@ const ContentProduct = ({ input }: Props) => {
 
   return (
     <div
-      className='content-product px-lg'
+      className='content content-product px-lg'
       style={
         {
           // fontFamily: type?.slug?.current,

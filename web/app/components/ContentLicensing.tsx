@@ -10,7 +10,7 @@ type Props = {
 
 const ContentLicensing = ({ input }: Props) => {
   return (
-    <div className='content--licensing pt-header-height px-lg'>
+    <div className='content content--licensing pt-header-height px-lg'>
       <div className='grid md:grid-cols-8 gap-md'>
         <div className='col-span-5 col-start-4 '>
           {input.text && (
