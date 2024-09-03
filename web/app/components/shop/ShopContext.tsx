@@ -80,6 +80,29 @@ function licenseTypeReducer(state: any, action: any) {
   }
 }
 
+function trialsReducer(state: any, action: any) {
+  // console.log(state);
+  const { type, payload } = action;
+  switch (type) {
+    case "ADD":
+      return [...state, payload];
+    case "REMOVE":
+      return state.filter((item: SanityKeyed<ProductSingle>) => {
+        console.log(item._key, payload._key);
+        return item._key !== payload._key;
+      });
+
+    // case "REPLACE":
+    //   return state.map((item: any) =>
+    //     item.title === payload.title ? payload : item
+    //   );
+    case "REMOVE_ALL":
+      return [];
+    default:
+      throw new Error();
+  }
+}
+
 type ContextProps = {
   ready: boolean;
   licenses: LicenseSize[] | undefined;
@@ -101,11 +124,6 @@ type ContextProps = {
   setTrials: Function;
   // isVip: boolean;
   // setIsVip: Function;
-  // variant: {
-  //   scope: string;
-  //   value: Variant | null;
-  // };
-  // setVariant: Function;
 };
 
 const ShopContext = createContext<ContextProps>({} as ContextProps);
@@ -145,7 +163,8 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
 
   const [dataAttributes, setDataAttributes] = useState<Array<string>>([""]);
   const [isVip, setIsVip] = useState<boolean>(false);
-  const [trials, setTrials] = useState([]);
+  // const [trials, setTrials] = useState([]);
+  const [trials, setTrials] = useReducer(trialsReducer, []);
 
   const pathname = usePathname();
 

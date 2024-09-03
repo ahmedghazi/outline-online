@@ -7,6 +7,7 @@ import Checkbox from "./ui/Checkbox";
 import { usePageContext } from "../context/PageContext";
 import useShop from "./shop/ShopContext";
 import TrialsDownload from "./TrialsDownload";
+import { _removeFromArr } from "../utils/utils";
 
 type TypeFaceItemProps = {
   input: Product;
@@ -25,7 +26,6 @@ TO DO
 const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
   const [active, setActive] = useState<boolean>(false);
   const { trials, setTrials } = useShop();
-  // console.log(input);
   return (
     <div className={clsx("item", active && "is-active")}>
       <div className='_row grid md:grid-cols-8 gap-md-'>
@@ -49,15 +49,33 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
             name={input.title?.toLowerCase() || ""}
             checked={defaultActive}
             onChange={(checked: boolean) => {
-              console.log(checked);
-              if (checked && input.singles) {
-                const styles = input.singles;
-                setTrials((prev: any) => [...prev, ...styles]);
+              // console.log(checked);
+              const { singles } = input;
+              if (!singles) return;
+
+              console.log({ checked });
+              if (checked) {
+                // setTrials((prev: any) => [...prev, ...singles]);
+                // setTrials({ type: "ADD", payload: [...singles] });
+                singles.forEach((el) => {
+                  setTrials({ type: "ADD", payload: el });
+                });
               } else {
+                // console.log({ trials });
+                // console.log(typeof singles);
+                // console.log({ singles });
+                singles.forEach((el) => {
+                  console.log(el);
+                  setTrials({ type: "REMOVE", payload: el });
+                });
+                // const arrToFilter = trials;
+                // let filteredArr = _removeFromArr(arrToFilter, ...singles);
+                // console.log({ filteredArr });
+                // setTrials(filteredArr);
+
                 // const newArr = trials.filter(
                 //   (el: any) => el._key !== input.bundles.
                 // );
-                // setTrials(newArr);
               }
             }}
           />
@@ -101,8 +119,9 @@ const ContentTrials = ({ input }: Props) => {
   // const [items, setItems] = useState<Style[]>([]);
   const [allActive, setAllActive] = useState<boolean>(false);
   const { trials } = useShop();
+  console.log(trials);
   useEffect(() => {
-    // console.log(trials);
+    // setAllActive(trials.length > 0);
   }, [trials]);
 
   return (
@@ -115,16 +134,16 @@ const ContentTrials = ({ input }: Props) => {
       </div>
       <div className='footer'>
         <Checkbox
-          name={"Download Selected"}
+          name={trials.length === 0 ? "Download Selected" : "Remove all"}
           onChange={(checked: boolean) => {
             setAllActive(checked);
           }}
         />
       </div>
-      {/* <pre>{JSON.stringify(trials, null, 2)}</pre> */}
-      <Dialog openModal={trials.length > 0}>
+      <pre>{JSON.stringify(trials, null, 2)}</pre>
+      {/* <Dialog openModal={trials.length > 0}>
         <TrialsDownload />
-      </Dialog>
+      </Dialog> */}
 
       <div className='infos absolute bottom-header-height'>
         <div className='grid md:grid-cols-8 gap-md'>

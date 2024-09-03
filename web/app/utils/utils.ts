@@ -82,3 +82,13 @@ export const _randomNum = (number: number) => {
   const max = number * 1;
   return Math.random() * (max - min) + min;
 };
+
+export function _removeFromArr(arr: Array<any>, ...toRemove: Array<any> | any) {
+  toRemove.forEach((item: any) => {
+    var index = arr.indexOf(item);
+    if (index != -1) {
+      arr.splice(index, 1);
+    }
+  });
+  return arr;
+}
