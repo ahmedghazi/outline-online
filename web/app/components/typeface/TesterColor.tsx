@@ -13,15 +13,17 @@ const TesterColor = ({ onChange }: Props) => {
 
   return (
     <div className='color-ui'>
-      <label htmlFor='type-color'>Color:</label>
-      <input
-        type='color'
-        id='type-color'
-        name='type-color'
-        value='#000'
-        onChange={(e) => setHex(e.target.value)}
-      />
-      {hex !== "" && <span className='value'>{hex}</span>}
+      <div className='flex items-center'>
+        <label htmlFor='type-color'>Color:</label>
+        <input
+          type='color'
+          id='type-color'
+          name='type-color'
+          value='#000'
+          onChange={(e) => setHex(e.target.value)}
+        />
+        {hex !== "" && <span className='value'>{hex}</span>}
+      </div>
     </div>
   );
 };

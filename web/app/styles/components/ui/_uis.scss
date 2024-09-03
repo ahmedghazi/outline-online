@@ -1,6 +1,6 @@
 .button-ui {
   background-color: var(--color-gray);
-  border-radius: 0.313rem;
+  border-radius: var(--radius-sm);
   padding: 3px 5px;
 }
 
@@ -11,35 +11,55 @@
 
 .range-ui {
   background-color: var(--color-gray);
-  border-radius: 0.313rem;
-  padding: 3px 5px;
+  border-radius: var(--radius-sm);
+  padding: 3px 5px 2px;
+  padding: 0 5px;
+  height: toRem(24);
+  // line-height: toRem(28);
   max-width: 188px;
+  display: flex;
+  align-items: center;
+  .flex {
+    // display: block;
+    width: 100%;
+    gap: 0.2em;
+    transform: translateY(0.4px);
+
+    * {
+      display: inline;
+      line-height: 1;
+    }
+  }
   label {
     // position: absolute;
     // pointer-events: none;
     // left: 2.3em;
   }
   .value {
-    // position: absolute;
-    // right: 5px;
-    // top: 3px;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   input {
     appearance: none;
     background-color: none;
     border: none;
     max-width: calc(100% - 2.5em);
-    line-height: 1;
     &::-moz-range-thumb,
     &::-webkit-slider-thumb {
       appearance: none;
       background: currentColor;
+      border: none;
       width: 7.5px;
       height: 9px;
     }
   }
 }
 
+// .footer {
+//   @include debugFiletY(50%);
+// }
 .select-ui {
   max-width: 188px;
   position: relative;
@@ -53,9 +73,10 @@
 
     background-color: var(--color-gray);
     padding: 0px 5px 0px 2rem;
-    height: 24px;
+    height: toRem(24);
+    line-height: toRem(26);
     max-width: 188px;
-    border-radius: 0.313rem;
+    border-radius: var(--radius-sm);
     color: #000;
     cursor: pointer;
   }
@@ -72,7 +93,7 @@
     border-left: var(--size) solid black;
 
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-48%);
   }
 }
 
@@ -80,9 +101,22 @@
   display: flex;
   align-items: center;
   background-color: var(--color-gray);
-  border-radius: 0.313rem;
-  padding: 3px 5px;
+  border-radius: var(--radius-sm);
+  padding: 0px 5px;
+  height: toRem(24);
+  // line-height: toRem(28);
   max-width: 188px;
+
+  .flex {
+    // display: block;
+    gap: 0.2em;
+    transform: translateY(1.2px);
+
+    * {
+      display: inline;
+      line-height: 1;
+    }
+  }
   input {
     position: absolute;
     visibility: hidden;
@@ -173,7 +207,7 @@
   display: flex;
   align-items: center;
   background-color: var(--color-gray);
-  border-radius: 0.313rem;
+  border-radius: var(--radius-sm);
   padding: 3px 5px;
   // max-width: 188px;
   ul.text-align {
