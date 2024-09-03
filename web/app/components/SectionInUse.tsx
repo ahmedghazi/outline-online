@@ -20,70 +20,56 @@ const SectionInUse = ({ input }: Props) => {
         )}
       </div>
       <div className='thumbnails hide-sb'>
-        {input.map((item, i) => (
-          <div
-            className='thumbnail'
-            key={i}
-            onMouseEnter={() => setImage(item)}>
-            <FigureUI asset={item.image?.asset} width={200} />
-          </div>
-        ))}
-        {input.map((item, i) => (
-          <div
-            className='thumbnail'
-            key={i}
-            onMouseEnter={() => setImage(item)}>
-            <FigureUI asset={item.image?.asset} width={200} />
-          </div>
-        ))}
-        {input.map((item, i) => (
-          <div
-            className='thumbnail'
-            key={i}
-            onMouseEnter={() => setImage(item)}>
-            <FigureUI asset={item.image?.asset} width={200} />
-          </div>
-        ))}
-        {input.map((item, i) => (
-          <div
-            className='thumbnail'
-            key={i}
-            onMouseEnter={() => setImage(item)}>
-            <FigureUI asset={item.image?.asset} width={200} />
-          </div>
-        ))}
-        {input.map((item, i) => (
-          <div
-            className='thumbnail'
-            key={i}
-            onMouseEnter={() => setImage(item)}>
-            <FigureUI asset={item.image?.asset} width={200} />
-          </div>
-        ))}
-        {input.map((item, i) => (
-          <div
-            className='thumbnail'
-            key={i}
-            onMouseEnter={() => setImage(item)}>
-            <FigureUI asset={item.image?.asset} width={200} />
-          </div>
-        ))}
-        {input.map((item, i) => (
-          <div
-            className='thumbnail'
-            key={i}
-            onMouseEnter={() => setImage(item)}>
-            <FigureUI asset={item.image?.asset} width={200} />
-          </div>
-        ))}
-        {input.map((item, i) => (
-          <div
-            className='thumbnail'
-            key={i}
-            onMouseEnter={() => setImage(item)}>
-            <FigureUI asset={item.image?.asset} width={200} />
-          </div>
-        ))}
+        <div className='inner'>
+          {input.map((item, i) => (
+            <div
+              className='thumbnail'
+              key={i}
+              onMouseEnter={() => setImage(item)}>
+              <FigureUI asset={item.image?.asset} width={200} />
+            </div>
+          ))}
+          {input.map((item, i) => (
+            <div
+              className='thumbnail'
+              key={i}
+              onMouseEnter={() => setImage(item)}>
+              <FigureUI asset={item.image?.asset} width={200} />
+            </div>
+          ))}
+          {input.map((item, i) => (
+            <div
+              className='thumbnail'
+              key={i}
+              onMouseEnter={() => setImage(item)}>
+              <FigureUI asset={item.image?.asset} width={200} />
+            </div>
+          ))}
+          {input.map((item, i) => (
+            <div
+              className='thumbnail'
+              key={i}
+              onMouseEnter={() => setImage(item)}>
+              <FigureUI asset={item.image?.asset} width={200} />
+            </div>
+          ))}
+          {input.map((item, i) => (
+            <div
+              className='thumbnail'
+              key={i}
+              onMouseEnter={() => setImage(item)}>
+              <FigureUI asset={item.image?.asset} width={200} />
+            </div>
+          ))}
+          {input.map((item, i) => (
+            <div
+              className='thumbnail'
+              key={i}
+              onMouseEnter={() => setImage(item)}>
+              <FigureUI asset={item.image?.asset} width={200} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

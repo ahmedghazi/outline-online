@@ -5,8 +5,8 @@ import React, { Suspense, useRef, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, Stage } from "@react-three/drei";
 import Trinket from "./Trinket";
-import { proxy, useSnapshot } from "valtio";
-const state = proxy({ current: null, mode: 0 });
+// import { proxy, useSnapshot } from "valtio";
+// const state = proxy({ current: null, mode: 0 });
 
 // function Controls() {
 //   // Get notified on changes to state

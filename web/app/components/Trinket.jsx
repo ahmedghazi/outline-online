@@ -12,16 +12,18 @@ const state = proxy({ current: null, mode: 0 });
 
 const Trinket = (props) => {
   const gltf = useLoader(GLTFLoader, props.input.file.asset.url);
-  // console.log(props.input.file.asset.url);
   const groupRef = useRef();
-  const router = useRouter();
-  // const snap = useSnapshot(state);
-  // Set up state for the hovered and active state
-  // const [hovered, setHover] = useState(false);
-  // const [active, setActive] = useState(false);
-  const [position, setPosition] = useState([_randomNum(3), _randomNum(3), 0]);
+  // const router = useRouter();
+
+  // const [position, setPosition] = useState([_randomNum(3), _randomNum(3), 0]);
+  // const [position, setPosition] = useState([
+  //   props.position[0],
+  //   props.position[1],
+  //   0,
+  // ]);
+  const [position, setPosition] = useState([0, 0, 0]);
   const { size, viewport } = useThree();
-  // console.log(size);
+  // console.log(size, viewport);
   const aspect = size.width / viewport.width;
   // Subscribe this component to the render-loop, rotate the mesh every frame
   // useFrame(
@@ -36,6 +38,8 @@ const Trinket = (props) => {
   // console.log(props);
   const bind = useDrag(
     ({ offset: [x, y] }) => {
+      // console.log(position);
+      // console.log(aspect);
       const [, , z] = position;
       setPosition([x / aspect, -y / aspect, z]);
     },

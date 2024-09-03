@@ -4,14 +4,20 @@
   overflow: clip;
   .thumbnails {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    // top: 50%;
+    // transform: translateY(-50%);
     width: calc(var(--vw) * 100);
     overflow-x: scroll;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-
+    height: 100%;
+    .inner {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+    }
     .thumbnail {
       flex-shrink: 0;
       img {

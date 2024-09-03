@@ -115,7 +115,7 @@ type Props = {
 const SectionTypeFaces = ({ input }: Props) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const inViewport = useInViewPort(targetRef, { threshold: 0.5 });
-  console.log(inViewport);
+  // console.log(inViewport);
   useEffect(() => {
     publish("IS_PRODUCT", inViewport);
   }, [inViewport]);
