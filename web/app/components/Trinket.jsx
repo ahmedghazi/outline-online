@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { useLoader, useFrame, useThree } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { TransformControls } from "@react-three/drei";
 import { proxy, useSnapshot } from "valtio";
@@ -11,7 +12,9 @@ import { useDrag } from "react-use-gesture";
 const state = proxy({ current: null, mode: 0 });
 
 const Trinket = (props) => {
-  const gltf = useLoader(GLTFLoader, props.input.file.asset.url);
+  // const gltf = useLoader(GLTFLoader, props.input.file.asset.url);
+  // const scene = gltf.scene
+  const { scene } = useGLTF(props.input.file.asset.url);
   const groupRef = useRef();
   // const router = useRouter();
 
@@ -63,7 +66,7 @@ const Trinket = (props) => {
         // onPointerMove={(e) => setPosition(e.point.x, e.point.y, 0)}
         onPointerOver={(e) => console.log("hover", e.x)}
         onPointerOut={(e) => console.log("unhover")}>
-        <primitive object={gltf.scene} scale={0.1} name={name} />
+        <primitive object={scene} scale={0.1} name={name} />
       </group>
 
       {/* <primitive

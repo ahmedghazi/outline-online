@@ -11,38 +11,39 @@ import CompositionTool from "./CompositionTool";
 
 type Props = {
   input: ProductSingle[];
+  pangram: string;
 };
 
-const TypeTesterHero = ({ input }: Props) => {
-  const { type } = useType();
-  const ref = useRef<HTMLDivElement>(null);
+const TypeTesterHero = ({ input, pangram }: Props) => {
+  // const { type } = useType();
+  // const ref = useRef<HTMLDivElement>(null);
 
-  const _stylisticSets = useMemo(() => {
-    let arr: KeyValString[] = [];
-    input.forEach((el) => {
-      if (el.typeface?.stylisticSets && el.typeface?.stylisticSets.length > 0) {
-        el.typeface?.stylisticSets.forEach((s) => {
-          if (arr.some((e) => e.key === s.key)) {
-          } else {
-            arr.push(s);
-          }
-        });
-      }
-    });
+  // const _stylisticSets = useMemo(() => {
+  //   let arr: KeyValString[] = [];
+  //   input.forEach((el) => {
+  //     if (el.typeface?.stylisticSets && el.typeface?.stylisticSets.length > 0) {
+  //       el.typeface?.stylisticSets.forEach((s) => {
+  //         if (arr.some((e) => e.key === s.key)) {
+  //         } else {
+  //           arr.push(s);
+  //         }
+  //       });
+  //     }
+  //   });
 
-    return arr;
-  }, []);
+  //   return arr;
+  // }, []);
 
-  const _handleStylisticSets = (ss: KeyValString) => {
-    // console.log(ss);
-    if (!ref.current) return;
-    if (!ss || !ss.val) return;
-    ref.current.style.setProperty("--type-features", ss.val);
-  };
+  // const _handleStylisticSets = (ss: KeyValString) => {
+  //   // console.log(ss);
+  //   if (!ref.current) return;
+  //   if (!ss || !ss.val) return;
+  //   ref.current.style.setProperty("--type-features", ss.val);
+  // };
 
   return (
     <section className='type-tester--hero'>
-      <div className='items' ref={ref}>
+      <div className='items'>
         {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
         {input.map((item, i) => (
           <div
@@ -57,7 +58,7 @@ const TypeTesterHero = ({ input }: Props) => {
           </div>
         ))}
       </div>
-      <CompositionTool input={input} />
+      <CompositionTool input={input} pangram={pangram} />
     </section>
   );
 };

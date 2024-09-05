@@ -10,9 +10,10 @@ import TesterParagraph from "./TesterParagraph";
 
 type Props = {
   input: ProductSingle[];
+  pangram: string;
 };
 
-const CompositionTool = ({ input }: Props) => {
+const CompositionTool = ({ input, pangram }: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   const defaultStyle = input.length > 0 ? input[0].typeface?.slug?.current : "";
@@ -96,15 +97,7 @@ const CompositionTool = ({ input }: Props) => {
             suppressContentEditableWarning={true}
             spellCheck='false'
             autoCorrect='off'>
-            This website exists as an ongoing collaborative experiment in
-            digital publishing and information sharing. Because this website
-            functions as a wiki, all members of the School of Art
-            community—graduate students, faculty, staff, and alums—have the
-            ability to add new content and pages, and to edit most of the site’s
-            existing content. Content is the property of its various authors.
-            When you contribute to this site, you agree to abide by Yale
-            University academic and network use policy, and to act as a
-            responsible member of our community.
+            {pangram}
           </div>
         </div>
 

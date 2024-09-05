@@ -153,7 +153,18 @@ export default defineType({
     //   group: 'shop',
     //   hidden: true,
     // }),
-
+    defineField({
+      name: 'pangrams',
+      title: 'Pangrams',
+      type: 'array',
+      of: [
+        {
+          type: 'text',
+        },
+      ],
+      // description: 'short description for the cart',
+      group: 'editorial',
+    }),
     defineField({
       name: 'blurb',
       title: 'Blurb',

@@ -414,6 +414,13 @@ export interface Product extends SanityDocument {
   singles?: Array<SanityKeyed<ProductSingle>>;
 
   /**
+   * Pangrams — `array`
+   *
+   *
+   */
+  pangrams?: Array<SanityKeyed<string>>;
+
+  /**
    * Blurb — `string`
    *
    * short description for the cart

@@ -34,6 +34,17 @@ const ContentProduct = ({ input }: Props) => {
   const { type, dispatchType, dispatchTypes } = useType();
   const [ready, setReady] = useState<boolean>(false);
 
+  const _gerRandomPangram = (p: string[] | any) => {
+    console.log(p);
+    if (!p)
+      return "24 wacky bandmates mixed zany rhythms, blowing jazzy saxophones and fixing broken xylophones for a quirky gig.";
+    const len = p.length;
+    const rand = Math.round(Math.random() * len);
+    return p[rand];
+  };
+
+  const pangram = _gerRandomPangram(input.pangrams);
+
   useEffect(() => {
     setCurrentProduct(input);
     _setDefaultTypeface();
@@ -45,7 +56,7 @@ const ContentProduct = ({ input }: Props) => {
   }, [type]);
 
   const _setDefaultTypeface = () => {
-    console.log(input.singles);
+    // console.log(input.singles);
     const regular = input.singles?.filter(
       (el) => el.typeface?.style === "regular"
     );
@@ -77,7 +88,9 @@ const ContentProduct = ({ input }: Props) => {
           opacity: type ? 1 : 0,
         } as React.CSSProperties
       }>
-      {input.singles && <TypeTesterHero input={input.singles} />}
+      {input.singles && (
+        <TypeTesterHero input={input.singles} pangram={pangram} />
+      )}
 
       <section className='content mb-lg'>
         {input.content && <Modules input={input.content} />}
