@@ -52,6 +52,6 @@ node 18.18.0
 
 # To do cart
 
-- trials click all get full family trial
+- #trials click all get full family trial
 - trials only full pack
-- product add pangram
+- #product add pangram

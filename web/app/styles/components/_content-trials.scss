@@ -1,5 +1,5 @@
 .content-trials {
-  min-height: calc(var(--vh) * 100);
+  min-height: calc(var(--vh) * 100 - var(--header-height));
   .checkbox-ui {
     label {
       flex-direction: row-reverse;
@@ -17,6 +17,9 @@
         justify-content: end;
       }
     }
+  }
+  .infos {
+    bottom: calc(var(--header-height) + var(--footer-height));
   }
   dialog {
     background-color: var(--color-gray);

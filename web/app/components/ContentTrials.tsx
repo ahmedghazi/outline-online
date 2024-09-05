@@ -8,6 +8,8 @@ import { usePageContext } from "../context/PageContext";
 import useShop from "./shop/ShopContext";
 import TrialsDownload from "./TrialsDownload";
 import { _removeFromArr } from "../utils/utils";
+import { PortableText } from "next-sanity";
+import portableTextComponents from "../utils/portableTextComponents";
 
 type TypeFaceItemProps = {
   input: Product;
@@ -119,7 +121,7 @@ const ContentTrials = ({ input }: Props) => {
   // const [items, setItems] = useState<Style[]>([]);
   const [allActive, setAllActive] = useState<boolean>(false);
   const { trials } = useShop();
-  console.log(trials);
+  // console.log(input);
   useEffect(() => {
     // setAllActive(trials.length > 0);
   }, [trials]);
@@ -140,22 +142,21 @@ const ContentTrials = ({ input }: Props) => {
           }}
         />
       </div>
-      <pre>{JSON.stringify(trials, null, 2)}</pre>
-      {/* <Dialog openModal={trials.length > 0}>
+      {/* <pre>{JSON.stringify(trials, null, 2)}</pre> */}
+      <Dialog openModal={trials.length > 0}>
         <TrialsDownload />
-      </Dialog> */}
+      </Dialog>
 
       <div className='infos absolute bottom-header-height'>
         <div className='grid md:grid-cols-8 gap-md'>
-          <h2 className='md:col-start-4'>Trial Downloads:</h2>
+          <h2 className='md:col-start-4'>{input.infosLabel}:</h2>
           <div className='text md:col-span-4'>
-            We offer trial fonts with bextended Western Latin character sets
-            including numbers, and punctuation. Trial font files provided are
-            strictly limited for testing and pitching purposes. By downloading
-            the files, you accept Outline Online’s End User Licence Agreement
-            (EULA). If you download the trial files, and would then like to use
-            the font for a published project, your client will need to purchase
-            the appropriate licence.
+            {input.infos && (
+              <PortableText
+                value={input.infos}
+                components={portableTextComponents}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -31,6 +31,18 @@ export default defineType({
       type: 'string',
       group: 'editorial',
     }),
+    defineField({
+      name: 'infosLabel',
+      title: 'Infos label',
+      type: 'string',
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'infos',
+      title: 'Infos',
+      type: 'blockContent',
+      group: 'editorial',
+    }),
     // slug,
     defineField({
       name: 'typefaces',

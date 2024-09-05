@@ -221,6 +221,20 @@ export interface Trials extends SanityDocument {
   title?: string;
 
   /**
+   * Infos label — `string`
+   *
+   *
+   */
+  infosLabel?: string;
+
+  /**
+   * Infos — `blockContent`
+   *
+   *
+   */
+  infos?: BlockContent;
+
+  /**
    * Typefaces list — `array`
    *
    *

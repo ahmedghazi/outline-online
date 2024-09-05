@@ -58,22 +58,18 @@ const TrialsDownload = (props: Props) => {
       ],
     },
   ];
-  const fields = [
-    { type: "text", name: "website", required: false },
-    { type: "email", name: "email", required: true },
-    { type: "text", name: "first_name", required: false },
-    { type: "text", name: "last_name", required: true },
-    { type: "text", name: "name", required: false },
-    { type: "text", name: "location", required: false },
-    { type: "text", name: "postbox", required: false },
-    { type: "text", name: "street", required: false },
-    { type: "text", name: "zipcode", required: false },
-    { type: "text", name: "city", required: false },
-    { type: "text", name: "county", required: false },
-    { type: "text", name: "country", required: false },
-  ];
-  const requiredLength = fields.filter((el) => el.required).length;
 
+  const requiredLength = groups.reduce(
+    (sum, tasks) =>
+      tasks.fields.reduce((previousSum, task) => {
+        const is = task.required ? 1 : 0;
+        return previousSum + is;
+      }, sum),
+    0
+  );
+  // console.log({ requiredLength });
+
+  // const r = groups.reduce((count, current) => count + current.products.length, 0);
   const getButtonMsg = () => {
     switch (status) {
       case "sending":
@@ -91,7 +87,7 @@ const TrialsDownload = (props: Props) => {
     // console.log(Object.keys(state), requiredLength);
     setOkToSend(Object.keys(state).length >= requiredLength);
   }, [state]);
-
+  console.log(trials);
   const _collectTypefacesId = () => {
     const ids = trials.map((item, i) => item.typeface?._id);
     return ids;
