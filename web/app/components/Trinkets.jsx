@@ -37,7 +37,7 @@ const Trinkets = (props) => {
         shadows
         dpr={[1, 2]}
         // camera={{ fov: 50 }}
-        // camera={{ fov: 35, zoom: 1, near: 1, far: 1000 }}
+        camera={{ fov: 35, zoom: 1, near: 1, far: 1000 }}
         style={{
           width: "calc(var(--vw) * 100)",
           height: "calc(var(--vh) * 100)",
@@ -55,7 +55,7 @@ const Trinkets = (props) => {
                 name={i + 10}
                 key={i}
                 position={[Math.random() * space, Math.random() * space, 0]}
-                scale={0.1}
+                scale={1}
               />
             ))}
           </Stage>

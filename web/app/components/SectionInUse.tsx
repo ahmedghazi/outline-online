@@ -29,46 +29,6 @@ const SectionInUse = ({ input }: Props) => {
               <FigureUI asset={item.image?.asset} width={200} />
             </div>
           ))}
-          {input.map((item, i) => (
-            <div
-              className='thumbnail'
-              key={i}
-              onMouseEnter={() => setImage(item)}>
-              <FigureUI asset={item.image?.asset} width={200} />
-            </div>
-          ))}
-          {input.map((item, i) => (
-            <div
-              className='thumbnail'
-              key={i}
-              onMouseEnter={() => setImage(item)}>
-              <FigureUI asset={item.image?.asset} width={200} />
-            </div>
-          ))}
-          {input.map((item, i) => (
-            <div
-              className='thumbnail'
-              key={i}
-              onMouseEnter={() => setImage(item)}>
-              <FigureUI asset={item.image?.asset} width={200} />
-            </div>
-          ))}
-          {input.map((item, i) => (
-            <div
-              className='thumbnail'
-              key={i}
-              onMouseEnter={() => setImage(item)}>
-              <FigureUI asset={item.image?.asset} width={200} />
-            </div>
-          ))}
-          {input.map((item, i) => (
-            <div
-              className='thumbnail'
-              key={i}
-              onMouseEnter={() => setImage(item)}>
-              <FigureUI asset={item.image?.asset} width={200} />
-            </div>
-          ))}
         </div>
       </div>
     </section>

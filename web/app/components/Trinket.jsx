@@ -29,9 +29,7 @@ const Trinket = (props) => {
   // console.log(size, viewport);
   const aspect = size.width / viewport.width;
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  // useFrame(
-  //   (state, delta) => (groupRef.current.rotation.x += delta * Math.random() * 1)
-  // );
+
   useFrame(() => {
     groupRef.current.rotation.z += 0.001;
     groupRef.current.rotation.x += 0.001;
@@ -66,21 +64,8 @@ const Trinket = (props) => {
         // onPointerMove={(e) => setPosition(e.point.x, e.point.y, 0)}
         onPointerOver={(e) => console.log("hover", e.x)}
         onPointerOut={(e) => console.log("unhover")}>
-        <primitive object={scene} scale={0.1} name={name} />
+        <primitive object={scene} scale={1} name={name} />
       </group>
-
-      {/* <primitive
-        // {...props}
-        {...bind()}
-        scale={0.2}
-        ref={meshRef}
-        object={gltf.scene}
-        children-0-castShadow
-        dispotse={null}
-        // Click sets the mesh as the new target
-        onClick={_onClick}
-        // onClick={(e) => (e.stopPropagation(), (state.current = props.name))}
-      /> */}
     </>
   );
 };

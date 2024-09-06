@@ -1,7 +1,7 @@
 .snipcart-overwrite #snipcart {
   font-family: var(--font-primary) !important;
   font-size: var(--text-md) !important;
-  font-weight: 700 !important;
+  font-weight: unset !important;
   *,
   .snipcart__font--primary,
   .snipcart__font--secondary,
@@ -19,7 +19,7 @@
     font-family: var(--font-primary) !important;
     // font-weight: 400 !important;
     font-size: var(--text-md) !important;
-    font-weight: 700 !important;
+    font-weight: unset !important;
     // color: var(--color-primary);
     // box-shadow: unset;
   }

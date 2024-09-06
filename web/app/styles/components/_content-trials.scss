@@ -20,6 +20,7 @@
   }
   .infos {
     bottom: calc(var(--header-height) + var(--footer-height));
+    padding-right: var(--space-lg);
   }
   dialog {
     background-color: var(--color-gray);
