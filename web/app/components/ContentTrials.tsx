@@ -153,8 +153,8 @@ const ContentTrials = ({ input }: Props) => {
   };
 
   return (
-    <div className='content content-trials min-h-screen pt-header-height px-lg'>
-      <div className='list min-h-full '>
+    <div className='content content-trials px-lg'>
+      <div className='list  '>
         {input.typefaces &&
           input.typefaces.map((item, i) => (
             <TypeFaceItem key={i} input={item} defaultActive={allActive} />

@@ -1,5 +1,5 @@
 .content-trials {
-  min-height: calc(var(--vh) * 100 - var(--header-height));
+  min-height: calc(var(--vh) * 100 - 48.8px);
   .checkbox-ui {
     label {
       flex-direction: row-reverse;
