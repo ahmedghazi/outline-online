@@ -423,6 +423,13 @@ export interface Product extends SanityDocument {
   licenseSizes?: Array<SanityKeyed<LicenseSize>>;
 
   /**
+   * metadata — `array`
+   *
+   *
+   */
+  metadata?: Array<SanityKeyed<string>>;
+
+  /**
    * Bundles — `array`
    *
    *

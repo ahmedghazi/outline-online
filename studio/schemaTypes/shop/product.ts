@@ -112,12 +112,17 @@ export default defineType({
       hidden: true,
     }),
 
-    // defineField({
-    //   name: 'licenseType',
-    //   // title: 'licenses Type',
-    //   type: 'licenseType',
-    //   group: 'shop',
-    // }),
+    defineField({
+      name: 'metadata',
+      // title: 'licenses Type',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+        },
+      ],
+      group: 'shop',
+    }),
 
     defineField({
       name: 'bundles',

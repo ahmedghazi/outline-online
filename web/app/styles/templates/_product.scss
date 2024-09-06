@@ -1,10 +1,7 @@
 body[data-template="is-product"],
 .template--product {
-  main {
-    // padding-top: var(--header-height);
-  }
-  // .contenteditable,
-  // .modules .module--text-ui,
+  padding-bottom: calc(var(--footer-height) * 2);
+
   .glyphs .item {
     font-family: var(--typeface);
   }
@@ -158,8 +155,10 @@ body[data-template="is-product"],
     .grid {
       // border-top: var(--border);
       // border-left: var(--border);
-      grid-template-columns: repeat(16, minmax(0, 1fr));
-      gap: 0;
+      // grid-template-columns: repeat(12, minmax(0, 1fr));
+      // gap: 0;
+      display: flex;
+      flex-wrap: wrap;
     }
     .item {
       // width: calc(6.04em - 2px);
@@ -172,12 +171,15 @@ body[data-template="is-product"],
       align-items: center;
       -moz-box-pack: center;
       justify-content: center;
+      width: toRem(51);
+      height: toRem(51);
       // border-right: var(--border);
       // border-bottom: var(--border);
       transition: font-size 0.2s, transform 0.2s;
       @include debugOutline(-0.5px, black);
       background-color: white;
-      font-size: var(--text-lg);
+      // font-size: var(--text-lg);
+      font-size: 24px;
       &:hover {
         // font-size: var(--text-xl);
         transform: scale(1.5);

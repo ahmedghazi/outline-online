@@ -3,10 +3,11 @@ import Draggable from "react-draggable";
 type Props = {
   children: ReactNode;
   openModal: boolean;
+  onCloseModal?: Function;
   // closeModal: Function;
 };
 
-const Dialog = ({ openModal, children }: Props) => {
+const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -14,6 +15,7 @@ const Dialog = ({ openModal, children }: Props) => {
       ref.current?.showModal();
     } else {
       ref.current?.close();
+      if (onCloseModal) onCloseModal();
     }
   }, [openModal]);
 

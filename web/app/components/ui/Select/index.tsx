@@ -10,13 +10,21 @@ type Props = {
 };
 
 const Select = (props: Props) => {
+  // console.log(JSON.stringify(props.options[0]));
   return (
     <div className='select-ui'>
       <select
         onChange={(e) => {
-          console.log(e.target.value);
+          // console.log(e.target.value);
           if (e.target.value) props.onChange(JSON.parse(e.target.value));
-        }}>
+        }}
+        defaultValue={
+          props.label === "" &&
+          props.options[0] &&
+          props.options[0]._type === "keyValString"
+            ? JSON.stringify(props.options[0])
+            : ""
+        }>
         {props.label && (
           <option defaultValue='' value=''>
             {props.label}
@@ -24,16 +32,15 @@ const Select = (props: Props) => {
         )}
         {props.options &&
           props.options.map((item, i) => (
-            <option key={i} value={JSON.stringify(item)}>
+            <option
+              key={i}
+              value={JSON.stringify(item)}
+              // defaultValue={JSON.stringify(item)}
+            >
               {item._type === "licenseSize" && item.title}
               {item._type === "keyValString" && item.key}
             </option>
           ))}
-        {/* <option value=''>Stylistic Altern.</option>
-        <option value=''>Proportional Fig.</option>
-        <option value=''>Ordinals</option>
-        <option value=''>Numerator</option>
-        <option value=''>Fractions</option> */}
       </select>
       {!props.options && <div>Please provide some options</div>}
     </div>

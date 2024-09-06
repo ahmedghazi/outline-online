@@ -81,7 +81,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
               <Select
                 options={_singles}
                 onChange={_handleStyles}
-                label='Family'
+                // label='Family'
               />
             )}
             {/* <select

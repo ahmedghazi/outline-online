@@ -13,7 +13,7 @@ body {
   overflow-y: auto;
   // background-color: var(--color-bg);
   // color: var(--color-primary);
-  // @include debugFiletY(50%);
+  // @include debugFiletY(50px);
 
   // @include debugOutline(var(--space-md));
 }
@@ -23,7 +23,8 @@ main {
   min-height: var(--app-height, 100vh);
   position: relative;
   & > [data-template]:not(.template--product, .template--home) {
-    padding-top: calc(var(--header-height) * 2);
+    // padding-top: calc(var(--header-height) * 2);
+    padding-top: 48.8px;
     & > .content.pt-header-height {
       padding-top: 0;
     }

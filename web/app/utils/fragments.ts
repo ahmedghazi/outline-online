@@ -35,6 +35,7 @@ export const productCard = `
   slug,
   title,
 	price,
+	metadata,
 	singles[]{
 		_key,
 		_type,

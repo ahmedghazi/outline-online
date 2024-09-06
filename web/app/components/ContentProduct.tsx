@@ -35,7 +35,6 @@ const ContentProduct = ({ input }: Props) => {
   const [ready, setReady] = useState<boolean>(false);
 
   const _gerRandomPangram = (p: string[] | any) => {
-    console.log(p);
     if (!p)
       return "24 wacky bandmates mixed zany rhythms, blowing jazzy saxophones and fixing broken xylophones for a quirky gig.";
     const len = p.length;
@@ -88,7 +87,7 @@ const ContentProduct = ({ input }: Props) => {
           opacity: type ? 1 : 0,
         } as React.CSSProperties
       }>
-      {input.singles && (
+      {ready && input.singles && (
         <TypeTesterHero input={input.singles} pangram={pangram} />
       )}
 

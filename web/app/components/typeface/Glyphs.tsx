@@ -46,10 +46,10 @@ const Glyphs = ({ input }: Props) => {
       }}>
       <div className='mb-md'>
         <h3>Basic latin</h3>
-        <div className='grid md:grid-cols-10-  md:grid-cols-16 '>
+        <div className='grid '>
           {input.typeface?.glyphs &&
             input.typeface?.glyphs.map((item, i) => (
-              <div className='item md:col-span-2' key={i}>
+              <div className='item' key={i}>
                 <div>{item}</div>
               </div>
             ))}
