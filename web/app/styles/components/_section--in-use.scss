@@ -29,8 +29,12 @@
   .modal {
     position: absolute;
     inset: var(--header-height);
-    display: flex;
-    justify-content: center;
+
+    figure {
+      // background-color: red;
+      display: flex;
+      justify-content: center;
+    }
     img {
       height: calc(
         var(--vh) * 100 - calc(var(--header-height) * 2) - 1em
@@ -39,6 +43,10 @@
     }
     figcaption {
       text-align: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.5em 0;
     }
   }
 }

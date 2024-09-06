@@ -13,7 +13,7 @@ const SectionInUse = ({ input }: Props) => {
     <section className='section--in-use'>
       <div className='modal'>
         {image && (
-          <div>
+          <div className=''>
             <FigureUI asset={image.image?.asset} width={2000} />
             <figcaption>{image.caption}</figcaption>
           </div>
