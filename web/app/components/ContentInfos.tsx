@@ -15,7 +15,7 @@ const ContentInfos = ({ input }: Props) => {
         <div className='col-span-5 col-start-4 mb-lg'>
           {input.about && (
             <div className='grid md:grid-cols-5 gap-md'>
-              <h2 className='col-span-2'>About</h2>
+              <h2 className='col-span-2'>ABOUT</h2>
               <div className='col-span-3'>
                 <div className='text'>
                   <PortableText

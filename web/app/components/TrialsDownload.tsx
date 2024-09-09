@@ -87,7 +87,7 @@ const TrialsDownload = (props: Props) => {
     // console.log(Object.keys(state), requiredLength);
     setOkToSend(Object.keys(state).length >= requiredLength);
   }, [state]);
-  console.log(trials);
+  // console.log(trials);
   const _collectTypefacesId = () => {
     const ids = trials.map((item, i) => item.typeface?._id);
     return ids;
@@ -134,25 +134,6 @@ const TrialsDownload = (props: Props) => {
     <div className='trials-download'>
       <form action='' className='form-trials' onSubmit={_onSubmit}>
         <div className='client-infos'>
-          {/* {fields.map((item, i) => (
-            <div className='form-row' key={i}>
-              {item.required && <span className='text-red'>*</span>}
-              <label htmlFor={item.name}>{item.name}:</label>
-              <input
-                type={item.type}
-                name={item.name}
-                placeholder={item.name}
-                required={item.required}
-                role='textbox'
-                onChange={({ target }) => {
-                  setState((prev: any) => ({
-                    ...prev,
-                    [item.name]: target.value,
-                  }));
-                }}
-              />
-            </div>
-          ))} */}
           {groups.map((item, i) => (
             <div className='form-group' key={i}>
               <div className='title'>{item.title}</div>

@@ -61,27 +61,14 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
 
               // console.log({ checked });
               if (checked) {
-                // setTrials((prev: any) => [...prev, ...singles]);
-                // setTrials({ type: "ADD", payload: [...singles] });
                 singles.forEach((el) => {
                   setTrials({ type: "ADD", payload: el });
                 });
               } else {
-                // console.log({ trials });
-                // console.log(typeof singles);
-                // console.log({ singles });
                 singles.forEach((el) => {
                   // console.log(el);
                   setTrials({ type: "REMOVE", payload: el });
                 });
-                // const arrToFilter = trials;
-                // let filteredArr = _removeFromArr(arrToFilter, ...singles);
-                // console.log({ filteredArr });
-                // setTrials(filteredArr);
-
-                // const newArr = trials.filter(
-                //   (el: any) => el._key !== input.bundles.
-                // );
               }
             }}
           />
@@ -125,7 +112,7 @@ const ContentTrials = ({ input }: Props) => {
   // const [items, setItems] = useState<Style[]>([]);
   const [allActive, setAllActive] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const { trials } = useShop();
+  const { trials, setTrials } = useShop();
 
   const total = useMemo(() => {
     const sum =
@@ -151,7 +138,11 @@ const ContentTrials = ({ input }: Props) => {
     else if (trials.length === total) return "Download all";
     else return "";
   };
-
+  /*
+- select all
+- - download all
+- download selected
+*/
   return (
     <div className='content content-trials px-lg'>
       <div className='list  '>
@@ -161,38 +152,52 @@ const ContentTrials = ({ input }: Props) => {
           ))}
       </div>
       <div
-        className={clsx("footer", trials.length > 0 && "has-trials")}
+        className={clsx("footer", trials.length > 0 && "has-trials-")}
         onClick={() => {
-          if (trials.length > 0) {
-            setOpenModal(true);
-          }
+          // if (trials.length > 0) {
+          //   setOpenModal(true);
+          // }
         }}>
-        <Checkbox
+        {trials.length === 0 && (
+          <Checkbox
+            name={_getDlButtonLabel()}
+            // checked={openModal}
+            onChange={(checked: boolean) => {
+              setAllActive(checked);
+            }}
+          />
+        )}
+        {trials.length > 0 && (
+          <Checkbox
+            name={_getDlButtonLabel()}
+            checked={openModal}
+            onChange={(checked: boolean) => {
+              setOpenModal(checked);
+            }}
+          />
+        )}
+        {/* {openModal && <span>openModal</span>} */}
+        {/* <Checkbox
           name={_getDlButtonLabel()}
           checked={openModal}
           onChange={(checked: boolean) => {
-            if (checked) setAllActive(trials.length < total);
-            else {
+            if (checked) {
+              if (trials.length === 0) {
+                setAllActive(true);
+              }
+              if (trials.length > 0) {
+                setOpenModal(true);
+              }
+            } else {
               setAllActive(false);
+              setTrials({ type: "REMOVE_ALL" });
             }
+            // if (checked) setAllActive(trials.length < total);
+            // else {
+            //   setAllActive(false);
+            // }
           }}
-        />
-        {/* <div className='checkbox-ui'>
-          <label htmlFor='dl'>
-            <input
-              type='checkbox'
-              id='dl'
-              name='dl'
-              onChange={(e) => {
-                if (trials.length === 0) {
-                  setAllActive(e.target.checked);
-                }
-              }}
-            />
-            <span className='checkmark'></span>
-            <span className='label'>{_getDlButtonLabel()}</span>
-          </label>
-        </div> */}
+        /> */}
       </div>
       {/* <pre>{JSON.stringify(trials, null, 2)}</pre> */}
       <Dialog openModal={openModal} onCloseModal={() => setOpenModal(false)}>

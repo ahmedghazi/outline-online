@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
 type Props = {
   children: ReactNode;
@@ -9,15 +9,21 @@ type Props = {
 
 const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   const ref = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = useState<boolean>(false);
+  // console.log("openModal", openModal);
 
   useEffect(() => {
-    if (openModal) {
+    setOpen(openModal);
+  }, [openModal]);
+
+  useEffect(() => {
+    if (open) {
       ref.current?.showModal();
     } else {
       ref.current?.close();
       if (onCloseModal) onCloseModal();
     }
-  }, [openModal]);
+  }, [open]);
 
   return (
     <Draggable>
@@ -26,7 +32,7 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
         // onCancel={closeModal}
       >
         <div className='header'>
-          <button className='text-red' onClick={() => ref.current?.close()}>
+          <button className='text-red' onClick={() => setOpen(false)}>
             ╳
           </button>
         </div>
