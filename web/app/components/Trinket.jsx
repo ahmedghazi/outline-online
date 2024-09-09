@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { _linkResolver, _randomNum } from "../utils/utils";
 import { useDrag } from "react-use-gesture";
 // import { DragControls } from "three/examples/jsm/controls/DragControls";
-
+//https://www.youtube.com/watch?v=tBSbgRRpNzI
 const state = proxy({ current: null, mode: 0 });
 
 const Trinket = (props) => {
@@ -59,7 +59,7 @@ const Trinket = (props) => {
   };
   return (
     <>
-      <Float speed={1.4} rotationIntensity={1.5} floatIntensity={2.3}>
+      <Float speed={1} rotationIntensity={1} floatIntensity={1.3}>
         <DragControls>
           <group
             ref={groupRef}
