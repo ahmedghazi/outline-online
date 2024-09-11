@@ -29,6 +29,9 @@ const Underline = (props: any): JSX.Element => (
 const Outline = (props: any): JSX.Element => (
   <span style={{border: '1px solid ', borderRadius: '100%'}}> {props.children} </span>
 )
+const Gray = (props: any): JSX.Element => (
+  <span style={{color: '#666666 '}}> {props.children} </span>
+)
 // const TextXL = (props: any): JSX.Element => (
 //   <p style={{fontSize: '3rem', marginTop: 0}}> {props.children} </p>
 // )
@@ -70,8 +73,9 @@ export default defineType({
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
-          {title: 'Underline', value: 'u', icon: () => 'u', component: Underline},
-          {title: 'Outline', value: 'outline', icon: () => 'o', component: Outline},
+          {title: 'Gray', value: 'text-muted', icon: () => 'Gray', component: Gray},
+          // {title: 'Underline', value: 'u', icon: () => 'u', component: Underline},
+          // {title: 'Outline', value: 'outline', icon: () => 'o', component: Outline},
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [

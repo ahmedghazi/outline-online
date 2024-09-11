@@ -67,6 +67,9 @@ const portableTextComponents: PortableTextComponents = {
     align_right: ({ children, value }) => (
       <p className='text-right'>{children}</p>
     ),
+    "text-muted": ({ children, value }) => (
+      <span className='text-muted'>{children}</span>
+    ),
   },
 };
 
