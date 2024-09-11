@@ -21,15 +21,15 @@ const Clock = () => {
   const _update = () => {
     const now = new Date();
 
-    const day = pad2(now.getDate());
-    const month = pad2(now.getMonth() + 1);
+    // const day = pad2(now.getDate());
+    // const month = pad2(now.getMonth() + 1);
     const hour = pad2(now.getHours()) as number;
     const minute = pad2(now.getMinutes());
-    const seconde = pad2(now.getSeconds());
-    let ampm = hour >= 12 ? "pm" : "am";
+    // const seconde = pad2(now.getSeconds());
+    // let ampm = hour >= 12 ? "pm" : "am";
 
     // setDate(`${day}.${month}`);
-    setTime(`${hour}:${minute} ${ampm}`);
+    setTime(`${hour}:${minute}`);
     // console.log(now);
   };
   //Local Time: 03:17 pm (CET)

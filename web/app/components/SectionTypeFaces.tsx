@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   KeyValString,
   Product,
@@ -23,42 +23,73 @@ type ItemProps = {
 
 const Item = ({ input, defaultStyle }: ItemProps) => {
   const [active, setActive] = useState<boolean>(false);
-  // const [style, setStyle] = useState<Style>(defaultStyle);
+  const ref = useRef<HTMLDivElement>(null);
   const { type, dispatchType } = useType();
+  // console.log(type);
+  const [text, setText] = useState<string>("");
 
   useEffect(() => {
     dispatchType(defaultStyle);
+    if (ref && ref.current) {
+      ref.current.addEventListener("input", _cEditableChange);
+    }
+
+    return () => {
+      if (ref && ref.current) {
+        ref.current.removeEventListener("input", _cEditableChange);
+      }
+    };
   }, []);
 
+  const _cEditableChange = (event: Event) => {
+    const target = event.target as HTMLDivElement;
+    // console.log(target.innerText);
+    setText(target.innerText);
+  };
+
+  function setCursorEditable(editableElem: HTMLDivElement, position: number) {
+    let range = document.createRange();
+    let sel = window.getSelection();
+    if (!sel) return;
+    range.setStart(editableElem.childNodes[0], position);
+    range.collapse(true);
+
+    sel.removeAllRanges();
+    sel.addRange(range);
+    editableElem.focus();
+  }
+
+  useEffect(() => {
+    if (!text) {
+      // setText(type?.title);
+    }
+    if (text) {
+      if (ref && ref.current) setCursorEditable(ref.current, text.length);
+    }
+  }, [type, text]);
+
   const _handleStyles = (s: KeyValString) => {
-    // console.log(s);
-    // if (!ref.current) return;
     if (!s || !s.val) return;
-    // ref.current.style.fontFamily = s.val;
-    // ref.current.style.setProperty("--type-family", s.val);
-    // setCurrentStyle(s.val);
+
     dispatchType(JSON.parse(s.val));
   };
-  // console.log(input.singles);
-  // console.log(style.typeface);
-  // const defaulttypeface
+
   const _singles = useMemo(() => {
     if (!input.singles) return;
     const arr: KeyValString[] = input.singles.map((item) => {
       return {
         _type: "keyValString",
         key: item.title,
-        // val: JSON.stringify(item.typeface?.slug?.current),
         val: JSON.stringify(item.typeface),
       };
     });
     return arr;
   }, []);
-  // console.log(_singles);
 
   return (
     <div className={clsx("typeface--item", active && "is-active")}>
       <div
+        ref={ref}
         className='title'
         onClick={() => setActive(!active)}
         contentEditable={true}
@@ -68,11 +99,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
         style={{
           fontFamily: type?.slug?.current,
         }}>
-        {/* <TypeCard
-            fontName={input.title}
-            base64={style.typeface.typefaceFile.base64}
-          /> */}
-        {type?.title}
+        {text ? text : type?.title}
       </div>
       <div className='actions'>
         {input.singles && input.singles.length > 0 && (
@@ -84,22 +111,6 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
                 // label='Family'
               />
             )}
-            {/* <select
-              name='styles'
-              id=''
-              onChange={(e) => {
-                // console.log(JSON.parse(e.target.value));
-                // setStyle(JSON.parse(e.target.value));
-                dispatchType(JSON.parse(e.target.value));
-              }}
-              // value={JSON.stringify(input.singles[0])}
-            >
-              {input.singles?.map((item, i) => (
-                <option key={i * 10} value={JSON.stringify(item.typeface)}>
-                  {item.typeface?.title}
-                </option>
-              ))}
-            </select> */}
           </div>
         )}
 
