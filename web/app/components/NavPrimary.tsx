@@ -12,6 +12,7 @@ import Buy from "./Buy";
 import Cart from "./shop/Cart";
 import { usePathname, useRouter } from "next/navigation";
 import { subscribe, unsubscribe } from "pubsub-js";
+import clsx from "clsx";
 // import useInViewPort from "../hooks/useInViewport";
 
 type NavLinkProps = {
@@ -72,7 +73,14 @@ const NavPrimary = ({ navPrimary, productsCart }: NavProps) => {
   }, [isProduct]);
 
   const _handleScroll = () => {
-    document.body.classList.toggle("has-scrolled", document.body.scrollTop > 0);
+    // const threshold = document.body.classList.contains("has-scrolled")
+    //   ? window.innerHeight / 2
+    //   : 0;
+    // console.log(document.body.scrollTop, threshold);
+    document.body.classList.toggle(
+      "has-scrolled",
+      document.body.scrollTop > 10
+    );
   };
 
   return (
@@ -82,12 +90,16 @@ const NavPrimary = ({ navPrimary, productsCart }: NavProps) => {
         {navPrimary?.map((item, i) => (
           <li
             key={i}
-            className={
+            className={clsx(
               (item &&
                 item._type === "menuItem" &&
                 `menu-item--${item.link?.label?.toLowerCase()}`) ||
-              ""
-            }>
+                "",
+              item &&
+                item._type === "menuItem" &&
+                item.subMenu &&
+                "has-children"
+            )}>
             {item && item._type === "menuItem" && (
               <>
                 {item.link && <NavLink input={item.link} depth={0} />}
