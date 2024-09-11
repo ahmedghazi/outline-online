@@ -224,10 +224,10 @@ const BuyModal = ({ productsCart }: Props) => {
                     onChange={(val: string) => setLicenseSizeProfil(val)}
                   />
                 </div>
-                <div></div>
-                <div></div>
+                {/* <div></div> */}
+                {/* <div></div> */}
                 <div className='label'>Licenses</div>
-                <div className='licenses md:col-span-3 py-05e'>
+                <div className='licenses md:col-span-5 py-05e'>
                   <div className='flex justify-between'>
                     {licenseSizeProfil?.licenseType?.map((item, i) => (
                       <div className='input flex gap-sm' key={i}>
