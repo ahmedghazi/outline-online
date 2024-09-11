@@ -39,7 +39,7 @@
       background-color: transparent;
     }
     .header {
-      padding: var(--space-md);
+      padding: var(--space-md) var(--space-md) 5px;
     }
   }
   form {
@@ -54,14 +54,11 @@
       .form-row {
         // width: 50%;
         display: flex;
-        gap: 0.4em;
-        // &:nth-child(1),
-        // &:nth-child(3),
-        // &:nth-child(5) {
-        //   padding-bottom: 1em;
-        // }
+        // gap: 0.4em;
+
         label {
           color: #666666;
+          white-space: nowrap;
         }
       }
     }
@@ -69,12 +66,16 @@
     input {
       width: 100%;
       border: none;
-      color: #9747ff;
+      color: var(--color-purple);
       line-height: 1;
       margin: unset;
       display: initial;
+      &:is(:-webkit-autofill, :autofill) {
+        color: var(--color-purple);
+        background-color: transparent;
+      }
       &:focus {
-        color: #9747ff;
+        color: var(--color-purple);
       }
       &::placeholder {
         color: transparent;
@@ -82,8 +83,20 @@
     }
     .consent {
       padding: var(--space-md);
-      .checkbox-ui label {
-        flex-direction: row;
+      .checkbox-ui {
+        width: 60%;
+        label {
+          flex-direction: row-reverse;
+          justify-content: space-between;
+          .label {
+            &::before {
+              content: "✓";
+              color: var(--color-purple);
+              display: inline-block;
+              margin-right: 0.4em;
+            }
+          }
+        }
       }
     }
     button[type="submit"] {

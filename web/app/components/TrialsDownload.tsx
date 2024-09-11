@@ -25,36 +25,81 @@ const TrialsDownload = (props: Props) => {
     {
       title: "LICENCEE INFORMATION",
       fields: [
-        { type: "text", name: "website", required: false },
-        { type: "email", name: "email", required: true },
+        {
+          type: "text",
+          name: "website",
+          placzeholder: "Website",
+          required: false,
+        },
+        { type: "email", name: "email", placzeholder: "Email", required: true },
       ],
     },
 
     {
       title: "NAME",
       fields: [
-        { type: "text", name: "first_name", required: false },
-        { type: "text", name: "last_name", required: true },
+        {
+          type: "text",
+          name: "first_name",
+          placzeholder: "First name",
+          required: false,
+        },
+        {
+          type: "text",
+          name: "last_name",
+          placzeholder: "Last name",
+          required: true,
+        },
       ],
     },
 
     {
       title: "COMPANY",
       fields: [
-        { type: "text", name: "name", required: false },
-        { type: "text", name: "location", required: false },
+        { type: "text", name: "name", placzeholder: "Name", required: false },
+        {
+          type: "text",
+          name: "location",
+          placzeholder: "Location",
+          required: false,
+        },
       ],
     },
 
     {
       title: "ADDRESS",
       fields: [
-        { type: "text", name: "postbox", required: false },
-        { type: "text", name: "street", required: false },
-        { type: "text", name: "zipcode", required: false },
-        { type: "text", name: "city", required: false },
-        { type: "text", name: "county", required: false },
-        { type: "text", name: "country", required: false },
+        {
+          type: "text",
+          name: "postbox",
+          placzeholder: "Postbox",
+          required: false,
+        },
+        {
+          type: "text",
+          name: "street",
+          placzeholder: "Street",
+          required: false,
+        },
+        {
+          type: "text",
+          name: "zipcode",
+          placzeholder: "ZIP Code",
+          required: false,
+        },
+        { type: "text", name: "city", placzeholder: "City", required: false },
+        {
+          type: "text",
+          name: "county",
+          placzeholder: "County",
+          required: false,
+        },
+        {
+          type: "text",
+          name: "country",
+          placzeholder: "Country",
+          required: false,
+        },
       ],
     },
   ];
@@ -141,11 +186,11 @@ const TrialsDownload = (props: Props) => {
                 {item.fields.map((field, i) => (
                   <div className='form-row' key={i}>
                     {field.required && <span className='text-red'>*</span>}
-                    <label htmlFor={field.name}>{field.name}:</label>
+                    <label htmlFor={field.name}>{field.placzeholder}:</label>
                     <input
                       type={field.type}
                       name={field.name}
-                      placeholder={field.name}
+                      placeholder={field.placzeholder}
                       required={field.required}
                       role='textbox'
                       onChange={({ target }) => {
@@ -164,13 +209,13 @@ const TrialsDownload = (props: Props) => {
         <div className='consent'>
           <div className='form-row'>
             <Checkbox
-              name={"✓ I agree with the EULA"}
+              name={"I agree with the EULA"}
               onChange={(checked: boolean) => {}}
             />
           </div>
           <div className='form-row'>
             <Checkbox
-              name={"✓ Subscribe to Outline Online Newsletter!"}
+              name={"Subscribe to Outline Online Newsletter!"}
               onChange={(checked: boolean) => {}}
             />
           </div>

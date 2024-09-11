@@ -13,7 +13,7 @@
   background-color: var(--color-gray);
   border-radius: var(--radius-sm);
   padding: 3px 5px 2px;
-  padding: 0 5px;
+  padding: 0 7.5px;
   height: toRem(24);
   // line-height: toRem(28);
   max-width: 188px;
@@ -72,7 +72,7 @@
     -webkit-appearance: none;
 
     background-color: var(--color-gray);
-    padding: 0px 5px 0px 2rem;
+    padding: 0px 7.5px 0px 2rem;
     height: toRem(24);
     line-height: toRem(26);
     max-width: 188px;
@@ -102,7 +102,7 @@
   align-items: center;
   background-color: var(--color-gray);
   border-radius: var(--radius-sm);
-  padding: 0px 5px;
+  padding: 0px 7.5px;
   height: toRem(24);
   // line-height: toRem(28);
   max-width: 188px;
@@ -208,7 +208,7 @@
   align-items: center;
   background-color: var(--color-gray);
   border-radius: var(--radius-sm);
-  padding: 3px 5px;
+  padding: 3px 7.5px;
   // max-width: 188px;
   ul.text-align {
     padding-top: 0.3em;
