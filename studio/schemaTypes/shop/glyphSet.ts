@@ -22,8 +22,13 @@ export default defineField({
     defineField({
       title: 'items',
       name: 'items',
-      type: 'string',
-      description: 'separated by comma',
+      type: 'array',
+      of: [{type: 'string'}],
+      // description: 'separated by comma',
+      options: {
+        layout: 'tags',
+        // isHighlighted: true,
+      },
       // of: [{type: 'string'}],
     }),
   ],

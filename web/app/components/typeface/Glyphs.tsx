@@ -47,7 +47,23 @@ const Glyphs = ({ input }: Props) => {
       style={{
         fontFamily: type?.slug?.current,
       }}>
-      {input.typeface?.glyphs && input.typeface?.glyphs.length > 0 && (
+      {input.typeface?.glyphs &&
+        input.typeface?.glyphs.length > 0 &&
+        input.typeface?.glyphs.map((item, i) => (
+          <div className='mb-md' key={i}>
+            <h3 className='mb-sm'>{item.title}</h3>
+            <div className='grid '>
+              {item.items &&
+                item.items.map((_item, j) => (
+                  <div className='item' key={j}>
+                    <div className='glyph'>{_item}</div>
+                    <div className='unicode'>{_item.codePointAt(0)}</div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        ))}
+      {/* {input.typeface?.glyphs && input.typeface?.glyphs.length > 0 && (
         <div className='mb-md'>
           <h3 className='mb-sm'>Basic latin</h3>
           <div className='grid '>
@@ -60,7 +76,7 @@ const Glyphs = ({ input }: Props) => {
               ))}
           </div>
         </div>
-      )}
+      )} */}
       {/* <div className='mb-md'>
         <h3>Latin supplement</h3>
         <div className='grid md:grid-cols-20'>

@@ -83,11 +83,11 @@ export default defineField({
     defineField({
       name: 'glyphs',
       type: 'array',
-      of: [{type: 'string'}],
-      options: {
-        layout: 'tags',
-        // isHighlighted: true,
-      },
+      of: [{type: 'glyphSet'}],
+      // options: {
+      //   layout: 'tags',
+      //   // isHighlighted: true,
+      // },
       group: 'editorial',
     }),
     defineField({

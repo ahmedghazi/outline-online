@@ -558,7 +558,7 @@ export interface Typeface extends SanityDocument {
    *
    *
    */
-  glyphs?: Array<SanityKeyed<string>>;
+  glyphs?: Array<SanityKeyed<GlyphSet>>;
 
   /**
    * vendor — `reference`
@@ -1199,6 +1199,23 @@ export type TextDropDown = {
    *
    */
   text?: BlockContent;
+};
+
+export type GlyphSet = {
+  _type: "glyphSet";
+  /**
+   * Title — `string`
+   *
+   * lowercase, no space, ex: 1,10,100; 10k, 20k
+   */
+  title?: string;
+
+  /**
+   * items — `array`
+   *
+   *
+   */
+  items?: Array<SanityKeyed<string>>;
 };
 
 export type ImageUI = {

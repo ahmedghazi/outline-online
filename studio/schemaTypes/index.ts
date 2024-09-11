@@ -42,6 +42,7 @@ import obj3d from './objects/obj3d'
 import trinket from './objects/trinket'
 import textDropDown from './objects/textDropDown'
 import keyValString from './objects/keyValString'
+import glyphSet from './shop/glyphSet'
 
 export const schemaTypes = [
   home,
@@ -82,6 +83,7 @@ export const schemaTypes = [
   obj3d,
   trinket,
   textDropDown,
+  glyphSet,
 
   // moduleImages,
   // moduleTexts,
