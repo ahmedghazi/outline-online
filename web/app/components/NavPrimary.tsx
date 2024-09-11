@@ -16,16 +16,17 @@ import { subscribe, unsubscribe } from "pubsub-js";
 
 type NavLinkProps = {
   input: LinkInternal | LinkExternal;
+  depth: number;
 };
 
-const NavLink = ({ input }: NavLinkProps) => {
+const NavLink = ({ input, depth }: NavLinkProps) => {
   const pathname = usePathname();
 
   const href = _linkResolver(input.link);
   const ariaCurrent = href === pathname ? "page" : undefined;
   // console.log(href, ariaCurrent);
   return (
-    <Link href={href} aria-current={ariaCurrent}>
+    <Link href={href} aria-current={ariaCurrent} className={`depth-${depth}`}>
       {input.label}
     </Link>
   );
@@ -89,10 +90,7 @@ const NavPrimary = ({ navPrimary, productsCart }: NavProps) => {
             }>
             {item && item._type === "menuItem" && (
               <>
-                {/* <Link href={_linkResolver(item.link?.link)}>
-                  {item.link?.label}
-                </Link> */}
-                {item.link && <NavLink input={item.link} />}
+                {item.link && <NavLink input={item.link} depth={0} />}
                 {item.subMenu && item.subMenu?.length > 0 && (
                   <ul className='submenu'>
                     {item.subMenu?.length > 0 &&
@@ -105,7 +103,7 @@ const NavPrimary = ({ navPrimary, productsCart }: NavProps) => {
                               ? "is-half"
                               : ""
                           }>
-                          <NavLink input={subItem} />
+                          <NavLink input={subItem} depth={1} />
                         </li>
                       ))}
                   </ul>
@@ -115,12 +113,16 @@ const NavPrimary = ({ navPrimary, productsCart }: NavProps) => {
           </li>
         ))}
 
-        <li className='menu-item--buy'>
-          <Buy productsCart={productsCart} />
-        </li>
-        <li className='menu-item--cart'>
-          <Cart />
-        </li>
+        <div className='actions'>
+          <ul className='flex'>
+            <li className='menu-item--buy'>
+              <Buy productsCart={productsCart} />
+            </li>
+            <li className='menu-item--cart'>
+              <Cart />
+            </li>
+          </ul>
+        </div>
       </ul>
     </nav>
   );

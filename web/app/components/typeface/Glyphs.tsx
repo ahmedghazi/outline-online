@@ -21,6 +21,8 @@ const Glyphs = ({ input }: Props) => {
     ...'!@#$%^&*()_+-=[]{}|;:",.<>/?`~',
   ];
 
+  // const str = '!@#$%^&*()_+-=[]{}|;:",.<>/?`~'.split("").join(" ");
+  // console.log(str);
   // const latin = alphabets.latin.split("");
   // const latin_extended = alphabets.latin_extended.split("");
   // console.log(input);
@@ -37,6 +39,7 @@ const Glyphs = ({ input }: Props) => {
     // ref.current.innerHTML = content;
   }, []);
   // console.log({ type });
+  const _getUnicode = (item: string) => {};
   return (
     <section
       className='glyphs ee'
@@ -44,17 +47,20 @@ const Glyphs = ({ input }: Props) => {
       style={{
         fontFamily: type?.slug?.current,
       }}>
-      <div className='mb-md'>
-        <h3>Basic latin</h3>
-        <div className='grid '>
-          {input.typeface?.glyphs &&
-            input.typeface?.glyphs.map((item, i) => (
-              <div className='item' key={i}>
-                <div>{item}</div>
-              </div>
-            ))}
+      {input.typeface?.glyphs && input.typeface?.glyphs.length > 0 && (
+        <div className='mb-md'>
+          <h3 className='mb-sm'>Basic latin</h3>
+          <div className='grid '>
+            {input.typeface?.glyphs &&
+              input.typeface?.glyphs.map((item, i) => (
+                <div className='item' key={i}>
+                  <div className='glyph'>{item}</div>
+                  <div className='unicode'>{item.codePointAt(0)}</div>
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
+      )}
       {/* <div className='mb-md'>
         <h3>Latin supplement</h3>
         <div className='grid md:grid-cols-20'>

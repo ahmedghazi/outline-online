@@ -95,7 +95,12 @@ const ContentProduct = ({ input }: Props) => {
         {input.content && <Modules input={input.content} />}
       </section>
 
-      {input.singles && <Glyphs input={input.singles[0]} />}
+      {input.singles &&
+        input.singles.map((item, i) => (
+          <div className='mb-md' key={i}>
+            <Glyphs input={item} />
+          </div>
+        ))}
     </div>
   );
 };

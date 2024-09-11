@@ -23,6 +23,10 @@
     // color: var(--color-primary);
     // box-shadow: unset;
   }
+  .snipcart-modal__container,
+  .snipcart-layout.snipcart-modal{
+    transform: none!important;
+  }
   // @media (min-width: 768px) {
   //   .snipcart-cart-summary--edit.snipcart-modal__container {
   //     width: calc(100% / 3);
@@ -300,7 +304,7 @@
   --bgColor-error: hsl(6, 50%, 15%);
   --bgColor-info: hsl(210, 55%, 15%);
 
-  --bgColor-modal:#fff;
+  --bgColor-modal:#E2E5E6;
   --bgColor-modalVeil: hsla(210, 10%, 7%, 0.75);
 
   --bgColor-link: none;
