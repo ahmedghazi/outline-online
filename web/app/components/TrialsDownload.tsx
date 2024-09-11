@@ -116,7 +116,7 @@ const TrialsDownload = (props: Props) => {
         body: JSON.stringify({ data: payload }),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       if (data.ok) {
         setStatus("success");
       }

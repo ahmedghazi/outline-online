@@ -81,7 +81,7 @@ const AddToCart = (props: Props) => {
       type: "readonly",
       value: licenseSizeProfil.title,
     });
-
+    console.log(licenseSizeProfil);
     // dataAttributes[`data-item-custom${index}-placeholder`] = "Licence Size";
     dataAttributes[`data-item-custom${index}-name`] = "Licence Size";
     dataAttributes[`data-item-custom${index}-type`] = "readonly";
