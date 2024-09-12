@@ -43,7 +43,6 @@ const CartProduct = ({ input }: CartProductProps) => {
   const [active, setActive] = useState<boolean>(false);
   // const { licenseSizeProfil } = useShop();
 
-  console.log(input);
   return (
     <div className={clsx("typeface-item", active && "is-active")}>
       <div className='_row py-05e'>
@@ -68,7 +67,7 @@ const CartProduct = ({ input }: CartProductProps) => {
           </div>
 
           <div className='md:col-span-5'>
-            <div className='grid md:grid-cols-5 gap-sm'>
+            <div className='grid md:grid-cols-5 gap-sm-'>
               <div className='label !py-0'>metadata</div>
               {input.metadata?.map((item, i) => (
                 <div key={i}>{item}</div>

@@ -67,7 +67,7 @@ const Trinkets = (props) => {
                 ))}
             </Stage>
           </Suspense>
-          <CameraHelper />
+          {/* <CameraHelper /> */}
           {/* <Controls /> */}
           {/* <OrbitControls ref={ref} makeDefault={false} /> */}
         </Canvas>
