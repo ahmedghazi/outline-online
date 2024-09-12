@@ -99,6 +99,7 @@ const CartProduct = ({ input }: CartProductProps) => {
                     <AddToCart
                       id={item._key || ""}
                       title={item.title || ""}
+                      fullTitle={`${input.title} ${item.title}`}
                       blurb={"ze blurb"}
                       price={item.price || 20000000000}
                       metadata={{
@@ -125,6 +126,7 @@ const CartProduct = ({ input }: CartProductProps) => {
                     <AddToCart
                       id={item._key || ""}
                       title={item.title || ""}
+                      fullTitle={`${input.title} ${item.title}`}
                       blurb={"ze blurb"}
                       price={item.price || 20000000000}
                       metadata={{
@@ -155,6 +157,7 @@ declare global {
 
 const BuyModal = ({ productsCart }: Props) => {
   // const [active, setActive] = useState<boolean>(false);
+  const [ready, setReady] = useState<boolean>(false);
   const [active, setActive] = useState<boolean>(false);
   const [buttonStatus, setButtonStatus] = useState("Add To Cart");
 
@@ -169,6 +172,7 @@ const BuyModal = ({ productsCart }: Props) => {
   // console.log(products);
 
   useEffect(() => {
+    setReady(true);
     _setDefaultLicenses();
     const token = subscribe("BUY_MODAL_ACTIVE", (e, d) => {
       setActive(d);
@@ -179,6 +183,10 @@ const BuyModal = ({ productsCart }: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.classList.toggle("is-product", active);
+  }, [active]);
+
   const _setDefaultLicenses = () => {
     // console.log(licenseTypeProfil);
     //setLicenseSizeProfil()
@@ -187,38 +195,49 @@ const BuyModal = ({ productsCart }: Props) => {
 
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
     const items = licenseTypeProfil?.filter((el) => el.label === val.label);
+    // console.log(licenseTypeProfil);
+    console.log(items);
     // if (checked) console.log(checked, val, items);
-    if ((items && items.length > 0) || !checked) {
-      //remove
-      setLicenseTypeProfil({ type: "REMOVE", payload: val });
+    if (checked) {
+      //no dubplicate
+      if (items?.length === 0) {
+        console.log(items?.length === 0);
+        console.log("+++++ add", val);
+        setLicenseTypeProfil({ type: "ADD", payload: val });
+      }
     } else {
-      //add
-      setLicenseTypeProfil({ type: "ADD", payload: val });
+      if (items && items.length > 0) {
+        //remove
+        console.log("----- remove", val);
+        setLicenseTypeProfil({ type: "REMOVE", payload: val });
+      }
     }
   };
-  // const _addToCart = () => {};
+
   const _addToCart = async () => {
     //https://docs.snipcart.com/v3/sdk/api#cart
     // console.log(products);
     setButtonStatus("Adding...");
     try {
-      // const productsToAdd = ''
-      // await Snipcart.api.cart.items.add(products)
       await Promise.all(
         products.map(async (product) => {
           console.log(product);
           await window.Snipcart.api.cart.items.add(product);
         })
       );
-      // products.forEach(product => {})
 
-      // console.log(products.toString())
       await window.Snipcart.api.theme.cart.open();
       setButtonStatus("Add");
     } catch (error) {
       console.log(error);
     }
   };
+
+  const hasLicenseType = licenseTypeProfil && licenseTypeProfil?.length > 0;
+  const hasProducts = products && products.length > 0;
+  // console.log(licenseTypeProfil);
+  // console.log({ hasLicenseType, hasProducts });
+
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
       <div className='outter'>
@@ -231,6 +250,7 @@ const BuyModal = ({ productsCart }: Props) => {
                   <Select
                     options={licenses}
                     onChange={(val: string) => setLicenseSizeProfil(val)}
+                    disabled={hasProducts && hasLicenseType ? true : false}
                   />
                 </div>
                 {/* <div></div> */}
@@ -242,7 +262,7 @@ const BuyModal = ({ productsCart }: Props) => {
                       <div className='input flex gap-sm' key={i}>
                         <Checkbox
                           name={item.label || ""}
-                          checked={i === 0}
+                          checked={ready && i === 0}
                           onChange={(checked: boolean) => {
                             // console.log(checked, item.label);
                             _updateLicenseType(checked, item);

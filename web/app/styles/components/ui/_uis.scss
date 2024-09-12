@@ -79,6 +79,10 @@
     border-radius: var(--radius-sm);
     color: #000;
     cursor: pointer;
+    &:disabled {
+      opacity: 0.2;
+      cursor: none;
+    }
   }
   &::before {
     --size: 0.3rem;

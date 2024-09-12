@@ -7,31 +7,33 @@ type Props = {
   label?: string;
   options: LicenseSize[] | KeyValString[];
   onChange: Function;
+  disabled?: boolean;
 };
 
-const Select = (props: Props) => {
+const Select = ({ label, options, onChange, disabled = false }: Props) => {
   // console.log(JSON.stringify(props.options[0]));
+  // console.log(label, disabled);
+
   return (
     <div className='select-ui'>
       <select
+        disabled={disabled}
         onChange={(e) => {
           // console.log(e.target.value);
-          if (e.target.value) props.onChange(JSON.parse(e.target.value));
+          if (e.target.value) onChange(JSON.parse(e.target.value));
         }}
         defaultValue={
-          props.label === "" &&
-          props.options[0] &&
-          props.options[0]._type === "keyValString"
-            ? JSON.stringify(props.options[0])
+          label === "" && options[0] && options[0]._type === "keyValString"
+            ? JSON.stringify(options[0])
             : ""
         }>
-        {props.label && (
+        {label && (
           <option defaultValue='' value=''>
-            {props.label}
+            {label}
           </option>
         )}
-        {props.options &&
-          props.options.map((item, i) => (
+        {options &&
+          options.map((item, i) => (
             <option
               key={i}
               value={JSON.stringify(item)}
@@ -42,7 +44,7 @@ const Select = (props: Props) => {
             </option>
           ))}
       </select>
-      {!props.options && <div>Please provide some options</div>}
+      {!options && <div>Please provide some options</div>}
     </div>
   );
 };

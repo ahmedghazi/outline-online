@@ -7,10 +7,8 @@ type Props = {
 };
 
 const Checkbox = ({ name, checked = false, onChange }: Props) => {
-  // const defaultChecked = checked ? checked : false;
   const [active, setActive] = useState<boolean>(checked);
-  // const [checked, setChecked] = useState<boolean>(false);
-  // console.log(name, checked);
+
   useEffect(() => {
     // console.log(checked);
     if (checked) {
@@ -31,9 +29,6 @@ const Checkbox = ({ name, checked = false, onChange }: Props) => {
   }, [active]);
 
   const _handleChange = (e: BaseSyntheticEvent) => {
-    // console.log(name, e.target.value);
-    // const val = e.target.value === "on" ? true : false;
-    // setActive(val);
     setActive((prev) => !prev);
     setTimeout(() => {}, 150);
   };
@@ -41,20 +36,12 @@ const Checkbox = ({ name, checked = false, onChange }: Props) => {
   return (
     <div className='checkbox-ui'>
       <label htmlFor={name}>
-        {/* {checked && name + " is checked"}
-        {active && name + " is active"} */}
         <input
           type='checkbox'
           name={name}
           id={name}
-          // defaultChecked={checked ? checked : active}
-          // checked={!!active}
           checked={active}
           onChange={_handleChange}
-          // onChange={(e) => {
-          // console.log(e, checked);
-          // setActive(checked ? checked : !active);
-          // }}
         />
         <span className='checkmark'></span>
         <span className='label'>{name}</span>

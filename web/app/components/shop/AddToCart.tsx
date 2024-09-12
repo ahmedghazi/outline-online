@@ -18,6 +18,7 @@ type Props = {
   id: string;
   price: number;
   title: string;
+  fullTitle: string;
   blurb: string;
   category?: string;
   metadata: MetadataProps;
@@ -41,7 +42,7 @@ interface ProductData {
 }
 
 const AddToCart = (props: Props) => {
-  const { price, title, blurb, category, id, metadata } = props;
+  const { price, title, fullTitle, blurb, category, id, metadata } = props;
   const {
     // dataAttributes,
     // currentProduct,
@@ -182,7 +183,7 @@ const AddToCart = (props: Props) => {
     },
     url: pathname,
     description: blurb || "",
-    name: `${title}` || "",
+    name: `${fullTitle}` || "",
     quantity: 1,
     stackable: "never",
     shippable: false,
@@ -217,7 +218,7 @@ const AddToCart = (props: Props) => {
             data-item-price={price}
             data-item-url={pathname}
             data-item-description={blurb || ""}
-            data-item-name={`Tupeface name ${title}` || ""}
+            data-item-name={`${fullTitle}` || ""}
             data-item-min-quantity='1'
             data-item-quantity='1'
             data-item-max-quantity='1'
