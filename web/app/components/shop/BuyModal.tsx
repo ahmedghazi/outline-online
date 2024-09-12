@@ -43,27 +43,38 @@ const CartProduct = ({ input }: CartProductProps) => {
   const [active, setActive] = useState<boolean>(false);
   // const { licenseSizeProfil } = useShop();
 
-  // console.log(input.bundles);
+  console.log(input);
   return (
     <div className={clsx("typeface-item", active && "is-active")}>
       <div className='_row py-05e'>
-        <div
-          className={clsx("flex gap-sm col-span-2 cursor-pointer")}
-          onClick={() => setActive(!active)}>
-          <button className='btn-toggle'>
-            <svg
-              version='1.1'
-              id='Calque_1'
-              xmlns='http://www.w3.org/2000/svg'
-              x='0px'
-              y='0px'
-              viewBox='0 0 4.9 9.9'
-              width={4.9}
-              height={9.9}>
-              <polygon points='4.9,4.9 0,9.9 0,0 ' />
-            </svg>
-          </button>
-          <h2>{input.title}</h2>
+        <div className='grid md:grid-cols-8'>
+          <div
+            className={clsx("flex gap-sm col-span-2 cursor-pointer")}
+            onClick={() => setActive(!active)}>
+            <button className='btn-toggle'>
+              <svg
+                version='1.1'
+                id='Calque_1'
+                xmlns='http://www.w3.org/2000/svg'
+                x='0px'
+                y='0px'
+                viewBox='0 0 4.9 9.9'
+                width={4.9}
+                height={9.9}>
+                <polygon points='4.9,4.9 0,9.9 0,0 ' />
+              </svg>
+            </button>
+            <h2>{input.title}</h2>
+          </div>
+
+          <div className='md:col-span-5'>
+            <div className='grid md:grid-cols-5 gap-sm'>
+              <div className='label !py-0'>metadata</div>
+              {input.metadata?.map((item, i) => (
+                <div key={i}>{item}</div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 

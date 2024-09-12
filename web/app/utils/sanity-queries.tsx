@@ -83,7 +83,8 @@ export async function getProductsCart(): Promise<Product[]> {
       },
       licenseSizes[]{
         ...
-      }
+      },
+      metadata
     }
     `
   );
