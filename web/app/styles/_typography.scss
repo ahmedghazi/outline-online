@@ -4,11 +4,17 @@
     url("./fonts/Literature-Regular.woff2") format("woff2");
   font-display: swap;
 }
-
+@font-face {
+  font-family: "OOArketa-Regular";
+  src: url("./fonts/OOArketa-Regular.woff") format("woff"),
+    url("./fonts/OOArketa-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+//OOArketa-Regular
 //ABCDiatype-Regular
 body {
   color: black;
-  font-family: var(--font-primary);
+  font-family: var(--font-arketa);
   font-size: var(--text-md-mobile);
   line-height: 1.2;
   // text-rendering: optimizeLegibility;
@@ -19,13 +25,13 @@ body {
     font-size: var(--text-md);
   }
 }
-.sans {
-  font-family: var(--font-primary);
-}
-.serif {
-  font-family: var(--font-secondary);
-  letter-spacing: 0.02em;
-}
+// .sans {
+//   font-family: var(--font-primary);
+// }
+// .serif {
+//   font-family: var(--font-secondary);
+//   letter-spacing: 0.02em;
+// }
 
 html {
   // font-size: 14px;

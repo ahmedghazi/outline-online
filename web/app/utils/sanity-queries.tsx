@@ -105,7 +105,8 @@ export const homeQuery = groq`*[_type == "home"][0]{
     file{
       ...,
       asset->{
-        url
+        url,
+        originalFilename
       }
     },
     link->{

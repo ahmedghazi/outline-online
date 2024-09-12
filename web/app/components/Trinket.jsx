@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLoader, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Float, DragControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -16,12 +16,17 @@ const state = proxy({ current: null, mode: 0 });
 const Trinket = (props) => {
   const { scene } = useGLTF(props.input.file.asset.url);
   const groupRef = useRef();
+  const primitiveRef = useRef();
   const router = useRouter();
   const [isHover, setIsHover] = useState(false);
 
   const [position, setPosition] = useState(props.position);
   // const { size, viewport } = useThree();
   // console.log(size, viewport);
+  useEffect(() => {
+    primitiveRef.current.position.set(0.5, 0.5, 0);
+    groupRef.current.position.set(-0.5, -0.5, 0);
+  }, []);
 
   // console.log(position);
   const _onClick = (e) => {
@@ -34,8 +39,10 @@ const Trinket = (props) => {
   // console.log(props.parent);
   useFrame(() => {
     if (isHover) return;
-    groupRef.current.rotation.x += 0.001;
-    groupRef.current.rotation.y += 0.001;
+    const x = Math.random() * 0.001;
+    const y = Math.random() * 0.005;
+    groupRef.current.rotation.x += x;
+    groupRef.current.rotation.y += y;
     groupRef.current.rotation.z += 0.0005;
   });
 
@@ -70,7 +77,7 @@ const Trinket = (props) => {
           onPointerOver={_onPointerOver}
           onPointerOut={_onPointerOut}>
           <boxGeometry args={[1, 1, 1]} />
-          <primitive object={scene} scale={1} name={name} />
+          <primitive ref={primitiveRef} object={scene} scale={1} name={name} />
         </group>
       </DragControls>
       {/* </Float> */}

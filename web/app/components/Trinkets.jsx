@@ -17,7 +17,7 @@ const TrinketInfo = ({ infos }) => {
   }, []);
 
   const _update = (e) => {
-    console.log(e);
+    // console.log(e);
     if (!ref) return;
     const bounding = ref.current.getBoundingClientRect();
     const offsetX = bounding.width / 2;

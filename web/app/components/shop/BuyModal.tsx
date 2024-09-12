@@ -13,6 +13,7 @@ import Price from "./Price";
 import useShop from "./ShopContext";
 import AddToCart from "./AddToCart";
 import { subscribe, unsubscribe } from "pubsub-js";
+import { usePathname } from "next/navigation";
 
 type CartProductProps = {
   input: Product;
@@ -160,6 +161,7 @@ const BuyModal = ({ productsCart }: Props) => {
   const [ready, setReady] = useState<boolean>(false);
   const [active, setActive] = useState<boolean>(false);
   const [buttonStatus, setButtonStatus] = useState("Add To Cart");
+  const pathname = usePathname();
 
   const {
     licenses,
@@ -185,6 +187,9 @@ const BuyModal = ({ productsCart }: Props) => {
 
   useEffect(() => {
     document.body.classList.toggle("is-product--open", active);
+    if (active && pathname === "/") {
+      window.scroll(0, window.innerHeight);
+    }
   }, [active]);
 
   const _setDefaultLicenses = () => {
