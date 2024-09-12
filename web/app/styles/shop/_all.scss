@@ -156,7 +156,7 @@
     padding: 0;
   }
   .snipcart-base-button {
-    padding: 0 1em;
+    padding: 0.6em 1em 0.5em;
     border-radius: 0;
   }
 
@@ -287,6 +287,7 @@
 
   --color-buttonPrimary: var(--color-bg);
   --color-buttonPrimary-hover: hsl(0, 0%, 100%);
+  // --color-buttonPrimary-hover: var(--color-muted);
   --color-buttonPrimary-active: var(--color-buttonPrimary);
   --color-buttonPrimary-focus: var(--color-buttonPrimary);
   --color-buttonPrimary-disabled: var(--color-alt);
@@ -377,7 +378,8 @@
   --bgColor-input-autofill: #d3d8db;
 
   --bgColor-buttonPrimary: blue;
-  --bgColor-buttonPrimary-hover: hsl(220, 70%, 30%);
+  // --bgColor-buttonPrimary-hover: hsl(220, 70%, 30%);
+  --bgColor-buttonPrimary-hover: var(--color-muted);
   --bgColor-buttonPrimary-active: var(--bgColor-buttonPrimary);
   --bgColor-buttonPrimary-focus: var(--bgColor-buttonPrimary);
   --bgColor-buttonPrimary-disabled: hsl(210, 10%, 25%);
