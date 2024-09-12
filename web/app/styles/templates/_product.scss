@@ -110,22 +110,7 @@ body[data-template="is-product"],
         }
       }
     }
-    // .type-tester {
-    //   // height: calc(var(--vh) * 100);
-    //   // @include flex_center_h_v;
-    //   // flex-direction: column;
-    // }
-    // .contenteditable {
-    //   // height: calc(var(--vh) * 100 - var(--header-height));
-    //   // width: 100%;
-    //   // @include flex_center_h_v;
 
-    //   white-space: pre-line;
-
-    //   text-align: center;
-    //   text-overflow: clip;
-    //   // overflow-y: scroll;
-    // }
     .footer {
       position: absolute;
       bottom: 0;
@@ -152,6 +137,17 @@ body[data-template="is-product"],
 
   .glyphs {
     // display: grid;
+    .overview {
+      position: fixed;
+      inset: 0;
+      @include flex_center_h_v;
+      pointer-events: none;
+      font-size: 70vh;
+      span {
+        line-height: 1;
+        transform: translateY(-3vh);
+      }
+    }
     .grid {
       // border-top: var(--border);
       // border-left: var(--border);
@@ -184,11 +180,7 @@ body[data-template="is-product"],
       background-color: white;
       // font-size: var(--text-lg);
       font-size: 24px;
-      &:hover {
-        // font-size: var(--text-xl);
-        transform: scale(1.5);
-        z-index: 99;
-      }
+
       .glyph {
         transform: translateY(-0.2em);
       }

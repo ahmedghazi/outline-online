@@ -1,6 +1,6 @@
 "use client";
 import { ProductSingle, Style } from "@/app/types/schema";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { alphabets } from "./alphabets";
 import useType from "./TypeContext";
 // import useType from "./typeContext";
@@ -11,6 +11,7 @@ type Props = {
 
 const Glyphs = ({ input }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [glyh, setGlyph] = useState<string>("");
   const { type } = useType();
 
   const glyphsList = [
@@ -42,7 +43,7 @@ const Glyphs = ({ input }: Props) => {
   const _getUnicode = (item: string) => {};
   return (
     <section
-      className='glyphs ee'
+      className='glyphs '
       // ref={ref}
       style={{
         fontFamily: type?.slug?.current,
@@ -55,38 +56,26 @@ const Glyphs = ({ input }: Props) => {
             <div className='grid '>
               {item.items &&
                 item.items.map((_item, j) => (
-                  <div className='item' key={j}>
+                  <div
+                    className='item'
+                    key={j}
+                    onMouseEnter={() => setGlyph(_item)}
+                    // onMouseLeave={() => setGlyph("")}
+                  >
+                    {/* <div className='pointer-events-none '> */}
                     <div className='glyph'>{_item}</div>
                     <div className='unicode'>{_item.codePointAt(0)}</div>
+                    {/* </div> */}
                   </div>
                 ))}
             </div>
           </div>
         ))}
-      {/* {input.typeface?.glyphs && input.typeface?.glyphs.length > 0 && (
-        <div className='mb-md'>
-          <h3 className='mb-sm'>Basic latin</h3>
-          <div className='grid '>
-            {input.typeface?.glyphs &&
-              input.typeface?.glyphs.map((item, i) => (
-                <div className='item' key={i}>
-                  <div className='glyph'>{item}</div>
-                  <div className='unicode'>{item.codePointAt(0)}</div>
-                </div>
-              ))}
-          </div>
+      {glyh && (
+        <div className='overview'>
+          <span>{glyh}</span>
         </div>
-      )} */}
-      {/* <div className='mb-md'>
-        <h3>Latin supplement</h3>
-        <div className='grid md:grid-cols-20'>
-          {latin_extended.map((item, i) => (
-            <div className='item' key={i}>
-              {item}
-            </div>
-          ))}
-        </div>
-      </div> */}
+      )}
     </section>
   );
 };

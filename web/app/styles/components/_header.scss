@@ -165,8 +165,12 @@ body[data-template="is-home"] {
   }
 }
 
+.snipcart-cart--opened,
 body.cart-opened {
-  .menu-item--cart button {
-    background-color: var(--color-gray);
+  .menu-item--cart {
+    z-index: 10 !important;
+    button {
+      background-color: var(--color-gray);
+    }
   }
 }

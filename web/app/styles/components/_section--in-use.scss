@@ -39,7 +39,7 @@
     img {
       height: calc(
         var(--vh) * 100 - calc(var(--header-height) + var(--footer-height)) -
-          1.2em
+          1.3em
       ) !important;
       width: auto !important;
     }
@@ -48,7 +48,8 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      padding: 0.1em 0 0;
+      padding: 0.05em 0 0;
+      padding: 0;
     }
   }
 }
