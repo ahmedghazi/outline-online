@@ -23,47 +23,25 @@
     // color: var(--color-primary);
     // box-shadow: unset;
   }
+
+  .snipcart-modal__container,
+  .snipcart-layout.snipcart-modal {
+    transform: none !important;
+  }
   .snipcart-modal__container {
     width: calc(var(--vw) * 100 - var(--space-lg) * 2);
     left: var(--space-lg);
     height: auto;
     min-height: unset;
     max-height: 100vh;
-  }
-  .snipcart-modal__container,
-  .snipcart-layout.snipcart-modal {
-    transform: none !important;
-  }
-  // @media (min-width: 768px) {
-  //   .snipcart-cart-summary--edit.snipcart-modal__container {
-  //     width: calc(100% / 3);
-  //   }
-  // }
-  // .snipcart-modal__container {
-  //   z-index: 251;
-  // }
-  // .snipcart-test-banner {
-  //   position: absolute;
-  // }
-  // .snipcart-cart-summary-side .snipcart-cart__secondary-header {
-  //   padding: 0px var(--space-md);
-  //   min-height: unset;
-  //   height: auto;
-  //   flex: 0;
-  //   border-bottom: var(--border);
-  // }
-  // .snipcart-layout__content--side {
-  //   border-left: var(--border) black;
-  // }
-
-  .snipcart-modal__container {
-    z-index: 100;
     padding-top: var(--header-height);
-    padding-bottom: var(--footer-height);
+    z-index: 100;
   }
+
   .snipcart-layout__content {
     width: 100%;
-    padding: 0 var(--space-lg);
+    padding: 0 var(--space-sm);
+    padding: 0;
   }
   .snipcart-cart-header {
     padding: 0 var(--space-md);
@@ -97,15 +75,16 @@
     // display: flex;
     border-top: var(--border);
     // padding-top: 0.5em;
-    padding-left: 25%;
-    &::before {
-      content: "Items";
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      padding-top: 0.5em;
-    }
+    // padding-left: 25%;
+    position: relative;
+    // &::before {
+    //   content: "Items";
+    //   display: block;
+    //   position: absolute;
+    //   left: 0;
+    //   top: 0;
+    //   padding-top: 0.5em;
+    // }
     & > div.root:not(:first-child) .snipcart-item-line {
       // min-width: 75%;
       border-top: var(--border);
@@ -296,15 +275,40 @@
     border-bottom-right-radius: 1em;
   }
 
-  .snipcart-summary-fees__item {
-    padding: 0.6em 0 0.4em;
-    color: var(--color-blue);
-    border-bottom: var(--border);
-    border-color: var(--color-blue);
+  .snipcart-cart__footer {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 101%;
+      height: 35.2px;
+      background-color: white;
+      bottom: 0;
+      z-index: 0;
+    }
+    .snipcart-summary-fees {
+      margin-bottom: var(--space-lg);
+      .snipcart-summary-fees__item {
+        padding: 0.6em 0 0.4em;
+        color: var(--color-blue);
+        border-bottom: var(--border);
+        border-color: var(--color-blue);
+      }
+    }
+    .snipcart-cart__footer-buttons {
+      display: flex;
+      flex-direction: column-reverse;
+
+      button {
+        margin-top: 0;
+        z-index: 1;
+        // transform: translateY(100%);
+      }
+      .snipcart-featured-payment-methods {
+        margin: 0;
+      }
+    }
   }
-  .snipcart-cart__footer-buttons button {
-    margin-top: var(--space-lg);
-  }
+
   /* -----------------
         Colors
     ----------------- */
