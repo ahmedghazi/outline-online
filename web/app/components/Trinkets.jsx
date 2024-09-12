@@ -6,22 +6,53 @@ import { Stage } from "@react-three/drei";
 import Trinket from "./Trinket";
 import { subscribe, unsubscribe } from "pubsub-js";
 
+const TrinketInfo = ({ infos }) => {
+  const ref = useRef();
+  const [transform, setTransform] = useState("");
+  useEffect(() => {
+    window.addEventListener("mousemove", _update);
+    return () => {
+      window.removeEventListener("mousemove", _update);
+    };
+  }, []);
+
+  const _update = (e) => {
+    console.log(e);
+    if (!ref) return;
+    const bounding = ref.current.getBoundingClientRect();
+    const offsetX = bounding.width / 2;
+    // const offset
+    const { clientX, clientY } = e;
+    const x = clientX - offsetX;
+    const y = clientY + 100;
+    setTransform(`translate(${x}px, ${y}px)`);
+  };
+  return (
+    <div
+      ref={ref}
+      className='infos'
+      style={{
+        transform: transform,
+      }}>
+      {infos}
+    </div>
+  );
+};
+
 const Trinkets = (props) => {
   const refParent = useRef();
   // const ref = useRef();
   const space = 3;
   const [ready, setReady] = useState(false);
-  const [infos, setInfos] = useState("infos");
+  const [infos, setInfos] = useState(null);
   const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
 
   useEffect(() => {
-    console.log(refParent);
+    // console.log(refParent);
     setWindowSize({ w: window.innerWidth, h: window.innerHeight });
     setReady(true);
 
     const token = subscribe("TRINKET_INFO", (e, d) => {
-      console.log(e);
-      console.log(d);
       setInfos(d);
     });
 
@@ -36,7 +67,7 @@ const Trinkets = (props) => {
   // }
 
   return (
-    <section className='tinkets' ref={refParent}>
+    <section className='section--trinkets' ref={refParent}>
       {ready && (
         <Canvas
           shadows
@@ -71,7 +102,7 @@ const Trinkets = (props) => {
           {/* <OrbitControls ref={ref} makeDefault={false} /> */}
         </Canvas>
       )}
-      {infos && <div className='infos'>{infos}</div>}
+      {infos !== "" && <TrinketInfo infos={infos} />}
     </section>
   );
 };

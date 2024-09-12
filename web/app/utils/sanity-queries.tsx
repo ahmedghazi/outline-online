@@ -109,6 +109,7 @@ export const homeQuery = groq`*[_type == "home"][0]{
       }
     },
     link->{
+      title,
       _type,
       slug
     }

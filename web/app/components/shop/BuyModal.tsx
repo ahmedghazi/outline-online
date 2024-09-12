@@ -184,7 +184,7 @@ const BuyModal = ({ productsCart }: Props) => {
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("is-product", active);
+    document.body.classList.toggle("is-product--open", active);
   }, [active]);
 
   const _setDefaultLicenses = () => {
@@ -196,19 +196,19 @@ const BuyModal = ({ productsCart }: Props) => {
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
     const items = licenseTypeProfil?.filter((el) => el.label === val.label);
     // console.log(licenseTypeProfil);
-    console.log(items);
+    // console.log(items);
     // if (checked) console.log(checked, val, items);
     if (checked) {
       //no dubplicate
       if (items?.length === 0) {
-        console.log(items?.length === 0);
-        console.log("+++++ add", val);
+        // console.log(items?.length === 0);
+        // console.log("+++++ add", val);
         setLicenseTypeProfil({ type: "ADD", payload: val });
       }
     } else {
       if (items && items.length > 0) {
         //remove
-        console.log("----- remove", val);
+        // console.log("----- remove", val);
         setLicenseTypeProfil({ type: "REMOVE", payload: val });
       }
     }

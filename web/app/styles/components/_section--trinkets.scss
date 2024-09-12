@@ -1,0 +1,13 @@
+.section--trinkets {
+  // background-color: red;
+  position: relative;
+  .infos {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    // background-color: var(--color-gray);
+    padding: 0 1em;
+    pointer-events: none;
+    will-change: transform;
+  }
+}

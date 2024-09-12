@@ -11,18 +11,6 @@ body[data-template="is-home"],
     scroll-snap-align: start;
     min-height: 100vh;
     position: relative;
-    &.section--typefaces {
-      // padding-top: calc(var(--header-height) * 2);
-    }
-  }
-  .tinkets {
-    .infos {
-      position: absolute;
-      bottom: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: red;
-    }
   }
 }
 

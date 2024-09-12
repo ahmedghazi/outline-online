@@ -113,6 +113,12 @@ body.is-product header #nav-primary ul .menu-item--buy .btn--buy {
     color: var(--color-blue) !important;
   }
 }
+body.is-product--open header #nav-primary ul .menu-item--buy .btn--buy {
+  background-color: var(--color-gray) !important;
+  &:hover {
+    background-color: var(--color-gray) !important;
+  }
+}
 
 body[data-template="is-home"] {
   &.has-scrolled {

@@ -17,6 +17,7 @@ const Trinket = (props) => {
   const { scene } = useGLTF(props.input.file.asset.url);
   const groupRef = useRef();
   const router = useRouter();
+  const [isHover, setIsHover] = useState(false);
 
   const [position, setPosition] = useState(props.position);
   // const { size, viewport } = useThree();
@@ -32,18 +33,21 @@ const Trinket = (props) => {
   };
   // console.log(props.parent);
   useFrame(() => {
+    if (isHover) return;
     groupRef.current.rotation.x += 0.001;
     groupRef.current.rotation.y += 0.001;
     groupRef.current.rotation.z += 0.0005;
   });
 
   const _onPointerOver = () => {
-    console.log(props);
-    // publish("TRINKET_INFO", props.link.label);
-    publish("TRINKET_INFO", "here is the infos");
+    // console.log(props.input.link);
+    setIsHover(true);
+    publish("TRINKET_INFO", props.input.link.title);
+    // publish("TRINKET_INFO", "here is the infos");
   };
   const _onPointerOut = () => {
-    // publish("TRINKET_INFO", "");
+    setIsHover(false);
+    publish("TRINKET_INFO", "");
   };
 
   return (
