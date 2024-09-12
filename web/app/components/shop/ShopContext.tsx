@@ -283,6 +283,25 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
       Snipcart.events.on("cart.confirm.error", (confirmError: any) => {
         console.log(confirmError);
       });
+      // Snipcart.events.on("cart.opened", function () {
+      //   console.log("Snipcart popup is visible");
+      //   document.body.classList.add("cart-opened");
+      // });
+      // Snipcart.events.on("cart.closed", function () {
+      //   console.log("Snipcart popup has been closed");
+      //   document.body.classList.remove("cart-opened");
+      // });
+      Snipcart.events.on("theme.routechanged", (routesChange: any) => {
+        if (routesChange.from === "/" && routesChange.to !== "/") {
+          console.log("cart opened");
+          document.body.classList.add("cart-opened");
+        }
+
+        if (routesChange.from !== "/" && routesChange.to === "/") {
+          console.log("cart closed");
+          document.body.classList.remove("cart-opened");
+        }
+      });
     };
     // listen store update
     const unsubscribe = Snipcart.store.subscribe(listenSnipcart);

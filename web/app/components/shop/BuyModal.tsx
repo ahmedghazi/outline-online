@@ -211,7 +211,6 @@ const BuyModal = ({ productsCart }: Props) => {
   };
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
-      {/* <pre>{JSON.stringify(productsCart, null, 2)}</pre> */}
       <div className='outter'>
         <div className='inner'>
           <div className='header'>
@@ -267,6 +266,7 @@ const BuyModal = ({ productsCart }: Props) => {
           </div>
         </div>
       </div>
+      <pre>{JSON.stringify(products, null, 2)}</pre>
     </div>
   );
 };

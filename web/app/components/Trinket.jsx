@@ -13,54 +13,34 @@ import { useDrag } from "react-use-gesture";
 const state = proxy({ current: null, mode: 0 });
 
 const Trinket = (props) => {
-  // const gltf = useLoader(GLTFLoader, props.input.file.asset.url);
-  // const scene = gltf.scene
   const { scene } = useGLTF(props.input.file.asset.url);
   const groupRef = useRef();
-  // const router = useRouter();
+  const router = useRouter();
 
-  // const [position, setPosition] = useState([_randomNum(3), _randomNum(3), 0]);
-  // const [position, setPosition] = useState([
-  //   props.position[0],
-  //   props.position[1],
-  //   0,
-  // ]);
-  // const [position, setPosition] = useState([0, 0, 0]);
   const [position, setPosition] = useState(props.position);
-  const { size, viewport } = useThree();
+  // const { size, viewport } = useThree();
   // console.log(size, viewport);
-  const aspect = size.width / viewport.width;
-  // Subscribe this component to the render-loop, rotate the mesh every frame
 
-  // useFrame(() => {
-  //   groupRef.current.rotation.x += 0.0005;
-  //   groupRef.current.rotation.y += 0.001;
-  // });
-
-  // Return view, these are regular three.js elements expressed in JSX
-  // console.log(props);
-  const bind = useDrag(
-    ({ offset: [x, y] }) => {
-      console.log(x, position, aspect);
-      // console.log(aspect);
-      const [, , z] = position;
-      // setPosition([x / aspect, -y / aspect, z]);
-      // setPosition([x / 20, -y / 20, z]);
-    },
-    { pointerEvents: true }
-  );
   // console.log(position);
   const _onClick = (e) => {
     e.stopPropagation();
     // console.log(props.input);
     if (props.input.link) {
-      // router.push(_linkResolver(props.input.link), { scroll: false });
+      router.push(_linkResolver(props.input.link), { scroll: false });
     }
   };
+  // console.log(props.parent);
   return (
     <>
       <Float speed={1} rotationIntensity={1} floatIntensity={1.3}>
-        <DragControls>
+        <DragControls
+          dragConfig={{
+            dragLimits: [
+              [0, props.windowSize.w],
+              [0, props.windowSize.h],
+              [0, 0],
+            ],
+          }}>
           <group
             ref={groupRef}
             position={position}

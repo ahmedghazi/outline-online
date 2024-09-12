@@ -164,3 +164,9 @@ body[data-template="is-home"] {
     }
   }
 }
+
+body.cart-opened {
+  .menu-item--cart button {
+    background-color: var(--color-gray);
+  }
+}

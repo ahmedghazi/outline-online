@@ -90,8 +90,11 @@ const AddToCart = (props: Props) => {
     dataAttributes[`data-item-custom${index}-shippable`] = "false";
     licenseSizeProfil.licenseType.forEach((item, i) => {
       index = i + 1;
+      const name = item.label
+        ? item.label.replace(" ", "-").toLowerCase()
+        : "no-label";
       dataAttributes[`data-item-custom${index}-placeholder`] = "Licence";
-      dataAttributes[`data-item-custom${index}-name`] = item.label;
+      dataAttributes[`data-item-custom${index}-name`] = name;
       dataAttributes[`data-item-custom${index}-type`] = "checkbox";
       // dataAttributes[`data-item-custom${index}-required`] = "true";
       dataAttributes[`data-item-custom${index}-shippable`] = "false";
@@ -111,10 +114,10 @@ const AddToCart = (props: Props) => {
           dataAttributes[`data-item-custom${index}-value`] = "false";
         }
       }
-      // console.log(dataAttributes);
+      // console.log(exist);
 
       data.push({
-        name: item.label,
+        name: name,
         // required: true,
         type: "checkbox",
         options: `true[+${item.price}]|false`,

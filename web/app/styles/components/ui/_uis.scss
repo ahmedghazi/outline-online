@@ -188,6 +188,7 @@
     border: none;
     box-shadow: none;
     background-color: transparent;
+    background-color: red;
   }
   &:checked + label::after {
     content: "";
