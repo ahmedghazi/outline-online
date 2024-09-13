@@ -143,15 +143,6 @@ const SectionTypeFaces = ({ input }: Props) => {
             )}
           </div>
         ))}
-        {input.map((item, i) => (
-          <div key={i} className='item'>
-            {item && item.singles && item.singles.length > 0 && (
-              <TypeContextProvider>
-                <Item input={item} defaultStyle={item.singles[0].typeface} />
-              </TypeContextProvider>
-            )}
-          </div>
-        ))}
       </div>
     </section>
   );

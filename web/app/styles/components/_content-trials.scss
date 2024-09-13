@@ -6,6 +6,13 @@
       gap: 0.4em;
     }
   }
+  .item {
+    .checkbox-ui {
+      .label {
+        opacity: 0;
+      }
+    }
+  }
   .footer {
     text-align: right;
     &.has-trials {
