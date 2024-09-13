@@ -41,6 +41,10 @@
         transform: rotate(45deg);
       }
     }
+    &:last-child .group:last-child {
+      // background-color: red;
+      border-bottom: none;
+    }
     .summary {
       color: var(--color-gray-100);
     }
