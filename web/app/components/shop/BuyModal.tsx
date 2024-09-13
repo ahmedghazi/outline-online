@@ -67,14 +67,14 @@ const CartProduct = ({ input }: CartProductProps) => {
             <h2>{input.title}</h2>
           </div>
 
-          <div className='md:col-span-5'>
+          {/* <div className='md:col-span-5'>
             <div className='grid md:grid-cols-5 gap-sm-'>
               <div className='label !py-0'>metadata</div>
               {input.metadata?.map((item, i) => (
                 <div key={i}>{item}</div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
