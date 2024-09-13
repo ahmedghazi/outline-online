@@ -22,6 +22,10 @@ export default defineField({
       description: 'Image Fallback',
     }),
     defineField({
+      name: 'metadata',
+      type: 'text',
+    }),
+    defineField({
       name: 'link',
       type: 'reference',
       weak: true,

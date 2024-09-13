@@ -1175,6 +1175,13 @@ export type Trinket = {
   };
 
   /**
+   * metadata — `text`
+   *
+   *
+   */
+  metadata?: string;
+
+  /**
    * link — `reference`
    *
    *

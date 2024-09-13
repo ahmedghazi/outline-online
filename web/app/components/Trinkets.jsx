@@ -1,10 +1,15 @@
 "use client";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { Fragment, Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Stage } from "@react-three/drei";
-// import { PerspectiveCamera } from "three";
+import { Bounds, Center, Stage, Text3D } from "@react-three/drei";
+import { PerspectiveCamera } from "three";
 import Trinket from "./Trinket";
+import TrinketTest from "./TrinketTest";
+
 import { subscribe, unsubscribe } from "pubsub-js";
+import { _shuffle } from "../utils/utils";
+
+//https://gltf.pmnd.rs/
 
 const TrinketInfo = ({ infos }) => {
   const ref = useRef();
@@ -42,7 +47,7 @@ const TrinketInfo = ({ infos }) => {
 const Trinkets = (props) => {
   const refParent = useRef();
   // const ref = useRef();
-  const space = 3;
+  const space = 10;
   const [ready, setReady] = useState(false);
   const [infos, setInfos] = useState(null);
   const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
@@ -61,45 +66,47 @@ const Trinkets = (props) => {
     };
   }, []);
 
-  // function CameraHelper() {
-  //   const camera = new PerspectiveCamera(60, 1, 1, 3);
-  //   return <cameraHelper args={[camera]} />;
-  // }
-
+  function CameraHelper() {
+    const camera = new PerspectiveCamera(60, 1, 1, 3);
+    return <cameraHelper args={[camera]} />;
+  }
+  // const items = [props.input[1], props.input[2]];
+  // const _shuffledItems = _shuffle(items);
   return (
-    <section className='section--trinkets' ref={refParent}>
+    <section className='section--trinkets h-screen' ref={refParent}>
       {ready && (
-        <Canvas
-          shadows
-          camera={{ fov: 60, near: 1, far: 1000 }}
-          style={{
-            // width: "calc(var(--vw) * 100)",
-            height: "calc(var(--vh) * 100)",
-          }}>
-          <ambientLight />
-          <pointLight position={[5, 5, 5]} intensity={3} />
-          <Suspense fallback={null}>
-            <Stage
-              preset='rembrandt'
-              intensity={1}
-              shadows={false}
-              environment='city'>
-              {refParent &&
-                props.input.map((item, i) => (
-                  <Trinket
-                    key={i}
-                    input={item}
-                    name={i + 10}
-                    position={[Math.random() * space, Math.random() * space, 0]}
-                    windowSize={windowSize}
-                    // scale={1}
-                  />
-                ))}
-            </Stage>
-          </Suspense>
-          {/* <CameraHelper /> */}
-          {/* <Controls /> */}
-          {/* <OrbitControls ref={ref} makeDefault={false} /> */}
+        <Canvas camera={{ zoom: 1 }}>
+          {/* <ambientLight /> */}
+          {/* <pointLight position={[5, 5, 5]} intensity={3} /> */}
+          {/* <Suspense fallback={null}>
+            <Stage preset='rembrandt' intensity={1} environment='city'> */}
+          {/* <Bounds fit observe margin={4}> */}
+
+          {/* {props.input.map((item, i) => (
+            <TrinketTest
+              key={i}
+              input={item}
+              name={i + 10}
+              initialPosition={[
+                Math.random() * space,
+                (Math.random() * space) / 2,
+                0,
+              ]}
+            />
+          ))} */}
+          <Stage preset='rembrandt' intensity={1} environment='city'>
+            <Suspense fallback={null}>
+              <TrinketTest input={props.input[0]} position={[0, 0, 0]} />
+              <TrinketTest input={props.input[1]} position={[3, 0, 0]} />
+              <TrinketTest input={props.input[2]} position={[-3, 0, 0]} />
+            </Suspense>
+          </Stage>
+
+          {/* </Bounds> */}
+          {/* </Stage>
+          </Suspense> */}
+          <CameraHelper />
+          <axesHelper args={[5]} />
         </Canvas>
       )}
       {infos !== "" && <TrinketInfo infos={infos} />}

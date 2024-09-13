@@ -92,3 +92,10 @@ export function _removeFromArr(arr: Array<any>, ...toRemove: Array<any> | any) {
   });
   return arr;
 }
+
+export const _shuffle = (array: any[]) => {
+  return array
+    .map((a) => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((a) => a.value);
+};
