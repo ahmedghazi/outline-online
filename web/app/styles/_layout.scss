@@ -51,7 +51,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   padding: var(--space-md) var(--space-sm);
+  padding: 16px var(--space-sm);
   span {
     width: 20px;
     height: 1px;
