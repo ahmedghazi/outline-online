@@ -1,7 +1,10 @@
 .buy-modal {
   position: fixed;
   z-index: 1;
-  inset: 0;
+  // inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   padding: var(--header-height) 0;
   .outter {
     padding: 0 var(--space-lg);
@@ -9,14 +12,17 @@
     max-height: calc(var(--vh) * 100 - var(--header-height) * 2);
     overflow-y: auto;
     .inner {
-      background-color: var(--color-gray);
       height: 100%;
-      // padding-top: var(--space-sm);
-      padding: var(--space-sm);
+      // padding: var(--space-sm);
     }
   }
+  .header,
+  .body {
+    padding: 0 var(--space-sm);
+    background-color: var(--color-gray);
+  }
   .header {
-    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-md);
   }
   .body {
   }
@@ -28,9 +34,15 @@
       & > ._row {
         border: none;
       }
+      .summary {
+        color: black;
+      }
       .btn-toggle {
         transform: rotate(45deg);
       }
+    }
+    .summary {
+      color: var(--color-gray-100);
     }
     .btn-toggle {
       transition: transform 0.2s;
@@ -55,7 +67,15 @@
   .label {
     padding: 0.5em 0;
   }
-
+  .price {
+    justify-content: end;
+    min-width: 5em;
+  }
+  .footer {
+    border-bottom-right-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+    overflow: hidden;
+  }
   .atc-all {
     display: block;
     width: 100%;

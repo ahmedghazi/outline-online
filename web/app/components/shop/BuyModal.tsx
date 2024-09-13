@@ -49,7 +49,7 @@ const CartProduct = ({ input }: CartProductProps) => {
       <div className='_row py-05e'>
         <div className='grid md:grid-cols-8'>
           <div
-            className={clsx("flex gap-sm col-span-2 cursor-pointer")}
+            className={clsx("flex gap-sm col-span-2 cursor-pointer summary")}
             onClick={() => setActive(!active)}>
             <button className='btn-toggle'>
               <svg
@@ -81,7 +81,7 @@ const CartProduct = ({ input }: CartProductProps) => {
       <div className={clsx("detail", active ? "block" : "hidden")}>
         <div className='group'>
           <div className='grid md:grid-cols-8'>
-            <div className='label text-muted- col-span-2'>Bundles</div>
+            <div className='label text-gray-100 col-span-2'>Bundles</div>
             <div className='items col-span-6'>
               {input.bundles?.map((item, i) => (
                 <div className='item _row grid md:grid-cols-6' key={i}>
@@ -116,7 +116,7 @@ const CartProduct = ({ input }: CartProductProps) => {
         </div>
         <div className='group'>
           <div className='grid md:grid-cols-8'>
-            <div className='label text-muted- col-span-2'>Single Styles</div>
+            <div className='label text-gray-100 col-span-2'>Single Styles</div>
             <div className='items col-span-6'>
               {input.singles?.map((item, i) => (
                 <div className='item _row grid md:grid-cols-6' key={i}>
@@ -301,7 +301,7 @@ const BuyModal = ({ productsCart }: Props) => {
           </div>
         </div>
       </div>
-      <pre>{JSON.stringify(products, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
     </div>
   );
 };
