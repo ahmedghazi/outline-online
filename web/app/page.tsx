@@ -1,6 +1,6 @@
 import { draftMode } from "next/headers";
 import Tester from "./components/typeface/TypeTester";
-import data from "./data.json";
+// import data from "./data.json";
 import { Home } from "./types/schema";
 import { getClient } from "./utils/sanity-client";
 import { getHome, homeQuery } from "./utils/sanity-queries";
