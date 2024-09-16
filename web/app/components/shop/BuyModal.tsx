@@ -255,7 +255,7 @@ const BuyModal = ({ productsCart }: Props) => {
                   <Select
                     options={licenses}
                     onChange={(val: string) => setLicenseSizeProfil(val)}
-                    disabled={hasProducts && hasLicenseType ? true : false}
+                    // disabled={hasProducts && hasLicenseType ? true : false}
                   />
                 </div>
                 {/* <div></div> */}
