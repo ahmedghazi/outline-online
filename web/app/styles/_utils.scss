@@ -133,6 +133,9 @@ ul.list-with-comma {
   .md\:grid-cols-16 {
     grid-template-columns: repeat(16, minmax(0, 1fr));
   }
+  .md\:col-span-15 {
+    grid-column: span 15 / span 15;
+  }
   .md\:col-span-6 {
     grid-column: span 6 / span 6;
   }

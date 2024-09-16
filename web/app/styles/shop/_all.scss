@@ -44,7 +44,7 @@
     padding: 0;
   }
   .snipcart-cart-header {
-    padding: 0 var(--space-md);
+    padding: 0 var(--space-sm);
     width: 100%;
     .snipcart-cart-header__close-button.snipcart-modal__close {
       span,
@@ -68,6 +68,7 @@
     width: 100%;
     padding: 0.5em 0;
     padding: 0em 0;
+    margin-top: toRem(70);
   }
   .snipcart-item-list {
     border-bottom: var(--border);
@@ -103,16 +104,22 @@
         // flex-direction: column;
 
         display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-columns: repeat(15, minmax(0, 1fr));
         .snipcart-item-line__header,
         .snipcart-item-line__price {
           // width: 50%;
         }
         .snipcart-item-line__header {
           align-items: unset;
-          grid-column: span 2 / span 2;
+          grid-column: span 3 / span 3;
 
           // order: 1;
+          display: flex;
+          justify-content: start;
+          gap: 0.5em;
+          button {
+            transform: translateY(-0.2em);
+          }
           .snipcart-item-line__info {
             display: none;
           }
@@ -120,6 +127,9 @@
         .snipcart-item-line__price {
           // order: 2;
           // grid-column: span 1 / span 1;
+          position: absolute;
+          right: 0;
+          top: -0.25em;
           .flex {
             justify-content: flex-end;
           }
@@ -132,7 +142,7 @@
           // border-top: var(--border);
           // padding-top: 0.5em;
           // order: 3;
-          grid-column: span 3 / span 3;
+          grid-column: span 12 / span 12;
           .snipcart-item-line__body {
             .snipcart-item-custom-fields--readonly {
               display: flex;
@@ -140,7 +150,8 @@
               gap: var(--space-md);
               padding: 0;
               margin: 0;
-
+              padding-bottom: 0.5em;
+              border-bottom: var(--border);
               label {
                 padding: 0;
                 margin: 0;
@@ -250,6 +261,17 @@
   .snipcart-flash-message--error {
     color: white;
   }
+  .snipcart-featured-payment-methods {
+    padding: 0;
+    justify-content: end;
+    .snipcart-featured-payment-methods__title {
+      position: static;
+    }
+    .snipcart-featured-payment-methods__list-item {
+      padding: 0;
+      min-height: 1em;
+    }
+  }
   .snipcart-featured-payment-methods__title {
     top: 0;
   }
@@ -263,6 +285,7 @@
   .snipcart-item-list .snipcart-item-line__header button::after {
     content: "×";
     line-height: 50%;
+    font-size: 1.5em;
   }
   .outline {
     border: none;
@@ -286,12 +309,45 @@
       z-index: 0;
     }
     .snipcart-summary-fees {
-      margin-bottom: var(--space-lg);
+      grid-column: span 15 / span 15;
+      margin-bottom: 0;
       .snipcart-summary-fees__item {
         padding: 0.6em 0 0.4em;
-        color: var(--color-blue);
         border-bottom: var(--border);
         border-color: var(--color-blue);
+        margin: 0;
+
+        &.snipcart-summary-fees__total {
+          color: var(--color-blue);
+
+          .snipcart-summary-fees__title {
+            color: var(--color-blue);
+          }
+        }
+      }
+    }
+    .snipcart-featured-payment-methods {
+      margin: 0;
+      margin-bottom: toRem(50);
+      padding: 0.5em;
+      align-items: baseline;
+      .snipcart-featured-payment-methods__title {
+        position: relative;
+        &,
+        * {
+          font-size: 10px !important;
+        }
+        svg {
+          height: 10px;
+          width: auto;
+          // transform: translateY(-1px);
+          position: absolute;
+          left: 0;
+          top: -2px;
+        }
+      }
+      svg {
+        height: 12px;
       }
     }
     .snipcart-cart__footer-buttons {
@@ -302,9 +358,6 @@
         margin-top: 0;
         z-index: 1;
         // transform: translateY(100%);
-      }
-      .snipcart-featured-payment-methods {
-        margin: 0;
       }
     }
   }

@@ -13,10 +13,10 @@
 
         <section class="snipcart-cart__content">
           <div class="px-sm ">
-            <div class="grid md:grid-cols-8 b-t b-b">
-              <div class="title md:col-span-2 py-05e">Items:</div>
+            <div class="grid md:grid-cols-16 b-t b-b">
+              <div class="title py-05e">Items:</div>
 
-              <item-list item-template="item-line" class="snipcart-item-list--no-shadow md:col-span-6"
+              <item-list item-template="item-line" class="snipcart-item-list--no-shadow md:col-span-15"
                 :show-description="!isSideCart">
                 <template v-slot:footer v-if="isSideCart && hasActiveDiscountsTriggerableByCode">
                   <li class="snipcart-item-line snipcart-item-line--cart-edit">
@@ -36,9 +36,12 @@
 
             <div class="snipcart-cart__footer-col">
               <div class="px-sm">
-                <summary-fees class="snipcart-cart-summary-fees--reverse" :summary-data="summaryFeesProvider">
-                  {{ $localize('cart.shipping_taxes_calculated_at_checkout')}}
-                </summary-fees>
+                <div class="grid md:grid-cols-16 b-t b-b">
+                  <div class="title py-05e">TOTAL</div>
+                  <summary-fees class="snipcart-cart-summary-fees--reverse" :summary-data="summaryFeesProvider">
+                    {{ $localize('cart.shipping_taxes_calculated_at_checkout')}}
+                  </summary-fees>
+                </div>
               </div>
 
               <footer v-if="!editingCart || isSideCart" class="snipcart-cart__footer-buttons">
@@ -76,7 +79,6 @@
                 <figure class="snipcart-item-line__media snipcart-item-line__media--small" v-if="showSmallImage">
                   <item-image class="snipcart-item-line__image"></item-image>
                 </figure>
-
                 <div class="product-title">
                   <h2
                     class="snipcart-item-line__title snipcart__font--xlarge snipcart__font--secondary snipcart__font--black">
@@ -86,6 +88,7 @@
                     <item-description v-if="showDescription"></item-description>
                   </div>
                 </div>
+                <button-icon icon="cross" label="item.remove_item" styling="danger" @click="removeItem"></button-icon>
 
               </div>
 
@@ -99,7 +102,7 @@
               </div>
               <div class="snipcart-item-line__price">
                 <div class="flex flex-row-reverse gap-sm">
-                  <button-icon icon="cross" label="item.remove_item" styling="danger" @click="removeItem"></button-icon>
+
                   <item-price :item="item" :selected-plan="selectedPlan" class="snipcart__font--xlarge">
                   </item-price>
                 </div>
@@ -112,40 +115,40 @@
   </div>
   </item-line>
 
-  <!-- <cart-summary>
-      <div class="root">
+  <cart-summary>
+    <div class="root">
 
-        <div class="snipcart-cart-summary">
-          <section class="snipcart-cart-summary__content">
-            <div class="snipcart-cart-summary__actions snipcart__box--header">
-              <h1 class="snipcart-cart-summary__title snipcart__font--subtitle">{{ $localize('cart.summary') }}</h1>
-              <button type="button" class="outline ml-sm" onclick="history.back()">Edit</button>
-            </div>
+      <div class="snipcart-cart-summary">
+        <section class="snipcart-cart-summary__content">
+          <div class="snipcart-cart-summary__actions snipcart__box--header">
+            <h1 class="snipcart-cart-summary__title snipcart__font--subtitle">{{ $localize('cart.summary') }}</h1>
+            <button type="button" class="outline ml-sm" onclick="history.back()">Edit</button>
+          </div>
 
-            <div class="snipcart-summary-item-list-custom">
+          <!-- <div class="snipcart-summary-item-list-custom">
               <div class="snipcart-summary-item-name">Fonts</div>
               <div class="snipcart-summary-item-license">Licenses</div>
               <div class="snipcart-summary-item-company-size">Company size</div>
               <div class="snipcart-summary-item-price"></div>
+            </div> -->
+
+          <overridable name="cart-summary" section="items">
+            <item-list item-template="cart-summary-expanded-item"></item-list>
+          </overridable>
+
+          <hr class="snipcart-cart-summary__separator" />
+
+          <loading-overlay>
+            <div class="snipcart-cart-summary__totals">
+              <summary-fees :summary-data="summaryFeesProvider"></summary-fees>
             </div>
-
-            <overridable name="cart-summary" section="items">
-              <item-list item-template="cart-summary-expanded-item"></item-list>
-            </overridable>
-
-            <hr class="snipcart-cart-summary__separator" />
-
-            <loading-overlay>
-              <div class="snipcart-cart-summary__totals">
-                <summary-fees :summary-data="summaryFeesProvider"></summary-fees>
-              </div>
-            </loading-overlay>
-          </section>
-
-        </div>
+          </loading-overlay>
+        </section>
 
       </div>
-    </cart-summary> -->
+
+    </div>
+  </cart-summary>
 
   <cart-summary-expanded-item>
     <div class="root">
