@@ -1,13 +1,27 @@
 "use client";
-import React, { Fragment, Suspense, useEffect, useRef, useState } from "react";
+import React, {
+  Fragment,
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Canvas } from "@react-three/fiber";
-import { Bounds, Center, Stage, Text3D } from "@react-three/drei";
+import {
+  Bounds,
+  Center,
+  Stage,
+  OrbitControls,
+  TransformControls,
+} from "@react-three/drei";
 import { PerspectiveCamera } from "three";
 import Trinket from "./Trinket";
 import TrinketTest from "./TrinketTest";
 
 import { subscribe, unsubscribe } from "pubsub-js";
-import { _shuffle } from "../utils/utils";
+import { _shuffle, _randomNum } from "../utils/utils";
+// import { metadata } from "../layout";
 
 //https://gltf.pmnd.rs/
 
@@ -47,7 +61,7 @@ const TrinketInfo = ({ infos }) => {
 const Trinkets = (props) => {
   const refParent = useRef();
   // const ref = useRef();
-  const space = 10;
+
   const [ready, setReady] = useState(false);
   const [infos, setInfos] = useState(null);
   const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
@@ -70,43 +84,50 @@ const Trinkets = (props) => {
     const camera = new PerspectiveCamera(60, 1, 1, 3);
     return <cameraHelper args={[camera]} />;
   }
-  // const items = [props.input[1], props.input[2]];
-  // const _shuffledItems = _shuffle(items);
+
+  const distance = 5;
+  const files = [
+    // "/three/Scene.glb",
+    "/three/LUPA.glb",
+    "/three/KEYCHAIN.glb",
+    "/three/KEYCARD.glb",
+    "/three/ATHERN.glb",
+  ];
+  const items = useMemo(() => {
+    return files.map((item, i) => {
+      return {
+        file: files[i],
+        position: [_randomNum(distance) * 2, _randomNum(distance), 2],
+        metadata: props.input[i].metadata,
+        // metadata: "infos",
+      };
+    });
+  }, []);
+
   return (
     <section className='section--trinkets h-screen' ref={refParent}>
       {ready && (
-        <Canvas camera={{ zoom: 1 }}>
-          {/* <ambientLight /> */}
-          {/* <pointLight position={[5, 5, 5]} intensity={3} /> */}
-          {/* <Suspense fallback={null}>
-            <Stage preset='rembrandt' intensity={1} environment='city'> */}
-          {/* <Bounds fit observe margin={4}> */}
-
-          {/* {props.input.map((item, i) => (
-            <TrinketTest
-              key={i}
-              input={item}
-              name={i + 10}
-              initialPosition={[
-                Math.random() * space,
-                (Math.random() * space) / 2,
-                0,
-              ]}
-            />
-          ))} */}
+        <Canvas orthographic camera={{ zoom: 0 }}>
           <Stage preset='rembrandt' intensity={1} environment='city'>
-            <Suspense fallback={null}>
-              <TrinketTest input={props.input[0]} position={[0, 0, 0]} />
-              <TrinketTest input={props.input[1]} position={[3, 0, 0]} />
-              <TrinketTest input={props.input[2]} position={[-3, 0, 0]} />
-            </Suspense>
+            <Bounds fit observe margin={4}>
+              <Suspense fallback={null}>
+                {items.map((item, i) => (
+                  <group key={i}>
+                    <Trinket
+                      key={i}
+                      file={item.file}
+                      initialPosition={item.position}
+                      metadata={item.metadata}
+                    />
+                  </group>
+                ))}
+              </Suspense>
+            </Bounds>
           </Stage>
 
-          {/* </Bounds> */}
-          {/* </Stage>
-          </Suspense> */}
-          <CameraHelper />
-          <axesHelper args={[5]} />
+          {/* <CameraHelper /> */}
+          {/* <axesHelper args={[5]} /> */}
+          {/* <OrbitControls onChange={(e) => console.log(e)} /> */}
         </Canvas>
       )}
       {infos !== "" && <TrinketInfo infos={infos} />}
@@ -114,3 +135,4 @@ const Trinkets = (props) => {
   );
 };
 export default Trinkets;
+//position={[1, 2, 3]} rotation={[Math.PI / 2, 0, 0]
