@@ -26,7 +26,7 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   }, [open]);
 
   return (
-    <Draggable>
+    <Draggable nodeRef={ref}>
       <dialog
         ref={ref}
         // onCancel={closeModal}

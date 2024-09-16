@@ -1,6 +1,7 @@
 import React from "react";
 import { Settings } from "../types/schema";
 import CookieWrapper from "./ui/CookieWrapper";
+import MailchimpDialog from "./ui/MailchimpDialog";
 
 type Props = {
   settings: Settings;
@@ -22,7 +23,25 @@ const Footer = ({ settings }: Props) => {
                 )}
               </li>
             ))}
-          <li>Newsletter</li>
+          <li>
+            <MailchimpDialog
+              action='https://outline-online.us14.list-manage.com/subscribe/post?u=deed79621dad3f2cd97ac8f9e&amp;id=669ce7f7f2&amp;f_id=009fc2e1f0'
+              fields={[
+                {
+                  name: "EMAIL",
+                  placeholder: "E-mail",
+                  type: "email",
+                  required: true,
+                },
+                {
+                  name: "NAME",
+                  placeholder: "Name",
+                  type: "text",
+                  required: true,
+                },
+              ]}
+            />
+          </li>
           <li>©{new Date().getFullYear()} Copyright</li>
         </ul>
       </nav>
