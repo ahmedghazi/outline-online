@@ -290,14 +290,17 @@ const BuyModal = ({ productsCart }: Props) => {
           </div>
           <div className='footer'>
             {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
-            {products.length > 0 && (
-              <button onClick={_addToCart} className='atc-all bg-green block'>
-                {buttonStatus}{" "}
+            {/* {products.length > 0 && ( */}
+            <button onClick={_addToCart} className='atc-all bg-green block'>
+              {buttonStatus}{" "}
+              {products.length > 0 && (
                 <span className='length'>
-                  {products.length} product{products.length > 1 && "s"}
+                  <span>{products.length}</span>
+                  <span>product{products.length > 1 && "s"}</span>
                 </span>
-              </button>
-            )}
+              )}
+            </button>
+            {/* )} */}
           </div>
         </div>
       </div>
