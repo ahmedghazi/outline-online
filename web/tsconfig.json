@@ -27,9 +27,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/components/Test3d.jsx",
+    "app/components/trinkets/Test3d.jsx",
     "app/components/Obj3dsAll.jsx",
-    "app/components/TrinketsFromGPT.jsx"
+    "app/components/trinkets/TrinketsFromGPT.jsx"
   ],
   "exclude": ["node_modules"]
 }

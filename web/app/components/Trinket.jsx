@@ -31,13 +31,14 @@ const Trinket = ({ file, initialPosition, metadata }) => {
   }, []);
 
   // console.log(primitiveRef.current);
-  useFrame(() => {
+  useFrame((state) => {
     if (isHover) return;
     if (!group.current) return;
     // return;
     // console.log(primitiveRef.current);
     // primitiveRef.current.rotation.x += randRotations.x;
     // group.current.rotation.y += randRotations.y;
+    // const t = state.clock.getElapsedTime();
     primitiveRef.current.rotation.x += randRotations.x;
     primitiveRef.current.rotation.y += 0.00001;
   });

@@ -10,10 +10,10 @@ import {
 } from "@react-three/fiber";
 import { DragControls, OrbitControls, useGLTF } from "@react-three/drei";
 import { useDrag } from "react-use-gesture";
-import { _randomNum } from "../utils/utils";
+import { _randomNum } from "../../utils/utils";
 // import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import Trinket from "./Trinket";
+import Trinket from "../Trinket";
 
 // function Model(props) {
 //   const gltf = useGLTF(props.path);

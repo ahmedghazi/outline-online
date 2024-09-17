@@ -26,7 +26,7 @@ const SectionInUse = ({ input }: Props) => {
               className='thumbnail'
               key={i}
               onMouseEnter={() => setImage(item)}>
-              <FigureUI asset={item.image?.asset} width={200} />
+              <FigureUI asset={item.image?.asset} width={100} />
             </div>
           ))}
         </div>

@@ -6,7 +6,7 @@ import { getClient } from "./utils/sanity-client";
 import { getHome, homeQuery } from "./utils/sanity-queries";
 import Modules from "./components/modules";
 import ContentHome from "./components/ContentHome";
-import Test3d from "./components/Test3d";
+import Test3d from "./components/trinkets/Test3d";
 import { Metadata } from "next";
 import website from "./config/website";
 
