@@ -70,6 +70,7 @@ const Scene = (props) => {
   useEffect(() => {
     console.log(refGroup.current);
     setTimeout(() => {
+      window.scroll(0, 1);
       cameraControlsRef.current?.fitToBox(refGroup.current, true);
       setTimeout(() => {
         cameraControlsRef.current?.fitToBox(refGroup.current, true);
@@ -139,6 +140,7 @@ const SectionTrinkets = (props) => {
 
   useEffect(() => {
     setReady(true);
+
     const token = subscribe("TRINKET_INFO", (e, d) => {
       setInfos(d);
     });
