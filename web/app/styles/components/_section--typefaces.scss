@@ -38,6 +38,9 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: end;
+      .select-ui {
+        min-width: toRem(108);
+      }
     }
   }
 }

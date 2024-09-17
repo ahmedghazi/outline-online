@@ -103,7 +103,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
       </div>
       <div className='actions'>
         {input.singles && input.singles.length > 0 && (
-          <div>
+          <>
             {_singles && _singles.length > 0 && (
               <Select
                 options={_singles}
@@ -111,7 +111,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
                 // label='Family'
               />
             )}
-          </div>
+          </>
         )}
 
         <Link href={_linkResolver(input)}>Visit {input.title}</Link>
