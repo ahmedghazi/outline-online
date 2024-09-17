@@ -19,6 +19,7 @@ import {
 } from "@react-three/drei";
 // import { PerspectiveCamera } from "three";
 import Trinket from "./Trinket";
+import TrinketImage from "./TrinketImage";
 // import TrinketTest from "./trinkets/TrinketTest";
 
 import { subscribe, unsubscribe } from "pubsub-js";
@@ -69,8 +70,10 @@ const Scene = (props) => {
 
   useEffect(() => {
     console.log(refGroup.current);
+    window.scroll(0, 1);
     setTimeout(() => {
-      window.scroll(0, 1);
+      window.scroll(0, 0);
+
       cameraControlsRef.current?.fitToBox(refGroup.current, true);
       setTimeout(() => {
         cameraControlsRef.current?.fitToBox(refGroup.current, true);
@@ -93,15 +96,26 @@ const Scene = (props) => {
     "/three/ATHERN.glb",
   ];
   const items = useMemo(() => {
-    return files.map((item, i) => {
+    return props.input.map((item, i) => {
       return {
-        file: files[i],
+        _type: item.name ? "file" : "image",
+        file: item.name ? `/three/${item.name}.glb` : "",
         position: [_randomNum(distance * 2), _randomNum(distance), 0],
-        metadata: props.input[i] ? props.input[i].metadata : "",
+        metadata: item.metadata,
+        image: item.image ? item.image.asset.url : "",
+        dimensions: item.image ? item.image.asset.metadata.dimensions : "",
       };
     });
+    // return files.map((item, i) => {
+    //   return {
+    //     file: files[i],
+    //     position: [_randomNum(distance * 2), _randomNum(distance), 0],
+    //     metadata: props.input[i] ? props.input[i].metadata : "",
+    //   };
+    // });
   }, []);
-  // console.log(props);
+
+  console.log(items);
   return (
     <>
       {/* <Bounds fit clip observe margin={1.2}> */}
@@ -109,12 +123,23 @@ const Scene = (props) => {
         <Suspense fallback={null}>
           {items.map((item, i) => (
             <group key={i}>
-              <Trinket
-                key={i}
-                file={item.file}
-                initialPosition={item.position}
-                metadata={item.metadata}
-              />
+              {item._type === "file" && (
+                <Trinket
+                  key={i}
+                  file={item.file}
+                  initialPosition={item.position}
+                  metadata={item.metadata}
+                />
+              )}
+              {item._type === "image" && (
+                <TrinketImage
+                  key={i}
+                  url={item.image}
+                  dimensions={item.dimensions}
+                  initialPosition={item.position}
+                  metadata={item.metadata}
+                />
+              )}
             </group>
           ))}
         </Suspense>

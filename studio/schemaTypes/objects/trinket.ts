@@ -8,6 +8,7 @@ export default defineField({
   description: '',
   preview: {
     select: {
+      title: 'name',
       label: `file.asset.url`,
     },
   },
@@ -15,6 +16,12 @@ export default defineField({
     defineField({
       name: 'file',
       type: 'file',
+      hidden: true,
+    }),
+    defineField({
+      name: 'name',
+      type: 'string',
+      description: 'Ex: LUPA, KEYCHAIN',
     }),
     defineField({
       name: 'image',

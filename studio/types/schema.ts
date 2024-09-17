@@ -1163,6 +1163,13 @@ export type Trinket = {
   file?: { _type: "file"; asset: SanityReference<any> };
 
   /**
+   * name — `string`
+   *
+   * Ex: LUPA, KEYCHAIN
+   */
+  name?: string;
+
+  /**
    * image — `image`
    *
    * Image Fallback

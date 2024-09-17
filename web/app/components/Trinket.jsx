@@ -10,7 +10,6 @@ import {
 } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-import { _linkResolver, _randomNum } from "../utils/utils";
 import { publish } from "pubsub-js";
 import * as THREE from "three";
 
@@ -34,22 +33,10 @@ const Trinket = ({ file, initialPosition, metadata }) => {
   useFrame((state) => {
     if (isHover) return;
     if (!group.current) return;
-    // return;
-    // console.log(primitiveRef.current);
-    // primitiveRef.current.rotation.x += randRotations.x;
-    // group.current.rotation.y += randRotations.y;
-    // const t = state.clock.getElapsedTime();
+
     primitiveRef.current.rotation.x += randRotations.x;
     primitiveRef.current.rotation.y += 0.00001;
   });
-
-  // useFrame( (state) => {
-  //   const t = state.clock.getElapsedTime()
-  //   ref.current.rotation.z = -0.2 - (1 + Math.sin(t / 1.5)) / 20
-  //   ref.current.rotation.x = Math.cos(t / 4) / 8
-  //   ref.current.rotation.y = Math.sin(t / 4) / 8
-  //   ref.current.position.y = (1 + Math.sin(t / 1.5)) / 10
-  // })
 
   const _onPointerOver = () => {
     // console.log(props.input.link);
