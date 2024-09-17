@@ -71,6 +71,9 @@ const Scene = (props) => {
     console.log(refGroup.current);
     setTimeout(() => {
       cameraControlsRef.current?.fitToBox(refGroup.current, true);
+      setTimeout(() => {
+        cameraControlsRef.current?.fitToBox(refGroup.current, true);
+      }, 1000);
     }, 1000);
     setWindowSize({ w: window.innerWidth, h: window.innerHeight });
   }, []);
@@ -117,24 +120,10 @@ const Scene = (props) => {
       </group>
       {/* </Bounds> */}
 
-      <CameraControls
-        ref={cameraControlsRef}
-        enabled={false}
-        // camera={OrthographicCamera}
-        // makeDefault={true}
-        // minDistance={minDistance}
-        // verticalDragToForward={verticalDragToForward}
-        // dollyToCursor={dollyToCursor}
-        // infinityDolly={infinityDolly}
-      />
+      <CameraControls ref={cameraControlsRef} enabled={false} />
       {/* <CameraHelper /> */}
       {/* <axesHelper args={[5]} /> */}
-      {/* <OrthographicCamera
-            makeDefault
-            position={[500, 0.9, 1.8]}
-            fov={60}
-            // zoom={0.9}
-          /> */}
+
       {/* <OrbitControls
       // enableZoom={false}
       // enablePan={false}
