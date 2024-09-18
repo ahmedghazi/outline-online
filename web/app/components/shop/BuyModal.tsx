@@ -81,22 +81,24 @@ const CartProduct = ({ input }: CartProductProps) => {
       <div className={clsx("detail", active ? "block" : "hidden")}>
         <div className='group'>
           <div className='grid md:grid-cols-8'>
-            <div className='label text-gray-100 col-span-2'>Bundles</div>
-            <div className='items col-span-6'>
+            <div className='label text-gray-100 md:col-span-2'>Bundles</div>
+            <div className='items md:col-span-6'>
               {input.bundles?.map((item, i) => (
                 <div className='item _row grid md:grid-cols-6' key={i}>
-                  <div className='title col-span-4'>
-                    <div className='flex gap-sm'>
+                  <div className='title md:col-span-4'>
+                    <div className='md:flex md:gap-sm'>
                       <div className='title'>{item.title}</div>
-                      <ul className='flex text-muted gap-sm'>
+                      <ul className='flex flex-wrap  md:gap-sm text-muted'>
                         {item.typefaces?.map((_item, j) => (
-                          <li key={j}>{_item.title}</li>
+                          <li key={j} className='whitespace-nowrap'>
+                            {_item.title}
+                          </li>
                         ))}
                       </ul>
                     </div>
                   </div>
                   {/* <Price price={item.price} /> */}
-                  <div className='actions col-span-2'>
+                  <div className='actions md:col-span-2'>
                     <AddToCart
                       id={item._key || ""}
                       title={item.title || ""}
@@ -116,14 +118,16 @@ const CartProduct = ({ input }: CartProductProps) => {
         </div>
         <div className='group'>
           <div className='grid md:grid-cols-8'>
-            <div className='label text-gray-100 col-span-2'>Single Styles</div>
-            <div className='items col-span-6'>
+            <div className='label text-gray-100 md:col-span-2'>
+              Single Styles
+            </div>
+            <div className='items md:col-span-6'>
               {input.singles?.map((item, i) => (
                 <div className='item _row grid md:grid-cols-6' key={i}>
-                  <div className='title col-span-4'>{item.title}</div>
+                  <div className='title md:col-span-4'>{item.title}</div>
 
                   {/* <Price price={item.price} /> */}
-                  <div className='actions col-span-2'>
+                  <div className='actions md:col-span-2'>
                     <AddToCart
                       id={item._key || ""}
                       title={item.title || ""}
@@ -249,7 +253,7 @@ const BuyModal = ({ productsCart }: Props) => {
         <div className='inner'>
           <div className='header'>
             {licenses && (
-              <div className='_row grid md:grid-cols-8'>
+              <div className='_row grid md:grid-cols-8 '>
                 <div className='label'>Company Size</div>
                 <div className='input'>
                   <Select
@@ -261,8 +265,8 @@ const BuyModal = ({ productsCart }: Props) => {
                 {/* <div></div> */}
                 {/* <div></div> */}
                 <div className='label'>Licenses</div>
-                <div className='licenses md:col-span-5 py-05e'>
-                  <div className='flex justify-between'>
+                <div className='licenses md:col-span-5 md:py-05e'>
+                  <div className='flex flex-wrap md:justify-between'>
                     {licenseSizeProfil?.licenseType?.map((item, i) => (
                       <div className='input flex gap-sm' key={i}>
                         <Checkbox

@@ -63,7 +63,7 @@ const Header = ({ settings, productsCart }: Props) => {
   };
 
   return (
-    <header>
+    <header id='main-header'>
       <div className='sup-header'>
         <div className='flex justify-between'>
           <div className='item'>Metadata</div>

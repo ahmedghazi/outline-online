@@ -22,7 +22,15 @@
     background-color: var(--color-gray);
   }
   .header {
+    padding: var(--space-sm);
     padding-bottom: var(--space-md);
+
+    .select-ui select {
+      background-color: var(--color-gray-50);
+      @media all and (max-width: $md) {
+        min-width: toRem(183);
+      }
+    }
   }
   .body {
   }
@@ -84,5 +92,25 @@
     display: block;
     width: 100%;
     padding: 0.3em;
+  }
+
+  @media all and (max-width: $md) {
+    padding-top: 3rem;
+    // z-index: 252;
+    .outter {
+      padding: 0 var(--space-sm);
+    }
+    .header {
+      .label + .input {
+        margin-bottom: var(--space-md);
+      }
+    }
+    .price {
+      justify-content: start;
+    }
+    .footer {
+      position: sticky;
+      bottom: 0;
+    }
   }
 }

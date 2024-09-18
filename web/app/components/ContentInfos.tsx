@@ -10,13 +10,13 @@ type Props = {
 
 const ContentInfos = ({ input }: Props) => {
   return (
-    <div className='content content--infos pt-header-height px-lg'>
+    <div className='content content--infos pt-header-height px-sm md:px-lg'>
       <div className='grid md:grid-cols-8 gap-md'>
-        <div className='col-span-5 col-start-4 mb-lg'>
+        <div className='md:col-span-5 md:col-start-4 mb-lg'>
           {input.about && (
             <div className='grid md:grid-cols-5 gap-md'>
-              <h2 className='col-span-2'>ABOUT</h2>
-              <div className='col-span-3'>
+              <h2 className='md:col-span-2'>ABOUT</h2>
+              <div className='md:col-span-3'>
                 <div className='text'>
                   <PortableText
                     value={input.about}
@@ -27,7 +27,7 @@ const ContentInfos = ({ input }: Props) => {
             </div>
           )}
         </div>
-        <div className='col-span-5 col-start-4 mb-xl'>
+        <div className='md:col-span-5 md:col-start-4 mb-xl'>
           {input.textsDropDown &&
             input.textsDropDown.map((item, i) => (
               <div className='item' key={i}>
@@ -48,7 +48,7 @@ const ContentInfos = ({ input }: Props) => {
             ))}
         </div>
         {input.colophon && (
-          <div className='col-span-4'>
+          <div className='md:col-span-4'>
             {input.colophon.map((item, i) => (
               <div className='item grid md:grid-cols-4 gap-md mb-md' key={i}>
                 <div className='key'>{item.key}</div>

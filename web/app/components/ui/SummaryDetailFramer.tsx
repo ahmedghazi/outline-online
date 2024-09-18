@@ -29,7 +29,7 @@ const SummaryDetailFramer = ({ summary, detail }: Props) => {
   // }, [expand, onOpen])
 
   return (
-    <div className='summary-detail grid md:grid-cols-5 gap-md'>
+    <div className='summary-detail grid md:grid-cols-5 md:gap-md'>
       <div
         className={clsx("summary md:col-span-2")}
         onClick={() => setExpand(!expand)}
@@ -42,7 +42,7 @@ const SummaryDetailFramer = ({ summary, detail }: Props) => {
               "icon-arrow transition-transform origin-center",
               expand && "rotate-90"
             )}>
-            <svg
+            {/* <svg
               width='6'
               height='7'
               viewBox='0 0 6 7'
@@ -51,19 +51,20 @@ const SummaryDetailFramer = ({ summary, detail }: Props) => {
               <path
                 d='M2.14186e-06 0L0 7L6 3.5L2.14186e-06 0Z'
                 fill='#000'></path>
-            </svg>
+            </svg> */}
+            ◢
           </div>
           <div className='title'>{summary}</div>
         </div>
       </div>
-      <div className='detail md:col-span-3 pb-md'>
+      <div className='detail md:col-span-3 '>
         <motion.div
           initial='collapsed'
           className='z-0 overflow-hidden'
           animate={controls}
           variants={variants}
           transition={{ duration: 0.3 }}>
-          {detail}
+          <div className='pb-md'>{detail}</div>
         </motion.div>
       </div>
     </div>

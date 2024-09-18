@@ -5,7 +5,7 @@
   --vh: 100vh;
   --vw: 100vw;
   --header-height: 60px;
-  --psuedo-header-height: 48.8px;
+  --pseudo-header-height: 48.8px;
   --color-bg: #efefef;
   --color-primary: #000;
   --color-secondary: #fff;
@@ -41,20 +41,10 @@
   --text-md: 0.75rem; //14px
   --text-lg: 3.375rem; //54px
   --text-xl: 10vw;
-
   --sm--text-lg: 2.25rem; //36px
-
-  /*
-  xs: 8pt 10px
-  md: 12pt 16px
-  lg: 18pt 24px
-  xl: 30pt 40px
-  */
 
   // --cubic: cubic-bezier(0.53, 0, 0.36, 1);
   --cubic: cubic-bezier(0.775, 0, 0.17, 1.005);
-
-  // --text-xl: clamp(26px, 5.21vw, 75px);
 
   --border-width: 1px;
   --border: var(--border-width) solid;
