@@ -13,7 +13,7 @@ const ModuleSliderUI = ({ input }: Props) => {
     <div
       className={clsx(
         "module moduke--slider-ui",
-        input.size && `col-span-${input.size}`
+        input.size && `md:col-span-${input.size}`
       )}>
       <Slider settingsOverride={{ adaptiveHeight: true }}>
         {input.items?.map((item, i) => (

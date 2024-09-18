@@ -15,7 +15,7 @@ const Footer = ({ settings }: Props) => {
         <ul>
           {settings.navSecondary &&
             settings.navSecondary?.map((item, i) => (
-              <li key={i}>
+              <li key={i} className='hidden-sm'>
                 {item._type === "linkExternal" && (
                   <a href={item.link} target='_blank' rel='noopener noreferrer'>
                     {item.label}

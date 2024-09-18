@@ -193,5 +193,24 @@ body[data-template="is-product"],
   }
 
   @media all and (max-width: $md) {
+    .composition-tool {
+      display: none;
+    }
+    .content {
+      .text {
+        transform: translateY(-0.2em);
+      }
+      .col-span-8 ~ .col-span-8 {
+        grid-row: unset;
+      }
+      .module--sidebar-ui {
+        grid-row: unset;
+      }
+    }
+    .glyphs {
+      .item {
+        width: calc(100% / 7);
+      }
+    }
   }
 }

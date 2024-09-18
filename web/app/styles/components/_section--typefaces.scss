@@ -43,4 +43,15 @@
       }
     }
   }
+  @media all and (max-width: $md) {
+    padding: var(--space-sm);
+    .item {
+      .title {
+        font-size: var(--sm--text-lg);
+      }
+      .actions {
+        display: none;
+      }
+    }
+  }
 }

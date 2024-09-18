@@ -26,4 +26,8 @@ footer#site-footer {
       }
     }
   }
+  @media all and (max-width: $md) {
+    padding: var(--space-sm);
+    font-size: var(--text-xs);
+  }
 }

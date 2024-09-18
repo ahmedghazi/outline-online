@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import website from "../config/website";
 import Cart from "./shop/Cart";
 import Clock from "./ui/Clock";
@@ -7,7 +8,10 @@ import { _linkResolver } from "../utils/utils";
 import Link from "next/link";
 import ScreenTime from "./ui/ScreenTime";
 import Buy from "./Buy";
-import NavPrimary from "./NavPrimary";
+import NavPrimaryDesktop from "./NavPrimaryDesktop";
+import NavPrimaryMobile from "./NavPrimaryMobile";
+import { subscribe, unsubscribe } from "pubsub-js";
+import { usePathname } from "next/navigation";
 
 type Props = {
   settings: Settings;
@@ -16,22 +20,70 @@ type Props = {
 
 const Header = ({ settings, productsCart }: Props) => {
   // console.log(settings);
+  const [isProduct, setIsProduct] = useState<boolean>(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const token = subscribe("IS_PRODUCT", (e, d) => {
+      setIsProduct(d);
+    });
+
+    return () => {
+      unsubscribe(token);
+    };
+  }, []);
+
+  useEffect(() => {
+    setIsProduct(false);
+    if (pathname === "/") {
+      document.body.addEventListener("scroll", _handleScroll);
+    }
+    if (pathname.indexOf("product") > -1) {
+      setIsProduct(true);
+    }
+
+    return () => {
+      document.body.removeEventListener("scroll", _handleScroll);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.classList.toggle("is-product", isProduct);
+  }, [isProduct]);
+
+  const _handleScroll = () => {
+    // const threshold = document.body.classList.contains("has-scrolled")
+    //   ? window.innerHeight / 2
+    //   : 0;
+    // console.log(document.body.scrollTop, threshold);
+    document.body.classList.toggle(
+      "has-scrolled",
+      document.body.scrollTop > 10
+    );
+  };
+
   return (
     <header>
       <div className='sup-header'>
         <div className='flex justify-between'>
           <div className='item'>Metadata</div>
-          <div className='item'>Operation: Switzerland (CH)</div>
-          <div className='item'>
+          <div className='item hidden-sm'>Operation: Switzerland (CH)</div>
+          <div className='item hidden-sm'>
             <Clock />
           </div>
-          <div className='item'>Global: UTC+1, EST+5, CST+6, PST+8</div>
+          <div className='item hidden-sm'>
+            Global: UTC+1, EST+5, CST+6, PST+8
+          </div>
           <div className='item'>
             <ScreenTime />
           </div>
         </div>
       </div>
-      <NavPrimary
+      <NavPrimaryDesktop
+        navPrimary={settings.navPrimary}
+        productsCart={productsCart}
+      />
+      <NavPrimaryMobile
         navPrimary={settings.navPrimary}
         productsCart={productsCart}
       />

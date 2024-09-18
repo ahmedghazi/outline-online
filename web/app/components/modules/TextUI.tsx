@@ -12,8 +12,8 @@ const ModuleTextUI = ({ input }: Props) => {
   return (
     <div
       className={clsx(
-        "module module--text-ui ",
-        input.size && `col-span-${input.size}`
+        "module module--text-ui col-span-1",
+        input.size && `md:col-span-${input.size}`
       )}>
       {input.text && (
         <div className='text'>

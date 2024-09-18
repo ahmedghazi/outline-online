@@ -36,7 +36,7 @@ const Modules = ({ input }: any) => {
   };
 
   return (
-    <div className='modules grid md:grid-cols-16 gap-md'>
+    <div className='modules grid grid-cols-1 md:grid-cols-16 gap-sm md:gap-md'>
       {_renderModules()}
     </div>
   );

@@ -45,13 +45,14 @@ const config: Config = {
       blue: "var(--color-blue)",
     },
     fontSize: {
-      "sm--md": ["var(--text-sm--md)", "1.2"],
-      "sm--lg": ["var(--text-sm--lg)", "1.2"],
-      "sm--xl": ["var(--text-sm--xl)", "1.2"],
+      // "sm--md": ["var(--text-sm--md)", "1.2"],
+      // "sm--lg": ["var(--text-sm--lg)", "1.2"],
+      // "sm--xl": ["var(--text-sm--xl)", "1.2"],
       sm: ["var(--text-sm)", "1.2"],
       md: ["var(--text-md)", "1.2"],
       lg: ["var(--text-lg)", "1.075"],
       xl: ["var(--text-xl)", "0.875"],
+      "sm--lg": ["var(--text-lg--mobile)"],
     },
     fontFamily: {
       sans: "var(--font-primary)",
