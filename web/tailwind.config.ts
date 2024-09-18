@@ -52,7 +52,7 @@ const config: Config = {
       md: ["var(--text-md)", "1.2"],
       lg: ["var(--text-lg)", "1.075"],
       xl: ["var(--text-xl)", "0.875"],
-      "sm--lg": ["var(--text-lg--mobile)"],
+      "sm--lg": "var(--sm--text-lg)",
     },
     fontFamily: {
       sans: "var(--font-primary)",
