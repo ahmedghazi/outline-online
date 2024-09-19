@@ -28,13 +28,20 @@ header#main-header {
     // transition: transform 1s;
     ul {
       display: flex;
-      justify-content: space-around;
+      // justify-content: space-around;
       // justify-content: center;
+      justify-content: space-between;
+
       li {
         position: relative;
         &.has-children a.depth-0 {
           pointer-events: none;
         }
+      }
+      a.depth-0 {
+        width: 13vw;
+        display: block;
+        text-align: center;
       }
       li:hover .submenu {
         display: flex;
