@@ -203,7 +203,7 @@ body[data-template="is-home"] {
   header#main-header #nav-primary {
     // transition: transform 0.2s;
     transform: translateY(
-      calc(var(--vh) * 50 - var(--header-height) / 2 - 0.5em)
+      calc(var(--vh) * 50 - var(--header-height) / 2 - 1em)
     );
     ul {
       li.menu-item--outline.online {
