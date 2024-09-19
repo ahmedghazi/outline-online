@@ -22,6 +22,7 @@ type Props = {
   blurb: string;
   category?: string;
   metadata: MetadataProps;
+  defaultActive?: boolean;
   // url: string;
   // description: string;
   // dataattributes: Array<string> | null;
@@ -42,7 +43,16 @@ interface ProductData {
 }
 
 const AddToCart = (props: Props) => {
-  const { price, title, fullTitle, blurb, category, id, metadata } = props;
+  const {
+    price,
+    title,
+    fullTitle,
+    blurb,
+    category,
+    id,
+    metadata,
+    defaultActive,
+  } = props;
   const {
     // dataAttributes,
     // currentProduct,
@@ -54,7 +64,9 @@ const AddToCart = (props: Props) => {
   } = useShop();
   const pathname = usePathname();
   const productExistsInStore = products.filter((el) => el.id === id).length > 0;
-  const [active, setActive] = useState<boolean>(productExistsInStore);
+  console.log(title, defaultActive);
+  // console.log(productExistsInStore, defaultActive);
+  const [active, setActive] = useState<boolean>(false);
 
   let finalPrice: number = price;
   if (licenseTypeProfil) {
@@ -62,6 +74,10 @@ const AddToCart = (props: Props) => {
       if (element.price) finalPrice += element.price;
     });
   }
+
+  useEffect(() => {
+    if (defaultActive) setActive(true);
+  }, [defaultActive]);
 
   /**
    * LicenseProfil (company size > price web, price logo, ...)
@@ -130,6 +146,7 @@ const AddToCart = (props: Props) => {
   };
 
   useEffect(() => {
+    console.log(title, active);
     if (active) {
       const exist = products.filter((el) => el.id === productData.id);
       if (exist.length === 0)
