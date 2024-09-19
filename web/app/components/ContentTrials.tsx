@@ -30,21 +30,28 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
   const { trials, setTrials } = useShop();
   return (
     <div className={clsx("item", active && "is-active")}>
-      <div className='_row grid md:grid-cols-8 gap-md-'>
+      <div className='_row grid grid-cols-6 md:grid-cols-8 gap-md-'>
         <div
-          className={clsx("flex gap-sm col-span-2 cursor-pointer")}
+          className={clsx(
+            "flex gap-sm col-span-3 md:col-span-2 cursor-pointer"
+          )}
           onClick={() => setActive(!active)}>
-          <button className='btn-toggle'>►</button>
+          <button className='btn-toggle'>◢</button>
           <h2>{input.title}</h2>
         </div>
         {/* {input.singles && (
           <div className='styles'>{input.singles.length} styles</div>
         )} */}
-        <div className='md:col-span-5'>
+        <div className='col-span-2 md:col-span-5'>
           <div className='grid md:grid-cols-5 gap-sm'>
-            <div className='label'>metadata</div>
+            <div className='label hidden-sm'>metadata</div>
+            {input.singles && (
+              <div className='styles'>{input.singles.length} styles</div>
+            )}
             {input.metadata?.map((item, i) => (
-              <div key={i}>{item}</div>
+              <div key={i} className='hidden-sm'>
+                {item}
+              </div>
             ))}
           </div>
         </div>
@@ -76,11 +83,15 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
       </div>
       {active && (
         <div className='detail'>
-          <div className='grid md:grid-cols-8 gap-md-'>
+          <div className='grid grid-cols-2- md:grid-cols-8 gap-md-'>
             {input.singles?.map((item, i) => (
-              <div className='item col-start-3 col-span-6' key={i}>
-                <div className='_row flex justify-between'>
-                  <div className='title text-muted'>{item.title}</div>
+              <div
+                className='item col-start-2- md:col-start-3 md:col-span-6'
+                key={i}>
+                <div className='_row flex  justify-end md:block'>
+                  <div className='title w-1/2 md:w-full text-muted'>
+                    {item.title}
+                  </div>
                   {/* <Checkbox
                     name={item.title || ""}
                     onChange={(checked: boolean) => {
@@ -144,7 +155,7 @@ const ContentTrials = ({ input }: Props) => {
 - download selected
 */
   return (
-    <div className='content content-trials px-lg'>
+    <div className='content content-trials px-sm md:px-lg'>
       <div className='list  '>
         {input.typefaces &&
           input.typefaces.map((item, i) => (
@@ -204,7 +215,7 @@ const ContentTrials = ({ input }: Props) => {
         <TrialsDownload />
       </Dialog>
 
-      <div className='infos absolute bottom-header-height'>
+      <div className='infos md:absolute md:bottom-header-height'>
         <div className='grid md:grid-cols-8 gap-md'>
           <h2 className='md:col-start-4'>{input.infosLabel}:</h2>
           <div className='text md:col-span-4'>

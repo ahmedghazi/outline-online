@@ -116,4 +116,43 @@
       width: 100%;
     }
   }
+
+  @media all and (max-width: $md) {
+    .list {
+      .item > ._row {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+    }
+    .infos {
+      margin-top: var(--space-lg);
+      bottom: unset;
+    }
+    dialog {
+      left: var(--space-sm);
+      width: calc((var(--vw) * 100) - var(--space-md));
+      top: calc(var(--header-height) + 2.4em);
+      max-width: unset;
+      overflow-y: auto;
+      max-height: 60vh;
+      .header {
+        position: sticky;
+        top: 0;
+        background-color: var(--color-gray);
+        z-index: 1;
+      }
+    }
+    form {
+      .form-group {
+        margin-bottom: 1em;
+      }
+      .title {
+        margin-bottom: 1em;
+      }
+      .fields {
+        padding-left: 1em;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 0;
+      }
+    }
+  }
 }

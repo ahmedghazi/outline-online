@@ -52,7 +52,7 @@ const CartProduct = ({ input }: CartProductProps) => {
             className={clsx("flex gap-sm col-span-2 cursor-pointer summary")}
             onClick={() => setActive(!active)}>
             <button className='btn-toggle'>
-              <svg
+              {/* <svg
                 version='1.1'
                 id='Calque_1'
                 xmlns='http://www.w3.org/2000/svg'
@@ -62,7 +62,8 @@ const CartProduct = ({ input }: CartProductProps) => {
                 width={4.9}
                 height={9.9}>
                 <polygon points='4.9,4.9 0,9.9 0,0 ' />
-              </svg>
+              </svg> */}
+              ◢
             </button>
             <h2>{input.title}</h2>
           </div>
