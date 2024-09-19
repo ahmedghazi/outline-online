@@ -93,7 +93,8 @@ header#main-header {
       }
       .menu-item--cart {
         &:hover button {
-          background-color: var(--color-gray);
+          // background-color: var(--color-gray);
+          background-color: var(--color-gray-25);
         }
         button {
           border-top-right-radius: var(--radius);
@@ -233,7 +234,7 @@ body.cart-opened {
   .menu-item--cart {
     z-index: 10 !important;
     button {
-      background-color: var(--color-gray);
+      background-color: var(--color-gray-25);
     }
   }
 }
