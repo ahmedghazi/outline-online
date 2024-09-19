@@ -22,7 +22,7 @@ type Props = {
   blurb: string;
   category?: string;
   metadata: MetadataProps;
-  defaultActive?: boolean;
+  defaultActive: boolean;
   // url: string;
   // description: string;
   // dataattributes: Array<string> | null;
@@ -76,7 +76,7 @@ const AddToCart = (props: Props) => {
   }
 
   useEffect(() => {
-    if (defaultActive) setActive(true);
+    setActive(defaultActive);
   }, [defaultActive]);
 
   /**

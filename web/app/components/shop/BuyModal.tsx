@@ -102,14 +102,12 @@ const CartProduct = ({ input }: CartProductProps) => {
 
   return (
     <div className={clsx("typeface-item", active && "is-active")}>
-      <div className='_row py-05e'>
-        <div className='grid md:grid-cols-8'>
-          <div
-            className={clsx("flex gap-sm col-span-2 cursor-pointer summary")}
-            onClick={() => setActive(!active)}>
-            <button className='btn-toggle'>◢</button>
-            <h2>{input.title}</h2>
-          </div>
+      <div
+        className='_row py-05e cursor-pointer'
+        onClick={() => setActive(!active)}>
+        <div className={clsx("flex gap-sm col-span-2 cursor-pointer summary")}>
+          <button className='btn-toggle'>◢</button>
+          <h2>{input.title}</h2>
         </div>
       </div>
 
