@@ -142,7 +142,7 @@ const FormMailchimp = (props: Props) => {
       <button
         disabled={status === "sending" || status === "success"}
         type='submit'
-        className='text-white'
+        className={clsx(valid ? "button-submit" : "button-disabled")}
         aria-label='submit'>
         <span>{getButtonMsg()}</span>
       </button>

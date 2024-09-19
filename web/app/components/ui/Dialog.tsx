@@ -32,7 +32,9 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
         // onCancel={closeModal}
       >
         <div className='header'>
-          <button className='text-red' onClick={() => setOpen(false)}>
+          <button
+            className='!text-red text-[18px]'
+            onClick={() => setOpen(false)}>
             ╳
           </button>
         </div>

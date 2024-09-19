@@ -1,3 +1,10 @@
+.button-disabled {
+  @apply bg-gray-25 text-gray-100;
+}
+.button-submit {
+  @apply bg-green text-white;
+}
+
 .button-ui {
   background-color: var(--color-gray);
   border-radius: var(--radius-sm);

@@ -38,6 +38,9 @@
     border-top: var(--border);
   }
   .typeface-item {
+    &:last-child:not(.is-active) > ._row {
+      border-bottom: none !important;
+    }
     &.is-active {
       & > ._row {
         border: none;

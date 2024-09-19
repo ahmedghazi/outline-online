@@ -46,7 +46,9 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
           <div className='grid md:grid-cols-5 gap-sm'>
             <div className='label hidden-sm'>metadata</div>
             {input.singles && (
-              <div className='styles'>{input.singles.length} styles</div>
+              <div className='styles sm-only'>
+                {input.singles.length} styles
+              </div>
             )}
             {input.metadata?.map((item, i) => (
               <div key={i} className='hidden-sm'>
@@ -85,9 +87,7 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
         <div className='detail'>
           <div className='grid grid-cols-2- md:grid-cols-8 gap-md-'>
             {input.singles?.map((item, i) => (
-              <div
-                className='item col-start-2- md:col-start-3 md:col-span-6'
-                key={i}>
+              <div className='item md:col-span-6 md:col-start-3' key={i}>
                 <div className='_row flex  justify-end md:block'>
                   <div className='title w-1/2 md:w-full text-muted'>
                     {item.title}

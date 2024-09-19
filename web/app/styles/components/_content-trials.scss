@@ -7,6 +7,14 @@
     }
   }
   .item {
+    &.is-active {
+      & > ._row {
+        border-bottom: var(--border);
+      }
+      .detail .item:first-child > ._row {
+        border-top: none;
+      }
+    }
     .checkbox-ui {
       .label {
         opacity: 0;

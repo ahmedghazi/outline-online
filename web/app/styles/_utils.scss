@@ -136,15 +136,15 @@ ul.list-with-comma {
   .md\:grid-cols-16 {
     grid-template-columns: repeat(16, minmax(0, 1fr));
   }
-  .md\:col-span-15 {
-    grid-column: span 15 / span 15;
-  }
-  .md\:col-span-6 {
-    grid-column: span 6 / span 6;
-  }
-  .md\:col-span-8 {
-    grid-column: span 8 / span 8;
-  }
+  // .md\:col-span-15 {
+  //   grid-column: span 15 / span 15;
+  // }
+  // .md\:col-span-6 {
+  //   grid-column: span 6 / span 6;
+  // }
+  // .md\:col-span-8 {
+  //   grid-column: span 8 / span 8;
+  // }
 }
 
 .px-sm {
@@ -227,8 +227,8 @@ dialog {
       }
     }
     button[type="submit"] {
-      background-color: var(--color-blue);
-      color: white;
+      // background-color: var(--color-blue);
+      // color: white;
       border-bottom-right-radius: 1em;
       border-bottom-left-radius: 1em;
       text-align: center;
