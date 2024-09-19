@@ -125,6 +125,7 @@ const FormMailchimp = (props: Props) => {
               name={field.name}
               required={true}
               role='textbox'
+              size={30}
               onChange={({ target }) => {
                 setState((prev: any) => ({
                   ...prev,
