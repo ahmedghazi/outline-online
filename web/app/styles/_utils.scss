@@ -163,8 +163,10 @@ dialog {
   &::backdrop {
     background-color: transparent;
   }
+  // @include debugSquare(calc(var(--space-md) * 0.96));
   .header {
-    padding: var(--space-md) var(--space-md) 5px;
+    padding: calc(var(--space-md) * 0.8) var(--space-md)
+      calc(var(--space-md) * 0.55);
   }
 
   form {
@@ -174,16 +176,26 @@ dialog {
     .fields {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-
       gap: var(--space-md);
       .form-row {
-        // width: 50%;
-        display: flex;
-        // gap: 0.4em;
-
+        // display: flex;
+        // align-items: start;
+        line-height: 1;
+        span {
+          font-size: inherit;
+        }
+        label,
+        input {
+          line-height: 1;
+        }
         label {
           color: #666666;
           white-space: nowrap;
+        }
+        input {
+          line-height: 1;
+          margin: 0;
+          width: auto;
         }
       }
     }
