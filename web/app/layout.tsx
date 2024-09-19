@@ -53,7 +53,7 @@ export default async function RootLayout({
                 <span></span>
               </div>
               <Header settings={settings} productsCart={productsCart} />
-              {/* <BuyModal productsCart={productsCart} /> */}
+              <BuyModal productsCart={productsCart} />
               <main>{children}</main>
               <div className='dashes dashes--right'>
                 <span></span>

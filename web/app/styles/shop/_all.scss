@@ -79,14 +79,8 @@
     // padding-top: 0.5em;
     // padding-left: 25%;
     position: relative;
-    // &::before {
-    //   content: "Items";
-    //   display: block;
-    //   position: absolute;
-    //   left: 0;
-    //   top: 0;
-    //   padding-top: 0.5em;
-    // }
+    grid-column: span 15 / span 15;
+
     & > div.root:not(:first-child) .snipcart-item-line {
       // min-width: 75%;
       border-top: var(--border);

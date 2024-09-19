@@ -6,7 +6,10 @@
   left: 0;
   right: 0;
   padding: var(--header-height) 0;
+  pointer-events: none;
   .outter {
+    pointer-events: all;
+
     padding: 0 var(--space-lg);
     height: 100%;
     max-height: calc(var(--vh) * 100 - var(--header-height) * 2);

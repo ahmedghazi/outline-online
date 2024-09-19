@@ -182,13 +182,25 @@ const BuyModal = ({ productsCart }: Props) => {
     setReady(true);
     _setDefaultLicenses();
     const token = subscribe("BUY_MODAL_ACTIVE", (e, d) => {
+      console.log(e);
       setActive(d);
+    });
+
+    const tokenB = subscribe("CART_OPENED", (e, d) => {
+      console.log(e);
+      if (d) setActive(false);
     });
 
     return () => {
       unsubscribe(token);
+      unsubscribe(tokenB);
     };
   }, []);
+
+  useEffect(() => {
+    console.log(pathname);
+    setActive(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.classList.toggle("is-product--open", active);

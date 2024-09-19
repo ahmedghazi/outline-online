@@ -127,6 +127,11 @@ body[data-template="is-product"],
     .text {
       transform: translateY(-0.2em);
     }
+    @media all and (min-width: $md) {
+      .md\:col-span-8 {
+        grid-column: span 8 / span 8;
+      }
+    }
     .col-span-8 ~ .col-span-8 {
       grid-row: span 7 / span 7;
     }

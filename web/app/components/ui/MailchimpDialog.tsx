@@ -65,9 +65,6 @@ const FormMailchimp = (props: Props) => {
 
     const isValid = isValidEmail && Object.keys(state).length === fields.length;
     setValid(isValid);
-    console.log({ isValidEmail });
-    console.log(Object.keys(state).length, fields.length);
-    console.log(state);
   }, [state]);
 
   const handleSubmit = (evt: React.SyntheticEvent<HTMLFormElement>) => {
@@ -78,11 +75,11 @@ const FormMailchimp = (props: Props) => {
         return `${field.name}=${encodeURIComponent(state[field.name])}`;
       })
       .join("&");
-    console.log(values);
+    // console.log(values);
     // const path = `${action}&EMAIL=${encodeURIComponent(email)}`;
     const path = `${action}&${values}`;
     const url = path.replace("/post?", "/post-json?");
-    console.log(path);
+    // console.log(path);
     // const email = state["EMAIL"];
     sendData(url);
 

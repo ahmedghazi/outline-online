@@ -30,7 +30,7 @@ const Buy = ({ productsCart }: Props) => {
         className={clsx("btn--buy z-10", active && "bg-gray")}>
         BUY
       </button>
-      {active && productsCart && <BuyModal productsCart={productsCart} />}
+      {/* {active && productsCart && <BuyModal productsCart={productsCart} />} */}
     </div>
   );
 };
