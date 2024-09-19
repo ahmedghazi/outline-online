@@ -16,13 +16,22 @@ footer#site-footer {
     justify-content: space-between;
   }
   .mailchimp-dialog {
+    .text-red {
+      color: red;
+      font-size: 18px;
+    }
     form {
       input {
         line-height: 1;
       }
       button[type="submit"] {
         margin-top: var(--space-sm);
+        background-color: var(--color-gray-25);
+        color: #707077;
+      }
+      &.is-valid button[type="submit"] {
         background-color: var(--color-green);
+        color: white;
       }
     }
   }

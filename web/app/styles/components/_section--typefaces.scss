@@ -39,7 +39,11 @@
       justify-content: space-between;
       align-items: end;
       .select-ui {
-        min-width: toRem(108);
+        min-width: toRem(188);
+        width: toRem(188);
+        select {
+          width: toRem(188);
+        }
       }
     }
   }

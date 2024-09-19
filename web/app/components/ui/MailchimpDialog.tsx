@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import PropTypes from "prop-types"
 import jsonp from "jsonp";
 // import PropTypes from "prop-types";
@@ -35,6 +35,7 @@ const FormMailchimp = (props: Props) => {
   // const { messages } = Mailchimp.defaultProps
   const [email, setEmail] = useState<string>("");
   const [status, setStatus] = useState<string>("");
+  const [valid, setValid] = useState<boolean>(false);
 
   const getButtonMsg = () => {
     switch (status) {
@@ -53,6 +54,22 @@ const FormMailchimp = (props: Props) => {
     }
   };
 
+  const validateEmail = (email: string) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
+  useEffect(() => {
+    const email = state["EMAIL"];
+    const isValidEmail = validateEmail(email);
+
+    const isValid = isValidEmail && Object.keys(state).length === fields.length;
+    setValid(isValid);
+    console.log({ isValidEmail });
+    console.log(Object.keys(state).length, fields.length);
+    console.log(state);
+  }, [state]);
+
   const handleSubmit = (evt: React.SyntheticEvent<HTMLFormElement>) => {
     // alert("submit");
     evt.preventDefault();
@@ -66,14 +83,13 @@ const FormMailchimp = (props: Props) => {
     const path = `${action}&${values}`;
     const url = path.replace("/post?", "/post-json?");
     console.log(path);
-    const email = state["EMAIL"];
+    // const email = state["EMAIL"];
+    sendData(url);
 
-    validateEmail(email) ? sendData(url) : setStatus("empty");
-  };
-
-  const validateEmail = (email: string) => {
-    var re = /\S+@\S+\.\S+/;
-    return re.test(email);
+    // const isValidEmail = validateEmail(email);
+    // const isValid = isValidEmail && state.length === fields.length;
+    // isValid ? sendData(url) : "";
+    // // validateEmail(email) ? sendData(url) : setStatus("empty");
   };
 
   const sendData = (url: string) => {
@@ -99,7 +115,9 @@ const FormMailchimp = (props: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={clsx("mailchimp")}>
+    <form
+      onSubmit={handleSubmit}
+      className={clsx("mailchimp", valid && "is-valid")}>
       <div className='fields px-md'>
         {fields.map((field, i) => (
           <div className='form-row' key={i}>
@@ -120,11 +138,12 @@ const FormMailchimp = (props: Props) => {
           </div>
         ))}
       </div>
+
       <button
         disabled={status === "sending" || status === "success"}
         type='submit'
-        aria-label='submit'
-        className={"italic serif"}>
+        className='text-white'
+        aria-label='submit'>
         <span>{getButtonMsg()}</span>
       </button>
     </form>
