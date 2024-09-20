@@ -56,6 +56,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       : input.typeface
       ? [input.typeface]
       : [];
+
   return (
     <div
       className='item _row grid md:grid-cols-6 cursor-pointer'

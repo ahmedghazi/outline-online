@@ -66,10 +66,10 @@ const Scene = (props) => {
   const cameraControlsRef = useRef();
   // const { camera } = useThree();
 
-  const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
+  // const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
 
   useEffect(() => {
-    console.log(refGroup.current);
+    // console.log(refGroup.current);
     window.scroll(0, 1);
     setTimeout(() => {
       window.scroll(0, 0);
@@ -79,22 +79,17 @@ const Scene = (props) => {
         cameraControlsRef.current?.fitToBox(refGroup.current, true);
       }, 1000);
     }, 1000);
-    setWindowSize({ w: window.innerWidth, h: window.innerHeight });
+    // setWindowSize({ w: window.innerWidth, h: window.innerHeight });
   }, []);
 
-  // function CameraHelper() {
-  //   const camera = new PerspectiveCamera(60, 1, 1, 3);
-  //   return <cameraHelper args={[camera]} />;
-  // }
-
   const distance = 5;
-  const files = [
-    // "/three/Scene.glb",
-    "/three/LUPA.glb",
-    "/three/KEYCHAIN.glb",
-    "/three/KEYCARD.glb",
-    "/three/ATHERN.glb",
-  ];
+  // const files = [
+  //   // "/three/Scene.glb",
+  //   "/three/LUPA.glb",
+  //   "/three/KEYCHAIN.glb",
+  //   "/three/KEYCARD.glb",
+  //   "/three/ATHERN.glb",
+  // ];
   const items = useMemo(() => {
     return props.input.map((item, i) => {
       return {
@@ -106,13 +101,6 @@ const Scene = (props) => {
         dimensions: item.image ? item.image.asset.metadata.dimensions : "",
       };
     });
-    // return files.map((item, i) => {
-    //   return {
-    //     file: files[i],
-    //     position: [_randomNum(distance * 2), _randomNum(distance), 0],
-    //     metadata: props.input[i] ? props.input[i].metadata : "",
-    //   };
-    // });
   }, []);
 
   // console.log(items);

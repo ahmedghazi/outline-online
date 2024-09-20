@@ -60,6 +60,7 @@ const Trinket = ({ file, initialPosition, metadata }) => {
           {/* <PivotControls> */}
 
           <primitive
+            castShadow={false}
             ref={primitiveRef}
             position={[0, 0, 0]}
             object={scene}
