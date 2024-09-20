@@ -63,8 +63,8 @@ const AddToCart = (props: Props) => {
     setProducts,
   } = useShop();
   const pathname = usePathname();
-  const productExistsInStore = products.filter((el) => el.id === id).length > 0;
-  console.log(title, defaultActive);
+  // const productExistsInStore = products.filter((el) => el.id === id).length > 0;
+  // console.log(title, defaultActive);
   // console.log(productExistsInStore, defaultActive);
   const [active, setActive] = useState<boolean>(false);
 
