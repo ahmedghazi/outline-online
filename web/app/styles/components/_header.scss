@@ -69,12 +69,9 @@ header#main-header {
         }
       }
 
-      .actions .menu-item--cart {
-        transform: translateX(calc(var(--radius) * -1));
-        z-index: 0;
-      }
       .menu-item--buy {
         z-index: 1;
+        transform: translateX(calc(var(--radius) * 1));
         .btn--buy {
           color: var(--color-blue);
           border-top-right-radius: var(--radius);
@@ -92,6 +89,9 @@ header#main-header {
         }
       }
       .menu-item--cart {
+        // transform: translateX(calc(var(--radius) * -1));
+        z-index: 0;
+        width: calc(100% + var(--radius));
         &:hover button {
           // background-color: var(--color-gray);
           background-color: var(--color-gray-25);
