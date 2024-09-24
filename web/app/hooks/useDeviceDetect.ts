@@ -36,7 +36,7 @@ export default function useDeviceDetect() {
   const _getBrowser = () => {
     let userAgent = navigator.userAgent;
     let browser;
-    console.log(userAgent);
+    // console.log(userAgent);
     // Detect Chrome
     if (/Chrome/.test(userAgent) && !/Chromium/.test(userAgent)) {
       browser = "chrome";
@@ -57,7 +57,7 @@ export default function useDeviceDetect() {
     else if (/Trident/.test(userAgent)) {
       browser = "ie";
     }
-    console.log(browser);
+    // console.log(browser);
     return browser;
   };
   // console.log(isMobile)

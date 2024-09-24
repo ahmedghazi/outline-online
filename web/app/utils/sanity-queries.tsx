@@ -63,6 +63,9 @@ export async function getProductsCart(): Promise<Product[]> {
     groq`
     *[_type == "product"]{
       title,
+      slug{
+        current
+      },
       singles[]{
         _key,
         title,

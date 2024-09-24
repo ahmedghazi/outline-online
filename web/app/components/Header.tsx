@@ -25,7 +25,7 @@ const Header = ({ settings, productsCart }: Props) => {
   const [isProduct, setIsProduct] = useState<boolean>(false);
   const pathname = usePathname();
   const { scrollDirection } = useScrollDirection();
-  console.log(scrollDirection);
+
   useEffect(() => {
     const token = subscribe("IS_PRODUCT", (e, d) => {
       setIsProduct(d);
@@ -55,10 +55,6 @@ const Header = ({ settings, productsCart }: Props) => {
   }, [isProduct]);
 
   const _handleScroll = () => {
-    // const threshold = document.body.classList.contains("has-scrolled")
-    //   ? window.innerHeight / 2
-    //   : 0;
-
     let hasScrolled = document.body.scrollTop > 10;
     if (
       scrollDirection === "down" &&

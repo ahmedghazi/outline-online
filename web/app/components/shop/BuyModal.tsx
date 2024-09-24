@@ -100,6 +100,19 @@ type CartProductProps = {
 const CartProduct = ({ input }: CartProductProps) => {
   const [active, setActive] = useState<boolean>(false);
   // const { licenseSizeProfil } = useShop();
+  const pathname = usePathname();
+  // console.log(pathname);
+  // console.log(input.slug);
+  useEffect(() => {
+    const isProductPage = pathname.indexOf("product") > -1;
+    if (isProductPage) {
+      const url = pathname.split("/").pop();
+      console.log(url, input.slug?.current);
+      if (url === input.slug?.current) {
+        setActive(true);
+      }
+    }
+  }, [pathname]);
 
   return (
     <div className={clsx("typeface-item", active && "is-active")}>
