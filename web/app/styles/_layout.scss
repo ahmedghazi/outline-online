@@ -61,6 +61,11 @@ main {
     display: block;
   }
 }
+.is-chrome {
+  .dashes {
+    padding-top: 18px;
+  }
+}
 @media all and (min-width: $md) {
 }
 

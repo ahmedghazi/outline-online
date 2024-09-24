@@ -2,26 +2,64 @@ import { useState, useEffect } from "react";
 
 export default function useDeviceDetect() {
   const [isMobile, setMobile] = useState<boolean>(false);
+  const [browser, setBrowser] = useState<string | undefined>("");
 
   useEffect(() => {
-    _handleDetect();
-    window.addEventListener("resize", _handleDetect);
+    const browser = _getBrowser();
+    setBrowser(browser);
 
-    return () => window.removeEventListener("resize", _handleDetect);
-  }, [setMobile]);
+    _detectMobile();
+    window.addEventListener("resize", _detectMobile);
 
-  const _handleDetect = () => {
+    return () => window.removeEventListener("resize", _detectMobile);
+  }, [setMobile, setBrowser]);
+
+  useEffect(() => {
+    if (browser) document.documentElement.classList.add(`is-${browser}`);
+  }, [browser]);
+
+  const _detectMobile = () => {
     const userAgent =
-      typeof window.navigator === "undefined" ? "" : navigator.userAgent;
+      typeof window.navigator === "undefined"
+        ? ""
+        : navigator.userAgent.toLowerCase();
+    // console.log(userAgent);
     const mobileUA = Boolean(
       userAgent.match(
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
       )
     );
     const isSmallDevice = window.innerWidth <= 1080;
-    // console.log(isSmallDevice, mobileUA)
     setMobile(isSmallDevice ? true : mobileUA);
   };
+
+  const _getBrowser = () => {
+    let userAgent = navigator.userAgent;
+    let browser;
+    console.log(userAgent);
+    // Detect Chrome
+    if (/Chrome/.test(userAgent) && !/Chromium/.test(userAgent)) {
+      browser = "chrome";
+    }
+    // Detect Chromium-based Edge
+    else if (/Edg/.test(userAgent)) {
+      browser = "mse";
+    }
+    // Detect Firefox
+    else if (/Firefox/.test(userAgent)) {
+      browser = "ff";
+    }
+    // Detect Safari
+    else if (/Safari/.test(userAgent)) {
+      browser = "safari";
+    }
+    // Detect Internet Explorer
+    else if (/Trident/.test(userAgent)) {
+      browser = "ie";
+    }
+    console.log(browser);
+    return browser;
+  };
   // console.log(isMobile)
-  return { isMobile };
+  return { isMobile, browser };
 }

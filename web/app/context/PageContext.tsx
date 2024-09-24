@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react";
 import { usePathname } from "next/navigation";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 // import { getSettings } from "../utils/sanity-queries";
 
 const PageContext = createContext({});
@@ -25,8 +26,10 @@ export const PageContextProvider = (props: PageContextProps) => {
   const settings = {
     pathname,
   };
+  const { browser } = useDeviceDetect();
 
   useEffect(() => {
+    console.log(browser);
     _format();
     _handlePageTemplate();
     window.addEventListener("resize", _format);
@@ -35,6 +38,10 @@ export const PageContextProvider = (props: PageContextProps) => {
       window.removeEventListener("resize", _format);
     };
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.add(`is-${browser}`);
+  }, [browser]);
 
   useEffect(() => {
     _handlePageTemplate();
