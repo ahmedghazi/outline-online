@@ -12,6 +12,8 @@ import NavPrimaryDesktop from "./NavPrimaryDesktop";
 import NavPrimaryMobile from "./NavPrimaryMobile";
 import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
+import { useScroll } from "../hooks/useScroll";
+import { useScrollDirection } from "../hooks/useScrollDirection";
 
 type Props = {
   settings: Settings;
@@ -22,7 +24,8 @@ const Header = ({ settings, productsCart }: Props) => {
   // console.log(settings);
   const [isProduct, setIsProduct] = useState<boolean>(false);
   const pathname = usePathname();
-
+  const { scrollDirection } = useScrollDirection();
+  console.log(scrollDirection);
   useEffect(() => {
     const token = subscribe("IS_PRODUCT", (e, d) => {
       setIsProduct(d);
@@ -45,7 +48,7 @@ const Header = ({ settings, productsCart }: Props) => {
     return () => {
       document.body.removeEventListener("scroll", _handleScroll);
     };
-  }, [pathname]);
+  }, [pathname, scrollDirection]);
 
   useEffect(() => {
     document.body.classList.toggle("is-product", isProduct);
@@ -55,11 +58,14 @@ const Header = ({ settings, productsCart }: Props) => {
     // const threshold = document.body.classList.contains("has-scrolled")
     //   ? window.innerHeight / 2
     //   : 0;
-    // console.log(document.body.scrollTop, threshold);
-    document.body.classList.toggle(
-      "has-scrolled",
-      document.body.scrollTop > 10
-    );
+
+    let hasScrolled = document.body.scrollTop > 10;
+    if (
+      scrollDirection === "down" &&
+      document.body.scrollTop < window.innerHeight
+    )
+      hasScrolled = false;
+    document.body.classList.toggle("has-scrolled", hasScrolled);
   };
 
   return (

@@ -44,9 +44,9 @@ export function useScroll() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", listener);
+    document.body.addEventListener("scroll", listener);
     return () => {
-      window.removeEventListener("scroll", listener);
+      document.body.removeEventListener("scroll", listener);
     };
   });
 
