@@ -225,18 +225,18 @@ const BuyModal = ({ productsCart }: Props) => {
     setLicenseTypeProfil,
     products,
   } = useShop();
-  console.log(products);
+  // console.log(products);
 
   useEffect(() => {
     setReady(true);
     // _setDefaultLicenses();
     const token = subscribe("BUY_MODAL_ACTIVE", (e, d) => {
-      console.log(e);
+      // console.log(e);
       setActive(d);
     });
 
     const tokenB = subscribe("CART_OPENED", (e, d) => {
-      console.log(e);
+      // console.log(e);
       if (d) setActive(false);
     });
 
@@ -247,7 +247,7 @@ const BuyModal = ({ productsCart }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log(pathname);
+    // console.log(pathname);
     setActive(false);
   }, [pathname]);
 

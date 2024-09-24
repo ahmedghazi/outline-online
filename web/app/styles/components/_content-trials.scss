@@ -50,7 +50,7 @@
     // transform: translate(-50%, -50%);
     width: 50%;
     // max-width: 60%;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     &::backdrop {
       background-color: transparent;
     }
@@ -118,8 +118,8 @@
     button[type="submit"] {
       background-color: var(--color-blue);
       color: white;
-      border-bottom-right-radius: 1em;
-      border-bottom-left-radius: 1em;
+      border-bottom-right-radius: var(--radius-sm);
+      border-bottom-left-radius: var(--radius-sm);
       text-align: center;
       width: 100%;
     }

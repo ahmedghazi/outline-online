@@ -146,7 +146,7 @@ const AddToCart = (props: Props) => {
   };
 
   useEffect(() => {
-    console.log(title, active);
+    // console.log(title, active);
     if (active) {
       const exist = products.filter((el) => el.id === productData.id);
       if (exist.length === 0)

@@ -6,6 +6,7 @@ import React, {
   useEffect,
   ReactNode,
   useReducer,
+  SyntheticEvent,
 } from "react";
 import {
   LabelPrice,
@@ -202,7 +203,9 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
   useEffect(() => {
     if (!ready) return;
     const { Snipcart } = window;
-
+    const snipcartModal: HTMLElement = document.querySelector(
+      ".snipcart-modal__container"
+    ) as HTMLElement;
     const listenSnipcart = () => {
       const { cart } = Snipcart.store.getState();
 
@@ -224,6 +227,8 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
           console.log("cart opened");
           document.body.classList.add("cart-opened");
           publish("CART_OPENED", true);
+
+          document.body.addEventListener("click", _handleClickOutside);
         }
 
         if (routesChange.from !== "/" && routesChange.to === "/") {
@@ -241,6 +246,30 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
       unsubscribe();
     };
   }, [ready]);
+
+  const _handleClickOutside = (e: Event) => {
+    console.log("click oustide modal");
+    const target = e.target as Element;
+    if (!target.closest(".snipcart-modal__container")) {
+      // blur();
+      const cartClose: HTMLElement = document.querySelector(
+        ".snipcart-modal__close"
+      ) as HTMLElement;
+      if (cartClose) {
+        cartClose.click();
+        publish("BUY_MODAL_ACTIVE", true);
+      }
+    }
+    // const cartClose: HTMLElement = document.querySelector(
+    //   ".snipcart-modal__close"
+    // ) as HTMLElement;
+    // if (cartClose) {
+    //   // cartClose.click();
+    // }
+  };
+  // const _handleClickOutsideReset = (evt: Event) => {
+  //   evt.stopPropagation();
+  // };
 
   return (
     <ShopContext.Provider
