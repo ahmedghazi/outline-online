@@ -67,7 +67,7 @@ const Cart = () => {
       <div className='flex gap-02e'>
         {/* <span className='snipcart-items-count'>3</span> */}
         <button
-          className='snipcart-checkout'
+          className='btn--cart snipcart-checkout'
           aria-label='open cart'
           title='open cart'>
           <span className='label'>CART</span>

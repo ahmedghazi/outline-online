@@ -28,7 +28,7 @@ const Buy = ({ productsCart }: Props) => {
       <button
         onClick={() => setActive(!active)}
         className={clsx("btn--buy z-10", active && "bg-gray")}>
-        BUY
+        <span>BUY</span>
       </button>
       {/* {active && productsCart && <BuyModal productsCart={productsCart} />} */}
     </div>

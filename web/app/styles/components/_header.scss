@@ -31,7 +31,7 @@ header#main-header {
       // justify-content: space-around;
       // justify-content: center;
       justify-content: space-between;
-
+      align-items: baseline;
       li {
         position: relative;
         &.has-children a.depth-0 {
@@ -42,6 +42,7 @@ header#main-header {
         width: 13vw;
         display: block;
         text-align: center;
+        // transform: translateY(0.13em);
       }
       li:hover .submenu {
         display: flex;
@@ -69,6 +70,18 @@ header#main-header {
         }
       }
 
+      .btn--buy,
+      .btn--cart {
+        // line-height: 1.2;
+        // height: 1.2em;
+        // padding-top: 0.2em;
+        // background-color: orange;
+        // transform: translateY(-0.13em);
+        span {
+          // padding-top: 0.2em;
+          display: inline-block;
+        }
+      }
       .menu-item--buy {
         z-index: 1;
         transform: translateX(calc(var(--radius) * 1));
