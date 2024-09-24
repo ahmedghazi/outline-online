@@ -45,7 +45,7 @@ header#main-header {
         // transform: translateY(0.13em);
       }
       li:hover .submenu {
-        display: flex;
+        display: block;
       }
       .submenu {
         display: none;
@@ -195,15 +195,23 @@ body[data-template="is-home"] {
   header#main-header {
     color: white;
     mix-blend-mode: difference;
+
     &::after {
       background-color: black;
+    }
+    a:hover {
+      color: white !important;
     }
   }
   &.has-scrolled header#main-header {
     color: black;
     mix-blend-mode: unset;
+
     &::after {
       background-color: white;
+    }
+    a:hover {
+      color: black !important;
     }
   }
   header#main-header #nav-primary {
