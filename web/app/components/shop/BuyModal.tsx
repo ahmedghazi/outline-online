@@ -107,7 +107,7 @@ const CartProduct = ({ input }: CartProductProps) => {
     const isProductPage = pathname.indexOf("product") > -1;
     if (isProductPage) {
       const url = pathname.split("/").pop();
-      console.log(url, input.slug?.current);
+
       if (url === input.slug?.current) {
         setActive(true);
       }

@@ -1,6 +1,6 @@
 "use client";
 // import { _localizeText } from "@/app/utils/utils";
-import { publish } from "pubsub-js";
+import { publish, subscribe, unsubscribe } from "pubsub-js";
 import React, { useEffect, useRef, useState } from "react";
 import useShop from "./ShopContext";
 import { usePathname } from "next/navigation";
@@ -9,35 +9,31 @@ const Cart = () => {
   const [count, setCount] = useState<number>(0);
   const cartRef = useRef<HTMLDivElement>(null);
   const { cartObject } = useShop();
+  const pathname = usePathname();
+
+  // useEffect(() => {
+  //   const { Snipcart } = window;
+  //   if (!Snipcart) return;
+
+  //   Snipcart.events.on("snipcart.initialization.error", () => {
+  //     console.log("Failed to initialize Snipcart");
+  //   });
+  // }, []);
 
   useEffect(() => {
-    const { Snipcart } = window;
-    if (!Snipcart) return;
-
-    // const tokenEsc = subscribe("ESC", _onClose);
-
-    // document.addEventListener("snipcart.ready", function () {
-    //   console.log("snipcart ready");
-    // });
-
-    Snipcart.events.on("snipcart.initialization.error", () => {
-      console.log("Failed to initialize Snipcart");
+    const token = subscribe("CART_OPENED", (e, d) => {
+      console.log(e, d, pathname);
+      if (d && pathname === "/") {
+        document.body.scroll(0, window.innerHeight);
+      }
     });
 
-    // Snipcart.events.on("item.added", (cartItem: any) => {
-    //   if (!cartRef || !cartRef.current) return;
-
-    //   // publish("ITEM.ADDED");
-    //   setCount(Snipcart.store.getState().cart.items.count);
-    // });
-    // Snipcart.events.on("item.removed", (cartItem: any) => {
-    //   setCount(Snipcart.store.getState().cart.items.count);
-    // });
-
     return () => {
-      // unsubscribe(tokenEsc);
+      unsubscribe(token);
     };
   }, []);
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (cartObject) {
@@ -46,7 +42,6 @@ const Cart = () => {
     }
   }, [cartObject]);
 
-  const pathname = usePathname();
   useEffect(() => {
     _onClose();
   }, [pathname]);

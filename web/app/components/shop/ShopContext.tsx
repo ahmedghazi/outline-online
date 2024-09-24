@@ -21,6 +21,7 @@ import {
 import { usePathname } from "next/navigation";
 import { _getDataAttributes } from "./utils";
 import { publish } from "pubsub-js";
+import path from "path";
 
 interface ShopContextProps {
   // location?: object;
