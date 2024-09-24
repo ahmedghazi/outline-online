@@ -22,7 +22,6 @@ const Cart = () => {
 
   useEffect(() => {
     const token = subscribe("CART_OPENED", (e, d) => {
-      console.log(e, d, pathname);
       if (d && pathname === "/") {
         document.body.scroll(0, window.innerHeight);
       }
