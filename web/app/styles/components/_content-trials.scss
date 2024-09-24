@@ -23,10 +23,16 @@
   }
   .footer {
     text-align: right;
+    border-bottom-right-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
     &.has-trials {
       .checkbox-ui {
         pointer-events: none;
       }
+    }
+    &.button-submit .checkbox-ui {
+      background-color: var(--color-green);
+      color: white;
     }
     .checkbox-ui {
       padding: 0.5em;

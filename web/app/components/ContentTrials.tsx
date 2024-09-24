@@ -163,7 +163,11 @@ const ContentTrials = ({ input }: Props) => {
           ))}
       </div>
       <div
-        className={clsx("footer", trials.length > 0 && "has-trials-")}
+        className={clsx(
+          "footer",
+          // trials.length > 0 && "has-trials-"
+          trials.length > 0 ? "button-submit" : "button-disabled"
+        )}
         onClick={() => {
           // if (trials.length > 0) {
           //   setOpenModal(true);
