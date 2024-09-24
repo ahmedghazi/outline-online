@@ -131,34 +131,6 @@ const CartProduct = ({ input }: CartProductProps) => {
             <div className='label text-gray-100 md:col-span-2'>Bundles</div>
             <div className='items md:col-span-6'>
               {input.bundles?.map((item, i) => (
-                // <div className='item _row grid md:grid-cols-6' key={i}>
-                //   <div className='title md:col-span-4'>
-                //     <div className='md:flex md:gap-sm'>
-                //       <div className='title'>{item.title}</div>
-                //       <ul className='flex flex-wrap  md:gap-sm text-muted'>
-                //         {item.typefaces?.map((_item, j) => (
-                //           <li key={j} className='whitespace-nowrap'>
-                //             {_item.title}
-                //           </li>
-                //         ))}
-                //       </ul>
-                //     </div>
-                //   </div>
-                //   {/* <Price price={item.price} /> */}
-                //   <div className='actions md:col-span-2'>
-                //     <AddToCart
-                //       id={item._key || ""}
-                //       title={item.title || ""}
-                //       fullTitle={`${input.title} ${item.title}`}
-                //       blurb={"ze blurb"}
-                //       price={item.price || 20000000000}
-                //       metadata={{
-                //         type: "bundle",
-                //         typefaces: item.typefaces ? item.typefaces : [],
-                //       }}
-                //     />
-                //   </div>
-                // </div>
                 <CartProductItem
                   key={i}
                   title={`${input.title} > ${item.title}`}
@@ -176,28 +148,6 @@ const CartProduct = ({ input }: CartProductProps) => {
             </div>
             <div className='items md:col-span-6'>
               {input.singles?.map((item, i) => (
-                // <div className='item _row grid md:grid-cols-6' key={i}>
-                //   <div className='title md:col-span-4'>{item.title}</div>
-
-                //   {/* <Price price={item.price} /> */}
-                //   <div className='actions md:col-span-2'>
-                //     <AddToCart
-                //       id={item._key || ""}
-                //       title={item.title || ""}
-                //       fullTitle={`${input.title} ${item.title}`}
-                //       blurb={"ze blurb"}
-                //       price={item.price || 20000000000}
-                //       metadata={{
-                //         type: "style",
-                //         type: "style",
-                //         type: "style",
-                //         type: "style",
-                //         type: "style",
-                //         typefaces: item.typeface ? [item.typeface] : [],
-                //       }}
-                //     />
-                //   </div>
-                // </div>
                 <CartProductItem
                   key={i}
                   title={`${input.title} > ${item.title}`}
