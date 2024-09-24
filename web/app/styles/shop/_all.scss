@@ -2,6 +2,7 @@
   font-family: var(--font-primary) !important;
   font-size: var(--text-md) !important;
   font-weight: unset !important;
+  line-height: 1.2 !important;
   *,
   .snipcart__font--primary,
   .snipcart__font--secondary,
@@ -20,6 +21,7 @@
     // font-weight: 400 !important;
     font-size: var(--text-md) !important;
     font-weight: unset !important;
+    line-height: 1.2 !important;
     // color: var(--color-primary);
     // box-shadow: unset;
   }
@@ -125,7 +127,8 @@
           // grid-column: span 1 / span 1;
           position: absolute;
           right: 0;
-          top: -0.25em;
+          // top: -0.25em;
+          top: 0;
           .flex {
             justify-content: flex-end;
           }
