@@ -17,7 +17,8 @@ const TesterLeading = ({ initialValue, target }: Props) => {
   }, [height]);
 
   const _update = () => {
-    target.style.lineHeight = `${height}px`;
+    // target.style.lineHeight = `${height}px`;
+    target.style.setProperty("--type-textLineHeight", `${height}px`);
   };
 
   return (

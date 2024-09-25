@@ -299,7 +299,7 @@ body[data-template="is-home"] {
 .snipcart-cart--opened,
 body.cart-opened {
   .menu-item--cart {
-    z-index: 10 !important;
+    // z-index: 10 !important;
     button {
       background-color: var(--color-gray-25);
     }

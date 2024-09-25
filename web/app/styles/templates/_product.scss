@@ -85,8 +85,11 @@ body[data-template="is-product"],
           font-size: 2em;
           width: 64rem;
           height: 9em;
-          font-family: var(--type-family);
           color: var(--type-color);
+          font-size: var(--type-textFontSize);
+          letter-spacing: var(--type-textLetterSpacing);
+          line-height: var(--type-textLineHeight);
+          font-family: var(--type-family);
           text-align: var(--type-textAlign);
           text-transform: var(--type-textTransform);
           column-count: var(--type-columnCount);

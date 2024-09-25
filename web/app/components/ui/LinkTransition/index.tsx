@@ -22,14 +22,13 @@ const LinkTransition = ({
 }: LinkTransitionProps) => {
   const router = useRouter();
 
-  const handleTransition = async (
+  const _handleTransition = async (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
 
     const main = document.querySelector("main");
     // TO DO
-    console.log(main);
     // run anime out
     main?.classList.add("page-transition");
     // sleep
@@ -42,10 +41,10 @@ const LinkTransition = ({
   };
   return (
     <Link
-      onClick={handleTransition}
+      onClick={_handleTransition}
       href={href}
-      {...props}
-      className={className}>
+      className={className}
+      {...props}>
       {children}
     </Link>
   );

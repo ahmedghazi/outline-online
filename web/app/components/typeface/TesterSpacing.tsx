@@ -19,7 +19,8 @@ const TesterSpacing = ({ initialValue, target }: Props) => {
   }, [size]);
 
   const _update = () => {
-    target.style.letterSpacing = `${size}px`;
+    // target.style.letterSpacing = `${size}px`;
+    target.style.setProperty("--type-textLetterSpacing", `${size}px`);
   };
 
   return (
