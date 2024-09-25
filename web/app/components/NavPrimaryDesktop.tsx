@@ -139,16 +139,14 @@ const NavPrimaryDesktop = ({ navPrimary, productsCart }: NavProps) => {
           </li>
         ))}
 
-        <div className='actions'>
-          <ul className='flex'>
-            <li className='menu-item--buy'>
-              <Buy productsCart={productsCart} />
-            </li>
-            <li className='menu-item--cart'>
-              <Cart />
-            </li>
-          </ul>
-        </div>
+        <ul className='actions flex'>
+          <li className='menu-item--buy'>
+            <Buy productsCart={productsCart} />
+          </li>
+          <li className='menu-item--cart'>
+            <Cart />
+          </li>
+        </ul>
       </ul>
     </nav>
   );

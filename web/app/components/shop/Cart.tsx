@@ -58,18 +58,15 @@ const Cart = () => {
 
   return (
     <div className='cart' ref={cartRef}>
-      <div className='flex gap-02e'>
-        {/* <span className='snipcart-items-count'>3</span> */}
-        <button
-          className='btn--cart snipcart-checkout'
-          aria-label='open cart'
-          title='open cart'>
-          <span className='label'>CART</span>
-          <span className='snipcart-items-count- text-green pl-02e'>
-            ({count})
-          </span>
-        </button>
-      </div>
+      <button
+        className='btn--cart snipcart-checkout'
+        aria-label='open cart'
+        title='open cart'>
+        <span className='label'>CART</span>
+        <span className='snipcart-items-count- text-green pl-02e'>
+          ({count})
+        </span>
+      </button>
     </div>
   );
 };

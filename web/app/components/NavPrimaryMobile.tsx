@@ -26,9 +26,8 @@ type NavProps = {
   productsCart: any;
 };
 const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
-  // const [y, setY] = useState<number | string | null>(null);
   const ref = useRef<HTMLElement | null>(null);
-
+  const pathname = usePathname();
   useEffect(() => {
     if (window.innerWidth > 1080) return;
 
@@ -50,6 +49,13 @@ const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    const submenus = document.querySelectorAll(".submenu");
+    submenus.forEach((el) => {
+      el.classList.remove("is-active");
+    });
+  }, [pathname]);
+
   const _toggleSubmenu = (evt: Event) => {
     evt.preventDefault();
     const element = evt.target as HTMLElement;
@@ -66,16 +72,18 @@ const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
             href='/'
             label='Outline Online'
             depth={0}
-          />{" "}
+          />
         </li>
-        <ul className='flex flex-2 nav-shop'>
-          <li className='menu-item--buy'>
-            <Buy productsCart={productsCart} />
-          </li>
-          <li className='menu-item--cart'>
-            <Cart />
-          </li>
-        </ul>
+        <li className='flex-2 nav-shop'>
+          <ul className='flex'>
+            <li className='menu-item--buy'>
+              <Buy productsCart={productsCart} />
+            </li>
+            <li className='menu-item--cart'>
+              <Cart />
+            </li>
+          </ul>
+        </li>
 
         {navPrimary?.map((item, i) => (
           <li

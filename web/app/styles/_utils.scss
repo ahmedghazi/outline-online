@@ -163,6 +163,10 @@ dialog {
   &::backdrop {
     background-color: transparent;
   }
+  @media (max-width: 1080px) {
+    width: calc(100vw - var(--space-sm)) !important;
+    left: var(--space-sm);
+  }
   // @include debugSquare(calc(var(--space-md) * 0.96));
   .header {
     padding: calc(var(--space-md) * 0.8) var(--space-md)

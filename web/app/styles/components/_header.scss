@@ -125,37 +125,37 @@ header#main-header {
   @media all and (max-width: $md) {
     padding: var(--space-sm);
     nav#nav-primary {
-      ul li {
-        a {
-          white-space: nowrap;
-          color: var(--color-gray-100);
-        }
-        a.depth-0 {
-          width: auto;
-        }
-        &.flex-2 {
-          flex-basis: 50%;
-          &.nav-item--home a {
-            text-align: left;
-          }
-        }
-        &.has-children {
-          // background-color: red;
-          a.depth-0 {
-            pointer-events: all;
-          }
-          .submenu.is-active {
-            display: block;
-          }
-        }
-        .submenu {
-          transform: none !important;
-          left: 0 !important;
-          top: unset !important;
-          padding-left: 0;
-          padding-top: 0 !important;
+      ul {
+        line-height: 1;
+        li {
           a {
-            text-align: left !important;
+            white-space: nowrap;
+            color: var(--color-gray-100);
+          }
+          a.depth-0 {
+            width: auto;
+          }
+          &.flex-2 {
+            flex-basis: 50%;
+          }
+          &.has-children {
+            // background-color: red;
+            a.depth-0 {
+              pointer-events: all;
+            }
+            .submenu.is-active {
+              display: block;
+            }
+          }
+          .submenu {
+            transform: none !important;
+            left: 0 !important;
+            top: unset !important;
+            padding-left: 0;
+            padding-top: 0 !important;
+            a {
+              text-align: left !important;
+            }
           }
         }
       }
@@ -169,7 +169,10 @@ header#main-header {
         gap: var(--space-sm);
         justify-content: space-between;
         li {
-          // min-width: 50%;
+          min-width: 50%;
+          &.menu-item--buy {
+            transform: translate(0);
+          }
           &.menu-item--cart {
             width: auto;
             .btn--cart {
@@ -309,8 +312,10 @@ body.cart-opened {
 .is-chrome {
   .btn--buy,
   .btn--cart {
+    padding-top: 0.1em;
+
     span {
-      transform: translateY(0.05em);
+      // transform: translateY(0.05em);
       display: inline-block;
     }
   }
@@ -318,8 +323,9 @@ body.cart-opened {
 .is-ff {
   .btn--buy,
   .btn--cart {
+    padding-top: 0.2em;
     span {
-      transform: translateY(0.13em);
+      // transform: translateY(0.13em);
       display: inline-block;
     }
   }

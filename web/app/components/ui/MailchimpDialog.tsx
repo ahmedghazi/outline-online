@@ -152,7 +152,7 @@ const MailchimpDialog = (props: Props) => {
   return (
     <div className='mailchimp-dialog'>
       <button className='toggle' onClick={() => setOpenModal(!openModal)}>
-        Newsletter {openModal && "is open"}
+        Newsletter
       </button>
 
       <Dialog openModal={openModal} onCloseModal={() => setOpenModal(false)}>

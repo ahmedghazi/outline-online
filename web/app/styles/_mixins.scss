@@ -502,7 +502,7 @@ $sass-burger-add-vendor-prefixes: true !default;
   }
 }
 
-@mixin debugFiletY($top: 1em, $color: blue) {
+@mixin debugFiletY($top: 1em, $color: red) {
   // position: relative;
 
   &:before {
