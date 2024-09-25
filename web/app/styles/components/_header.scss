@@ -166,17 +166,19 @@ header#main-header {
       }
       .nav-shop {
         min-width: 50%;
-        gap: var(--space-sm);
-        justify-content: space-between;
-        li {
-          min-width: 50%;
-          &.menu-item--buy {
-            transform: translate(0);
-          }
-          &.menu-item--cart {
-            width: auto;
-            .btn--cart {
+        ul {
+          gap: var(--space-sm);
+          justify-content: space-between;
+          li {
+            min-width: 50%;
+            &.menu-item--buy {
+              transform: translate(0);
+            }
+            &.menu-item--cart {
               width: auto;
+              .btn--cart {
+                width: auto;
+              }
             }
           }
         }
