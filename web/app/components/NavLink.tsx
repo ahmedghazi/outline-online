@@ -3,6 +3,7 @@ import React from "react";
 import { _linkResolver } from "../utils/utils";
 import { LinkExternal, LinkInternal } from "../types/schema";
 import Link from "next/link";
+import LinkTransition from "./ui/LinkTransition";
 
 type NavLinkProps = {
   // input: LinkInternal | LinkExternal;
@@ -17,9 +18,12 @@ const NavLink = ({ href, label, depth }: NavLinkProps) => {
   // const href = _linkResolver(input.link);
   const ariaCurrent = href === pathname ? "page" : undefined;
   return (
-    <Link href={href} aria-current={ariaCurrent} className={`depth-${depth}`}>
+    <LinkTransition
+      href={href}
+      aria-current={ariaCurrent}
+      className={`depth-${depth}`}>
       {label}
-    </Link>
+    </LinkTransition>
   );
 };
 
