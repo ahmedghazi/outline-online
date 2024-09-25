@@ -313,20 +313,26 @@ body.cart-opened {
   .btn--buy,
   .btn--cart {
     padding-top: 0.1em;
-
-    span {
-      // transform: translateY(0.05em);
-      display: inline-block;
-    }
   }
 }
 .is-ff {
   .btn--buy,
   .btn--cart {
     padding-top: 0.2em;
-    span {
-      // transform: translateY(0.13em);
-      display: inline-block;
+    @media all and (max-width: $md) {
+      padding: 0;
+      height: 18px;
+      line-height: 18px;
+    }
+  }
+}
+.is-safari {
+  .btn--buy,
+  .btn--cart {
+    // padding-top: 0.1em;
+    @media all and (max-width: $md) {
+      height: 18px;
+      line-height: 18px;
     }
   }
 }
