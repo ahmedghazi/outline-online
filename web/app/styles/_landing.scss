@@ -22,4 +22,14 @@ html body.is-landing {
       color: var(--color-blue);
     }
   }
+
+  @media all and (max-width: $md) {
+    #nav-primary {
+      .menu-item--typefaces,
+      .menu-item--information,
+      .menu-item--trials {
+        display: none;
+      }
+    }
+  }
 }
