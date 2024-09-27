@@ -1,12 +1,12 @@
 import { KeyValString, ProductSingle, Style } from "@/app/types/schema";
 import React, { useMemo, useRef } from "react";
-import TypeTester from "./TypeTester";
-import useType from "./TypeContext";
-import TesterSize from "./TesterSize";
-import TesterLeading from "./TesterLeading";
-import TesterSpacing from "./TesterSpacing";
-import Select from "../ui/Select";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
+// import TypeTester from "./TypeTester";
+// import useType from "./TypeContext";
+// import TesterSize from "./TesterSize";
+// import TesterLeading from "./TesterLeading";
+// import TesterSpacing from "./TesterSpacing";
+// import Select from "../ui/Select";
+// import { div } from "three/examples/jsm/nodes/Nodes.js";
 import CompositionTool from "./CompositionTool";
 
 type Props = {

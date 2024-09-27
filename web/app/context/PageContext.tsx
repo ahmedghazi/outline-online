@@ -59,7 +59,7 @@ export const PageContextProvider = (props: PageContextProps) => {
     // document.documentElement.style.setProperty("--app-height", wh + "px");
 
     const header = document.querySelector("header");
-    let headerBounding = {} || { height: 50 };
+    let headerBounding = { height: 50 };
     if (header) {
       headerBounding = header.getBoundingClientRect();
 
@@ -69,7 +69,7 @@ export const PageContextProvider = (props: PageContextProps) => {
       );
     }
     const footer = document.querySelector("footer");
-    let footerBoundig = {} || { height: 50 };
+    let footerBoundig = { height: 50 };
     if (footer) {
       footerBoundig = footer.getBoundingClientRect();
 

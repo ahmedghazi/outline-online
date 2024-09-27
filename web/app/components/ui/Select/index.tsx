@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 import { KeyValString, LicenseSize } from "@/app/types/schema";
-import { label } from "three/examples/jsm/nodes/Nodes.js";
+// import { label } from "three/examples/jsm/nodes/Nodes.js";
 
 type Props = {
   label?: string;
