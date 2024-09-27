@@ -127,7 +127,7 @@ const Scene = (props) => {
               //   _randomNum(distance * 2),
               //   0,
               // ]}
-              metadata={"test"}
+              metadata={"reset_location"}
             />
           </group>
           <group>
@@ -138,7 +138,7 @@ const Scene = (props) => {
               //   _randomNum(distance * 2),
               //   0,
               // ]}
-              metadata={"test"}
+              metadata={"reset_location_rotation"}
             />
           </group>
         </Suspense>

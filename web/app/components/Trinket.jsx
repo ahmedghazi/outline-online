@@ -23,7 +23,7 @@ const Trinket = ({ file, initialPosition, metadata }) => {
   const group = useRef();
   const primitiveRef = useRef();
   const [isHover, setIsHover] = useState(false);
-  const distance = 5;
+  const distance = 3;
   const _initialPosition = useMemo(() => {
     const x = _randomNum(distance * 2);
     const y = _randomNum(distance * 1);
