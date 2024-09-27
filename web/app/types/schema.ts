@@ -666,6 +666,13 @@ export type LicenseType = {
   label?: string;
 
   /**
+   * category — `string`
+   *
+   * Used for discounts
+   */
+  category?: string;
+
+  /**
    * Infos — `string`
    *
    * Displayed on front end

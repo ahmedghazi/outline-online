@@ -20,6 +20,11 @@ export default defineField({
       description: 'Displayed on front end',
     }),
     defineField({
+      name: 'category',
+      type: 'string',
+      description: 'Used for discounts',
+    }),
+    defineField({
       title: 'Infos',
       name: 'infos',
       type: 'string',
