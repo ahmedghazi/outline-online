@@ -1,0 +1,25 @@
+html body.is-landing {
+  header#main-header {
+    #nav-primary {
+      transition: none;
+      transform: none;
+      a,
+      button,
+      span {
+        pointer-events: none;
+        color: var(--color-gray-100) !important;
+      }
+    }
+  }
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  footer#site-footer {
+    a,
+    button.toggle {
+      color: var(--color-blue);
+    }
+  }
+}

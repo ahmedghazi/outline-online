@@ -8,6 +8,7 @@
     "s": "cd studio && yarn dev",
     "w": "cd web && yarn dev",
     "d": "git add . && git commit -m 'let s gooo' && git push",
+    "d:l": "git add . && git commit -m 'let s gooo' && git push origin landing",
     "d:p": "git add . && git commit -m 'let s gooo' && git push origin preprod",
     "dm": "func() { git add . && git commit -m \"$1\" && git push; }; func",
     "dm:preprod": "func() { git add . && git commit -m \"$1\" && git push origin preprod; }; func"
