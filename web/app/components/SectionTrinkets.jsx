@@ -64,12 +64,8 @@ const TrinketInfo = ({ infos }) => {
 const Scene = (props) => {
   const refGroup = useRef();
   const cameraControlsRef = useRef();
-  // const { camera } = useThree();
-
-  // const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
 
   useEffect(() => {
-    // console.log(refGroup.current);
     window.scroll(0, 1);
     setTimeout(() => {
       window.scroll(0, 0);
@@ -79,17 +75,10 @@ const Scene = (props) => {
         cameraControlsRef.current?.fitToBox(refGroup.current, true);
       }, 1000);
     }, 1000);
-    // setWindowSize({ w: window.innerWidth, h: window.innerHeight });
   }, []);
 
   const distance = 5;
-  // const files = [
-  //   // "/three/Scene.glb",
-  //   "/three/LUPA.glb",
-  //   "/three/KEYCHAIN.glb",
-  //   "/three/KEYCARD.glb",
-  //   "/three/ATHERN.glb",
-  // ];
+
   const items = useMemo(() => {
     return props.input.map((item, i) => {
       return {
@@ -109,7 +98,7 @@ const Scene = (props) => {
       {/* <Bounds fit clip observe margin={1.2}> */}
       <group ref={refGroup}>
         <Suspense fallback={null}>
-          {items.map((item, i) => (
+          {/* {items.map((item, i) => (
             <group key={i}>
               {item._type === "file" && (
                 <Trinket
@@ -129,7 +118,29 @@ const Scene = (props) => {
                 />
               )}
             </group>
-          ))}
+          ))} */}
+          <group>
+            <Trinket
+              file={"/three/LUPA.reset_location.glb"}
+              // initialPosition={[
+              //   _randomNum(distance * 2),
+              //   _randomNum(distance * 2),
+              //   0,
+              // ]}
+              metadata={"test"}
+            />
+          </group>
+          <group>
+            <Trinket
+              file={"/three/LUPA.reset_location_rotation.glb"}
+              // initialPosition={[
+              //   _randomNum(distance * 2),
+              //   _randomNum(distance * 2),
+              //   0,
+              // ]}
+              metadata={"test"}
+            />
+          </group>
         </Suspense>
       </group>
       {/* </Bounds> */}
