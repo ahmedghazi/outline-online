@@ -234,6 +234,11 @@
   }
   .snipcart-cart-summary {
     background-color: transparent;
+    .snipcart-cart-summary__actions {
+      button.snipcart-button-link {
+        display: none;
+      }
+    }
   }
   .snipcart-cart-summary__content {
     padding: 0;
@@ -359,6 +364,11 @@
         z-index: 1;
         // transform: translateY(100%);
       }
+    }
+  }
+  .snipcart-payment-card-form__container {
+    button.snipcart-submit {
+      width: 100%;
     }
   }
 
