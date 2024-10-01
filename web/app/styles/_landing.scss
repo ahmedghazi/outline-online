@@ -3,11 +3,15 @@ html body.is-landing {
     #nav-primary {
       transition: none;
       transform: none;
+      li,
       a,
       button,
       span {
         pointer-events: none;
         color: var(--color-gray-100) !important;
+      }
+      .submenu {
+        // visibility: hidden;
       }
     }
   }

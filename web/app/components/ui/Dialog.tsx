@@ -10,7 +10,16 @@ type Props = {
 const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   const ref = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState<boolean>(false);
+  const [position, setPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
   // console.log("openModal", openModal);
+
+  useEffect(() => {
+    const { innerWidth, innerHeight } = window;
+    setPosition({ x: innerWidth / 2, y: innerHeight / 2 });
+  }, []);
 
   useEffect(() => {
     setOpen(openModal);
@@ -26,7 +35,11 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   }, [open]);
 
   return (
-    <Draggable nodeRef={ref}>
+    <Draggable
+      nodeRef={ref}
+      positionOffset={{ x: "-50%", y: "-50%" }}
+      // defaultPosition={{ x: -position.x, y: -position.y }}
+    >
       <dialog
         ref={ref}
         // onCancel={closeModal}
