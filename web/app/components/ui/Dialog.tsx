@@ -38,6 +38,7 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
     <Draggable
       nodeRef={ref}
       positionOffset={{ x: "-50%", y: "-50%" }}
+      disabled={position.x < 768}
       // defaultPosition={{ x: -position.x, y: -position.y }}
     >
       <dialog

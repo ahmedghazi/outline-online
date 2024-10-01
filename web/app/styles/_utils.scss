@@ -163,9 +163,9 @@ dialog {
   &::backdrop {
     background-color: transparent;
   }
-  @media (max-width: 1080px) {
+  @media (max-width: $md) {
     width: calc(100vw - var(--space-sm)) !important;
-    left: var(--space-sm);
+    // left: var(--space-sm);
   }
   // @include debugSquare(calc(var(--space-md) * 0.96));
   .header {
@@ -181,6 +181,14 @@ dialog {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--space-md);
+      @media (max-width: $md) {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 0;
+        .form-row {
+          display: flex;
+          align-items: baseline;
+        }
+      }
       .form-row {
         // display: flex;
         // align-items: start;
