@@ -50,7 +50,6 @@ const Page: ({ params }: PageProps) => Promise<JSX.Element> = async ({
   if (!data) return <div>please edit page</div>;
   return (
     <div className='template template--home' data-template='home'>
-      {/* <Test3d /> */}
       <ContentHome input={data} />
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </div>
