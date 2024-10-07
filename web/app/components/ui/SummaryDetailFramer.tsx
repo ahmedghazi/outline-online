@@ -40,7 +40,7 @@ const SummaryDetailFramer = ({ summary, detail }: Props) => {
           <div
             className={clsx(
               "icon-arrow transition-transform origin-center",
-              expand && "rotate-90"
+              expand && "rotate-45"
             )}>
             {/* <svg
               width='6'

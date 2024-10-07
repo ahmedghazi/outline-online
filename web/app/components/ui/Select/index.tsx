@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./index.scss";
 import { KeyValString, LicenseSize } from "@/app/types/schema";
-// import { label } from "three/examples/jsm/nodes/Nodes.js";
+import clsx from "clsx";
 
 type Props = {
   label?: string;
@@ -11,16 +11,36 @@ type Props = {
 };
 
 const Select = ({ label, options, onChange, disabled = false }: Props) => {
-  // console.log(JSON.stringify(props.options[0]));
-  // console.log(label, disabled);
+  const [active, setActive] = useState<boolean>(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (active) {
+      document.documentElement.addEventListener("mousedown", _clickOutside);
+    }
+    return () => {
+      document.documentElement.removeEventListener("mousedown", _clickOutside);
+    };
+  }, [active]);
+
+  const _clickOutside = () => {
+    console.log("_clickOutside");
+    setActive(false);
+  };
 
   return (
-    <div className='select-ui'>
+    <div className={clsx("select-ui", active && "is-active")}>
       <select
+        ref={ref as React.RefObject<HTMLSelectElement>}
+        onFocus={(e) => setActive(true)}
+        onBlur={(e) => setActive(false)}
         disabled={disabled}
         onChange={(e) => {
           // console.log(e.target.value);
-          if (e.target.value) onChange(JSON.parse(e.target.value));
+          if (e.target.value) {
+            onChange(JSON.parse(e.target.value));
+            setActive(false);
+          }
         }}
         defaultValue={
           label === "" && options[0] && options[0]._type === "keyValString"

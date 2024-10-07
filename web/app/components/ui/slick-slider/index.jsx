@@ -13,7 +13,7 @@ function SamplePrevArrow(props) {
       className={className}
       style={{ ...style, display: "block" }}
       onClick={onClick}>
-      ◄
+      ◂
     </div>
   );
 }
@@ -24,7 +24,7 @@ function SampleNextArrow(props) {
       className={className}
       style={{ ...style, display: "block" }}
       onClick={onClick}>
-      ►
+      ▸
     </div>
   );
 }

@@ -97,19 +97,14 @@
   }
   &::before {
     --size: 0.3rem;
-    content: "◢";
+    content: "◥";
     position: absolute;
     pointer-events: none;
     left: 8px;
     top: 29%;
   }
-  &::before {
-    // border-top: var(--size) solid transparent;
-    // border-bottom: var(--size) solid transparent;
-    // border-left: var(--size) solid black;
-
-    // top: 50%;
-    // transform: translateY(-50%);
+  &.is-active::before {
+    content: "▴";
   }
 }
 
