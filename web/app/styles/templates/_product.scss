@@ -93,8 +93,12 @@ body[data-template="is-product"],
           text-align: var(--type-textAlign);
           text-transform: var(--type-textTransform);
           column-count: var(--type-columnCount);
+          word-break: break-word;
           -ms-overflow-style: none; /* Internet Explorer 10+ */
           scrollbar-width: none; /* Firefox */
+          &::selection {
+            background-color: var(--color-gray);
+          }
           &::-webkit-scrollbar {
             display: none; /* Safari and Chrome */
           }

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import TesterSize from "./TesterSize";
 import TesterLeading from "./TesterLeading";
 import TesterSpacing from "./TesterSpacing";
@@ -20,6 +20,24 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const [currentStyle, setCurrentStyle] = useState<string | undefined>(
     defaultStyle
   );
+
+  useEffect(() => {
+    ref.current?.addEventListener("paste", _onPaste);
+    return () => {
+      ref.current?.removeEventListener("paste", _onPaste);
+    };
+  }, []);
+
+  const _onPaste = (e: ClipboardEvent) => {
+    e.preventDefault();
+    console.log(e);
+    const clipboardData = e.clipboardData;
+    if (!clipboardData) return;
+    const text = clipboardData.getData("text/plain");
+
+    // // insert text manually
+    document.execCommand("insertHTML", false, text);
+  };
 
   const _stylisticSets = useMemo(() => {
     let arr: KeyValString[] = [];

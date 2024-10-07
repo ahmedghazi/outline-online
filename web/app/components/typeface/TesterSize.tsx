@@ -26,7 +26,7 @@ const TesterSize = ({ initialValue, target }: Props) => {
     // target.style.fontSize = `${size}px`;
     // target.style.lineHeight = `${size}px`;
     target.style.setProperty("--type-textFontSize", `${size}px`);
-    target.style.setProperty("--type-textLineHeight", `${size}px`);
+    // target.style.setProperty("--type-textLineHeight", `${size}px`);
   };
 
   return (
