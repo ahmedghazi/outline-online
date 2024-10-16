@@ -201,11 +201,11 @@ const AddToCart = (props: Props) => {
     },
     url: pathname,
     description: blurb || "",
-    name: `${fullTitle}` || "",
+    name: fullTitle || "",
     quantity: 1,
     stackable: "never",
     shippable: false,
-    categories: "test-license-discount",
+    categories: "License",
     customFields: [..._getDataAttributes()?.data],
     // customFields: [
     //   ..._getDataAttributes(),
@@ -213,7 +213,7 @@ const AddToCart = (props: Props) => {
     // ],
     metadata: JSON.stringify(metadata),
   };
-  // console.log(metadata);
+  console.log(productData);
 
   return (
     <div
@@ -233,12 +233,12 @@ const AddToCart = (props: Props) => {
             type='checkbox'
             name='atc'
             className='snipcart-add-item- '
-            data-item-categories='test-license-discount'
+            data-item-categories='License'
             data-item-id={id || ""}
             data-item-price={price}
             data-item-url={pathname}
             data-item-description={blurb || ""}
-            data-item-name={`${fullTitle}` || ""}
+            data-item-name={fullTitle || ""}
             data-item-min-quantity='1'
             data-item-quantity='1'
             data-item-max-quantity='1'

@@ -390,13 +390,20 @@
       }
     }
   }
-  .snipcart-payment-card-form__container {
-    button.snipcart-submit {
-      border-radius: var(--radius-sm);
-      width: 100%;
-      .snipcart-base-button__icon {
-        right: 0.5em;
-      }
+  // .snipcart-payment-card-form__container {
+  //   button.snipcart-submit {
+  //     border-radius: var(--radius-sm);
+  //     width: 100%;
+  //     .snipcart-base-button__icon {
+  //       right: 0.5em;
+  //     }
+  //   }
+  // }
+  button.snipcart-submit {
+    border-radius: var(--radius-sm);
+    width: 100%;
+    .snipcart-base-button__icon {
+      right: 0.5em;
     }
   }
   .snipcart-cart-summary-item__quantity {
