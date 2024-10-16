@@ -199,7 +199,26 @@
   }
   .snipcart-base-button {
     padding: 0.6em 1em 0.5em;
+    padding: 0.3em;
+    display: block;
+    line-height: unset;
+    width: 100%;
     border-radius: 0;
+    // background-color: red;
+    &,
+    * {
+      line-height: unset !important;
+    }
+    .snipcart-base-button__label {
+      line-height: 1.033 !important;
+
+      padding: unset;
+      margin: unset;
+    }
+    .snipcart-base-button__icon {
+      position: absolute;
+      right: 1em;
+    }
   }
 
   .snipcart-input {
@@ -271,6 +290,7 @@
     justify-content: end;
     .snipcart-featured-payment-methods__title {
       position: static;
+      background-color: transparent;
     }
     .snipcart-featured-payment-methods__list-item {
       padding: 0;
@@ -309,7 +329,9 @@
       position: absolute;
       width: 101%;
       height: 35.2px;
+      height: 21.6px;
       background-color: white;
+      // background-color: red;
       bottom: 0;
       z-index: 0;
     }

@@ -251,14 +251,15 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
   const _handleClickOutside = (e: Event) => {
     console.log("click oustide modal");
     const target = e.target as Element;
+    console.log(target.closest(".snipcart-modal__container"));
     if (!target.closest(".snipcart-modal__container")) {
       // blur();
       const cartClose: HTMLElement = document.querySelector(
         ".snipcart-modal__close"
       ) as HTMLElement;
       if (cartClose) {
-        cartClose.click();
-        publish("BUY_MODAL_ACTIVE", true);
+        // cartClose.click();
+        // publish("BUY_MODAL_ACTIVE", true);
       }
     }
     // const cartClose: HTMLElement = document.querySelector(
