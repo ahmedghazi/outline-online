@@ -390,15 +390,7 @@
       }
     }
   }
-  // .snipcart-payment-card-form__container {
-  //   button.snipcart-submit {
-  //     border-radius: var(--radius-sm);
-  //     width: 100%;
-  //     .snipcart-base-button__icon {
-  //       right: 0.5em;
-  //     }
-  //   }
-  // }
+
   button.snipcart-submit {
     border-radius: var(--radius-sm);
     width: 100%;
@@ -408,6 +400,29 @@
   }
   .snipcart-cart-summary-item__quantity {
     visibility: hidden;
+  }
+  .snipcart-summary-fees__discounts-icon {
+    svg {
+      position: absolute;
+      top: -0.9em;
+      path {
+        fill: black;
+      }
+    }
+  }
+  .snipcart-tool-tip {
+    box-shadow: unset;
+    margin: 0;
+    border-radius: var(--radius-sm);
+    min-width: 25em;
+    top: -1.05em;
+    left: 2em;
+    // background-color: var(--color-muted);
+    background-color: transparent;
+    pointer-events: none;
+    .snipcart-tool-tip__container {
+      padding: 0.4em;
+    }
   }
   /* -----------------
         Colors
