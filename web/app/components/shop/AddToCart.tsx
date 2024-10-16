@@ -205,7 +205,7 @@ const AddToCart = (props: Props) => {
     quantity: 1,
     stackable: "never",
     shippable: false,
-    categories: "License",
+    categories: ["License"],
     customFields: [..._getDataAttributes()?.data],
     // customFields: [
     //   ..._getDataAttributes(),
@@ -213,7 +213,7 @@ const AddToCart = (props: Props) => {
     // ],
     metadata: JSON.stringify(metadata),
   };
-  console.log(productData);
+  // console.log(productData);
 
   return (
     <div
