@@ -68,8 +68,10 @@ export async function getProductsCart(): Promise<Product[]> {
       },
       singles[]{
         _key,
+        _type,
         title,
         price,
+        description,
         typeface->{
           _id,
           title,
@@ -77,8 +79,11 @@ export async function getProductsCart(): Promise<Product[]> {
       },
       bundles[]{
         _key,
+        _type,
         title,
         price,
+        description,
+        descriptionAlt,
         typefaces[]->{
           _id,
           title,

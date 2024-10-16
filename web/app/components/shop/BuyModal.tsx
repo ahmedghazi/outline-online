@@ -56,15 +56,20 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       : input.typeface
       ? [input.typeface]
       : [];
-  console.log(input);
+  // console.log(input.descriptionAlt);
   return (
     <div
       className='item _row grid md:grid-cols-6 cursor-pointer'
       onClick={() => setActive(!active)}>
       <div className='title md:col-span-4'>
-        <div className='md:flex md:gap-sm'>
+        <div className='md:flex md:gap-sm '>
           <div className='title'>{input.title}</div>
-          <div className='desc'>{input.description}</div>
+          <div className='desc flex-2 flex justify-between'>
+            <span className='text-muted'>{input.description}</span>
+            {input._type === "productBundle" && input.descriptionAlt && (
+              <span className='text-green'>{input.descriptionAlt}</span>
+            )}
+          </div>
           {/* <ul className='flex flex-wrap  md:gap-sm text-muted'>
             {input._type === "productBundle" &&
               input.typefaces?.map((_item, j) => (
