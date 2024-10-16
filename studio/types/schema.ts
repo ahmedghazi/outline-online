@@ -802,6 +802,13 @@ export type ProductBundle = {
   description?: string;
 
   /**
+   * Description alt — `string`
+   *
+   * green text after description
+   */
+  descriptionAlt?: string;
+
+  /**
    * Price — `number`
    *
    * Based on base price (licence type + size), ex base price is 60e, this can add 330e, result: 390e

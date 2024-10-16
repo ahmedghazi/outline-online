@@ -56,7 +56,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       : input.typeface
       ? [input.typeface]
       : [];
-
+  console.log(input);
   return (
     <div
       className='item _row grid md:grid-cols-6 cursor-pointer'
@@ -64,14 +64,15 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       <div className='title md:col-span-4'>
         <div className='md:flex md:gap-sm'>
           <div className='title'>{input.title}</div>
-          <ul className='flex flex-wrap  md:gap-sm text-muted'>
+          <div className='desc'>{input.description}</div>
+          {/* <ul className='flex flex-wrap  md:gap-sm text-muted'>
             {input._type === "productBundle" &&
               input.typefaces?.map((_item, j) => (
                 <li key={j} className='whitespace-nowrap'>
                   {_item.title}
                 </li>
               ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
       {/* <Price price={item.price} /> */}
@@ -133,7 +134,7 @@ const CartProduct = ({ input }: CartProductProps) => {
               {input.bundles?.map((item, i) => (
                 <CartProductItem
                   key={i}
-                  title={`${input.title} > ${item.title}`}
+                  title={`${input.title} ${item.title}`}
                   input={item}
                   type='bundle'
                 />
@@ -150,7 +151,7 @@ const CartProduct = ({ input }: CartProductProps) => {
               {input.singles?.map((item, i) => (
                 <CartProductItem
                   key={i}
-                  title={`${input.title} > ${item.title}`}
+                  title={`${input.title} ${item.title}`}
                   input={item}
                   type='single' //style ???
                 />

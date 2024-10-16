@@ -38,12 +38,15 @@
     max-height: 100vh;
     padding-top: var(--header-height);
     z-index: 100;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
   }
 
   .snipcart-layout__content {
     width: 100%;
     padding: 0 var(--space-sm);
     padding: 0;
+    max-width: unset;
   }
   .snipcart-cart-header {
     padding: 0 var(--space-sm);
@@ -389,10 +392,16 @@
   }
   .snipcart-payment-card-form__container {
     button.snipcart-submit {
+      border-radius: var(--radius-sm);
       width: 100%;
+      .snipcart-base-button__icon {
+        right: 0.5em;
+      }
     }
   }
-
+  .snipcart-cart-summary-item__quantity {
+    visibility: hidden;
+  }
   /* -----------------
         Colors
     ----------------- */

@@ -28,6 +28,12 @@ export default defineField({
       name: 'description',
       type: 'string',
     }),
+    defineField({
+      title: 'Description alt',
+      name: 'descriptionAlt',
+      type: 'string',
+      description: 'green text after description',
+    }),
 
     defineField({
       title: 'Price',

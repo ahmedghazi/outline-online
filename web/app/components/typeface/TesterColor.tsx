@@ -5,7 +5,7 @@ type Props = {
 };
 
 const TesterColor = ({ onChange }: Props) => {
-  const [hex, setHex] = useState<string>("");
+  const [hex, setHex] = useState<string>("#000000");
 
   useEffect(() => {
     onChange(hex);
@@ -14,7 +14,9 @@ const TesterColor = ({ onChange }: Props) => {
   return (
     <div className='color-ui'>
       <div className='flex items-center'>
-        <label htmlFor='type-color'>Color:</label>
+        <label htmlFor='type-color' className='pointer-events-none '>
+          Color:
+        </label>
         <input
           type='color'
           id='type-color'
@@ -22,7 +24,7 @@ const TesterColor = ({ onChange }: Props) => {
           value='#000'
           onChange={(e) => setHex(e.target.value)}
         />
-        {hex !== "" && <span className='value'>{hex}</span>}
+        {hex !== "" && <span className='value pointer-events-none'>{hex}</span>}
       </div>
     </div>
   );

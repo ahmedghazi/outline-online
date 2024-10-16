@@ -155,7 +155,7 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState([]);
   const [cartObject, setCartObject] = useState(null);
-
+  console.log(products);
   const [licenseSizeProfil, setLicenseSizeProfil] = useState<
     LabelPrice | any | null
   >(defaultLicense);
@@ -249,9 +249,9 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
   }, [ready]);
 
   const _handleClickOutside = (e: Event) => {
-    console.log("click oustide modal");
+    // console.log("click oustide modal");
     const target = e.target as Element;
-    console.log(target.closest(".snipcart-modal__container"));
+    // console.log(target.closest(".snipcart-modal__container"));
     if (!target.closest(".snipcart-modal__container")) {
       // blur();
       const cartClose: HTMLElement = document.querySelector(

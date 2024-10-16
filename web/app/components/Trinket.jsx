@@ -67,15 +67,15 @@ const Trinket = ({ file, initialPosition, metadata }) => {
           position={_initialPosition}
           onPointerOver={_onPointerOver}
           onPointerOut={_onPointerOut}>
-          <PivotControls>
-            <primitive
-              castShadow={false}
-              ref={primitiveRef}
-              position={[0, 0, 0]}
-              object={scene}
-              scale={[1, 1, 1]}
-            />
-          </PivotControls>
+          {/* <PivotControls> */}
+          <primitive
+            castShadow={false}
+            ref={primitiveRef}
+            position={[0, 0, 0]}
+            object={scene}
+            scale={[0.4, 0.4, 0.4]}
+          />
+          {/* </PivotControls> */}
         </group>
       </DragControls>
     </>

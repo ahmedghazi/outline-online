@@ -44,6 +44,9 @@
     // pointer-events: none;
     // left: 2.3em;
   }
+  input::-webkit-slider-thumb {
+    color: black;
+  }
   .value {
     position: absolute;
     right: 5px;

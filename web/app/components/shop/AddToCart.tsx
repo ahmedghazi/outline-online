@@ -40,6 +40,7 @@ interface ProductData {
   shippable: boolean;
   customFields: any[];
   metadata: string;
+  categories: string;
 }
 
 const AddToCart = (props: Props) => {
@@ -204,6 +205,7 @@ const AddToCart = (props: Props) => {
     quantity: 1,
     stackable: "never",
     shippable: false,
+    categories: "test-license-discount",
     customFields: [..._getDataAttributes()?.data],
     // customFields: [
     //   ..._getDataAttributes(),
@@ -231,6 +233,7 @@ const AddToCart = (props: Props) => {
             type='checkbox'
             name='atc'
             className='snipcart-add-item- '
+            data-item-categories='test-license-discount'
             data-item-id={id || ""}
             data-item-price={price}
             data-item-url={pathname}
