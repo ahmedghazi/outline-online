@@ -127,18 +127,40 @@ const Scene = (props) => {
               //   _randomNum(distance * 2),
               //   0,
               // ]}
-              metadata={"reset_location"}
+              metadata={"LUPA reset_location"}
             />
           </group>
           <group>
             <Trinket
-              file={"/three/LUPA.reset_location_rotation.glb"}
+              file={"/three/ATHERN.reset_location.glb"}
               // initialPosition={[
               //   _randomNum(distance * 2),
               //   _randomNum(distance * 2),
               //   0,
               // ]}
-              metadata={"reset_location_rotation"}
+              metadata={"ATHERN reset_location"}
+            />
+          </group>
+          <group>
+            <Trinket
+              file={"/three/KEYCARD.reset_location.glb"}
+              // initialPosition={[
+              //   _randomNum(distance * 2),
+              //   _randomNum(distance * 2),
+              //   0,
+              // ]}
+              metadata={"KEYCARD reset_location"}
+            />
+          </group>
+          <group>
+            <Trinket
+              file={"/three/KEYCHAIN.reset_location.glb"}
+              // initialPosition={[
+              //   _randomNum(distance * 2),
+              //   _randomNum(distance * 2),
+              //   0,
+              // ]}
+              metadata={"KEYCHAIN reset_location"}
             />
           </group>
         </Suspense>
