@@ -35,14 +35,6 @@ export default defineType({
     }),
 
     defineField({
-      name: 'obj3ds',
-      title: 'Trinkets list',
-      type: 'array',
-      of: [{type: 'obj3d'}],
-      group: 'editorial',
-      hidden: true,
-    }),
-    defineField({
       name: 'trinkets',
       title: 'Trinkets list',
       type: 'array',

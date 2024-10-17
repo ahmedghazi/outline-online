@@ -83,7 +83,7 @@ const Scene = (props) => {
     return props.input.map((item, i) => {
       return {
         _type: item.name ? "file" : "image",
-        file: item.name ? `/three/${item.name}.glb` : "",
+        file: item.name ? `/three/${item.name}.reset_location.glb` : "",
         position: [_randomNum(distance * 2), _randomNum(distance), 0],
         metadata: item.metadata,
         image: item.image ? item.image.asset.url : "",
@@ -98,7 +98,7 @@ const Scene = (props) => {
       {/* <Bounds fit clip observe margin={1.2}> */}
       <group ref={refGroup}>
         <Suspense fallback={null}>
-          {/* {items.map((item, i) => (
+          {items.map((item, i) => (
             <group key={i}>
               {item._type === "file" && (
                 <Trinket
@@ -118,51 +118,35 @@ const Scene = (props) => {
                 />
               )}
             </group>
-          ))} */}
-          <group>
+          ))}
+          {/* <group>
             <Trinket
               file={"/three/LUPA.reset_location.glb"}
-              // initialPosition={[
-              //   _randomNum(distance * 2),
-              //   _randomNum(distance * 2),
-              //   0,
-              // ]}
+
               metadata={"LUPA reset_location"}
             />
           </group>
           <group>
             <Trinket
               file={"/three/ATHERN.reset_location.glb"}
-              // initialPosition={[
-              //   _randomNum(distance * 2),
-              //   _randomNum(distance * 2),
-              //   0,
-              // ]}
+
               metadata={"ATHERN reset_location"}
             />
           </group>
           <group>
             <Trinket
               file={"/three/KEYCARD.reset_location.glb"}
-              // initialPosition={[
-              //   _randomNum(distance * 2),
-              //   _randomNum(distance * 2),
-              //   0,
-              // ]}
+
               metadata={"KEYCARD reset_location"}
             />
           </group>
           <group>
             <Trinket
               file={"/three/KEYCHAIN.reset_location.glb"}
-              // initialPosition={[
-              //   _randomNum(distance * 2),
-              //   _randomNum(distance * 2),
-              //   0,
-              // ]}
+
               metadata={"KEYCHAIN reset_location"}
             />
-          </group>
+          </group> */}
         </Suspense>
       </group>
       {/* </Bounds> */}
