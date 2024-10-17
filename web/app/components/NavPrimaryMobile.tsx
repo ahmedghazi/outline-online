@@ -67,12 +67,7 @@ const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
     <nav ref={ref} id='nav-primary' className='sm-only'>
       <ul className='flex flex-wrap !justify-between '>
         <li className='flex-2 nav-item--home'>
-          <NavLink
-            // input={item.link}
-            href='/'
-            label='Outline Online'
-            depth={0}
-          />
+          <NavLink href='/' label='Outline Online' depth={0} />
         </li>
         <li className='flex-2 nav-shop'>
           <ul className='flex'>
