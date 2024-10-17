@@ -154,7 +154,7 @@ const Scene = (props) => {
       <CameraControls ref={cameraControlsRef} enabled={false} />
       {/* <CameraHelper /> */}
       {/* <axesHelper args={[5]} /> */}
-
+      {/*test */}
       {/* <OrbitControls
       // enableZoom={false}
       // enablePan={false}
