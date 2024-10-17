@@ -56,9 +56,7 @@
     // pointer-events: none;
     // left: 2.3em;
   }
-  input::-webkit-slider-thumb {
-    color: black;
-  }
+
   .value {
     position: absolute;
     right: 5px;
@@ -71,13 +69,24 @@
     background-color: none;
     border: none;
     max-width: calc(100% - 2.5em);
-    &::-moz-range-thumb,
+    max-width: 50px;
+    // &::-moz-range-thumb,
     &::-webkit-slider-thumb {
       appearance: none;
-      background: currentColor;
+      // background: currentColor;
       border: none;
-      width: 7.5px;
-      height: 9px;
+      cursor: pointer;
+      background: black;
+      border-radius: 1em;
+      height: 10px;
+      width: 9px;
+    }
+    ::-moz-range-thumb {
+      background: black;
+      border-radius: 1em;
+      height: 10px;
+      width: 9px;
+      cursor: pointer;
     }
   }
 }
