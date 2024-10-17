@@ -272,6 +272,13 @@ export interface Settings extends SanityDocument {
   navSecondary?: Array<SanityKeyed<LinkInternal> | SanityKeyed<LinkExternal>>;
 
   /**
+   * Naviguation Tertiary — `array`
+   *
+   *
+   */
+  navTertiary?: Array<SanityKeyed<LinkInternal> | SanityKeyed<LinkExternal>>;
+
+  /**
    * licenseSizes — `array`
    *
    *
@@ -347,6 +354,50 @@ export interface PageModulaire extends SanityDocument {
     | SanityKeyed<SliderUI>
     | SanityKeyed<SidebarUI>
   >;
+}
+
+/**
+ * Page
+ *
+ *
+ */
+export interface Page extends SanityDocument {
+  _type: "page";
+
+  /**
+   * seo — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   * Click on generate, Semantic URL based on title (no space no char other than a-z-0-9
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Text — `blockContent`
+   *
+   *
+   */
+  text?: BlockContent;
+
+  /**
+   * textsDropDown — `array`
+   *
+   *
+   */
+  textsDropDown?: Array<SanityKeyed<TextDropDown>>;
 }
 
 /**
@@ -955,9 +1006,7 @@ export type LinkInternal = {
    *
    *
    */
-  link?: SanityReference<
-    Infos | PageModulaire | Home | Product | Licensing | Trials
-  >;
+  link?: SanityReference<Infos | Home | Product | Licensing | Trials | Page>;
 };
 
 export type LinkModal = {
@@ -1171,9 +1220,7 @@ export type Obj3d = {
    *
    *
    */
-  link?: SanityReference<
-    Infos | PageModulaire | Home | Product | Licensing | Trials
-  >;
+  link?: SanityReference<Infos | Home | Product | Licensing | Trials | Page>;
 };
 
 export type Trinket = {
@@ -1216,9 +1263,7 @@ export type Trinket = {
    *
    *
    */
-  link?: SanityReference<
-    Infos | PageModulaire | Home | Product | Licensing | Trials
-  >;
+  link?: SanityReference<Infos | Home | Product | Licensing | Trials | Page>;
 };
 
 export type TextDropDown = {
@@ -1368,6 +1413,7 @@ export type Documents =
   | Trials
   | Settings
   | PageModulaire
+  | Page
   | Tag
   | Product
   | Typeface

@@ -1,8 +1,9 @@
 import React from "react";
-import { Infos, Licensing } from "../types/schema";
+import { Licensing } from "../types/schema";
 import { PortableText } from "next-sanity";
 import portableTextComponents from "../utils/portableTextComponents";
 import SummaryDetailFramer from "./ui/SummaryDetailFramer";
+import NavTertiary from "./NavTertiary";
 
 type Props = {
   input: Licensing;
@@ -72,6 +73,8 @@ const ContentLicensing = ({ input }: Props) => {
           </div>
         </div>
       </div>
+      <NavTertiary />
+
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
     </div>
   );

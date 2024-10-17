@@ -1,35 +1,29 @@
 "use client";
-import React, {
-  createContext,
-  useContext,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { Settings } from "../types/schema";
 import useDeviceDetect from "../hooks/useDeviceDetect";
-// import { getSettings } from "../utils/sanity-queries";
 
-const PageContext = createContext({});
+// const PageContext = createContext({});
+
+type ContextProps = {
+  settings: Settings;
+};
+
+const PageContext = createContext<ContextProps>({} as ContextProps);
 
 interface PageContextProps {
-  // location?: object;
   children: ReactNode;
-  // pageContext: object;
+  settings: Settings;
 }
 
 export const PageContextProvider = (props: PageContextProps) => {
-  const { children } = props;
+  const { children, settings } = props;
   const pathname = usePathname();
-  // console.log(pathname);
-  const [isInfos, setIsInfos] = useState<boolean>(false);
-  const settings = {
-    pathname,
-  };
   const { browser } = useDeviceDetect();
 
   useEffect(() => {
-    console.log(browser);
+    // console.log(browser);
     _format();
     _handlePageTemplate();
     window.addEventListener("resize", _format);
@@ -89,19 +83,12 @@ export const PageContextProvider = (props: PageContextProps) => {
       // console.log(template);
 
       document.body.dataset.template = `is-${template}`;
-      // document.body.classList.remove("is-loading");
-      // setTimeout(() => {}, 1000);
     }
   };
 
   return (
-    <PageContext.Provider value={{ settings, isInfos, setIsInfos }}>
-      {children}
-    </PageContext.Provider>
+    <PageContext.Provider value={{ settings }}>{children}</PageContext.Provider>
   );
 };
-
-// export default PageContext;
-// export { PageContext, PageContextProvider };
 
 export const usePageContext = () => useContext(PageContext);

@@ -14,6 +14,8 @@ export const _linkResolver = (
   switch (node._type) {
     case "product":
       return `/product/${node.slug?.current}`;
+    case "page":
+      return `/page/${node.slug?.current}`;
 
     default:
       return `/${node.slug?.current}`;

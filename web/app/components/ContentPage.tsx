@@ -1,26 +1,26 @@
 import React from "react";
-import { Infos } from "../types/schema";
+import { Page, Settings } from "../types/schema";
 import { PortableText } from "next-sanity";
 import portableTextComponents from "../utils/portableTextComponents";
 import SummaryDetailFramer from "./ui/SummaryDetailFramer";
 import NavTertiary from "./NavTertiary";
 
 type Props = {
-  input: Infos;
+  input: Page;
 };
 
-const ContentInfos = ({ input }: Props) => {
+const ContentPage = ({ input }: Props) => {
   return (
-    <div className='content content--infos pt-header-height px-sm md:px-lg'>
+    <div className='content content--page pt-header-height px-sm md:px-lg'>
       <div className='grid md:grid-cols-8 gap-md'>
-        <div className='md:col-span-5 md:col-start-4 mb-lg'>
-          {input.about && (
+        <div className='md:col-span-5 md:col-start-4 '>
+          {input.text && (
             <div className='grid md:grid-cols-5 gap-md'>
-              <h2 className='md:col-span-2'>ABOUT</h2>
+              <h1 className='md:col-span-2'>{input.title}</h1>
               <div className='md:col-span-3'>
                 <div className='text'>
                   <PortableText
-                    value={input.about}
+                    value={input.text}
                     components={portableTextComponents}
                   />
                 </div>
@@ -28,7 +28,7 @@ const ContentInfos = ({ input }: Props) => {
             </div>
           )}
         </div>
-        <div className='md:col-span-5 md:col-start-4 mb-xl'>
+        <div className='md:col-span-5 md:col-start-4'>
           {input.textsDropDown &&
             input.textsDropDown.map((item, i) => (
               <div className='item' key={i}>
@@ -48,29 +48,11 @@ const ContentInfos = ({ input }: Props) => {
               </div>
             ))}
         </div>
-        {input.colophon && (
-          <div className='md:col-span-4'>
-            {input.colophon.map((item, i) => (
-              <div className='item grid md:grid-cols-4 gap-md mb-md' key={i}>
-                <div className='key'>{item.key}</div>
-                <div className='text md:col-span-2'>
-                  {item.val && (
-                    <PortableText
-                      value={item.val}
-                      components={portableTextComponents}
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
       <NavTertiary />
-
-      {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(settings, null, 2)}</pre> */}
     </div>
   );
 };
 
-export default ContentInfos;
+export default ContentPage;

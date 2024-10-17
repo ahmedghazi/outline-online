@@ -31,21 +31,21 @@ interface ShopContextProps {
 }
 
 // An enum with all the types of actions to use in our reducer
-enum CountActionKind {
-  INCREASE = "INCREASE",
-  DECREASE = "DECREASE",
-}
+// enum CountActionKind {
+//   INCREASE = "INCREASE",
+//   DECREASE = "DECREASE",
+// }
 
-// An interface for our actions
-interface CountAction {
-  type: CountActionKind;
-  payload: number;
-}
+// // An interface for our actions
+// interface CountAction {
+//   type: CountActionKind;
+//   payload: number;
+// }
 
-// An interface for our state
-interface CountState {
-  count: number;
-}
+// // An interface for our state
+// interface CountState {
+//   count: number;
+// }
 
 interface ProductData {
   id: string;
@@ -155,7 +155,7 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState([]);
   const [cartObject, setCartObject] = useState(null);
-  console.log(products);
+  // console.log(products);
   const [licenseSizeProfil, setLicenseSizeProfil] = useState<
     LabelPrice | any | null
   >(defaultLicense);

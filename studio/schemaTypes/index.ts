@@ -4,6 +4,7 @@ import licensing from './singletons/licensing'
 import trials from './singletons/trials'
 import settings from './singletons/settings'
 import pageModulaire from './documents/pageModulaire'
+import page from './documents/page'
 import tag from './documents/tag'
 import linkExpire from './documents/linkExpire'
 
@@ -51,6 +52,7 @@ export const schemaTypes = [
   trials,
   settings,
   pageModulaire,
+  page,
   tag,
   product,
   typeface,

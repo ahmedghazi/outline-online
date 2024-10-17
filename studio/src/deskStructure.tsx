@@ -16,10 +16,12 @@ const hiddenDocTypes = (listItem: any) => {
     'licensing',
     'trials',
     'pageModulaire',
+    'page',
     'tag',
     'product',
     'typeface',
     'settings',
+    'linkExpire',
     'media.tag',
   ].includes(id)
 }
@@ -58,6 +60,9 @@ export const structure = (S) =>
         .title('Trials')
         .schemaType('trials')
         .child(S.editor().title('Trials').schemaType('trials').documentId('trials')),
+      S.divider(),
+
+      S.listItem().title('Pages').schemaType('page').child(S.documentTypeList('page')),
 
       // S.listItem()
       //   .title('Pages (Modulaire)')

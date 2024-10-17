@@ -1,7 +1,7 @@
 const website = {
   pathPrefix: "/", // Prefix for all links. If you deploy your site to example.com/portfolio your pathPrefix should be "portfolio"
-  title: "Site Name", // Navigation and Site Title
-  titleAlt: "SN", // Title for JSONLD
+  title: "Outline Online", // Navigation and Site Title
+  titleAlt: "OO", // Title for JSONLD
   description: "...",
   headline: "", // Headline for schema.org JSONLD
   url: "https://aaa.fr", // Domain of your site. No trailing slash!

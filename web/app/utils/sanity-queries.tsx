@@ -4,6 +4,7 @@ import {
   Home,
   Infos,
   Licensing,
+  Page,
   Product,
   Settings,
   Trials,
@@ -39,6 +40,16 @@ export async function getSettings(): Promise<Settings> {
         }
       },
       navSecondary[]{
+        ...,
+        _type == 'linkInternal' => {
+          ...,
+          link->{
+            _type,
+            slug
+          }
+        }
+      },
+      navTertiary[]{
         ...,
         _type == 'linkInternal' => {
           ...,
@@ -208,4 +219,19 @@ export const productQuery = groq`*[_type == "product" && slug.current == $slug][
 
 export async function getProduct(slug: string): Promise<Product> {
   return cachedClient(productQuery, { slug: slug });
+}
+
+/**
+ * PAGE
+ *
+ */
+export const pageQuery = groq`*[_type == "page" && slug.current == $slug][0]{
+  ...,
+  seo{
+    ${seo}
+  }
+}`;
+
+export async function getPage(slug: string): Promise<Page> {
+  return cachedClient(pageQuery, { slug: slug });
 }

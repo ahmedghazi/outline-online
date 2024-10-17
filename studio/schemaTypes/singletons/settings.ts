@@ -95,6 +95,20 @@ export default defineType({
       ],
       group: 'footer',
     }),
+    defineField({
+      name: 'navTertiary',
+      title: 'Naviguation Tertiary',
+      type: 'array',
+      of: [
+        {
+          type: 'linkInternal',
+        },
+        {
+          type: 'linkExternal',
+        },
+      ],
+      group: 'footer',
+    }),
 
     defineField({
       name: 'licenseSizes',

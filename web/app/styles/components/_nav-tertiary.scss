@@ -1,0 +1,7 @@
+#nav-tertiary {
+  position: fixed;
+  bottom: calc(var(--footer-height) + 0.2em);
+  left: 0;
+  padding: 0 var(--space-lg);
+  width: 100%;
+}
