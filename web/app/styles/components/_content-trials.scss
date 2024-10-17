@@ -43,6 +43,9 @@
       label {
         justify-content: end;
       }
+      input:checked ~ .checkmark {
+        background-color: white;
+      }
     }
   }
   .infos {
