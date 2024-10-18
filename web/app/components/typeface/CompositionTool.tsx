@@ -97,7 +97,27 @@ const CompositionTool = ({ input, pangram }: Props) => {
       </button>
       <div className='modal'>
         <button className='btn-close' onClick={() => setActive(false)}>
-          ╳
+          <svg
+            width='27'
+            height='26'
+            viewBox='0 0 27 26'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'>
+            <line
+              x1='0.353553'
+              y1='0.646447'
+              x2='25.2254'
+              y2='25.5183'
+              stroke='#FF0000'
+            />
+            <line
+              x1='1.35152'
+              y1='25.6464'
+              x2='26.1385'
+              y2='0.859436'
+              stroke='#FF0000'
+            />
+          </svg>
         </button>
 
         <div className='inner'>
