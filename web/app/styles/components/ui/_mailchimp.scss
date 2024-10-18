@@ -4,11 +4,22 @@
     font-size: 18px;
   }
   form {
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     input {
       line-height: 1;
+      border: none;
+      margin: 0;
     }
     button[type="submit"] {
       margin-top: calc(var(--space-md) * 0.8);
+      width: 100%;
+      height: auto;
+      padding: 0.3em;
+      display: block;
+      line-height: unset;
       // background-color: var(--color-gray-25);
       // color: #707077;
     }
