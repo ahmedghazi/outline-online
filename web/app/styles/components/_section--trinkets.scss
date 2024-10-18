@@ -1,6 +1,8 @@
 .section--trinkets {
   background-color: white;
   position: relative;
+  padding-top: var(--header-height);
+  padding-bottom: var(--footer-height);
   .infos {
     position: absolute;
     top: 0%;

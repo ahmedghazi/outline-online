@@ -70,7 +70,12 @@ const Scene = (props) => {
     setTimeout(() => {
       window.scroll(0, 0);
 
-      cameraControlsRef.current?.fitToBox(refGroup.current, true);
+      cameraControlsRef.current?.fitToBox(refGroup.current, true, {
+        paddingTop: 150,
+        paddingLeft: 150,
+        paddingBottom: 150,
+        paddingRight: 150,
+      });
       setTimeout(() => {
         cameraControlsRef.current?.fitToBox(refGroup.current, true);
       }, 1000);
