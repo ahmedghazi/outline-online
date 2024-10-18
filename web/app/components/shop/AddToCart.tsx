@@ -183,6 +183,9 @@ const AddToCart = (props: Props) => {
   };
   // console.log(productData);
 
+  const categoriesClean = categories
+    ? categories.toString().replace(",", "|")
+    : "";
   return (
     <div
       className='add-to-cart cursor-pointer'
@@ -201,7 +204,7 @@ const AddToCart = (props: Props) => {
             type='checkbox'
             name='atc'
             className='snipcart-add-item- '
-            data-item-categories={categories?.toString()}
+            data-item-categories={categoriesClean}
             data-item-id={id || ""}
             data-item-price={price}
             data-item-url={pathname}

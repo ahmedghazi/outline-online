@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 
 const Cart = () => {
   const [count, setCount] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false);
   const cartRef = useRef<HTMLDivElement>(null);
   const { cartObject } = useShop();
   const pathname = usePathname();
@@ -56,10 +57,24 @@ const Cart = () => {
     if (btnClose) btnClose.click();
   };
 
+  useEffect(() => {
+    _toggle();
+  }, [open]);
+
+  const _toggle = () => {
+    if (!window.Snipcart) return;
+    if (open) {
+      window.Snipcart.api.theme.cart.open();
+    } else {
+      window.Snipcart.api.theme.cart.close();
+    }
+  };
+
   return (
     <div className='cart' ref={cartRef}>
       <button
-        className='btn--cart snipcart-checkout'
+        onClick={() => setOpen(!open)}
+        className='btn--cart snipcart-checkout-'
         aria-label='open cart'
         title='open cart'>
         <span className='label'>CART</span>
