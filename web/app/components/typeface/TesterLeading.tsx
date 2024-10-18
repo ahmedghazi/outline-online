@@ -31,7 +31,7 @@ const TesterLeading = ({ initialValue, target }: Props) => {
           type='range'
           name='height'
           value={height}
-          min='14'
+          min='-14'
           max='150'
           step='1'
           onChange={(e) => setHeight(e.target.value)}

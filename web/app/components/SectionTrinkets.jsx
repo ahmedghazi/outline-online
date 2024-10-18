@@ -55,6 +55,7 @@ const TrinketInfo = ({ infos }) => {
       className='infos'
       style={{
         transform: transform,
+        opacity: transform !== "" ? 1 : 0,
       }}>
       {infos}
     </div>
