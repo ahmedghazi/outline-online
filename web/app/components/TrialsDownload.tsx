@@ -20,18 +20,19 @@ const TrialsDownload = (props: Props) => {
   const [okToSend, setOkToSend] = useState<boolean>(true);
   const [state, setState] = useState<any[string]>([]);
   const [status, setStatus] = useState<string>("");
+  const [agree, setAgree] = useState<boolean>(false);
   const { trials } = useShop();
   const groups = [
     {
-      title: "LICENCEE INFORMATION",
+      title: "CONTACT",
       fields: [
+        { type: "email", name: "email", placzeholder: "Email", required: true },
         {
           type: "text",
           name: "website",
           placzeholder: "Website",
           required: false,
         },
-        { type: "email", name: "email", placzeholder: "Email", required: true },
       ],
     },
 
@@ -56,48 +57,16 @@ const TrialsDownload = (props: Props) => {
     {
       title: "COMPANY",
       fields: [
-        { type: "text", name: "name", placzeholder: "Name", required: false },
         {
           type: "text",
-          name: "location",
+          name: "company_name",
+          placzeholder: "Name",
+          required: false,
+        },
+        {
+          type: "text",
+          name: "company_location",
           placzeholder: "Location",
-          required: false,
-        },
-      ],
-    },
-
-    {
-      title: "ADDRESS",
-      fields: [
-        {
-          type: "text",
-          name: "postbox",
-          placzeholder: "Postbox",
-          required: false,
-        },
-        {
-          type: "text",
-          name: "street",
-          placzeholder: "Street",
-          required: false,
-        },
-        {
-          type: "text",
-          name: "zipcode",
-          placzeholder: "ZIP Code",
-          required: false,
-        },
-        { type: "text", name: "city", placzeholder: "City", required: false },
-        {
-          type: "text",
-          name: "county",
-          placzeholder: "County",
-          required: false,
-        },
-        {
-          type: "text",
-          name: "country",
-          placzeholder: "Country",
           required: false,
         },
       ],
@@ -190,7 +159,7 @@ const TrialsDownload = (props: Props) => {
                     <input
                       type={field.type}
                       name={field.name}
-                      placeholder={field.placzeholder}
+                      // placeholder={field.placzeholder}
                       required={field.required}
                       role='textbox'
                       onChange={({ target }) => {
@@ -216,11 +185,13 @@ const TrialsDownload = (props: Props) => {
           <div className='form-row'>
             <Checkbox
               name={"Subscribe to Outline Online Newsletter!"}
-              onChange={(checked: boolean) => {}}
+              onChange={(checked: boolean) => {
+                setAgree(checked);
+              }}
             />
           </div>
         </div>
-        {okToSend && (
+        {okToSend && agree && (
           <div className='footer'>
             <button type='submit'>{getButtonMsg()}</button>
           </div>
