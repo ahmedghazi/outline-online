@@ -170,7 +170,7 @@ const AddToCart = (props: Props) => {
     url: pathname,
     description: blurb || "",
     name: fullTitle || "",
-    categories: [categories],
+    categories: categories,
     quantity: 1,
     stackable: "never",
     shippable: false,
@@ -181,7 +181,7 @@ const AddToCart = (props: Props) => {
     // ],
     metadata: JSON.stringify(metadata),
   };
-  // console.log(productData);
+  console.log(productData);
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")
