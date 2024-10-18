@@ -56,10 +56,10 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       : input.typeface
       ? [input.typeface]
       : [];
-  // console.log(input);
+  console.log(input);
   return (
     <div
-      className='item _row grid md:grid-cols-6 cursor-pointer'
+      className='item _row grid md:grid-cols-6 gap-md cursor-pointer'
       onClick={() => setActive(!active)}>
       <div className='title md:col-span-4'>
         <div className='md:flex md:gap-sm '>
@@ -81,6 +81,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
           blurb={""}
           categories={input.categories || []}
           price={input.price || 20000000000}
+          priceCrossed={input.priceCrossed}
           metadata={{
             type: type,
             typefaces: typefaces,

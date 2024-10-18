@@ -17,6 +17,7 @@ type MetadataProps = {
 type Props = {
   id: string;
   price: number;
+  priceCrossed: number | undefined;
   title: string;
   fullTitle: string;
   blurb: string;
@@ -46,6 +47,7 @@ type Props = {
 const AddToCart = (props: Props) => {
   const {
     price,
+    priceCrossed,
     title,
     fullTitle,
     blurb,
@@ -181,7 +183,7 @@ const AddToCart = (props: Props) => {
     // ],
     metadata: JSON.stringify(metadata),
   };
-  console.log(productData);
+  // console.log(productData);
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")
@@ -193,7 +195,7 @@ const AddToCart = (props: Props) => {
         setActive(!active);
       }}>
       <div className='flex justify-between'>
-        <Price priceCrossed={price} price={finalPrice} />
+        <Price priceCrossed={priceCrossed} price={finalPrice} />
 
         <div className='checkbox-ui'>
           <input

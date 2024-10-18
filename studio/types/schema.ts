@@ -867,6 +867,13 @@ export type ProductBundle = {
   price?: number;
 
   /**
+   * Price crossed — `number`
+   *
+   * Displayed in buy modal
+   */
+  priceCrossed?: number;
+
+  /**
    * Typefaces — `array`
    *
    *
@@ -924,6 +931,13 @@ export type ProductSingle = {
    * Based on base price (licence type + size), ex base price is 50 CHF, this can add 60 CHF, result: 110 CHF
    */
   price?: number;
+
+  /**
+   * Price crossed — `number`
+   *
+   * Displayed in buy modal
+   */
+  priceCrossed?: number;
 
   /**
    * Typeface — `reference`

@@ -6,11 +6,14 @@ type Props = {
 };
 
 const Price = ({ price, priceCrossed }: Props) => {
+  console.log(price, priceCrossed);
+  const displayPriceCrossed = priceCrossed && priceCrossed > 0;
   return (
-    <div className='price  flex gap-sm'>
-      {/* <span>FROM</span> */}
-      <span className={priceCrossed ? "price--crossed" : ""}>{price} CHF</span>
-      {/* {priceCrossed && <span className=''>{priceCrossed} CHF</span>} */}
+    <div className='price  grid grid-cols-2 gap-sm'>
+      <span className='w-[70px]'>{price} CHF</span>
+      {displayPriceCrossed && (
+        <span className='text-muted line-through'>{priceCrossed} CHF</span>
+      )}
     </div>
   );
 };
