@@ -26,10 +26,15 @@
     padding: var(--space-sm);
     padding-bottom: var(--space-md);
 
-    .select-ui select {
-      background-color: var(--color-gray-50);
-      @media all and (max-width: $md) {
-        min-width: toRem(183);
+    .select-ui {
+      &::before {
+        content: "◢";
+      }
+      select {
+        background-color: var(--color-gray-50);
+        @media all and (max-width: $md) {
+          min-width: toRem(183);
+        }
       }
     }
   }
