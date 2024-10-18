@@ -56,7 +56,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       : input.typeface
       ? [input.typeface]
       : [];
-  // console.log(input.descriptionAlt);
+  console.log(input);
   return (
     <div
       className='item _row grid md:grid-cols-6 cursor-pointer'
@@ -70,14 +70,6 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
               <span className='text-green'>{input.descriptionAlt}</span>
             )}
           </div>
-          {/* <ul className='flex flex-wrap  md:gap-sm text-muted'>
-            {input._type === "productBundle" &&
-              input.typefaces?.map((_item, j) => (
-                <li key={j} className='whitespace-nowrap'>
-                  {_item.title}
-                </li>
-              ))}
-          </ul> */}
         </div>
       </div>
       {/* <Price price={item.price} /> */}
@@ -87,6 +79,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
           title={input.title || ""}
           fullTitle={title || ""}
           blurb={""}
+          categories={input.categories || []}
           price={input.price || 20000000000}
           metadata={{
             type: type,

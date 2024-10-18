@@ -72,13 +72,6 @@ export interface Home extends SanityDocument {
    *
    *
    */
-  obj3ds?: Array<SanityKeyed<Obj3d>>;
-
-  /**
-   * Trinkets list — `array`
-   *
-   *
-   */
   trinkets?: Array<SanityKeyed<Trinket>>;
 
   /**
@@ -869,6 +862,13 @@ export type ProductBundle = {
   descriptionAlt?: string;
 
   /**
+   * categories — `array`
+   *
+   * Used for discounts
+   */
+  categories?: Array<SanityKeyed<string>>;
+
+  /**
    * Price — `number`
    *
    * Based on base price (licence type + size), ex base price is 60e, this can add 330e, result: 390e
@@ -912,6 +912,20 @@ export type ProductSingle = {
    *
    */
   description?: string;
+
+  /**
+   * Description alt — `string`
+   *
+   * green text after description
+   */
+  descriptionAlt?: string;
+
+  /**
+   * categories — `array`
+   *
+   * Used for discounts
+   */
+  categories?: Array<SanityKeyed<string>>;
 
   /**
    * Price — `number`

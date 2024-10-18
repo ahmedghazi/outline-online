@@ -23,7 +23,21 @@ export default defineField({
       name: 'description',
       type: 'string',
     }),
-
+    defineField({
+      title: 'Description alt',
+      name: 'descriptionAlt',
+      type: 'string',
+      description: 'green text after description',
+    }),
+    defineField({
+      name: 'categories',
+      description: 'Used for discounts',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags',
+      },
+    }),
     defineField({
       title: 'Price',
       name: 'price',

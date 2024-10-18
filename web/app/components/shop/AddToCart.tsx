@@ -20,7 +20,7 @@ type Props = {
   title: string;
   fullTitle: string;
   blurb: string;
-  category?: string;
+  categories?: string[];
   metadata: MetadataProps;
   defaultActive: boolean;
   // url: string;
@@ -28,20 +28,20 @@ type Props = {
   // dataattributes: Array<string> | null;
 };
 
-interface ProductData {
-  id: string;
-  price: number;
-  alternatePrices: any;
-  url: string;
-  description: string;
-  name: string;
-  quantity: number;
-  stackable: string;
-  shippable: boolean;
-  customFields: any[];
-  metadata: string;
-  categories: string;
-}
+// interface ProductData {
+//   id: string;
+//   price: number;
+//   alternatePrices: any;
+//   url: string;
+//   description: string;
+//   name: string;
+//   quantity: number;
+//   stackable: string;
+//   shippable: boolean;
+//   customFields: any[];
+//   metadata: string;
+//   categories: string;
+// }
 
 const AddToCart = (props: Props) => {
   const {
@@ -49,7 +49,7 @@ const AddToCart = (props: Props) => {
     title,
     fullTitle,
     blurb,
-    category,
+    categories,
     id,
     metadata,
     defaultActive,
@@ -161,38 +161,6 @@ const AddToCart = (props: Props) => {
     }
   }, [active]);
 
-  // const _theProductID = () => {
-  //   if (!currentProduct) return "xxx";
-  //   const title = currentProduct.slug ? currentProduct.slug.current : "xxx";
-  //   let id = title.replace(" ", "-").toLowerCase();
-  //   id += "-";
-  //   id += currentProduct.title?.replace(" ", "-").toLowerCase();
-  //   return id;
-  // };
-
-  // const _addToCart = async () => {
-  //   //https://docs.snipcart.com/v3/sdk/api#cart
-  //   // console.log(products)
-  //   setButtonStatus("Adding...");
-  //   try {
-  //     // const productsToAdd = ''
-  //     // await Snipcart.api.cart.items.add(products)
-  //     await Promise.all(
-  //       products.map(async (product) => {
-  //         console.log(product);
-  //         await window.Snipcart.api.cart.items.add(product);
-  //       })
-  //     );
-  //     // products.forEach(product => {})
-
-  //     // console.log(products.toString())
-  //     await window.Snipcart.api.theme.cart.open();
-  //     setButtonStatus("Add");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // console.log(dataAttributes);
   const productData = {
     id: id || "",
     price: price.toFixed(2),
@@ -202,10 +170,10 @@ const AddToCart = (props: Props) => {
     url: pathname,
     description: blurb || "",
     name: fullTitle || "",
+    categories: [categories],
     quantity: 1,
     stackable: "never",
     shippable: false,
-    categories: ["License"],
     customFields: [..._getDataAttributes()?.data],
     // customFields: [
     //   ..._getDataAttributes(),
@@ -233,7 +201,7 @@ const AddToCart = (props: Props) => {
             type='checkbox'
             name='atc'
             className='snipcart-add-item- '
-            data-item-categories='License'
+            data-item-categories={categories?.toString()}
             data-item-id={id || ""}
             data-item-price={price}
             data-item-url={pathname}
