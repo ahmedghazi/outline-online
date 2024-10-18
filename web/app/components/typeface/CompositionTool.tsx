@@ -123,13 +123,14 @@ const CompositionTool = ({ input, pangram }: Props) => {
           <div className='footer '>
             <TesterSize initialValue='28' target={ref.current} />
             <TesterSpacing initialValue='0' target={ref.current} />
-            <TesterLeading initialValue='28' target={ref.current} />
+            <TesterLeading initialValue='0' target={ref.current} />
 
             {_styles && _styles.length > 0 && (
               <Select
                 options={_styles}
                 onChange={_handleStyles}
-                label='Family'
+                // label='Family'
+                label=''
               />
             )}
 

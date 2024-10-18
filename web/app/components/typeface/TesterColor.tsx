@@ -8,13 +8,14 @@ const TesterColor = ({ onChange }: Props) => {
   const [hex, setHex] = useState<string>("#000000");
 
   useEffect(() => {
+    console.log(hex);
     onChange(hex);
   }, [hex]);
 
   return (
     <div className='color-ui'>
       <div className='flex items-center'>
-        <label htmlFor='type-color' className='pointer-events-none '>
+        <label htmlFor='type-color' className='pointer-events-none- '>
           Color:
         </label>
         <input

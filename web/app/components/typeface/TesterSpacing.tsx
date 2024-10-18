@@ -33,8 +33,8 @@ const TesterSpacing = ({ initialValue, target }: Props) => {
           type='range'
           name='size'
           value={size}
-          min='-14'
-          max='14'
+          min='-204'
+          max='500'
           step='1'
           onChange={(e) => setSize(e.target.value)}
           className='mx-xs'

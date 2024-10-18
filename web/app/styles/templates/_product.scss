@@ -106,7 +106,7 @@ body[data-template="is-product"],
         .btn-close {
           position: absolute;
           left: 50%;
-          bottom: calc(var(--footer-height) + 0.4em);
+          bottom: calc(var(--footer-height) - 0.8em);
           transform: translateX(-50%);
           color: red;
           z-index: 20;
@@ -119,6 +119,7 @@ body[data-template="is-product"],
           position: absolute;
           bottom: 0;
           padding: var(--footer-height) var(--space-lg);
+          padding-bottom: toRem(11);
         }
       }
     }
