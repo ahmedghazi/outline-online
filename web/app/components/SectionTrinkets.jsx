@@ -125,34 +125,6 @@ const Scene = (props) => {
               )}
             </group>
           ))}
-          {/* <group>
-            <Trinket
-              file={"/three/LUPA.reset_location.glb"}
-
-              metadata={"LUPA reset_location"}
-            />
-          </group>
-          <group>
-            <Trinket
-              file={"/three/ATHERN.reset_location.glb"}
-
-              metadata={"ATHERN reset_location"}
-            />
-          </group>
-          <group>
-            <Trinket
-              file={"/three/KEYCARD.reset_location.glb"}
-
-              metadata={"KEYCARD reset_location"}
-            />
-          </group>
-          <group>
-            <Trinket
-              file={"/three/KEYCHAIN.reset_location.glb"}
-
-              metadata={"KEYCHAIN reset_location"}
-            />
-          </group> */}
         </Suspense>
       </group>
       {/* </Bounds> */}
@@ -189,7 +161,11 @@ const SectionTrinkets = (props) => {
   return (
     <section className='section--trinkets h-screen'>
       <Canvas orthographic camera={{ position: [0, 0, 5], fov: 60 }}>
-        <Stage preset='rembrandt' intensity={1} environment='city'>
+        <Stage
+          preset='rembrandt'
+          intensity={1}
+          environment='city'
+          shadows={false}>
           <Scene input={props.input} />
         </Stage>
       </Canvas>
