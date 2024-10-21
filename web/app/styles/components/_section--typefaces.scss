@@ -41,8 +41,12 @@
       .select-ui {
         min-width: toRem(188);
         width: toRem(188);
+        &::before {
+          content: "◢";
+        }
         select {
           width: toRem(188);
+          background-color: var(--color-gray-50);
         }
       }
     }
