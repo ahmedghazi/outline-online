@@ -4,4 +4,9 @@
   left: 0;
   padding: 0 var(--space-lg);
   width: 100%;
+
+  @media all and (max-width: $md) {
+    position: initial;
+    padding: 0;
+  }
 }
