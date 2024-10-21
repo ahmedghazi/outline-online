@@ -131,7 +131,15 @@
     content: "▴";
   }
 }
-
+.is-chrome .select-ui {
+  &::before {
+    top: 24%;
+  }
+  select {
+    // background-color: red;
+    padding: 0.4em 2.5em 0.4em 1.5rem;
+  }
+}
 .color-ui {
   display: flex;
   align-items: center;
