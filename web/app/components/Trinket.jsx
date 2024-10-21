@@ -18,7 +18,7 @@ import { _randomNum } from "../utils/utils";
 //https://www.youtube.com/watch?v=tBSbgRRpNzI
 // const state = proxy({ current: null, mode: 0 });
 
-const Trinket = ({ file, initialPosition, metadata }) => {
+const Trinket = ({ file, initialPosition, metadata, scale }) => {
   const { scene } = useGLTF(file);
   const group = useRef();
   const primitiveRef = useRef();
@@ -73,7 +73,7 @@ const Trinket = ({ file, initialPosition, metadata }) => {
             ref={primitiveRef}
             position={[0, 0, 0]}
             object={scene}
-            scale={[0.4, 0.4, 0.4]}
+            scale={scale}
           />
           {/* </PivotControls> */}
         </group>

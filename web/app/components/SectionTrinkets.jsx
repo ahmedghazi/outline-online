@@ -24,6 +24,7 @@ import TrinketImage from "./TrinketImage";
 
 import { subscribe, unsubscribe } from "pubsub-js";
 import { _shuffle, _randomNum } from "../utils/utils";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 // import { metadata } from "../layout";
 
 //https://gltf.pmnd.rs/
@@ -65,6 +66,7 @@ const TrinketInfo = ({ infos }) => {
 const Scene = (props) => {
   const refGroup = useRef();
   const cameraControlsRef = useRef();
+  const { isMobile } = useDeviceDetect();
 
   useEffect(() => {
     window.scroll(0, 1);
@@ -112,6 +114,7 @@ const Scene = (props) => {
                   file={item.file}
                   initialPosition={item.position}
                   metadata={item.metadata}
+                  scale={isMobile ? [0.7, 0.7, 0.7] : [0.4, 0.4, 0.4]}
                 />
               )}
               {item._type === "image" && (
@@ -143,11 +146,10 @@ const Scene = (props) => {
 };
 
 const SectionTrinkets = (props) => {
-  const [ready, setReady] = useState(false);
+  // const [ready, setReady] = useState(false);
   const [infos, setInfos] = useState(null);
-
   useEffect(() => {
-    setReady(true);
+    // setReady(true);
 
     const token = subscribe("TRINKET_INFO", (e, d) => {
       setInfos(d);

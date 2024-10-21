@@ -53,6 +53,7 @@
   }
   @media all and (max-width: $md) {
     padding: var(--space-sm);
+    padding-top: var(--header-height);
     .item {
       .title {
         font-size: var(--sm--text-lg);

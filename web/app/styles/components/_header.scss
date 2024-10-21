@@ -219,12 +219,17 @@ body[data-template="is-home"] {
     a:hover {
       color: white !important;
     }
+    #nav-primary ul,
     #nav-primary ul .actions {
       .menu-item--buy .btn--buy {
         color: #eaff00;
+        background-color: transparent;
       }
-      .menu-item--cart .text-green {
-        color: #e500dc;
+      .menu-item--cart button {
+        color: white;
+        .text-green {
+          color: #e500dc;
+        }
       }
     }
   }
@@ -238,12 +243,16 @@ body[data-template="is-home"] {
     a:hover {
       color: black !important;
     }
+    #nav-primary ul,
     #nav-primary ul .actions {
       .menu-item--buy .btn--buy {
         color: var(--color-blue);
       }
-      .menu-item--cart .text-green {
-        color: var(--color-green);
+      .menu-item--cart button {
+        color: black;
+        .text-green {
+          color: var(--color-green);
+        }
       }
     }
   }
@@ -323,30 +332,3 @@ body.cart-opened {
     line-height: 18px;
   }
 }
-// .is-chrome {
-//   .btn--buy,
-//   .btn--cart {
-//     padding-top: 0.1em;
-//   }
-// }
-// .is-ff {
-//   .btn--buy,
-//   .btn--cart {
-//     padding-top: 0.2em;
-//     @media all and (max-width: $md) {
-//       padding: 0;
-//       height: 18px;
-//       line-height: 18px;
-//     }
-//   }
-// }
-// .is-safari {
-//   .btn--buy,
-//   .btn--cart {
-//     // padding-top: 0.1em;
-//     @media all and (max-width: $md) {
-//       height: 18px;
-//       line-height: 18px;
-//     }
-//   }
-// }
