@@ -105,9 +105,15 @@
 
   @media all and (max-width: $md) {
     padding-top: var(--header-height);
-    // z-index: 252;
+    padding: var(--header-height) var(--space-sm) var(--footer-height);
     .outter {
+      max-height: calc(
+        var(--vh) * 100 - calc(var(--header-height) + var(--footer-height))
+      );
       padding: 0 var(--space-sm);
+      padding: 0;
+      border-bottom-left-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
     }
     .header {
       .label + .input {
