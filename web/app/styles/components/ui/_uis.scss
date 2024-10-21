@@ -139,12 +139,14 @@
   border-radius: var(--radius-sm);
   padding: 0px 7.5px;
   padding: 0.4em 2.5em 0.4em 0.4em;
+  padding: 0;
   height: toRem(24);
   // line-height: toRem(28);
   max-width: 188px;
 
   .flex {
     // display: block;
+    width: 100%;
     gap: 0.2em;
     transform: translateY(1.2px);
 
@@ -153,9 +155,19 @@
       line-height: 1;
     }
   }
+  label {
+    width: 100%;
+    cursor: pointer;
+    padding: 0.4em 2.5em 0.4em 0.4em;
+    display: block;
+  }
   input {
     position: absolute;
     visibility: hidden;
+  }
+  span {
+    position: absolute;
+    right: 2.5em;
   }
 }
 
