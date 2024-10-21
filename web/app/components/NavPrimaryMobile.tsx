@@ -31,9 +31,7 @@ const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
   useEffect(() => {
     if (window.innerWidth > 1080) return;
 
-    const itemsWithChildren = ref.current?.querySelectorAll(
-      ".has-children .depth-0"
-    );
+    const itemsWithChildren = ref.current?.querySelectorAll(".has-children");
     if (itemsWithChildren) {
       itemsWithChildren.forEach((el) => {
         el.addEventListener("click", _toggleSubmenu);
@@ -59,25 +57,16 @@ const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
   const _toggleSubmenu = (evt: Event) => {
     evt.preventDefault();
     const element = evt.target as HTMLElement;
-    const submenu = element.nextSibling as HTMLElement;
+    // const submenu = element.nextSibling as HTMLElement;
+    const submenu = element.querySelector(".submenu");
     submenu?.classList.toggle("is-active");
   };
 
   return (
     <nav ref={ref} id='nav-primary' className='sm-only'>
       <ul className='flex flex-wrap !justify-between '>
-        <li className='flex-2 nav-item--home'>
+        <li className='flex-2- nav-item--home'>
           <NavLink href='/' label='Outline Online' depth={0} />
-        </li>
-        <li className='flex-2 nav-shop'>
-          <ul className='flex'>
-            <li className='menu-item--buy'>
-              <Buy productsCart={productsCart} />
-            </li>
-            <li className='menu-item--cart'>
-              <Cart />
-            </li>
-          </ul>
         </li>
 
         {navPrimary?.map((item, i) => (
@@ -127,6 +116,17 @@ const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
             )}
           </li>
         ))}
+
+        <li className='flex-2 nav-shop'>
+          <ul className='flex'>
+            <li className='menu-item--buy'>
+              <Buy productsCart={productsCart} />
+            </li>
+            <li className='menu-item--cart'>
+              <Cart />
+            </li>
+          </ul>
+        </li>
       </ul>
     </nav>
   );

@@ -124,9 +124,11 @@ header#main-header {
 
   @media all and (max-width: $md) {
     padding: var(--space-sm);
+    padding-bottom: 0;
     nav#nav-primary {
       ul {
         line-height: 1;
+
         li {
           a {
             white-space: nowrap;
@@ -138,13 +140,27 @@ header#main-header {
           &.flex-2 {
             flex-basis: 50%;
           }
+          &.menu-item--trials {
+            order: 1;
+          }
+          &.menu-item--typefaces {
+            order: 4;
+            flex-basis: 50%;
+            a.depth-0 {
+              text-align: left;
+            }
+          }
+          &.nav-shop {
+            order: 5;
+          }
           &.has-children {
             // background-color: red;
             a.depth-0 {
-              pointer-events: all;
+              pointer-events: none;
             }
             .submenu.is-active {
               display: block;
+              z-index: 10;
             }
           }
           .submenu {
@@ -153,17 +169,22 @@ header#main-header {
             top: unset !important;
             padding-left: 0;
             padding-top: 0 !important;
+            padding-top: 2px !important;
+            // position: initial;
+            .is-half {
+              margin-bottom: 0 !important;
+            }
             a {
               text-align: left !important;
             }
           }
         }
       }
-      .nav-item--home a,
-      .nav-shop a,
-      .nav-shop button {
-        color: black;
-      }
+      // .nav-item--home a,
+      // .nav-shop a,
+      // .nav-shop button {
+      //   color: black;
+      // }
       .nav-shop {
         min-width: 50%;
         ul {
@@ -212,7 +233,10 @@ body[data-template="is-home"] {
   header#main-header {
     color: white;
     mix-blend-mode: difference;
-
+    a,
+    button {
+      color: white;
+    }
     &::after {
       background-color: black;
     }
@@ -236,7 +260,10 @@ body[data-template="is-home"] {
   &.has-scrolled header#main-header {
     color: black;
     mix-blend-mode: unset;
-
+    a,
+    button {
+      color: black;
+    }
     &::after {
       background-color: white;
     }

@@ -104,7 +104,7 @@
   }
 
   @media all and (max-width: $md) {
-    padding-top: 3rem;
+    padding-top: var(--header-height);
     // z-index: 252;
     .outter {
       padding: 0 var(--space-sm);
@@ -112,6 +112,17 @@
     .header {
       .label + .input {
         margin-bottom: var(--space-md);
+      }
+    }
+    .typeface-item ._row {
+      // background-color: red;
+      .actions {
+        padding: 0.5em 0;
+        display: flex;
+        justify-content: space-between;
+        .add-to-cart {
+          padding: 0;
+        }
       }
     }
     .price {

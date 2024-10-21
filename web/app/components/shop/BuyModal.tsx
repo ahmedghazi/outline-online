@@ -59,13 +59,13 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
   // console.log(input);
   return (
     <div
-      className='item _row grid md:grid-cols-6 gap-md cursor-pointer'
+      className='item _row grid md:grid-cols-6 md:gap-md cursor-pointer'
       onClick={() => setActive(!active)}>
       <div className='title md:col-span-4'>
         <div className='md:flex md:gap-sm '>
           <div className='title'>{input.title}</div>
-          <div className='desc flex-2 flex justify-between'>
-            <span className='text-muted'>{input.description}</span>
+          <div className='desc flex-2 flex justify-between hidden-sm'>
+            <span className='text-muted '>{input.description}</span>
             {input._type === "productBundle" && input.descriptionAlt && (
               <span className='text-green'>{input.descriptionAlt}</span>
             )}
@@ -74,6 +74,11 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       </div>
       {/* <Price price={item.price} /> */}
       <div className='actions md:col-span-2'>
+        <div className='sm-only'>
+          {input._type === "productBundle" && input.descriptionAlt && (
+            <span className='text-green'>{input.descriptionAlt}</span>
+          )}
+        </div>
         <AddToCart
           id={input._key || ""}
           title={input.title || ""}
@@ -287,7 +292,7 @@ const BuyModal = ({ productsCart }: Props) => {
                 {/* <div></div> */}
                 <div className='label'>Licenses</div>
                 <div className='licenses md:col-span-5 md:py-05e'>
-                  <div className='flex flex-wrap md:justify-between'>
+                  <div className='flex flex-wrap md:justify-between gap-sm md:gap-0'>
                     {licenseSizeProfil?.licenseType?.map((item, i) => (
                       <div className='input flex gap-sm' key={i}>
                         <Checkbox
