@@ -36,7 +36,7 @@ const TesterTextTransform = ({ target }: Props) => {
   return (
     <div className='type-text-transform controls'>
       <button className='case-toggle' onClick={_onClick} style={style}>
-        aa
+        {values[val] === "capitalize" ? "Aa" : "aA"}
       </button>
     </div>
   );
