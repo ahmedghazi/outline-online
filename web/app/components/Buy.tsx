@@ -4,7 +4,7 @@ import { Product } from "../types/schema";
 import BuyModal from "./shop/BuyModal";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { publish } from "pubsub-js";
+import { publish, subscribe, unsubscribe } from "pubsub-js";
 
 type Props = {
   productsCart: Product[];
@@ -12,11 +12,23 @@ type Props = {
 
 const Buy = ({ productsCart }: Props) => {
   const [active, setActive] = useState<boolean>(false);
+  const pathname = usePathname();
 
-  const pathnem = usePathname();
+  useEffect(() => {
+    const token = subscribe("CART_OPENED", (e, d) => {
+      if (d) {
+        setActive(false);
+      }
+    });
+
+    return () => {
+      unsubscribe(token);
+    };
+  }, []);
+
   useEffect(() => {
     setActive(false);
-  }, [pathnem]);
+  }, [pathname]);
 
   useEffect(() => {
     publish("BUY_MODAL_ACTIVE", active);

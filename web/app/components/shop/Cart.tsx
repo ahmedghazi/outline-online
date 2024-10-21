@@ -22,6 +22,11 @@ const Cart = () => {
   // }, []);
 
   useEffect(() => {
+    const tokenBuyModal = subscribe("BUY_MODAL_ACTIVE", (e, d) => {
+      if (d) {
+        window.Snipcart.api.theme.cart.close();
+      }
+    });
     const token = subscribe("CART_OPENED", (e, d) => {
       if (d && pathname === "/") {
         document.body.scroll(0, window.innerHeight);
@@ -30,6 +35,7 @@ const Cart = () => {
 
     return () => {
       unsubscribe(token);
+      unsubscribe(tokenBuyModal);
     };
   }, []);
 
@@ -58,6 +64,7 @@ const Cart = () => {
   };
 
   useEffect(() => {
+    console.log(open);
     _toggle();
   }, [open]);
 

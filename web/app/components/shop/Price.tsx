@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Price = ({ price, priceCrossed }: Props) => {
-  console.log(price, priceCrossed);
+  // console.log(price, priceCrossed);
   const displayPriceCrossed = priceCrossed && priceCrossed > 0;
   return (
     <div className='price  grid grid-cols-2 gap-sm'>
