@@ -153,6 +153,12 @@
         background-color: var(--color-gray);
         z-index: 1;
       }
+      form .form-group {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        .fields {
+          grid-column: span 3 / span 3;
+        }
+      }
     }
     form {
       .form-group {

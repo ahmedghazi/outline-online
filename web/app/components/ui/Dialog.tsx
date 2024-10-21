@@ -1,3 +1,4 @@
+import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   const ref = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState<boolean>(false);
+  const { isMobile } = useDeviceDetect();
   // console.log("openModal", openModal);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   }, [open]);
 
   return (
-    <Draggable nodeRef={ref}>
+    <Draggable nodeRef={ref} disabled={isMobile}>
       <dialog
         ref={ref}
         // onCancel={closeModal}
