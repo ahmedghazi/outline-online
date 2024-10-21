@@ -97,24 +97,6 @@
       }
     }
 
-    // input {
-    //   width: 100%;
-    //   border: none;
-    //   color: var(--color-purple);
-    //   line-height: 1;
-    //   margin: unset;
-    //   display: initial;
-    //   &:is(:-webkit-autofill, :autofill) {
-    //     color: var(--color-purple);
-    //     background-color: transparent;
-    //   }
-    //   &:focus {
-    //     color: var(--color-purple);
-    //   }
-    //   &::placeholder {
-    //     color: transparent;
-    //   }
-    // }
     .consent {
       padding: var(--space-md);
       .checkbox-ui {
@@ -131,29 +113,21 @@
               display: none;
             }
           }
-          // .label {
-          //   &::before {
-          //     content: "✓";
-          //     color: var(--color-purple);
-          //     display: inline-block;
-          //     margin-right: 0.4em;
-          //   }
-          // }
         }
       }
     }
-    // button[type="submit"] {
-    //   background-color: var(--color-blue);
-    //   color: white;
-    //   border-bottom-right-radius: var(--radius-sm);
-    //   border-bottom-left-radius: var(--radius-sm);
-    //   text-align: center;
-    //   width: 100%;
-    // }
   }
 
   @media all and (max-width: $md) {
+    min-height: calc(
+      var(--vh) * 100 - calc(var(--header-height) + var(--footer-height))
+    );
+    .list,
+    .footer {
+      z-index: 1;
+    }
     .list {
+      background-color: white;
       .item > ._row {
         grid-template-columns: repeat(6, minmax(0, 1fr));
       }
@@ -162,6 +136,9 @@
       margin-top: var(--space-lg);
       bottom: unset;
       padding-right: 0;
+      position: absolute;
+      bottom: 0;
+      z-index: 0;
     }
     dialog {
       left: var(--space-sm);
