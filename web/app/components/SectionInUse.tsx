@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Figure } from "../types/schema";
 import FigureUI from "./ui/Figure";
 
@@ -9,6 +9,23 @@ type Props = {
 
 const SectionInUse = ({ input }: Props) => {
   const [image, setImage] = useState<Figure | null>(null);
+  const [x, setX] = useState<number>(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    ref.current?.addEventListener("mousemove", _update);
+  }, []);
+
+  const _update = (e: MouseEvent) => {
+    const { pageX } = e;
+    const percentWindow = (pageX * 100) / window.innerWidth;
+    const scrollWidth = ref.current?.scrollWidth;
+    if (!scrollWidth) return;
+    const scrollableWidth = scrollWidth - window.innerWidth;
+    const scroll = (percentWindow * scrollableWidth) / 100;
+    ref.current.scrollLeft = scroll;
+  };
+
   return (
     <section className='section--in-use'>
       <div className='modal'>
@@ -19,7 +36,7 @@ const SectionInUse = ({ input }: Props) => {
           </div>
         )}
       </div>
-      <div className='thumbnails hide-sb'>
+      <div className='thumbnails hide-sb' ref={ref}>
         <div className='inner'>
           {input.map((item, i) => (
             <div
