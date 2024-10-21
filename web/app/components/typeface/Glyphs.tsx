@@ -60,6 +60,7 @@ const Glyphs = ({ input }: Props) => {
                   <div
                     className='item'
                     key={j}
+                    onClick={() => setGlyph(_item)}
                     onMouseEnter={() => setGlyph(_item)}
                     // onMouseLeave={() => setGlyph("")}
                   >

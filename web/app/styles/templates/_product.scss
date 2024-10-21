@@ -189,6 +189,7 @@ body[data-template="is-product"],
       justify-content: center;
       width: toRem(51);
       height: toRem(51);
+      cursor: pointer;
       // border-right: var(--border);
       // border-bottom: var(--border);
       transition: font-size 0.2s, transform 0.2s;
@@ -200,7 +201,10 @@ body[data-template="is-product"],
       background-color: white;
       // font-size: var(--text-lg);
       font-size: 24px;
-
+      .glyph,
+      .unicode {
+        pointer-events: none;
+      }
       .glyph {
         transform: translateY(-0.2em);
       }
@@ -230,6 +234,9 @@ body[data-template="is-product"],
     .glyphs {
       .item {
         width: calc(100% / 7);
+      }
+      .overview {
+        font-size: 50vh;
       }
     }
   }
