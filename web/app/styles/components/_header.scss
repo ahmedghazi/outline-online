@@ -90,7 +90,7 @@ header#main-header {
         }
       }
       .menu-item--cart {
-        z-index: 0;
+        // z-index: 0;
         width: calc(100% + var(--radius));
         // &:hover button {
         //   background-color: var(--color-gray-25);
@@ -406,6 +406,9 @@ header#main-header .menu-item--cart .btn--cart {
   }
 }
 
+body.cart-opened header#main-header .menu-item--cart {
+  z-index: 1;
+}
 body.cart-opened header#main-header .menu-item--cart .btn--cart {
   background-color: var(--color-gray-25);
   &:hover {
