@@ -100,7 +100,11 @@ const NavPrimaryDesktop = ({ navPrimary, productsCart }: NavProps) => {
               item &&
                 item._type === "menuItem" &&
                 item.subMenu &&
-                "has-children"
+                "has-children",
+              item &&
+                item._type === "menuItem" &&
+                item.subMenu &&
+                `len-${item.subMenu.length}`
             )}>
             {item && item._type === "menuItem" && (
               <>

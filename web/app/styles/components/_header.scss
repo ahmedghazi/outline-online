@@ -307,6 +307,7 @@ body[data-template="is-home"] {
     }
     .submenu {
       // background-color: yellow;
+      min-height: calc(1.2em * 3 + 2em);
       padding-top: 1em;
       top: 50%;
       transform: translateX(-50%) translateY(calc(-50% - 0em));
@@ -327,7 +328,7 @@ body[data-template="is-home"] {
       top: unset;
       padding-top: 0;
       li.is-half {
-        margin-bottom: 0;
+        margin-bottom: 0 !important;
       }
     }
     ul {
