@@ -33,6 +33,9 @@
       .fields {
         grid-template-columns: repeat(1, minmax(0, 1fr));
       }
+      button[type="submit"] {
+        padding: 0.5em;
+      }
     }
   }
 }

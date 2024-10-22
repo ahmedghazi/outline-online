@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Checkbox from "./ui/Checkbox";
 import useShop from "./shop/ShopContext";
+import clsx from "clsx";
 
 type Props = {};
 
@@ -142,7 +143,7 @@ const TrialsDownload = (props: Props) => {
     // .join("&");
   };
 
-  // console.log(state);
+  console.log(okToSend, agree);
 
   return (
     <div className='trials-download'>
@@ -179,21 +180,27 @@ const TrialsDownload = (props: Props) => {
           <div className='form-row'>
             <Checkbox
               name={"I agree with the EULA"}
-              onChange={(checked: boolean) => {}}
-            />
-          </div>
-          <div className='form-row'>
-            <Checkbox
-              name={"Subscribe to Outline Online Newsletter!"}
               onChange={(checked: boolean) => {
                 setAgree(checked);
               }}
             />
           </div>
+          <div className='form-row'>
+            <Checkbox
+              name={"Subscribe to Outline Online Newsletter!"}
+              onChange={(checked: boolean) => {}}
+            />
+          </div>
         </div>
         {okToSend && agree && (
           <div className='footer'>
-            <button type='submit'>{getButtonMsg()}</button>
+            <button
+              type='submit'
+              className={clsx(
+                okToSend && agree ? "button-submit" : "button-disabled"
+              )}>
+              {getButtonMsg()}
+            </button>
           </div>
         )}
       </form>

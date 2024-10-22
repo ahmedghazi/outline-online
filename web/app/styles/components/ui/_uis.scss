@@ -222,8 +222,8 @@
     height: 10px;
     width: 9px;
     transform: translateY(1px);
-
     background-color: transparent;
+    flex-shrink: 0;
     // &:after {
     //   content: "";
     //   position: absolute;

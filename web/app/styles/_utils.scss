@@ -166,7 +166,7 @@ dialog {
     background-color: transparent;
   }
   @media (max-width: 1080px) {
-    width: calc(100vw - var(--space-sm)) !important;
+    width: calc(100vw - var(--space-md)) !important;
     left: var(--space-sm);
   }
   // @include debugSquare(calc(var(--space-md) * 0.96));
@@ -183,6 +183,9 @@ dialog {
         white-space: nowrap;
       }
     }
+    label {
+      white-space: initial;
+    }
     input {
       width: 100%;
       border: none;
@@ -190,9 +193,9 @@ dialog {
       line-height: 1;
       margin: unset;
       display: initial;
-      &:is(:-webkit-autofill, :autofill) {
-        color: var(--color-purple);
-        background-color: transparent;
+      &:is(:-webkit-autofill, :-moz-autofill, :autofill) {
+        color: var(--color-purple) !important;
+        background-color: transparent !important;
       }
       &:focus {
         color: var(--color-purple);
@@ -201,6 +204,9 @@ dialog {
         color: transparent;
       }
     }
+    span.label {
+      hyphens: auto;
+    }
     button[type="submit"] {
       // background-color: var(--color-blue);
       // color: white;
@@ -208,6 +214,7 @@ dialog {
       border-bottom-left-radius: var(--radius-sm);
       text-align: center;
       width: 100%;
+      padding: 0.5em;
     }
   }
   // form {
