@@ -50,12 +50,12 @@ const Trinket = ({ file, initialPosition, metadata, scale }) => {
 
   const _onPointerOver = () => {
     // console.log(props.input.link);
-    setIsHover(true);
+    // setIsHover(true);
     publish("TRINKET_INFO", metadata);
     // publish("TRINKET_INFO", "here is the infos");
   };
   const _onPointerOut = () => {
-    setIsHover(false);
+    // setIsHover(false);
     publish("TRINKET_INFO", "");
   };
 
