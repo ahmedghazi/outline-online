@@ -141,9 +141,9 @@ const CompositionTool = ({ input, pangram }: Props) => {
 
         {ref && ref.current && (
           <div className='footer '>
-            <TesterSize initialValue='28' target={ref.current} />
+            <TesterSize initialValue='89' target={ref.current} />
             <TesterSpacing initialValue='0' target={ref.current} />
-            <TesterLeading initialValue='0' target={ref.current} />
+            <TesterLeading initialValue='89' target={ref.current} />
 
             {_styles && _styles.length > 0 && (
               <Select

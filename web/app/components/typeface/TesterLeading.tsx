@@ -6,7 +6,7 @@ type Props = {
 };
 
 const TesterLeading = ({ initialValue, target }: Props) => {
-  const [height, setHeight] = useState<string>(initialValue);
+  const [value, setValue] = useState<string>(initialValue);
 
   useEffect(() => {
     _update();
@@ -14,11 +14,11 @@ const TesterLeading = ({ initialValue, target }: Props) => {
 
   useEffect(() => {
     _update();
-  }, [height]);
+  }, [value]);
 
   const _update = () => {
     // target.style.lineHeight = `${height}px`;
-    target.style.setProperty("--type-textLineHeight", `${height}px`);
+    target.style.setProperty("--type-textLineHeight", `${value}px`);
   };
 
   return (
@@ -30,14 +30,20 @@ const TesterLeading = ({ initialValue, target }: Props) => {
         <input
           type='range'
           name='height'
-          value={height}
-          min='24'
-          max='500'
+          value={value}
+          min='10'
+          max='400'
           step='1'
-          onChange={(e) => setHeight(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           className='mx-xs'
         />
-        <div className='value'>{height}</div>
+        {/* <input type='number' value={height} /> */}
+        {/* <div className='value'>{height}</div> */}
+        <input
+          type='number'
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
       </div>
     </div>
   );

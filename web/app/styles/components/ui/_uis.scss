@@ -45,7 +45,7 @@
     width: 100%;
     gap: 0.2em;
     transform: translateY(0.4px);
-
+    justify-content: space-between;
     * {
       display: inline;
       line-height: 1;
@@ -81,12 +81,25 @@
       height: 10px;
       width: 9px;
     }
-    ::-moz-range-thumb {
+    &::-moz-range-thumb {
       background: black;
       border-radius: 1em;
       height: 10px;
       width: 9px;
       cursor: pointer;
+    }
+    &[type="number"] {
+      text-align: right;
+      width: auto;
+      max-width: 2.1em;
+    }
+    &[type="number"]::-webkit-outer-spin-button,
+    &[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &[type="number"] {
+      -moz-appearance: textfield;
     }
   }
 }

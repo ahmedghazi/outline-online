@@ -11,7 +11,7 @@ export type Ref = HTMLDivElement;
 const TesterSize = ({ initialValue, target }: Props) => {
   // const { initialValue } = props;
   // console.log(ref);
-  const [size, setSize] = useState<string>(initialValue);
+  const [value, setValue] = useState<string>(initialValue);
 
   useEffect(() => {
     _update();
@@ -20,13 +20,10 @@ const TesterSize = ({ initialValue, target }: Props) => {
   useEffect(() => {
     // console.debug({ target })
     _update();
-  }, [size]);
+  }, [value]);
 
   const _update = () => {
-    // target.style.fontSize = `${size}px`;
-    // target.style.lineHeight = `${size}px`;
-    target.style.setProperty("--type-textFontSize", `${size}px`);
-    // target.style.setProperty("--type-textLineHeight", `${size}px`);
+    target.style.setProperty("--type-textFontSize", `${value}px`);
   };
 
   return (
@@ -38,14 +35,20 @@ const TesterSize = ({ initialValue, target }: Props) => {
         <input
           type='range'
           name='size'
-          value={size}
+          value={value}
           min='14'
-          max='150'
+          max='300'
           step='1'
-          onChange={(e) => setSize(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           className='mx-xs'
         />
-        <div className='value'>{size}</div>
+        {/* <div className='value'>{size}</div> */}
+        {/* <input type='number' value={size} /> */}
+        <input
+          type='number'
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
       </div>
     </div>
   );

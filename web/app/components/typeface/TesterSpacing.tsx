@@ -8,7 +8,7 @@ type Props = {
 export type Ref = HTMLDivElement;
 
 const TesterSpacing = ({ initialValue, target }: Props) => {
-  const [size, setSize] = useState<string>(initialValue);
+  const [value, setValue] = useState<string>(initialValue);
 
   useEffect(() => {
     _update();
@@ -16,11 +16,11 @@ const TesterSpacing = ({ initialValue, target }: Props) => {
 
   useEffect(() => {
     _update();
-  }, [size]);
+  }, [value]);
 
   const _update = () => {
-    // target.style.letterSpacing = `${size}px`;
-    target.style.setProperty("--type-textLetterSpacing", `${size}px`);
+    // target.style.letterSpacing = `${value}px`;
+    target.style.setProperty("--type-textLetterSpacing", `${value}px`);
   };
 
   return (
@@ -32,14 +32,19 @@ const TesterSpacing = ({ initialValue, target }: Props) => {
         <input
           type='range'
           name='size'
-          value={size}
-          min='-204'
-          max='500'
+          value={value}
+          min='-50'
+          max='100'
           step='1'
-          onChange={(e) => setSize(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           className='mx-xs'
         />
-        <div className='value'>{size}</div>
+        {/* <div className='value'>{value}</div> */}
+        <input
+          type='number'
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
       </div>
     </div>
   );
