@@ -125,8 +125,11 @@
     }
     .typeface-item ._row {
       // background-color: red;
+      .title {
+        padding-bottom: 0;
+      }
       .actions {
-        padding: 0.5em 0;
+        padding: 0 0 0.5em 0;
         display: flex;
         justify-content: space-between;
         .add-to-cart {
