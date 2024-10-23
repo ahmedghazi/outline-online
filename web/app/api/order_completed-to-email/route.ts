@@ -150,10 +150,12 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
     subject: "Your fonts :)",
     // text: "le message: " + JSON.stringify(payload),
     html: `
-      <p>hi ${destination}</p>
-      <p>Thx for your request.</p>
-      <p>You will found attached the fonts you bought.</p>
-      <p>Cheers from Outline Online.</p>
+      <div style="font-family:monospace,sans-serif">
+        <p>hi ${destination}</p>
+        <p>Thx for your request.</p>
+        <p>You will found attached the fonts you bought.</p>
+        <p>Cheers from Outline Online.</p>
+      </div>
     `,
     attachments: payload,
   };
