@@ -35,7 +35,7 @@ body[data-template="is-product"],
         position: fixed;
         inset: 0;
         z-index: 251;
-        padding: calc(var(--header-height) * 2) calc(var(--space-lg) + 25px)
+        padding: calc(var(--header-height) * 3) calc(var(--space-lg) + 25px)
           var(--footer-height);
         .inner {
           display: inline-block;
@@ -82,9 +82,10 @@ body[data-template="is-product"],
         .text-editor {
           resize: both;
           overflow: auto;
+          overflow: hidden;
           font-size: 2em;
           width: 64rem;
-          height: 9em;
+          height: 6em;
           color: var(--type-color);
           font-size: var(--type-textFontSize);
           letter-spacing: var(--type-textLetterSpacing);
