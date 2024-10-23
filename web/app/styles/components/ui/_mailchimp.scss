@@ -8,10 +8,18 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    label,
     input {
-      line-height: 1;
-      border: none;
-      margin: 0;
+      line-height: 1 !important;
+      border: none !important;
+      margin: 0 !important;
+      // vertical-align: unset;
+      display: block;
+    }
+    input {
+      // line-height: 0.5 !important;
+      // border: none !important;
+      // margin: 0 !important;
     }
     button[type="submit"] {
       margin-top: calc(var(--space-md) * 0.8);
@@ -36,6 +44,18 @@
       button[type="submit"] {
         padding: 0.5em;
       }
+    }
+  }
+}
+
+.is-safari .mailchimp-dialog {
+  form .form-row {
+    // align-items: end;
+    align-items: center;
+    padding-left: 1rem;
+    span {
+      position: absolute;
+      left: 0;
     }
   }
 }
