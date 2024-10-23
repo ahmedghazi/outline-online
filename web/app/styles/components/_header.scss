@@ -111,16 +111,17 @@ header#main-header {
   @media all and (max-width: $md) {
     padding: var(--space-sm);
     padding-bottom: 0;
+    a,
+    button {
+      white-space: nowrap;
+      // color: var(--color-gray-100);
+      color: black;
+    }
     nav#nav-primary {
       ul {
         line-height: 1;
 
         li {
-          a {
-            white-space: nowrap;
-            color: var(--color-gray-100);
-            color: black;
-          }
           a.depth-0 {
             width: auto;
           }
@@ -211,6 +212,7 @@ body[data-template="is-home"] {
     button {
       color: white;
     }
+
     &::after {
       background-color: black;
     }
