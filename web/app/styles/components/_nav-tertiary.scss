@@ -4,7 +4,7 @@
   left: 0;
   padding: 0 var(--space-lg);
   width: 100%;
-
+  // z-index: 251;
   @media all and (max-width: $md) {
     margin-top: var(--space-lg);
     margin-bottom: var(--footer-height);

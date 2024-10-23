@@ -4,6 +4,7 @@ import { hasCookie, setCookie } from "cookies-next";
 import { BlockContent } from "@/app/types/schema";
 import { PortableText } from "@portabletext/react";
 import components from "@/app/utils/portableTextComponents";
+import Link from "next/link";
 
 type Props = {
   message: BlockContent;
@@ -29,7 +30,9 @@ const CookieConsent = ({ message }: Props) => {
     <div className='z-50 cookie-consent flex justify-end'>
       <div className='inner '>
         <div className='flex buttons'>
-          <button>Read more</button>
+          <button>
+            <Link href={"/page/cookie-policy"}>Read more</Link>
+          </button>
           <button className='bg-green' onClick={() => acceptCookie()}>
             Agree
           </button>

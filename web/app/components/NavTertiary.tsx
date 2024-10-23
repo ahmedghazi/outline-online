@@ -8,7 +8,7 @@ type Props = {};
 
 const NavTertiary = (props: Props) => {
   const { settings } = usePageContext();
-
+  // console.log(settings);
   return (
     <nav id='nav-tertiary'>
       <ul className='grid md:grid-cols-4 gap-md'>

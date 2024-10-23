@@ -1,12 +1,20 @@
 footer#site-footer {
   // padding: var(--space-md) var(--space-lg);
-  padding: 0 var(--space-lg) 11px;
-  background-color: white;
+  position: none;
   position: fixed;
   width: 100%;
   bottom: 0;
   z-index: 250;
   color: var(--color-gray-100);
+  pointer-events: none;
+  & > .inner {
+    padding: 0 var(--space-lg) 11px;
+    background-color: white;
+  }
+  a,
+  button {
+    pointer-events: all;
+  }
   a,
   button:not(.button-submit) {
     color: var(--color-gray-100);

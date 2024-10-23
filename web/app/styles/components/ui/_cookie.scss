@@ -1,5 +1,8 @@
 .cookie-consent {
+  padding-right: var(--space-lg);
+  pointer-events: none;
   .inner {
+    pointer-events: all;
   }
   .buttons {
     button {
@@ -25,5 +28,9 @@
   .text {
     background-color: var(--color-gray);
     padding: 0 1em;
+  }
+
+  @media all and (max-width: $md) {
+    padding-right: var(--space-sm);
   }
 }
