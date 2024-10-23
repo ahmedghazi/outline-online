@@ -131,7 +131,7 @@ const CartProduct = ({ input }: CartProductProps) => {
       </div>
 
       <div className={clsx("detail", active ? "block" : "hidden")}>
-        <div className='group'>
+        <div className='group group--bundles'>
           <div className='grid md:grid-cols-8'>
             <div className='label text-gray-100 md:col-span-2'>Bundles</div>
             <div className='items md:col-span-6'>
@@ -146,7 +146,7 @@ const CartProduct = ({ input }: CartProductProps) => {
             </div>
           </div>
         </div>
-        <div className='group'>
+        <div className='group group--singles'>
           <div className='grid md:grid-cols-8'>
             <div className='label text-gray-100 md:col-span-2'>
               Single Styles
