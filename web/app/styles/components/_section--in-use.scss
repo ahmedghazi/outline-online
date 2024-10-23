@@ -8,6 +8,7 @@
     // transform: translateY(-50%);
     width: calc(var(--vw) * 100);
     overflow-x: scroll;
+    // overflow: hidden;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -16,7 +17,7 @@
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
-      justify-content: center;
+      // justify-content: center;
     }
     .thumbnail {
       flex-shrink: 0;

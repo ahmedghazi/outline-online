@@ -14,16 +14,23 @@ const SectionInUse = ({ input }: Props) => {
 
   useEffect(() => {
     ref.current?.addEventListener("mousemove", _update);
+    return () => {
+      ref.current?.removeEventListener("mousemove", _update);
+    };
   }, []);
 
   const _update = (e: MouseEvent) => {
-    const { pageX } = e;
-    const percentWindow = (pageX * 100) / window.innerWidth;
+    const percentWindow = _getPagePercX(e);
     const scrollWidth = ref.current?.scrollWidth;
     if (!scrollWidth) return;
     const scrollableWidth = scrollWidth - window.innerWidth;
     const scroll = (percentWindow * scrollableWidth) / 100;
     ref.current.scrollLeft = scroll;
+  };
+
+  const _getPagePercX = (e: MouseEvent) => {
+    const { pageX } = e;
+    return (pageX * 100) / window.innerWidth;
   };
 
   return (

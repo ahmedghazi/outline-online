@@ -14,8 +14,8 @@ type Props = {
 const ContentHome = ({ input }: Props) => {
   return (
     <div className='content--home'>
-      {input.trinkets && <SectionTrinkets input={input.trinkets} />}
-      {input.typefaces && <SectionTypeFaces input={input.typefaces} />}
+      {/* {input.trinkets && <SectionTrinkets input={input.trinkets} />}
+      {input.typefaces && <SectionTypeFaces input={input.typefaces} />} */}
       {input.inUse && <SectionInUse input={input.inUse} />}
     </div>
   );
