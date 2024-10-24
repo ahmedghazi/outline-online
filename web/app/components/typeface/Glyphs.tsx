@@ -45,7 +45,7 @@ const Glyphs = ({ input }: Props) => {
     <section
       className='glyphs '
       // ref={ref}
-      onMouseLeave={() => setGlyph("")}
+      // onMouseLeave={() => setGlyph("")}
       style={{
         fontFamily: type?.slug?.current,
       }}>
