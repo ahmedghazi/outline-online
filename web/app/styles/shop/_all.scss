@@ -298,6 +298,9 @@
     .snipcart-featured-payment-methods__title {
       position: static;
       background-color: transparent;
+      a.snipcart-featured-payment-methods__link {
+        font-size: var(--text-md) !important;
+      }
     }
     .snipcart-featured-payment-methods__list-item {
       padding: 0;
