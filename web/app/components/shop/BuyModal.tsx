@@ -1,7 +1,8 @@
 "use client";
 import {
-  LabelPrice,
   LicenseSize,
+  // LabelPrice,
+  // LicenseSize,
   LicenseType,
   Product,
   ProductBundle,
@@ -12,11 +13,17 @@ import React, { useEffect, useState } from "react";
 import Select from "../ui/Select";
 import clsx from "clsx";
 import Checkbox from "../ui/Checkbox";
-import Price from "./Price";
+// import Price from "./Price";
 import useShop from "./ShopContext";
 import AddToCart from "./AddToCart";
 import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
+
+declare global {
+  interface Window {
+    Snipcart: any; // 👈️ turn off type checking
+  }
+}
 
 /*
 # PROCESS
@@ -174,12 +181,6 @@ type Props = {
   productsCart: Product[];
 };
 
-declare global {
-  interface Window {
-    Snipcart: any; // 👈️ turn off type checking
-  }
-}
-
 const BuyModal = ({ productsCart }: Props) => {
   // const [active, setActive] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
@@ -234,9 +235,36 @@ const BuyModal = ({ productsCart }: Props) => {
   //   //setLicenseTypeProfil()
   // };
 
+  const _updateLicenseSize = (val: LicenseType) => {
+    setLicenseSizeProfil(val);
+  };
+  useEffect(() => {
+    console.log(licenseSizeProfil);
+    console.log("*********** old license types");
+    console.table(licenseTypeProfil);
+    if (licenseTypeProfil) {
+      //replace
+      //Lisense Size a changé
+      //anciens tableau de licenseYupe
+      licenseTypeProfil.forEach((el) => {
+        if (licenseSizeProfil && licenseSizeProfil?.licenseType) {
+          const replacer = licenseSizeProfil?.licenseType.filter(
+            (_el) => _el._key === el._key
+          );
+          if (replacer) {
+            console.log("*********** new license types");
+            console.table(replacer[0]);
+            setLicenseTypeProfil({ type: "REPLACE", payload: replacer[0] });
+          }
+        }
+      });
+      //nx tableau de licenseYupe
+    }
+  }, [licenseSizeProfil]);
+
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
     const items = licenseTypeProfil?.filter((el) => el.label === val.label);
-
+    console.log(checked, val.label, items);
     if (checked) {
       //no dubplicate
       if (items?.length === 0) {
@@ -272,9 +300,9 @@ const BuyModal = ({ productsCart }: Props) => {
 
   const hasLicenseType = licenseTypeProfil && licenseTypeProfil?.length > 0;
   const hasProducts = products && products.length > 0;
-  console.log(licenseSizeProfil);
-  if (licenseSizeProfil) console.table(licenseSizeProfil.licenseType);
-  // console.log({ hasLicenseType, hasProducts });
+  // console.log(licenseSizeProfil);
+  // if (licenseSizeProfil) console.table(licenseSizeProfil.licenseType);
+  // console.table(licenseTypeProfil);
 
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
@@ -287,7 +315,7 @@ const BuyModal = ({ productsCart }: Props) => {
                 <div className='input'>
                   <Select
                     options={licenses}
-                    onChange={(val: string) => setLicenseSizeProfil(val)}
+                    onChange={(val: LicenseSize) => _updateLicenseSize(val)}
                     // disabled={hasProducts && hasLicenseType ? true : false}
                   />
                 </div>

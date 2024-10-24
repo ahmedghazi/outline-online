@@ -64,7 +64,7 @@ interface ProductData {
 const initialLicenseTypeState: LabelPrice[] = [];
 
 function licenseTypeReducer(state: any, action: any) {
-  // console.log(state, action);
+  console.log(state, action);
   const { type, payload } = action;
   switch (type) {
     case "ADD":
@@ -72,10 +72,10 @@ function licenseTypeReducer(state: any, action: any) {
     case "REMOVE":
       return state.filter((item: any) => item.label !== payload.label);
 
-    // case "REPLACE":
-    //   return state.map((item: any) =>
-    //     item.title === payload.title ? payload : item
-    //   );
+    case "REPLACE":
+      return state.map((item: any) =>
+        item.label === payload.label ? payload : item
+      );
     case "REMOVE_ALL":
       return [];
     default:
