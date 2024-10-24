@@ -56,7 +56,7 @@ export default defineField({
       title: 'Typeface',
       name: 'typeface',
       type: 'reference',
-      description: 'rename this (cf bundles)',
+      description: 'Used in typefaces, product page, trials, buy area',
       to: [
         {
           type: 'typeface',

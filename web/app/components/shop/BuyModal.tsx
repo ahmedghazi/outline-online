@@ -63,7 +63,9 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       onClick={() => setActive(!active)}>
       <div className='title md:col-span-4'>
         <div className='md:flex md:gap-sm '>
-          <div className='title'>{input.title}</div>
+          <div className='title'>
+            {input.title} <span className='text-red'>{input.price}</span>
+          </div>
           <div className='desc flex-2 flex justify-between hidden-sm'>
             <span className='text-muted '>{input.description}</span>
             {input._type === "productBundle" && input.descriptionAlt && (
@@ -270,7 +272,8 @@ const BuyModal = ({ productsCart }: Props) => {
 
   const hasLicenseType = licenseTypeProfil && licenseTypeProfil?.length > 0;
   const hasProducts = products && products.length > 0;
-  // console.log(licenseTypeProfil);
+  console.log(licenseSizeProfil);
+  if (licenseSizeProfil) console.table(licenseSizeProfil.licenseType);
   // console.log({ hasLicenseType, hasProducts });
 
   return (
@@ -303,6 +306,8 @@ const BuyModal = ({ productsCart }: Props) => {
                             _updateLicenseType(checked, item);
                           }}
                         />
+                        <span className='text-red'>{item.price}</span>
+
                         {/* <div className='label !p-0'>{item.label}</div> */}
                       </div>
                     ))}

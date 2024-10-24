@@ -876,7 +876,7 @@ export type ProductBundle = {
   /**
    * Typefaces — `array`
    *
-   *
+   * Used in buy area
    */
   typefaces?: Array<SanityKeyedReference<Typeface>>;
 
@@ -942,7 +942,7 @@ export type ProductSingle = {
   /**
    * Typeface — `reference`
    *
-   * rename this (cf bundles)
+   * Used in typefaces, product page, trials, buy area
    */
   typeface?: SanityReference<Typeface>;
 

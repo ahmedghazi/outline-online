@@ -143,7 +143,7 @@ const TrialsDownload = (props: Props) => {
     // .join("&");
   };
 
-  console.log(okToSend, agree);
+  // console.log(okToSend, agree);
 
   return (
     <div className='trials-download'>

@@ -149,7 +149,7 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
   //     : [];
   // const initialLicenseTypeState: (LicenseType & { _key: string })[] = [];
 
-  // console.log(initialLicenseTypeState);
+  // console.log(licenses);
 
   const [ready, setReady] = useState<boolean>(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);

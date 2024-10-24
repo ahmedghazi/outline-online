@@ -60,6 +60,7 @@ export default defineField({
     defineField({
       title: 'Typefaces',
       name: 'typefaces',
+      description: 'Used in buy area',
       type: 'array',
       of: [
         {
