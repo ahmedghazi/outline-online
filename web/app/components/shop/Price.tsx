@@ -10,7 +10,7 @@ const Price = ({ price, priceCrossed }: Props) => {
   const displayPriceCrossed = priceCrossed && priceCrossed > 0;
   return (
     <div className='price  grid grid-cols-2 gap-sm'>
-      <span className='w-[70px]'>{price} CHF</span>
+      <span className='min-w-[80px]'>{price} CHF</span>
       {displayPriceCrossed && (
         <span className='text-muted line-through'>{priceCrossed} CHF</span>
       )}

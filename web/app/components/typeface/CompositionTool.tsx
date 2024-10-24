@@ -30,7 +30,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
 
   const _onPaste = (e: ClipboardEvent) => {
     e.preventDefault();
-    console.log(e);
+    // console.log(e);
     const clipboardData = e.clipboardData;
     if (!clipboardData) return;
     const text = clipboardData.getData("text/plain");
@@ -86,7 +86,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const _handleColor = (hex: string) => {
     if (!ref.current) return;
     if (!hex) return;
-    console.log(hex);
+    // console.log(hex);
     ref.current.style.setProperty("--type-color", hex);
     // setCurrentStyle(s.val);
   };

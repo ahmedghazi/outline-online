@@ -24,10 +24,10 @@ const Select = ({ label, options, onChange, disabled = false }: Props) => {
   }, [active]);
 
   const _clickOutside = () => {
-    console.log("_clickOutside");
+    // console.log("_clickOutside");
     setActive(false);
   };
-
+  // console.log(label, active);
   return (
     <div className={clsx("select-ui", active && "is-active")}>
       <select

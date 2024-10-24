@@ -249,11 +249,12 @@ const BuyModal = ({ productsCart }: Props) => {
       licenseTypeProfil.forEach((el) => {
         if (licenseSizeProfil && licenseSizeProfil?.licenseType) {
           const replacer = licenseSizeProfil?.licenseType.filter(
-            (_el) => _el._key === el._key
+            (_el) => _el.label === el.label
           );
-          if (replacer) {
+          if (replacer && replacer.length === 1) {
             console.log("*********** new license types");
             console.table(replacer[0]);
+
             setLicenseTypeProfil({ type: "REPLACE", payload: replacer[0] });
           }
         }
