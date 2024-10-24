@@ -86,6 +86,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const _handleColor = (hex: string) => {
     if (!ref.current) return;
     if (!hex) return;
+    console.log(hex);
     ref.current.style.setProperty("--type-color", hex);
     // setCurrentStyle(s.val);
   };

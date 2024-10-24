@@ -22,7 +22,7 @@ const TesterColor = ({ onChange }: Props) => {
           type='color'
           id='type-color'
           name='type-color'
-          value='#000'
+          value={hex}
           onChange={(e) => setHex(e.target.value)}
         />
         {hex !== "" && <span className='value pointer-events-none'>{hex}</span>}
