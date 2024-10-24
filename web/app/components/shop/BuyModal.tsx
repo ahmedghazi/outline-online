@@ -88,7 +88,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
               <span className='text-green'>{input.descriptionAlt}</span>
             )} */}
             {input._type === "productBundle" && isPriceCrossed && (
-              <span className='text-green'>{greenText}</span>
+              <span className='text-green blink'>{greenText}</span>
             )}
           </div>
         </div>
