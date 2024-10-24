@@ -354,6 +354,9 @@ body[data-template="is-home"]
   .menu-item--cart
   .btn--cart {
   color: white;
+  &:hover {
+    background-color: transparent;
+  }
   .text-green {
     color: purple;
   }
@@ -364,6 +367,9 @@ body[data-template="is-home"].has-scrolled
   .menu-item--cart
   .btn--cart {
   color: black;
+  &:hover {
+    background-color: var(--color-gray-25);
+  }
   .text-green {
     color: var(--color-green);
   }
