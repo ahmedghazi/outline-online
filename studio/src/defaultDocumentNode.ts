@@ -20,8 +20,9 @@ const previewURL = window.location.hostname === 'localhost' ? localURL : remoteU
 // Import this into the deskTool() plugin
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (S, {schemaType}) => {
   // Only show preview pane on `movie` schema type documents
+  // console.log(schemaType)
   switch (schemaType) {
-    // case `home`:
+    case `home`:
     case `page`:
     case `product`:
       return S.document().views([
