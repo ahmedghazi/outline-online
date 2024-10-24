@@ -309,12 +309,17 @@ header#main-header .menu-item--buy .btn--buy {
     background-color: var(--color-gray);
   }
 }
-body[data-template="is-home"] header#main-header .menu-item--buy .btn--buy {
+body[data-template="is-home"]
+  header#main-header
+  #nav-primary
+  .menu-item--buy
+  .btn--buy {
   color: #eaff00;
   background-color: transparent;
 }
 body[data-template="is-home"].has-scrolled
   header#main-header
+  #nav-primary
   .menu-item--buy
   .btn--buy {
   color: var(--color-blue);
@@ -338,8 +343,29 @@ body.cart-opened header#main-header .menu-item--buy .btn--buy {
 */
 header#main-header .menu-item--cart .btn--cart {
   color: black;
+
   &:hover {
     background-color: var(--color-gray-25);
+  }
+}
+body[data-template="is-home"]
+  header#main-header
+  #nav-primary
+  .menu-item--cart
+  .btn--cart {
+  color: white;
+  .text-green {
+    color: purple;
+  }
+}
+body[data-template="is-home"].has-scrolled
+  header#main-header
+  #nav-primary
+  .menu-item--cart
+  .btn--cart {
+  color: black;
+  .text-green {
+    color: var(--color-green);
   }
 }
 

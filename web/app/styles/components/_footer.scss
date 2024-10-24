@@ -25,7 +25,10 @@ footer#site-footer {
   }
 
   @media all and (max-width: $md) {
-    padding: var(--space-sm);
+    // padding: var(--space-sm);
     font-size: var(--text-xs);
+    & > .inner {
+      padding: var(--space-sm);
+    }
   }
 }
