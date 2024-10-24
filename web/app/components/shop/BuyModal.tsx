@@ -235,7 +235,7 @@ const BuyModal = ({ productsCart }: Props) => {
   //   //setLicenseTypeProfil()
   // };
 
-  const _updateLicenseSize = (val: LicenseType) => {
+  const _updateLicenseSize = (val: LicenseSize) => {
     setLicenseSizeProfil(val);
   };
   useEffect(() => {
@@ -298,8 +298,8 @@ const BuyModal = ({ productsCart }: Props) => {
     }
   };
 
-  const hasLicenseType = licenseTypeProfil && licenseTypeProfil?.length > 0;
-  const hasProducts = products && products.length > 0;
+  // const hasLicenseType = licenseTypeProfil && licenseTypeProfil?.length > 0;
+  // const hasProducts = products && products.length > 0;
   // console.log(licenseSizeProfil);
   // if (licenseSizeProfil) console.table(licenseSizeProfil.licenseType);
   // console.table(licenseTypeProfil);
