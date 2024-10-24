@@ -876,6 +876,13 @@ export type ProductBundle = {
   price?: number;
 
   /**
+   * Price Discount — `number`
+   *
+   * %, Displayed in buy modal => save Xx%
+   */
+  priceDiscount?: number;
+
+  /**
    * Price crossed — `number`
    *
    * Displayed in buy modal
@@ -885,7 +892,7 @@ export type ProductBundle = {
   /**
    * Typefaces — `array`
    *
-   *
+   * Used in buy area
    */
   typefaces?: Array<SanityKeyedReference<Typeface>>;
 
@@ -951,7 +958,7 @@ export type ProductSingle = {
   /**
    * Typeface — `reference`
    *
-   * rename this (cf bundles)
+   * Used in typefaces, product page, trials, buy area
    */
   typeface?: SanityReference<Typeface>;
 

@@ -63,6 +63,15 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       : input.typeface
       ? [input.typeface]
       : [];
+
+  let greenText = "";
+  const isPriceCrossed = input.priceCrossed !== undefined;
+  if (input.price && input.priceCrossed) {
+    const saving = (input.price * 100) / input.priceCrossed;
+    const perc = (saving * 100) / input.priceCrossed;
+    greenText = `Save (${perc.toFixed(2)}%)`;
+    // console.log(saving, perc);
+  }
   // console.log(input);
   return (
     <div
@@ -75,8 +84,11 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
           </div>
           <div className='desc flex-2 flex justify-between hidden-sm'>
             <span className='text-muted '>{input.description}</span>
-            {input._type === "productBundle" && input.descriptionAlt && (
+            {/* {input._type === "productBundle" && input.descriptionAlt && (
               <span className='text-green'>{input.descriptionAlt}</span>
+            )} */}
+            {input._type === "productBundle" && isPriceCrossed && (
+              <span className='text-green'>{greenText}</span>
             )}
           </div>
         </div>
@@ -239,9 +251,9 @@ const BuyModal = ({ productsCart }: Props) => {
     setLicenseSizeProfil(val);
   };
   useEffect(() => {
-    console.log(licenseSizeProfil);
-    console.log("*********** old license types");
-    console.table(licenseTypeProfil);
+    // console.log(licenseSizeProfil);
+    // console.log("*********** old license types");
+    // console.table(licenseTypeProfil);
     if (licenseTypeProfil) {
       //replace
       //Lisense Size a changé
@@ -265,7 +277,7 @@ const BuyModal = ({ productsCart }: Props) => {
 
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
     const items = licenseTypeProfil?.filter((el) => el.label === val.label);
-    console.log(checked, val.label, items);
+    // console.log(checked, val.label, items);
     if (checked) {
       //no dubplicate
       if (items?.length === 0) {

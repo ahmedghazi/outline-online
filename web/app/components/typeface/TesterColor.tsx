@@ -8,7 +8,7 @@ const TesterColor = ({ onChange }: Props) => {
   const [hex, setHex] = useState<string>("#000000");
 
   useEffect(() => {
-    console.log(hex);
+    // console.log(hex);
     onChange(hex);
   }, [hex]);
 

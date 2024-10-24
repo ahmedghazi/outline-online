@@ -867,6 +867,13 @@ export type ProductBundle = {
   price?: number;
 
   /**
+   * Price Discount — `number`
+   *
+   * %, Displayed in buy modal => save Xx%
+   */
+  priceDiscount?: number;
+
+  /**
    * Price crossed — `number`
    *
    * Displayed in buy modal
