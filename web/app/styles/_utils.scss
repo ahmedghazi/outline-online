@@ -177,17 +177,24 @@ dialog {
 
   form {
     .form-row {
-      display: flex;
-      align-items: baseline;
+      // display: flex;
+      // align-items: baseline !important;
+      display: block;
       label {
         white-space: nowrap;
       }
     }
+    // span.text-red {
+    //   display: none;
+    // }
     label {
       white-space: initial;
+      vertical-align: baseline;
+      line-height: 1;
     }
     input {
-      width: 100%;
+      // background-color: orange !important;
+      // width: 100%;
       border: none;
       color: var(--color-purple) !important;
       line-height: 1;
@@ -217,82 +224,4 @@ dialog {
       padding: 0.5em;
     }
   }
-  // form {
-  //   .client-infos {
-  //     padding: 0 var(--space-md);
-  //   }
-  //   .fields {
-  //     display: grid;
-  //     grid-template-columns: repeat(2, minmax(0, 1fr));
-  //     gap: var(--space-md);
-  //     .form-row {
-  //       // display: flex;
-  //       // align-items: start;
-  //       line-height: 1;
-  //       span {
-  //         font-size: inherit;
-  //       }
-  //       label,
-  //       input {
-  //         line-height: 1;
-  //       }
-  //       label {
-  //         color: #666666;
-  //         white-space: nowrap;
-  //       }
-  //       input {
-  //         line-height: 1;
-  //         margin: 0;
-  //         width: auto;
-  //       }
-  //     }
-  //   }
-
-  //   input {
-  //     width: 100%;
-  //     border: none;
-  //     color: var(--color-purple);
-  //     line-height: 1;
-  //     margin: unset;
-  //     display: initial;
-  //     &:is(:-webkit-autofill, :autofill) {
-  //       color: var(--color-purple);
-  //       background-color: transparent;
-  //     }
-  //     &::placeholder,
-  //     &:active,
-  //     &:focus {
-  //       color: var(--color-purple) !important;
-  //     }
-  //     &::placeholder {
-  //       color: transparent;
-  //     }
-  //   }
-  //   .consent {
-  //     padding: var(--space-md);
-  //     .checkbox-ui {
-  //       width: 60%;
-  //       label {
-  //         flex-direction: row-reverse;
-  //         justify-content: space-between;
-  //         .label {
-  //           &::before {
-  //             content: "✓";
-  //             color: var(--color-purple);
-  //             display: inline-block;
-  //             margin-right: 0.4em;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  //   button[type="submit"] {
-  //     // background-color: var(--color-blue);
-  //     // color: white;
-  //     border-bottom-right-radius: var(--radius-sm);
-  //     border-bottom-left-radius: var(--radius-sm);
-  //     text-align: center;
-  //     width: 100%;
-  //   }
-  // }
 }
