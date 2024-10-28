@@ -1,6 +1,7 @@
 .snipcart-overwrite #snipcart {
   font-family: var(--font-primary) !important;
   font-size: var(--text-md) !important;
+  font-size: inherit !important;
   font-weight: unset !important;
   line-height: 1.2 !important;
   *,
@@ -20,6 +21,7 @@
     font-family: var(--font-primary) !important;
     // font-weight: 400 !important;
     font-size: var(--text-md) !important;
+    font-size: inherit !important;
     font-weight: unset !important;
     line-height: 1.2 !important;
     // color: var(--color-primary);
@@ -441,6 +443,26 @@
       }
     }
   }
+
+  @media all and (min-width: $md) {
+    .snipcart-overwrite #snipcart *,
+    .snipcart__font--primary,
+    .snipcart__font--secondary,
+    .snipcart__font--subtitle-small,
+    .snipcart__font--tiny,
+    .snipcart__font--secondary,
+    .snipcart__font--subtitle,
+    .snipcart__font--subtitle-small,
+    .snipcart__font--small,
+    .snipcart__font--std,
+    .snipcart__font--large,
+    .snipcart__box--badge,
+    .snipcart__font--subtitle,
+    .snipcart__font--xlarge {
+      font-size: var(--text-md-mobile) !important;
+    }
+  }
+
   /* -----------------
         Colors
     ----------------- */
