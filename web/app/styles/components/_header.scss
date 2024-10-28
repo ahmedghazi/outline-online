@@ -117,6 +117,10 @@ header#main-header {
       // color: var(--color-gray-100);
       color: black;
     }
+    .sup-header .item,
+    nav#nav-primary a.depth-0 {
+      margin-bottom: 0.3em;
+    }
     nav#nav-primary {
       ul {
         line-height: 1;
