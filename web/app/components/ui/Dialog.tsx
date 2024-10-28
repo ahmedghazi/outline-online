@@ -10,9 +10,13 @@ type Props = {
 
 const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   const ref = useRef<HTMLDialogElement>(null);
+  const [ready, setReady] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const { isMobile } = useDeviceDetect();
   // console.log("openModal", openModal);
+  useEffect(() => {
+    setReady(true);
+  }, []);
 
   useEffect(() => {
     setOpen(openModal);
@@ -26,23 +30,27 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
       if (onCloseModal) onCloseModal();
     }
   }, [open]);
-
+  // console.log({ isMobile });
   return (
-    <Draggable nodeRef={ref} disabled={isMobile}>
-      <dialog
-        ref={ref}
-        // onCancel={closeModal}
-      >
-        <div className='header'>
-          <button
-            className='!text-red text-[18px]'
-            onClick={() => setOpen(false)}>
-            ╳
-          </button>
-        </div>
-        {children}
-      </dialog>
-    </Draggable>
+    <>
+      {ready && (
+        // <Draggable nodeRef={ref} disabled={isMobile}>
+        <dialog
+          ref={ref}
+          // onCancel={closeModal}
+        >
+          <div className='header'>
+            <button
+              className='!text-red text-[18px]'
+              onClick={() => setOpen(false)}>
+              ╳
+            </button>
+          </div>
+          {children}
+        </dialog>
+        // </Draggable>
+      )}
+    </>
   );
 };
 
