@@ -192,17 +192,17 @@ const TrialsDownload = (props: Props) => {
             />
           </div>
         </div>
-        {okToSend && agree && (
-          <div className='footer'>
-            <button
-              type='submit'
-              className={clsx(
-                okToSend && agree ? "button-submit" : "button-disabled"
-              )}>
-              {getButtonMsg()}
-            </button>
-          </div>
-        )}
+        {/* {okToSend && agree && ( */}
+        <div className='footer'>
+          <button
+            type='submit'
+            className={clsx(
+              okToSend && agree ? "button-submit" : "button-disabled"
+            )}>
+            {getButtonMsg()}
+          </button>
+        </div>
+        {/* )} */}
       </form>
     </div>
   );
