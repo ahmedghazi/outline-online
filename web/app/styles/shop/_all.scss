@@ -431,6 +431,16 @@
       padding: 0.4em;
     }
   }
+  .snipcart-empty-cart {
+    .snipcart-button-secondary {
+      //bg-green text-white;
+      background-color: var(--color-green);
+      color: white;
+      .snipcart-base-button__icon {
+        display: none;
+      }
+    }
+  }
   /* -----------------
         Colors
     ----------------- */

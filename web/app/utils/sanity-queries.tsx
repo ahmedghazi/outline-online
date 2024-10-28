@@ -126,13 +126,6 @@ export const homeQuery = groq`*[_type == "home"][0]{
 
   trinkets[]{
     ...,
-    // file{
-    //   ...,
-    //   asset->{
-    //     url,
-    //     originalFilename
-    //   }
-    // },
     image{
       asset->{
         url,
@@ -140,11 +133,6 @@ export const homeQuery = groq`*[_type == "home"][0]{
         metadata
       }
     },
-    // link->{
-    //   title,
-    //   _type,
-    //   slug
-    // }
   },
 
   typefaces[]->{
