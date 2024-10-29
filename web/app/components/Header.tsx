@@ -1,19 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import website from "../config/website";
-import Cart from "./shop/Cart";
 import Clock from "./ui/Clock";
 import { Product, Settings } from "../types/schema";
 import { _linkResolver } from "../utils/utils";
-import Link from "next/link";
 import ScreenTime from "./ui/ScreenTime";
-import Buy from "./Buy";
 import NavPrimaryDesktop from "./NavPrimaryDesktop";
 import NavPrimaryMobile from "./NavPrimaryMobile";
 import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
-import { useScroll } from "../hooks/useScroll";
 import { useScrollDirection } from "../hooks/useScrollDirection";
+import { usePageContext } from "../context/PageContext";
 
 type Props = {
   settings: Settings;
@@ -25,6 +21,7 @@ const Header = ({ settings, productsCart }: Props) => {
   const [isProduct, setIsProduct] = useState<boolean>(false);
   const pathname = usePathname();
   const { scrollDirection } = useScrollDirection();
+  const { tab } = usePageContext();
 
   useEffect(() => {
     const token = subscribe("IS_PRODUCT", (e, d) => {
@@ -53,6 +50,12 @@ const Header = ({ settings, productsCart }: Props) => {
   useEffect(() => {
     document.body.classList.toggle("is-product", isProduct);
   }, [isProduct]);
+
+  useEffect(() => {
+    const { active } = tab;
+    document.body.classList.toggle("has-scrolled", active);
+    window.scroll(0, 1);
+  }, [tab]);
 
   const _handleScroll = () => {
     let hasScrolled = document.body.scrollTop > 10;
