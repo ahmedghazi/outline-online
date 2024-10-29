@@ -200,6 +200,8 @@ dialog {
       line-height: 1;
       margin: unset;
       display: initial;
+      width: auto;
+      max-width: 19em;
       &:is(:-webkit-autofill, :-moz-autofill, :autofill) {
         color: var(--color-purple) !important;
         background-color: transparent !important;
