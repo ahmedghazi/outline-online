@@ -54,13 +54,14 @@ export default defineField({
       title: 'Price Discount',
       name: 'priceDiscount',
       type: 'number',
-      description: '%, Displayed in buy modal => save Xx%',
+      description: '%, Displayed in buy modal (green text) => save Xx%',
     }),
     defineField({
       title: 'Price crossed',
       name: 'priceCrossed',
       type: 'number',
       description: 'Displayed in buy modal',
+      hidden: true,
     }),
 
     defineField({

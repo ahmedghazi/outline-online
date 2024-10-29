@@ -126,9 +126,22 @@
     .typeface-item {
       .group {
         // padding-top: 0.5em;
+        &.group--bundles,
         &.group--singles {
-          ._row.item {
+          ._row.item:not(.is-price-crossed) {
             grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+          ._row.item.is-price-crossed {
+            .price .text-muted {
+              display: none;
+            }
+            // .actions {
+            //   display: grid;
+            //   grid-template-columns: repeat(4, minmax(0, 1fr));
+            //   .add-to-cart {
+            //     grid-column: span 3 / span 3;
+            //   }
+            // }
           }
         }
       }

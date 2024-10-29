@@ -65,23 +65,32 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
       : [];
 
   let greenText = "";
-  const isPriceCrossed = input.priceCrossed !== undefined;
-  if (input.price && input.priceCrossed) {
-    const saving = (input.price * 100) / input.priceCrossed;
-    const perc = (saving * 100) / input.priceCrossed;
-    greenText = `Save (${perc.toFixed(2)}%)`;
-    // console.log(saving, perc);
+  let isPriceCrossed: boolean =
+    typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
+  let priceCrossed: number = 0;
+  if (input.price && input.priceDiscount && isPriceCrossed) {
+    // isPriceCrossed = true;
+    priceCrossed = input.price + (input.price / 100) * input.priceDiscount;
+    greenText = `Save (${input.priceDiscount.toFixed(2)}%)`;
   }
-  // console.log(input);
+  // const isPriceCrossed: boolean = input.priceCrossed !== null;
+  // if (input.price && input.priceCrossed) {
+  //   const saving = (input.price * 100) / input.priceCrossed;
+  //   const perc = (saving * 100) / input.priceCrossed;
+  //   greenText = `Save (${perc.toFixed(2)}%)`;
+  //   // console.log(saving, perc);
+  // }
+  console.log(input.title, input.priceDiscount, isPriceCrossed);
   return (
     <div
-      className='item _row grid md:grid-cols-6 md:gap-md cursor-pointer'
+      className={clsx(
+        "item _row grid md:grid-cols-6 md:gap-md cursor-pointer",
+        isPriceCrossed && "is-price-crossed"
+      )}
       onClick={() => setActive(!active)}>
       <div className='title md:col-span-4'>
         <div className='md:flex md:gap-sm '>
-          <div className='title'>
-            {input.title} <span className='text-red'>{input.price}</span>
-          </div>
+          <div className='title'>{input.title}</div>
           <div className='desc flex-2 flex justify-between hidden-sm'>
             <span className='text-muted '>{input.description}</span>
             {/* {input._type === "productBundle" && input.descriptionAlt && (
@@ -107,7 +116,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
           blurb={""}
           categories={input.categories || []}
           price={input.price || 20000000000}
-          priceCrossed={input.priceCrossed}
+          priceCrossed={isPriceCrossed ? priceCrossed : undefined}
           metadata={{
             type: type,
             typefaces: typefaces,
@@ -347,7 +356,7 @@ const BuyModal = ({ productsCart }: Props) => {
                             _updateLicenseType(checked, item);
                           }}
                         />
-                        <span className='text-red'>{item.price}</span>
+                        {/* <span className='text-red'>{item.price}</span> */}
 
                         {/* <div className='label !p-0'>{item.label}</div> */}
                       </div>

@@ -878,7 +878,7 @@ export type ProductBundle = {
   /**
    * Price Discount — `number`
    *
-   * %, Displayed in buy modal => save Xx%
+   * %, Displayed in buy modal (green text) => save Xx%
    */
   priceDiscount?: number;
 
@@ -947,6 +947,13 @@ export type ProductSingle = {
    * Based on base price (licence type + size), ex base price is 50 CHF, this can add 60 CHF, result: 110 CHF
    */
   price?: number;
+
+  /**
+   * Price Discount — `number`
+   *
+   * %, Displayed in buy modal (green text) => save Xx%
+   */
+  priceDiscount?: number;
 
   /**
    * Price crossed — `number`

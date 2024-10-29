@@ -46,10 +46,17 @@ export default defineField({
         'Based on base price (licence type + size), ex base price is 50 CHF, this can add 60 CHF, result: 110 CHF',
     }),
     defineField({
+      title: 'Price Discount',
+      name: 'priceDiscount',
+      type: 'number',
+      description: '%, Displayed in buy modal (green text) => save Xx%',
+    }),
+    defineField({
       title: 'Price crossed',
       name: 'priceCrossed',
       type: 'number',
       description: 'Displayed in buy modal',
+      hidden: true,
     }),
 
     defineField({
