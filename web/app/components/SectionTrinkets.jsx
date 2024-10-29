@@ -17,6 +17,7 @@ import {
   PerspectiveCamera,
   CameraControls,
 } from "@react-three/drei";
+import { Box3 } from "three";
 // import { PerspectiveCamera } from "three";
 import Trinket from "./Trinket";
 import TrinketImage from "./TrinketImage";
@@ -73,20 +74,26 @@ const Scene = (props) => {
     window.scroll(0, 1);
     setTimeout(() => {
       window.scroll(0, 0);
-
-      cameraControlsRef.current?.fitToBox(refGroup.current, true, {
-        paddingTop: 150,
-        paddingLeft: 150,
-        paddingBottom: 150,
-        paddingRight: 150,
+      const box3 = new Box3().setFromObject(refGroup.current);
+      cameraControlsRef.current?.fitToBox(box3, false, {
+        paddingTop: 2,
+        paddingLeft: 2,
+        paddingBottom: 2,
+        paddingRight: 2,
       });
-      setTimeout(() => {
-        cameraControlsRef.current?.fitToBox(refGroup.current, true);
-      }, 1000);
+      // setTimeout(() => {
+      //   // cameraControlsRef.current?.fitToBox(refGroup.current, true);
+      //   cameraControlsRef.current?.fitToBox(refGroup.current, true, {
+      //     paddingTop: 150,
+      //     paddingLeft: 150,
+      //     paddingBottom: 150,
+      //     paddingRight: 150,
+      //   });
+      // }, 1000);
     }, 1000);
   }, []);
 
-  const distance = 5;
+  const distance = 1;
 
   const items = useMemo(() => {
     return props.input.map((item, i) => {
