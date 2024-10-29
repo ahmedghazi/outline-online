@@ -23,38 +23,12 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    // console.log(open);
-    // if (!open) return;
-
     _toggle();
-    // setTab({
-    //   name: open ? "CART" : "",
-    //   active: open,
-    // });
-    // else setTab("");
-    // publish("HEADER_TAB_CHANGE", {
-    //   item: "CART",
-    //   active: open,
-    // });
   }, [open]);
 
   useEffect(() => {
-    // console.log(pathname);
     setOpen(tab.name === "CART");
   }, [tab]);
-
-  useEffect(() => {
-    // const token = subscribe("HEADER_TAB_CHANGE", (e, d) => {
-    //   const { item, active } = d;
-    //   console.log(e, d);
-    //   if (item === "BUY") {
-    //     setOpen(false);
-    //   }
-    // });
-    // return () => {
-    //   unsubscribe(token);
-    // };
-  }, []);
 
   useEffect(() => {
     if (cartObject) {
@@ -65,6 +39,7 @@ const Cart = () => {
 
   useEffect(() => {
     _onClose();
+    setOpen(false);
   }, [pathname]);
 
   const _onClose = () => {

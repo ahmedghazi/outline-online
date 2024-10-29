@@ -25,36 +25,12 @@ const Buy = ({ productsCart }: Props) => {
   };
 
   useEffect(() => {
-    // console.log("Buy", active);
-    // setTab({
-    //   name: active ? "BUY" : "",
-    //   active: active,
-    // });
-    // else setTab("");
-  }, [active]);
-
-  useEffect(() => {
-    // console.log("Buy", tab);
     setActive(tab.name === "BUY");
   }, [tab]);
 
   useEffect(() => {
-    // const token = subscribe("HEADER_TAB_CHANGE", (e, d) => {
-    //   console.log(e, d);
-    //   const { item, active } = d;
-    //   if (item === "CART") {
-    //     setActive(false);
-    //   }
-    // });
-
-    return () => {
-      // unsubscribe(token);
-    };
-  }, []);
-
-  // useEffect(() => {
-  //   setActive(false);
-  // }, [pathname]);
+    setActive(false);
+  }, [pathname]);
 
   return (
     <button

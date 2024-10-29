@@ -67,6 +67,11 @@ export const PageContextProvider = (props: PageContextProps) => {
   useEffect(() => {
     _handlePageTemplate();
     document.body.classList.remove("has-scrolled");
+
+    setTab({
+      name: "",
+      active: false,
+    });
   }, [pathname]);
 
   const _format = () => {
@@ -112,6 +117,7 @@ export const PageContextProvider = (props: PageContextProps) => {
       document.body.dataset.template = `is-${template}`;
     }
   };
+  console.log(pathname);
   console.log(tab);
   return (
     <PageContext.Provider value={{ settings, tab, setTab }}>
