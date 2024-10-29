@@ -32,6 +32,7 @@ import useDeviceDetect from "../hooks/useDeviceDetect";
 const TrinketInfo = ({ infos }) => {
   const ref = useRef();
   const [transform, setTransform] = useState("");
+
   useEffect(() => {
     window.addEventListener("mousemove", _update);
     return () => {
@@ -41,7 +42,7 @@ const TrinketInfo = ({ infos }) => {
 
   const _update = (e) => {
     // console.log(e);
-    if (!ref) return;
+    if (!ref || !ref.current) return;
     const bounding = ref.current.getBoundingClientRect();
     const offsetX = bounding.width / 2;
     // const offset

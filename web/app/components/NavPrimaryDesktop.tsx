@@ -1,36 +1,12 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import {
-  LinkExternal,
-  LinkInternal,
-  MenuItem,
-  SanityKeyed,
-} from "../types/schema";
-import Link from "next/link";
+import React, { useRef } from "react";
+import { LinkExternal, MenuItem } from "../types/schema";
 import { _linkResolver } from "../utils/utils";
 import Buy from "./Buy";
 import Cart from "./shop/Cart";
-import { usePathname, useRouter } from "next/navigation";
-import { subscribe, unsubscribe } from "pubsub-js";
+
 import clsx from "clsx";
 import NavLink from "./NavLink";
-
-// type NavLinkProps = {
-//   input: LinkInternal | LinkExternal;
-//   depth: number;
-// };
-
-// const NavLink = ({ input, depth }: NavLinkProps) => {
-//   const pathname = usePathname();
-
-//   const href = _linkResolver(input.link);
-//   const ariaCurrent = href === pathname ? "page" : undefined;
-//   return (
-//     <Link href={href} aria-current={ariaCurrent} className={`depth-${depth}`}>
-//       {input.label}
-//     </Link>
-//   );
-// };
 
 type NavProps = {
   navPrimary: Array<MenuItem | LinkExternal> | undefined;
@@ -38,49 +14,7 @@ type NavProps = {
 };
 
 const NavPrimaryDesktop = ({ navPrimary, productsCart }: NavProps) => {
-  // const [y, setY] = useState<number | string | null>(null);
   const ref = useRef<HTMLElement | null>(null);
-  // const pathname = usePathname();
-  // const [isProduct, setIsProduct] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   if (window.innerWidth < 1080) return;
-
-  //   const token = subscribe("IS_PRODUCT", (e, d) => {
-  //     setIsProduct(d);
-  //   });
-
-  //   return () => {
-  //     unsubscribe(token);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (window.innerWidth < 1080) return;
-
-  //   setIsProduct(false);
-  //   if (pathname === "/") {
-  //     document.body.addEventListener("scroll", _handleScroll);
-  //   }
-  //   if (pathname.indexOf("product") > -1) {
-  //     setIsProduct(true);
-  //   }
-
-  //   return () => {
-  //     document.body.removeEventListener("scroll", _handleScroll);
-  //   };
-  // }, [pathname]);
-
-  // useEffect(() => {
-  //   document.body.classList.toggle("is-product", isProduct);
-  // }, [isProduct]);
-
-  // const _handleScroll = () => {
-  //   document.body.classList.toggle(
-  //     "has-scrolled",
-  //     document.body.scrollTop > 10
-  //   );
-  // };
 
   return (
     <nav ref={ref} id='nav-primary' className='hidden-sm'>

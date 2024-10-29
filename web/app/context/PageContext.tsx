@@ -1,13 +1,30 @@
 "use client";
-import React, { createContext, useContext, ReactNode, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 import { usePathname } from "next/navigation";
 import { Settings } from "../types/schema";
 import useDeviceDetect from "../hooks/useDeviceDetect";
+import { subscribe, unsubscribe } from "pubsub-js";
 
 // const PageContext = createContext({});
 
+const defaultTab = {
+  name: "",
+  active: false,
+};
+type TabProps = {
+  name: string;
+  active: boolean;
+};
 type ContextProps = {
   settings: Settings;
+  tab: TabProps;
+  setTab: Function;
 };
 
 const PageContext = createContext<ContextProps>({} as ContextProps);
@@ -21,6 +38,7 @@ export const PageContextProvider = (props: PageContextProps) => {
   const { children, settings } = props;
   const pathname = usePathname();
   const { browser } = useDeviceDetect();
+  const [tab, setTab] = useState<TabProps>(defaultTab);
 
   useEffect(() => {
     // console.log(browser);
@@ -28,8 +46,17 @@ export const PageContextProvider = (props: PageContextProps) => {
     _handlePageTemplate();
     window.addEventListener("resize", _format);
 
+    const token = subscribe("HEADER_TAB_CHANGE", (e, d) => {
+      if (pathname === "/") {
+        document.body.classList.toggle("has-scrolled", d.active);
+      } else {
+        document.body.classList.remove("has-scrolled");
+      }
+    });
+
     return () => {
       window.removeEventListener("resize", _format);
+      unsubscribe(token);
     };
   }, []);
 
@@ -85,9 +112,11 @@ export const PageContextProvider = (props: PageContextProps) => {
       document.body.dataset.template = `is-${template}`;
     }
   };
-
+  console.log(tab);
   return (
-    <PageContext.Provider value={{ settings }}>{children}</PageContext.Provider>
+    <PageContext.Provider value={{ settings, tab, setTab }}>
+      {children}
+    </PageContext.Provider>
   );
 };
 

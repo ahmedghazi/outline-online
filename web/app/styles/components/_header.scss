@@ -295,50 +295,9 @@ body[data-template="is-home"] {
       }
     }
   }
-  // header#main-header #nav-primary {
-  //   transform: translateY(
-  //     calc(var(--vh) * 50 - var(--header-height) / 2 - 1em)
-  //   );
-
-  //   position: relative;
-  //   z-index: 2;
-  //   ul {
-  //     li.menu-item--outline.online {
-  //       pointer-events: none;
-  //     }
-  //   }
-  //   .submenu {
-  //     // background-color: yellow;
-  //     min-height: calc(1.2em * 3 + 2em);
-  //     padding-top: 1em;
-  //     top: 50%;
-  //     transform: translateX(-50%) translateY(calc(-50% - 0em));
-  //     transition: transform 0.2s, top 0.2s;
-
-  //     // padding-bottom: 0;
-  //     .is-half {
-  //       transition: margin-bottom 0.2s;
-  //       margin-bottom: 1.2em;
-  //     }
-  //   }
-  // }
-  // &.has-scrolled header#main-header #nav-primary {
-  //   transform: translateY(0);
-
-  //   .submenu {
-  //     transform: translateX(-50%) translateY(0);
-  //     top: unset;
-  //     padding-top: 0;
-  //     li.is-half {
-  //       margin-bottom: 0 !important;
-  //     }
-  //   }
-  //   ul {
-  //     li.menu-item--outline.online {
-  //       pointer-events: initial;
-  //     }
-  //   }
-  // }
+  &.cart-opened {
+    overflow: hidden;
+  }
 }
 
 .btn--buy,

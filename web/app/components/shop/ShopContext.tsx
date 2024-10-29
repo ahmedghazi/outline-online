@@ -225,17 +225,24 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
 
       Snipcart.events.on("theme.routechanged", (routesChange: any) => {
         if (routesChange.from === "/" && routesChange.to !== "/") {
-          console.log("cart opened");
+          // console.log("cart opened");
           document.body.classList.add("cart-opened");
-          publish("CART_OPENED", true);
-
+          // publish("CART_OPENED", true);
+          // publish("HEADER_TAB_CHANGE", {
+          //   item: "CART",
+          //   active: true,
+          // });
           document.body.addEventListener("click", _handleClickOutside);
         }
 
         if (routesChange.from !== "/" && routesChange.to === "/") {
-          console.log("cart closed");
+          // console.log("cart closed");
           document.body.classList.remove("cart-opened");
-          publish("CART_OPENED", false);
+          // publish("CART_OPENED", false);
+          // publish("HEADER_TAB_CHANGE", {
+          //   item: "CART",
+          //   active: false,
+          // });
         }
       });
     };

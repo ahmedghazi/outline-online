@@ -4,6 +4,7 @@ import { publish, subscribe, unsubscribe } from "pubsub-js";
 import React, { useEffect, useRef, useState } from "react";
 import useShop from "./ShopContext";
 import { usePathname } from "next/navigation";
+import { usePageContext } from "@/app/context/PageContext";
 
 const Cart = () => {
   const [count, setCount] = useState<number>(0);
@@ -11,35 +12,49 @@ const Cart = () => {
   const cartRef = useRef<HTMLDivElement>(null);
   const { cartObject } = useShop();
   const pathname = usePathname();
+  const { tab, setTab } = usePageContext();
 
-  // useEffect(() => {
-  //   const { Snipcart } = window;
-  //   if (!Snipcart) return;
-
-  //   Snipcart.events.on("snipcart.initialization.error", () => {
-  //     console.log("Failed to initialize Snipcart");
-  //   });
-  // }, []);
+  const _onClick = () => {
+    const nextActive = !open;
+    setTab({
+      name: nextActive ? "CART" : "",
+      active: nextActive,
+    });
+  };
 
   useEffect(() => {
-    const tokenBuyModal = subscribe("BUY_MODAL_ACTIVE", (e, d) => {
-      if (d) {
-        window.Snipcart.api.theme.cart.close();
-      }
-    });
-    const token = subscribe("CART_OPENED", (e, d) => {
-      if (d && pathname === "/") {
-        document.body.scroll(0, window.innerHeight);
-      }
-    });
+    // console.log(open);
+    // if (!open) return;
 
-    return () => {
-      unsubscribe(token);
-      unsubscribe(tokenBuyModal);
-    };
+    _toggle();
+    // setTab({
+    //   name: open ? "CART" : "",
+    //   active: open,
+    // });
+    // else setTab("");
+    // publish("HEADER_TAB_CHANGE", {
+    //   item: "CART",
+    //   active: open,
+    // });
+  }, [open]);
+
+  useEffect(() => {
+    // console.log(pathname);
+    setOpen(tab.name === "CART");
+  }, [tab]);
+
+  useEffect(() => {
+    // const token = subscribe("HEADER_TAB_CHANGE", (e, d) => {
+    //   const { item, active } = d;
+    //   console.log(e, d);
+    //   if (item === "BUY") {
+    //     setOpen(false);
+    //   }
+    // });
+    // return () => {
+    //   unsubscribe(token);
+    // };
   }, []);
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     if (cartObject) {
@@ -53,20 +68,13 @@ const Cart = () => {
   }, [pathname]);
 
   const _onClose = () => {
-    // const { Snipcart } = window;
-    // if (!Snipcart) return;
-
-    // Snipcart.api.theme.cart.close();
-    const btnClose: HTMLElement = document.querySelector(
-      ".snipcart-modal__close"
-    ) as HTMLElement;
-    if (btnClose) btnClose.click();
+    if (!window.Snipcart) return;
+    window.Snipcart.api.theme.cart.close();
+    // const btnClose: HTMLElement = document.querySelector(
+    //   ".snipcart-modal__close"
+    // ) as HTMLElement;
+    // if (btnClose) btnClose.click();
   };
-
-  useEffect(() => {
-    console.log(open);
-    _toggle();
-  }, [open]);
 
   const _toggle = () => {
     if (!window.Snipcart) return;
@@ -80,7 +88,7 @@ const Cart = () => {
   return (
     <div className='cart' ref={cartRef}>
       <button
-        onClick={() => setOpen(!open)}
+        onClick={_onClick}
         className='btn--cart snipcart-checkout-'
         aria-label='open cart'
         title='open cart'>

@@ -18,6 +18,7 @@ import useShop from "./ShopContext";
 import AddToCart from "./AddToCart";
 import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
+import { usePageContext } from "@/app/context/PageContext";
 
 declare global {
   interface Window {
@@ -80,7 +81,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
   //   greenText = `Save (${perc.toFixed(2)}%)`;
   //   // console.log(saving, perc);
   // }
-  console.log(input.title, input.priceDiscount, isPriceCrossed);
+  // console.log(input.title, input.priceDiscount, isPriceCrossed);
   return (
     <div
       className={clsx(
@@ -208,6 +209,7 @@ const BuyModal = ({ productsCart }: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const [buttonStatus, setButtonStatus] = useState("Add To Cart");
   const pathname = usePathname();
+  const { tab } = usePageContext();
 
   const {
     licenses,
@@ -220,22 +222,28 @@ const BuyModal = ({ productsCart }: Props) => {
   // console.log(products);
 
   useEffect(() => {
+    // console.log(pathname);
+    setActive(tab.name === "BUY" && tab.active);
+  }, [tab]);
+
+  useEffect(() => {
     setReady(true);
-    // _setDefaultLicenses();
-    const token = subscribe("BUY_MODAL_ACTIVE", (e, d) => {
-      // console.log(e);
-      setActive(d);
-    });
 
-    const tokenB = subscribe("CART_OPENED", (e, d) => {
-      // console.log(e);
-      if (d) setActive(false);
-    });
+    /*
+      LISTEN TO BUY Button click
+    */
+    // const token = subscribe("HEADER_TAB_CHANGE", (e, d) => {
+    //   const { item, active } = d;
+    //   if (item === "CART") {
+    //     setActive(false);
+    //   } else {
+    //     setActive(active);
+    //   }
+    // });
 
-    return () => {
-      unsubscribe(token);
-      unsubscribe(tokenB);
-    };
+    // return () => {
+    //   unsubscribe(token);
+    // };
   }, []);
 
   useEffect(() => {
@@ -245,9 +253,9 @@ const BuyModal = ({ productsCart }: Props) => {
 
   useEffect(() => {
     document.body.classList.toggle("is-product--open", active);
-    if (active && pathname === "/") {
-      window.scroll(0, window.innerHeight);
-    }
+    // if (active && pathname === "/") {
+    //   window.scroll(0, window.innerHeight);
+    // }
   }, [active]);
 
   // const _setDefaultLicenses = () => {
