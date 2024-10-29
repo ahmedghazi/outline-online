@@ -444,7 +444,7 @@
     }
   }
 
-  @media all and (min-width: $md) {
+  @media all and (max-width: $md) {
     .snipcart-overwrite #snipcart *,
     .snipcart__font--primary,
     .snipcart__font--secondary,
