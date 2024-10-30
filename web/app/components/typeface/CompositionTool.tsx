@@ -3,7 +3,7 @@ import TesterSize from "./TesterSize";
 import TesterLeading from "./TesterLeading";
 import TesterSpacing from "./TesterSpacing";
 import Select from "../ui/Select";
-import { KeyValString, ProductSingle, Style } from "@/app/types/schema";
+import { KeyValString, ProductSingle } from "@/app/types/schema";
 import clsx from "clsx";
 import TesterColor from "./TesterColor";
 import TesterParagraph from "./TesterParagraph";

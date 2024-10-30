@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import { Product, Style, Trials } from "../types/schema";
+import { Product, Trials } from "../types/schema";
 import clsx from "clsx";
 import Dialog from "./ui/Dialog";
 import Checkbox from "./ui/Checkbox";
-import { usePageContext } from "../context/PageContext";
+// import { usePageContext } from "../context/PageContext";
 import useShop from "./shop/ShopContext";
 import TrialsDownload from "./TrialsDownload";
 import { _removeFromArr } from "../utils/utils";

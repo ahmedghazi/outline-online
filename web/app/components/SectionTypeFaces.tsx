@@ -1,16 +1,10 @@
 "use client";
 import React, { MouseEvent, useEffect, useMemo, useRef, useState } from "react";
-import {
-  KeyValString,
-  Product,
-  SanityKeyed,
-  Style,
-  Typeface,
-} from "../types/schema";
+import { KeyValString, Product, Typeface } from "../types/schema";
 import Link from "next/link";
 import { _linkResolver } from "../utils/utils";
 import clsx from "clsx";
-import TypeCard from "./typeface/TypeCard";
+// import TypeCard from "./typeface/TypeCard";
 import useType, { TypeContextProvider } from "./typeface/TypeContext";
 import useInViewPort from "../hooks/useInViewport";
 import { publish } from "pubsub-js";

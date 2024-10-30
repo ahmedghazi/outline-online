@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import useShop from "./ShopContext";
 import { usePathname } from "next/navigation";
 import {
-  LabelPrice,
+  // LabelPrice,
   LicenseType,
-  Product,
-  Style,
+  // Product,
   Typeface,
 } from "@/app/types/schema";
 import Price from "./Price";

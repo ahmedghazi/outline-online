@@ -15,8 +15,6 @@ import {
   Product,
   ProductSingle,
   SanityKeyed,
-  Style,
-  Variant,
 } from "@/app/types/schema";
 import { usePathname } from "next/navigation";
 import { _getDataAttributes } from "./utils";

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Product, Style, Typeface } from "../types/schema";
+import { Product, Typeface } from "../types/schema";
 // import Typetester from "./typeface/TypeTester";
 // import Licences from "./shop/Licences";
 // import BundleUI from "./shop/BundleUI";

@@ -1,4 +1,4 @@
-import { KeyValString, ProductSingle, Style } from "@/app/types/schema";
+import { KeyValString, ProductSingle } from "@/app/types/schema";
 import React, { useMemo, useRef } from "react";
 // import TypeTester from "./TypeTester";
 // import useType from "./TypeContext";

@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import TesterSize from "./TesterSize";
 import TesterHeight from "./TesterLeading";
 import "./Tester.scss";
-import { Style } from "@/app/types/schema";
+// import { Style } from "@/app/types/schema";
 
 type Props = {
   title: string;

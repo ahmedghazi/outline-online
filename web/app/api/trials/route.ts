@@ -8,7 +8,7 @@ import nodemailer from "nodemailer";
 // require("dotenv").config();
 // import sanityClient from "@sanity/client";
 import { client } from "../../utils/sanity-client";
-import { Style, Typeface } from "@/app/types/schema";
+import { Typeface } from "@/app/types/schema";
 
 // const client = sanityClient({
 //   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,

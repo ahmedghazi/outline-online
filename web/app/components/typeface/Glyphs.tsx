@@ -1,5 +1,5 @@
 "use client";
-import { ProductSingle, Style } from "@/app/types/schema";
+import { ProductSingle } from "@/app/types/schema";
 import React, { useEffect, useRef, useState } from "react";
 import { alphabets } from "./alphabets";
 import useType from "./TypeContext";
