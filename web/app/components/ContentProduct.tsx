@@ -33,7 +33,7 @@ const ContentProduct = ({ input }: Props) => {
 
   const { type, dispatchType, dispatchTypes } = useType();
   const [ready, setReady] = useState<boolean>(false);
-
+  console.log(type);
   const _gerRandomPangram = (p: string[] | any) => {
     if (!p)
       return "24 wacky bandmates mixed zany rhythms, blowing jazzy saxophones and fixing broken xylophones for a quirky gig.";
@@ -74,8 +74,8 @@ const ContentProduct = ({ input }: Props) => {
     dispatchTypes(arr);
   };
 
-  const hasLicences =
-    licenseTypeProfil && licenseTypeProfil.length > 0 && licenseSizeProfil;
+  // const hasLicences =
+  //   licenseTypeProfil && licenseTypeProfil.length > 0 && licenseSizeProfil;
 
   return (
     <div
@@ -87,6 +87,7 @@ const ContentProduct = ({ input }: Props) => {
           opacity: type ? 1 : 0,
         } as React.CSSProperties
       }>
+      {/* <pre>{JSON.stringify(input.singles, null, 2)}</pre> */}
       {ready && input.singles && (
         <TypeTesterHero input={input.singles} pangram={pangram} />
       )}

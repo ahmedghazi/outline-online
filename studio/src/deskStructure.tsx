@@ -75,7 +75,10 @@ export const structure = (S) =>
       S.divider(),
 
       S.listItem().title('Products').schemaType('product').child(S.documentTypeList('product')),
-      S.listItem().title('Typefaces').schemaType('typeface').child(S.documentTypeList('typeface')),
+      S.listItem()
+        .title('Typefaces (regular,italic,...)')
+        .schemaType('typeface')
+        .child(S.documentTypeList('typeface')),
 
       /**
        * with seo preview

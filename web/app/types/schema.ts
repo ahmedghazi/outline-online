@@ -663,43 +663,6 @@ export interface Vendor extends SanityDocument {
   description?: BlockContent;
 }
 
-/**
- * Link Expire
- *
- *
- */
-export interface LinkExpire extends SanityDocument {
-  _type: "linkExpire";
-
-  /**
-   * Title — `string`
-   *
-   *
-   */
-  title?: string;
-
-  /**
-   * Url — `url`
-   *
-   *
-   */
-  url?: string;
-
-  /**
-   * expired — `boolean`
-   *
-   *
-   */
-  expired?: boolean;
-
-  /**
-   * Hit count — `number`
-   *
-   *
-   */
-  count?: number;
-}
-
 export type LicenseType = {
   _type: "licenseType";
   /**
@@ -760,71 +723,6 @@ export type LicenseSize = {
    *
    */
   licenseType?: Array<SanityKeyed<LicenseType>>;
-};
-
-export type LicenseSizeOption = {
-  _type: "licenseSizeOption";
-  /**
-   * label — `string`
-   *
-   *
-   */
-  label?: string;
-
-  /**
-   * Price — `number`
-   *
-   *
-   */
-  price?: number;
-};
-
-export type Variants = {
-  _type: "variants";
-  /**
-   * Title — `string`
-   *
-   *
-   */
-  title?: string;
-
-  /**
-   * Base Price — `number`
-   *
-   * Base price, variants will increment this value
-   */
-  basePrice?: number;
-
-  /**
-   * Variants Title — `string`
-   *
-   * Ex: Company size
-   */
-  variantsTitle?: string;
-
-  /**
-   * Variant — `array`
-   *
-   * Company size
-   */
-  items?: Array<SanityKeyed<Variant>>;
-};
-
-export type Variant = {
-  _type: "variant";
-  /**
-   * Title — `string`
-   *
-   * lowercase, no space, ex: 1,10,100; 10k, 20k
-   */
-  title?: string;
-
-  /**
-   * Price Modifier — `number`
-   *
-   * Based on base price, ex base price is 30e, this variant can add 6e ending 36e
-   */
-  priceModifier?: number;
 };
 
 export type TypefaceFile = {
@@ -982,37 +880,6 @@ export type ProductSingle = {
    * Digital good client will receive
    */
   zipTrials?: { _type: "file"; asset: SanityReference<any> };
-};
-
-export type Style = {
-  _type: "style";
-  /**
-   * Title — `string`
-   *
-   *
-   */
-  title?: string;
-
-  /**
-   * Description — `string`
-   *
-   *
-   */
-  description?: string;
-
-  /**
-   * Price — `number`
-   *
-   * Based on base price (licence type + size), ex base price is 50 CHF, this can add 60 CHF, result: 110 CHF
-   */
-  price?: number;
-
-  /**
-   * items — `reference`
-   *
-   * rename this (cf bundles)
-   */
-  items?: SanityReference<Typeface>;
 };
 
 export type BlockContent = Array<SanityKeyed<SanityBlock>>;
@@ -1236,35 +1103,6 @@ export type LabelPrice = {
   price?: number;
 };
 
-export type Obj3d = {
-  _type: "obj3d";
-  /**
-   * gltf — `file`
-   *
-   *
-   */
-  gltf?: { _type: "file"; asset: SanityReference<any> };
-
-  /**
-   * image — `image`
-   *
-   * Image Fallback
-   */
-  image?: {
-    _type: "image";
-    asset: SanityReference<SanityImageAsset>;
-    crop?: SanityImageCrop;
-    hotspot?: SanityImageHotspot;
-  };
-
-  /**
-   * link — `reference`
-   *
-   *
-   */
-  link?: SanityReference<Infos | Home | Product | Licensing | Trials | Page>;
-};
-
 export type Trinket = {
   _type: "trinket";
   /**
@@ -1459,5 +1297,4 @@ export type Documents =
   | Tag
   | Product
   | Typeface
-  | Vendor
-  | LinkExpire;
+  | Vendor;

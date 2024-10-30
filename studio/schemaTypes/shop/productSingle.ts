@@ -28,6 +28,7 @@ export default defineField({
       name: 'descriptionAlt',
       type: 'string',
       description: 'green text after description',
+      hidden: true,
     }),
     defineField({
       name: 'categories',

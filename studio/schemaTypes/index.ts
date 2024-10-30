@@ -6,20 +6,20 @@ import settings from './singletons/settings'
 import pageModulaire from './documents/pageModulaire'
 import page from './documents/page'
 import tag from './documents/tag'
-import linkExpire from './documents/linkExpire'
+// import linkExpire from './documents/linkExpire'
 
 import product from './shop/product'
-import variants from './shop/variants'
-import variant from './shop/variant'
+// import variants from './shop/variants'
+// import variant from './shop/variant'
 import typeface from './shop/typeface'
 import typefaceFile from './shop/typefaceFile'
 import productBundle from './shop/productBundle'
 import productSingle from './shop/productSingle'
-import style from './shop/style'
+// import style from './shop/style'
 import vendor from './shop/vendor'
 import licenseType from './shop/licenseType'
 import licenseSize from './shop/licenseSize'
-import licenseSizeOption from './shop/licenseSizeOption'
+// import licenseSizeOption from './shop/licenseSizeOption'
 
 import imageUI from './objects/modules/imageUI'
 import textUI from './objects/modules/textUI'
@@ -39,7 +39,7 @@ import video from './objects/video'
 import interTitre from './objects/interTitre'
 import figure from './objects/figure'
 import labelPrice from './objects/labelPrice'
-import obj3d from './objects/obj3d'
+// import obj3d from './objects/obj3d'
 import trinket from './objects/trinket'
 import textDropDown from './objects/textDropDown'
 import keyValString from './objects/keyValString'
@@ -57,17 +57,17 @@ export const schemaTypes = [
   product,
   typeface,
   vendor,
-  linkExpire,
+  // linkExpire,
 
   licenseType,
   licenseSize,
-  licenseSizeOption,
-  variants,
-  variant,
+  // licenseSizeOption,
+  // variants,
+  // variant,
   typefaceFile,
   productBundle,
   productSingle,
-  style,
+  // style,
 
   blockContent,
   linkExternal,
@@ -82,7 +82,7 @@ export const schemaTypes = [
   interTitre,
   figure,
   labelPrice,
-  obj3d,
+  // obj3d,
   trinket,
   textDropDown,
   glyphSet,
