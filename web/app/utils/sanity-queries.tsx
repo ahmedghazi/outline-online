@@ -68,6 +68,7 @@ export async function getSettings(): Promise<Settings> {
 
 /**
  * PRODUCTS CART
+ * (only published ones)
  */
 export async function getProductsCart(): Promise<Product[]> {
   return client.fetch(
