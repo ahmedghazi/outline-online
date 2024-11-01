@@ -12,25 +12,26 @@ import linkExternalTypes from '../misc/linkExternalTypes'
  *    type: 'blockContent'
  *  }
  */
-const TextL = (props: any): JSX.Element => (
-  <p style={{fontSize: '2rem', marginTop: 0}}> {props.children} </p>
-)
+// const TextL = (props: any): JSX.Element => (
+//   <p style={{fontSize: '2rem', marginTop: 0}}> {props.children} </p>
+// )
 // const TextIndent = (props: any): JSX.Element => (
 //   <div className="indent">
 //     <p style={{paddingLeft: '1rem', marginTop: 0}}> {props.children} </p>
 //   </div>
 // )
-const TextIndent = (props: any): JSX.Element => (
-  <span style={{paddingLeft: '1rem', marginTop: 0, display: 'inline-block'}}>{props.children}</span>
-)
-const Underline = (props: any): JSX.Element => (
-  <span style={{textDecoration: 'underline'}}> {props.children} </span>
-)
-const Outline = (props: any): JSX.Element => (
-  <span style={{border: '1px solid ', borderRadius: '100%'}}> {props.children} </span>
-)
-const Gray = (props: any): JSX.Element => (
-  <span style={{color: '#666666 '}}> {props.children} </span>
+// const TextIndent = (props: any): JSX.Element => (
+//   <span style={{paddingLeft: '1rem', marginTop: 0, display: 'inline-block'}}>{props.children}</span>
+// )
+// const Underline = (props: any): JSX.Element => (
+//   <span style={{textDecoration: 'underline'}}> {props.children} </span>
+// )
+// const Outline = (props: any): JSX.Element => (
+//   <span style={{border: '1px solid ', borderRadius: '100%'}}> {props.children} </span>
+// )
+const GrayText = (props: any) => (
+  // <span style={{color: '#666666 '}}> {props.children} </span>
+  <span style={{color: '#666666'}}>{props.children}</span>
 )
 // const TextXL = (props: any): JSX.Element => (
 //   <p style={{fontSize: '3rem', marginTop: 0}}> {props.children} </p>
@@ -59,11 +60,11 @@ export default defineType({
         //   value: 'text-lg',
         //   component: TextL,
         // },
-        {
-          title: 'Texte indenté',
-          value: 'text-index',
-          component: TextIndent,
-        },
+        // {
+        //   title: 'Texte indenté',
+        //   value: 'text-index',
+        //   component: TextIndent,
+        // },
       ],
       lists: [{title: 'Bullet', value: 'bullet'}],
       // Marks let you mark up inline text in the block editor.
@@ -73,7 +74,7 @@ export default defineType({
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
-          {title: 'Gray', value: 'text-muted', icon: () => 'Gray', component: Gray},
+          {title: 'Gray', value: 'text-muted', icon: () => 'Gray', component: GrayText},
           // {title: 'Underline', value: 'u', icon: () => 'u', component: Underline},
           // {title: 'Outline', value: 'outline', icon: () => 'o', component: Outline},
         ],

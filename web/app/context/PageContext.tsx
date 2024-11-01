@@ -54,6 +54,8 @@ export const PageContextProvider = (props: PageContextProps) => {
       }
     });
 
+    document.body.classList.remove("is-loading");
+
     return () => {
       window.removeEventListener("resize", _format);
       unsubscribe(token);
@@ -117,8 +119,8 @@ export const PageContextProvider = (props: PageContextProps) => {
       document.body.dataset.template = `is-${template}`;
     }
   };
-  console.log(pathname);
-  console.log(tab);
+  // console.log(pathname);
+  // console.log(tab);
   return (
     <PageContext.Provider value={{ settings, tab, setTab }}>
       {children}
