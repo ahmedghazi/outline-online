@@ -73,11 +73,11 @@ const AddToCart = (props: Props) => {
   let finalPrice: number = price;
   if (licenseTypeProfil) {
     licenseTypeProfil.forEach((element) => {
-      console.log(price, finalPrice, element.price);
+      // console.log(price, finalPrice, element.price);
       if (element.price) finalPrice += element.price;
     });
   }
-  console.log({ finalPrice });
+  // console.log({ finalPrice });
   useEffect(() => {
     setActive(defaultActive);
   }, [defaultActive]);
