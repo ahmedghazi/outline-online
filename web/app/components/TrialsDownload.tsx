@@ -44,7 +44,7 @@ const TrialsDownload = (props: Props) => {
           type: "text",
           name: "first_name",
           placzeholder: "First name",
-          required: false,
+          required: true,
         },
         {
           type: "text",
