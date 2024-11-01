@@ -116,7 +116,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
           fullTitle={title || ""}
           blurb={""}
           categories={input.categories || []}
-          price={input.price || 20000000000}
+          price={input.price || 0}
           priceCrossed={isPriceCrossed ? priceCrossed : undefined}
           metadata={{
             type: type,
