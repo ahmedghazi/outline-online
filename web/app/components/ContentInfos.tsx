@@ -66,7 +66,7 @@ const ContentInfos = ({ input }: Props) => {
           </div>
         )}
       </div>
-      <NavTertiary />
+      {input.withNav && <NavTertiary />}
 
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
     </div>

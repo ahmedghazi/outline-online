@@ -56,5 +56,12 @@ export default defineType({
       of: [{type: 'textDropDown'}],
       group: 'editorial',
     }),
+    defineField({
+      name: 'withNav',
+      type: 'boolean',
+      description: 'display footer nav?',
+      initialValue: false,
+      group: 'editorial',
+    }),
   ],
 })

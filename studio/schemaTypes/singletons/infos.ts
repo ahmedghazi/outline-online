@@ -53,18 +53,25 @@ export default defineType({
       of: [{type: 'keyVal'}],
       group: 'editorial',
     }),
+    // defineField({
+    //   name: 'nav',
+    //   title: 'Footer Naviguation',
+    //   type: 'array',
+    //   of: [
+    //     {
+    //       type: 'linkInternal',
+    //     },
+    //     {
+    //       type: 'linkExternal',
+    //     },
+    //   ],
+    //   group: 'editorial',
+    // }),
     defineField({
-      name: 'nav',
-      title: 'Footer Naviguation',
-      type: 'array',
-      of: [
-        {
-          type: 'linkInternal',
-        },
-        {
-          type: 'linkExternal',
-        },
-      ],
+      name: 'withNav',
+      type: 'boolean',
+      description: 'display footer nav?',
+      initialValue: false,
       group: 'editorial',
     }),
   ],

@@ -49,7 +49,8 @@ const ContentPage = ({ input }: Props) => {
             ))}
         </div>
       </div>
-      <NavTertiary />
+      {input.withNav && <NavTertiary />}
+
       {/* <pre>{JSON.stringify(settings, null, 2)}</pre> */}
     </div>
   );

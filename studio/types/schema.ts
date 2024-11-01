@@ -124,11 +124,11 @@ export interface Infos extends SanityDocument {
   colophon?: Array<SanityKeyed<KeyVal>>;
 
   /**
-   * Footer Naviguation — `array`
+   * withNav — `boolean`
    *
-   *
+   * display footer nav?
    */
-  nav?: Array<SanityKeyed<LinkInternal> | SanityKeyed<LinkExternal>>;
+  withNav?: boolean;
 }
 
 /**
@@ -180,6 +180,13 @@ export interface Licensing extends SanityDocument {
    *
    */
   eulaTtextsDropDown?: Array<SanityKeyed<TextDropDown>>;
+
+  /**
+   * withNav — `boolean`
+   *
+   * display footer nav?
+   */
+  withNav?: boolean;
 }
 
 /**
@@ -382,6 +389,13 @@ export interface Page extends SanityDocument {
    *
    */
   textsDropDown?: Array<SanityKeyed<TextDropDown>>;
+
+  /**
+   * withNav — `boolean`
+   *
+   * display footer nav?
+   */
+  withNav?: boolean;
 }
 
 /**

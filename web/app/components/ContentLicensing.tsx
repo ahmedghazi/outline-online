@@ -73,7 +73,7 @@ const ContentLicensing = ({ input }: Props) => {
           </div>
         </div>
       </div>
-      <NavTertiary />
+      {input.withNav && <NavTertiary />}
 
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
     </div>

@@ -26,7 +26,7 @@ export default defineField({
       of: [{type: 'string'}],
       // description: 'separated by comma',
       options: {
-        layout: 'tags',
+        // layout: 'tags',
         // isHighlighted: true,
       },
       // of: [{type: 'string'}],
