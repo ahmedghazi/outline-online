@@ -46,7 +46,7 @@ export const PageContextProvider = (props: PageContextProps) => {
     _handlePageTemplate();
     window.addEventListener("resize", _format);
 
-    const token = subscribe("HEADER_TAB_CHANGE", (e, d) => {
+    const token1 = subscribe("HEADER_TAB_CHANGE", (e, d) => {
       if (pathname === "/") {
         document.body.classList.toggle("has-scrolled", d.active);
       } else {
@@ -54,11 +54,16 @@ export const PageContextProvider = (props: PageContextProps) => {
       }
     });
 
+    const token2 = subscribe("FORMAT", (e, d) => {
+      _format();
+    });
+
     document.body.classList.remove("is-loading");
 
     return () => {
       window.removeEventListener("resize", _format);
-      unsubscribe(token);
+      unsubscribe(token1);
+      unsubscribe(token2);
     };
   }, []);
 

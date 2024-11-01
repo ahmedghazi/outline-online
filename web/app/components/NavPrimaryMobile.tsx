@@ -17,7 +17,7 @@ import { _linkResolver } from "../utils/utils";
 import Buy from "./Buy";
 import Cart from "./shop/Cart";
 import { usePathname, useRouter } from "next/navigation";
-import { subscribe, unsubscribe } from "pubsub-js";
+import { publish, subscribe, unsubscribe } from "pubsub-js";
 import clsx from "clsx";
 import NavLink from "./NavLink";
 
@@ -60,6 +60,7 @@ const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
     // const submenu = element.nextSibling as HTMLElement;
     const submenu = element.querySelector(".submenu");
     submenu?.classList.toggle("is-active");
+    publish("FORMAT");
   };
 
   return (
