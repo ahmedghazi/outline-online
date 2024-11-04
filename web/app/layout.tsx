@@ -34,6 +34,7 @@ export default async function RootLayout({
 }) {
   const settings = await getSettings();
   const productsCart = await getProductsCart();
+  console.log(settings.licenseSizes);
   return (
     <html lang='en'>
       <Script id='snipcart-sources'>{`

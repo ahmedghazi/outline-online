@@ -2,12 +2,16 @@ import React from "react";
 
 type Props = {
   price: number | any;
-  priceCrossed?: number;
+  priceDiscount?: number;
 };
 
-const Price = ({ price, priceCrossed }: Props) => {
-  // console.log(price, priceCrossed);
-  const displayPriceCrossed = priceCrossed && priceCrossed > 0;
+const Price = ({ price, priceDiscount }: Props) => {
+  console.log(price, priceDiscount);
+  const displayPriceCrossed = priceDiscount && priceDiscount > 0;
+  let discount = 0;
+  if (displayPriceCrossed) {
+    discount = (priceDiscount * price) / 100;
+  }
   return (
     <div className='price  grid grid-cols-2 gap-sm'>
       <span className='min-w-[80px]'>{price} EUR</span>
@@ -15,7 +19,7 @@ const Price = ({ price, priceCrossed }: Props) => {
       <div>original price - saving</div> */}
       {displayPriceCrossed && (
         // <span className='text-muted line-through'>{priceCrossed} EUR</span>
-        <span className='text-muted line-through'>priceCrossed here EUR</span>
+        <span className='text-muted line-through'>{discount} EUR</span>
       )}
     </div>
   );

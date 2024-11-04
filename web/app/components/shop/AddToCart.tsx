@@ -16,7 +16,8 @@ type MetadataProps = {
 type Props = {
   id: string;
   price: number;
-  priceCrossed: number | undefined;
+  priceCrossed?: number | undefined;
+  priceDiscount?: number;
   title: string;
   fullTitle: string;
   blurb: string;
@@ -47,6 +48,7 @@ const AddToCart = (props: Props) => {
   const {
     price,
     priceCrossed,
+    priceDiscount,
     title,
     fullTitle,
     blurb,
@@ -69,12 +71,30 @@ const AddToCart = (props: Props) => {
   // console.log(title, defaultActive);
   // console.log(productExistsInStore, defaultActive);
   const [active, setActive] = useState<boolean>(false);
-  console.log(price);
+  // console.log(price);
+  const isBundle = metadata.type === "bundle";
+
+  const _getLicensePriceByLabel = (license: LicenseType) => {
+    // console.log({ label, license });
+    switch (title) {
+      case "Full Family":
+        return license.priceFamily;
+      case "Essential":
+        return license.priceEssentials;
+      case "Regular + Italic":
+        return license.priceRegIt;
+    }
+  };
+  // console.log(title, isBundle);
   let finalPrice: number = price;
   if (licenseTypeProfil) {
     licenseTypeProfil.forEach((element) => {
       // console.log(price, finalPrice, element.price);
-      if (element.price) finalPrice += element.price;
+      const elementPrice = isBundle
+        ? _getLicensePriceByLabel(element)
+        : element.price;
+      // console.log({ elementPrice });
+      if (elementPrice) finalPrice += elementPrice;
     });
   }
   // console.log({ finalPrice });
@@ -96,11 +116,9 @@ const AddToCart = (props: Props) => {
 
     let index: number = 0;
 
-    data.push({
-      name: "Licence Size",
-      type: "readonly",
-      value: licenseSizeProfil.title,
-    });
+    /**
+     * FOR BOTS
+     */
     // console.log(licenseSizeProfil);
     // dataAttributes[`data-item-custom${index}-placeholder`] = "Licence Size";
     dataAttributes[`data-item-custom${index}-name`] = "Licence Size";
@@ -108,11 +126,26 @@ const AddToCart = (props: Props) => {
     dataAttributes[`data-item-custom${index}-value`] = licenseSizeProfil.title;
     // dataAttributes[`data-item-custom${i}-required`] = "true";
     dataAttributes[`data-item-custom${index}-shippable`] = "false";
+
+    /**
+     * FOR SDK
+     */
+    data.push({
+      name: "Licence Size",
+      type: "readonly",
+      value: licenseSizeProfil.title,
+    });
+
     licenseSizeProfil.licenseType.forEach((item, i) => {
       index = i + 1;
+      const price = _getLicensePriceByLabel(item);
       const name = item.label
         ? item.label.replace(" ", "-").toLowerCase()
         : "no-label";
+
+      /**
+       * FOR BOTS
+       */
       dataAttributes[`data-item-custom${index}-placeholder`] = "Licence";
       dataAttributes[`data-item-custom${index}-name`] = name;
       dataAttributes[`data-item-custom${index}-type`] = "checkbox";
@@ -121,7 +154,7 @@ const AddToCart = (props: Props) => {
 
       dataAttributes[
         `data-item-custom${index}-options`
-      ] = `true[+${item.price}]|false`;
+      ] = `true[+${price}]|false`;
 
       let exist;
       if (licenseTypeProfil) {
@@ -136,11 +169,14 @@ const AddToCart = (props: Props) => {
       }
       // console.log(exist);
 
+      /**
+       * FOR SDK
+       */
       data.push({
         name: name,
         // required: true,
         type: "checkbox",
-        options: `true[+${item.price}]|false`,
+        options: `true[+${price}]|false`,
         // options: options.toString().split(",").join("|"),
         value: exist && exist.length > 0,
       });
@@ -195,7 +231,7 @@ const AddToCart = (props: Props) => {
         setActive(!active);
       }}>
       <div className='flex justify-between'>
-        <Price priceCrossed={priceCrossed} price={finalPrice} />
+        <Price priceDiscount={priceDiscount} price={finalPrice} />
 
         <div className='checkbox-ui'>
           <input

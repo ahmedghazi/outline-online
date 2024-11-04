@@ -68,12 +68,12 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
   let greenText = "";
   let isPriceCrossed: boolean =
     typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
-  let priceCrossed: number = 0;
-  if (input.price && input.priceDiscount && isPriceCrossed) {
-    // isPriceCrossed = true;
-    priceCrossed = input.price + (input.price / 100) * input.priceDiscount;
-    greenText = `Save ${input.priceDiscount}%`;
-  }
+  // let priceCrossed: number = 0;
+  // if (input.price && input.priceDiscount && isPriceCrossed) {
+  //   // isPriceCrossed = true;
+  //   priceCrossed = input.price + (input.price / 100) * input.priceDiscount;
+  //   greenText = `Save ${input.priceDiscount}%`;
+  // }
   // const isPriceCrossed: boolean = input.priceCrossed !== null;
   // if (input.price && input.priceCrossed) {
   //   const saving = (input.price * 100) / input.priceCrossed;
@@ -82,6 +82,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
   //   // console.log(saving, perc);
   // }
   // console.log(input.title, input.priceDiscount, isPriceCrossed);
+
   return (
     <div
       className={clsx(
@@ -97,8 +98,10 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
             {/* {input._type === "productBundle" && input.descriptionAlt && (
               <span className='text-green'>{input.descriptionAlt}</span>
             )} */}
-            {input._type === "productBundle" && isPriceCrossed && (
-              <span className='text-green blink'>{greenText}</span>
+            {input._type === "productBundle" && input.priceDiscount && (
+              <span className='text-green blink'>
+                Save {input.priceDiscount}%
+              </span>
             )}
           </div>
         </div>
@@ -117,7 +120,8 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
           blurb={""}
           categories={input.categories || []}
           price={input.price || 0}
-          priceCrossed={isPriceCrossed ? priceCrossed : undefined}
+          // priceCrossed={isPriceCrossed ? priceCrossed : undefined}
+          priceDiscount={input.priceDiscount}
           metadata={{
             type: type,
             typefaces: typefaces,
@@ -281,8 +285,8 @@ const BuyModal = ({ productsCart }: Props) => {
             (_el) => _el.label === el.label
           );
           if (replacer && replacer.length === 1) {
-            console.log("*********** new license types");
-            console.table(replacer[0]);
+            // console.log("*********** new license types");
+            // console.table(replacer[0]);
 
             setLicenseTypeProfil({ type: "REPLACE", payload: replacer[0] });
           }
@@ -332,7 +336,7 @@ const BuyModal = ({ productsCart }: Props) => {
   // const hasProducts = products && products.length > 0;
   // console.log(licenseSizeProfil);
   // if (licenseSizeProfil) console.table(licenseSizeProfil.licenseType);
-  // console.table(licenseTypeProfil);
+  // console.log(licenseTypeProfil);
 
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
@@ -360,8 +364,7 @@ const BuyModal = ({ productsCart }: Props) => {
                     // disabled={hasProducts && hasLicenseType ? true : false}
                   />
                 </div>
-                {/* <div></div> */}
-                {/* <div></div> */}
+
                 <div className='label'>Licenses</div>
                 <div className='licenses md:col-span-5 md:py-05e'>
                   <div className='flex flex-wrap md:justify-between gap-sm md:gap-0'>
