@@ -158,10 +158,11 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
     // text: "le message: " + JSON.stringify(payload),
     html: `
       <div style="font-family:monospace,sans-serif">
-        <p>hi ${destination}</p>
-        <p>Thx for your request.</p>
-        <p>We offer trial fonts with bextended Western Latin character sets including numbers, and punctuation. Trial font files provided are strictly limited for testing and pitching purposes. By downloading the files, you accept Outline Online’s End User Licence Agreement (EULA). If you download the trial files, and would then like to use the font for a published project, your client will need to purchase the appropriate licence.</p>
-        <p>Cheers from Outline Online.</p>
+        <p>Dear ${destination}!</p>
+        <p>Thank you for downloading the trial versions of our typefaces! Please, find them attached below in this email.</p>
+        <p>Outline Online trial fonts come with a full character set, meaning numbers, punctuation, diacritics and specific symbols are all included in the character set. This approach allows the effective testing and functional presentation of our typefaces. Trial font files are intended solely for testing and pitching purposes. In order to use the trial fonts in a published project, the appropriate licence(s) needs to be purchased for the respective license holder. By downloading these files, you agree to Outline Online's End User Licence Agreement (EULA).</p>
+        <p>Greetings,<br />
+        Outline Online</p>
       </div>
     `,
     attachments: payload,
