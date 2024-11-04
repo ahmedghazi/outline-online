@@ -43,6 +43,7 @@
           1.3em
       ) !important;
       width: auto !important;
+      object-fit: contain;
     }
     figcaption {
       text-align: center;
@@ -51,6 +52,20 @@
       transform: translateX(-50%);
       padding: 0.05em 0 0;
       padding: 0;
+    }
+  }
+  @media all and (max-width: $md) {
+    .thumbnails {
+    }
+    .modal {
+      inset: var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      img {
+        width: 100% !important;
+        height: auto !important;
+      }
     }
   }
 }

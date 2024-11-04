@@ -72,7 +72,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
   if (input.price && input.priceDiscount && isPriceCrossed) {
     // isPriceCrossed = true;
     priceCrossed = input.price + (input.price / 100) * input.priceDiscount;
-    greenText = `Save (${input.priceDiscount.toFixed(2)}%)`;
+    greenText = `Save ${input.priceDiscount}%`;
   }
   // const isPriceCrossed: boolean = input.priceCrossed !== null;
   // if (input.price && input.priceCrossed) {
@@ -339,6 +339,17 @@ const BuyModal = ({ productsCart }: Props) => {
       <div className='outter'>
         <div className='inner'>
           <div className='header'>
+            <p className='message '>
+              If you are a non profit ....{" "}
+              <a
+                href='http://'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='button-ui'>
+                contazct us
+              </a>
+            </p>
+
             {licenses && (
               <div className='_row grid md:grid-cols-8 '>
                 <div className='label'>Company Size</div>
@@ -365,7 +376,6 @@ const BuyModal = ({ productsCart }: Props) => {
                           }}
                         />
                         {/* <span className='text-red'>{item.price}</span> */}
-
                         {/* <div className='label !p-0'>{item.label}</div> */}
                       </div>
                     ))}

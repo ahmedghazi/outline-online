@@ -236,6 +236,9 @@
   }
 }
 .snipcart-checkbox {
+  & + label {
+    align-items: baseline;
+  }
   & + label::before,
   & + label::after {
     content: "";
@@ -260,18 +263,6 @@
   &:checked + label::before {
     background-color: black;
   }
-  // &:checked + label::after {
-  //   content: "";
-  //   position: absolute;
-  //   left: 0;
-  //   top: 0;
-  //   background-color: black;
-  //   box-shadow: unset;
-  //   height: 10px;
-  //   width: 9px;
-  //   transform: rotate(0deg);
-  //   opacity: 1;
-  // }
 }
 
 .paragraph-ui {

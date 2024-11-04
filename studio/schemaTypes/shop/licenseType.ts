@@ -37,10 +37,29 @@ export default defineField({
       description: 'Price if solo, no other license type selected',
     }),
     defineField({
+      title: 'price Family',
+      name: 'priceFamily',
+      type: 'number',
+      description: 'Price if selected with another license type',
+    }),
+    defineField({
+      title: 'price Essentials',
+      name: 'priceEssentials',
+      type: 'number',
+      description: 'Price if selected with another license type',
+    }),
+    defineField({
+      title: 'price Reg It',
+      name: 'priceRegIt',
+      type: 'number',
+      description: 'Price if selected with another license type',
+    }),
+    defineField({
       title: 'price multi',
       name: 'priceMulti',
       type: 'number',
       description: 'Price if selected with another license type',
+      hidden: true,
     }),
   ],
 })

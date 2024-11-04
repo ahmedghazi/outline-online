@@ -69,7 +69,7 @@ const AddToCart = (props: Props) => {
   // console.log(title, defaultActive);
   // console.log(productExistsInStore, defaultActive);
   const [active, setActive] = useState<boolean>(false);
-
+  console.log(price);
   let finalPrice: number = price;
   if (licenseTypeProfil) {
     licenseTypeProfil.forEach((element) => {

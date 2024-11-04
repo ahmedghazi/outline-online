@@ -13,9 +13,11 @@ const SectionInUse = ({ input }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    ref.current?.addEventListener("mousemove", _update);
+    if (window.innerWidth > 1080)
+      ref.current?.addEventListener("mousemove", _update);
     return () => {
-      ref.current?.removeEventListener("mousemove", _update);
+      if (window.innerWidth > 1080)
+        ref.current?.removeEventListener("mousemove", _update);
     };
   }, []);
 
@@ -49,7 +51,8 @@ const SectionInUse = ({ input }: Props) => {
             <div
               className='thumbnail'
               key={i}
-              onMouseEnter={() => setImage(item)}>
+              onMouseEnter={() => setImage(item)}
+              onClick={() => setImage(item)}>
               <FigureUI asset={item.image?.asset} width={100} />
             </div>
           ))}

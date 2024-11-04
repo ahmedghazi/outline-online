@@ -699,6 +699,27 @@ export type LicenseType = {
   price?: number;
 
   /**
+   * price Family — `number`
+   *
+   * Price if selected with another license type
+   */
+  priceFamily?: number;
+
+  /**
+   * price Essentials — `number`
+   *
+   * Price if selected with another license type
+   */
+  priceEssentials?: number;
+
+  /**
+   * price Reg It — `number`
+   *
+   * Price if selected with another license type
+   */
+  priceRegIt?: number;
+
+  /**
    * price multi — `number`
    *
    * Price if selected with another license type

@@ -44,7 +44,7 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
         )} */}
         <div className='col-span-2 md:col-span-5'>
           <div className='grid md:grid-cols-5 gap-sm'>
-            <div className='label hidden-sm'>metadata</div>
+            <div className='label hidden-sm'>Metadata</div>
             {input.singles && (
               <div className='styles sm-only'>
                 {input.singles.length} styles
