@@ -34,7 +34,6 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   return (
     <>
       {ready && isMobile && (
-        // <Draggable nodeRef={ref} disabled={isMobile}>
         <dialog
           ref={ref}
           // onCancel={closeModal}
@@ -48,7 +47,6 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
           </div>
           {children}
         </dialog>
-        // </Draggable>
       )}
       {ready && !isMobile && (
         <Draggable nodeRef={ref}>
