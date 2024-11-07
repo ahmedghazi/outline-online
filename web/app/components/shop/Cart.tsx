@@ -38,7 +38,7 @@ const Cart = () => {
   }, [cartObject]);
 
   useEffect(() => {
-    _onClose();
+    // _onClose();
     setOpen(false);
   }, [pathname]);
 

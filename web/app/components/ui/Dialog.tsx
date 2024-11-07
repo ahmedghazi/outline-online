@@ -33,7 +33,7 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
   // console.log({ isMobile });
   return (
     <>
-      {ready && (
+      {ready && isMobile && (
         // <Draggable nodeRef={ref} disabled={isMobile}>
         <dialog
           ref={ref}
@@ -49,6 +49,23 @@ const Dialog = ({ openModal, children, onCloseModal }: Props) => {
           {children}
         </dialog>
         // </Draggable>
+      )}
+      {ready && !isMobile && (
+        <Draggable nodeRef={ref}>
+          <dialog
+            ref={ref}
+            // onCancel={closeModal}
+          >
+            <div className='header'>
+              <button
+                className='!text-red text-[18px]'
+                onClick={() => setOpen(false)}>
+                ╳
+              </button>
+            </div>
+            {children}
+          </dialog>
+        </Draggable>
       )}
     </>
   );
