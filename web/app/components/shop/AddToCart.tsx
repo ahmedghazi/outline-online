@@ -75,7 +75,7 @@ const AddToCart = (props: Props) => {
   const isBundle = metadata.type === "bundle";
 
   const _getLicensePriceByLabel = (license: LicenseType) => {
-    console.log(title);
+    // console.log(title);
     switch (title) {
       case "Full Family":
         return license.priceFamily;
@@ -141,6 +141,7 @@ const AddToCart = (props: Props) => {
     licenseSizeProfil.licenseType.forEach((item, i) => {
       index = i + 1;
       const price = _getLicensePriceByLabel(item);
+      console.log("_getLicensePriceByLabel", price);
       const name = item.label
         ? item.label.replace(" ", "-").toLowerCase()
         : "no-label";
