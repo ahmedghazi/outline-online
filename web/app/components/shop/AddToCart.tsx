@@ -75,7 +75,7 @@ const AddToCart = (props: Props) => {
   const isBundle = metadata.type === "bundle";
 
   const _getLicensePriceByLabel = (license: LicenseType) => {
-    // console.log({ label, license });
+    console.log(title);
     switch (title) {
       case "Full Family":
         return license.priceFamily;
@@ -83,6 +83,8 @@ const AddToCart = (props: Props) => {
         return license.priceEssentials;
       case "Regular + Italic":
         return license.priceRegIt;
+      default:
+        return license.price;
     }
   };
   // console.log(title, isBundle);
@@ -219,7 +221,7 @@ const AddToCart = (props: Props) => {
     // ],
     metadata: JSON.stringify(metadata),
   };
-  // console.log(productData);
+  console.log(productData);
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")

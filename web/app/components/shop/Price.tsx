@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Price = ({ price, priceDiscount }: Props) => {
-  console.log(price, priceDiscount);
+  // console.log(price, priceDiscount);
   const displayPriceCrossed = priceDiscount && priceDiscount > 0;
   let discount = 0;
   if (displayPriceCrossed) {
