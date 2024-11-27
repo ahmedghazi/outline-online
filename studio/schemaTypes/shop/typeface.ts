@@ -63,6 +63,7 @@ export default defineField({
       type: 'file',
       description: 'Digital good client will receive',
       group: 'editorial',
+      hidden: true,
     }),
     defineField({
       name: 'stylisticSets',

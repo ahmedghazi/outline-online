@@ -49,12 +49,17 @@ Default is first license type
 */
 type CartProductItemProps = {
   title: string;
+  productId: string;
   input: SanityKeyed<ProductSingle | ProductBundle>;
-
   type: "bundle" | "single";
 };
 
-const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
+const CartProductItem = ({
+  input,
+  title,
+  productId,
+  type,
+}: CartProductItemProps) => {
   const [active, setActive] = useState<boolean>(false);
   const typefaces =
     input._type === "productBundle"
@@ -125,6 +130,7 @@ const CartProductItem = ({ input, title, type }: CartProductItemProps) => {
           metadata={{
             type: type,
             typefaces: typefaces,
+            productId: productId,
           }}
           defaultActive={active}
         />
@@ -174,6 +180,7 @@ const CartProduct = ({ input }: CartProductProps) => {
                 <CartProductItem
                   key={i}
                   title={`${input.title} ${item.title}`}
+                  productId={input._id}
                   input={item}
                   type='bundle'
                 />

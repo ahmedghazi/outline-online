@@ -11,6 +11,7 @@ import Price from "./Price";
 
 type MetadataProps = {
   type: string;
+  productId: string;
   typefaces: Typeface[];
 };
 type Props = {
