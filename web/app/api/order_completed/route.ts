@@ -128,7 +128,9 @@ const _getBundleOrSingle = (
 
   return bundleOrSingle?.filter((el) => el._key === _key);
 };
+
 /*
+Schema
 {
   "singles": [
       {
