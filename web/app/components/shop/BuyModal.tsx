@@ -128,9 +128,10 @@ const CartProductItem = ({
           // priceCrossed={isPriceCrossed ? priceCrossed : undefined}
           priceDiscount={input.priceDiscount}
           metadata={{
-            type: type,
-            typefaces: typefaces,
             productId: productId,
+            type: type,
+            _key: input._key,
+            // typefaces: typefaces,
           }}
           defaultActive={active}
         />
@@ -148,7 +149,7 @@ const CartProduct = ({ input }: CartProductProps) => {
   // const { licenseSizeProfil } = useShop();
   const pathname = usePathname();
   // console.log(pathname);
-  // console.log(input.slug);
+  // console.log(input);
   useEffect(() => {
     const isProductPage = pathname.indexOf("product") > -1;
     if (isProductPage) {
@@ -179,8 +180,8 @@ const CartProduct = ({ input }: CartProductProps) => {
               {input.bundles?.map((item, i) => (
                 <CartProductItem
                   key={i}
-                  title={`${input.title} ${item.title}`}
                   productId={input._id}
+                  title={`${input.title} ${item.title}`}
                   input={item}
                   type='bundle'
                 />
@@ -197,6 +198,7 @@ const CartProduct = ({ input }: CartProductProps) => {
               {input.singles?.map((item, i) => (
                 <CartProductItem
                   key={i}
+                  productId={input._id}
                   title={`${input.title} ${item.title}`}
                   input={item}
                   type='single' //style ???
@@ -327,7 +329,7 @@ const BuyModal = ({ productsCart }: Props) => {
     try {
       await Promise.all(
         products.map(async (product) => {
-          console.log(product);
+          // console.log(product);
           await window.Snipcart.api.cart.items.add(product);
         })
       );

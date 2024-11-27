@@ -39,9 +39,7 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
           <button className='btn-toggle'>◢</button>
           <h2>{input.title}</h2>
         </div>
-        {/* {input.singles && (
-          <div className='styles'>{input.singles.length} styles</div>
-        )} */}
+
         <div className='col-span-2 md:col-span-5'>
           <div className='grid md:grid-cols-5 gap-sm'>
             <div className='label hidden-sm'>Metadata</div>
@@ -71,7 +69,10 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
               // console.log({ checked });
               if (checked) {
                 singles.forEach((el) => {
-                  setTrials({ type: "ADD", payload: el });
+                  const trial: any = el;
+                  trial.typefaceTitle = input.title;
+                  trial.productId = input._id;
+                  setTrials({ type: "ADD", payload: trial });
                 });
               } else {
                 singles.forEach((el) => {
@@ -92,20 +93,6 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
                   <div className='title w-1/2 md:w-full text-muted'>
                     {item.title}
                   </div>
-                  {/* <Checkbox
-                    name={item.title || ""}
-                    onChange={(checked: boolean) => {
-                      // console.log(item.title, checked);
-                      if (checked) {
-                        setTrials((prev: any) => [...prev, item]);
-                      } else {
-                        const newArr = trials.filter(
-                          (el: any) => el._key !== item._key
-                        );
-                        setTrials(newArr);
-                      }
-                    }}
-                  /> */}
                 </div>
               </div>
             ))}
@@ -191,28 +178,6 @@ const ContentTrials = ({ input }: Props) => {
             }}
           />
         )}
-        {/* {openModal && <span>openModal</span>} */}
-        {/* <Checkbox
-          name={_getDlButtonLabel()}
-          checked={openModal}
-          onChange={(checked: boolean) => {
-            if (checked) {
-              if (trials.length === 0) {
-                setAllActive(true);
-              }
-              if (trials.length > 0) {
-                setOpenModal(true);
-              }
-            } else {
-              setAllActive(false);
-              setTrials({ type: "REMOVE_ALL" });
-            }
-            // if (checked) setAllActive(trials.length < total);
-            // else {
-            //   setAllActive(false);
-            // }
-          }}
-        /> */}
       </div>
       {/* <pre>{JSON.stringify(trials, null, 2)}</pre> */}
       <Dialog openModal={openModal} onCloseModal={() => setOpenModal(false)}>

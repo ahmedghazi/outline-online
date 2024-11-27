@@ -74,6 +74,7 @@ export async function getProductsCart(): Promise<Product[]> {
   return client.fetch(
     groq`
     *[_type == "product" && !(_id in path('drafts.**'))]{
+      _id,
       title,
       slug{
         current

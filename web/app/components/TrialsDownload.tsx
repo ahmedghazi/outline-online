@@ -23,6 +23,7 @@ const TrialsDownload = (props: Props) => {
   const [status, setStatus] = useState<string>("");
   const [agree, setAgree] = useState<boolean>(false);
   const { trials } = useShop();
+  console.log(trials);
   const groups = [
     {
       title: "CONTACT",
@@ -103,10 +104,10 @@ const TrialsDownload = (props: Props) => {
     setOkToSend(Object.keys(state).length >= requiredLength);
   }, [state]);
   // console.log(trials);
-  const _collectTypefacesId = () => {
-    const ids = trials.map((item, i) => item.typeface?._id);
-    return ids;
-  };
+  // const _collectTypefacesId = () => {
+  //   const ids = trials.map((item, i) => item.typeface?._id);
+  //   return ids;
+  // };
   // console.log(trials);
   const _onSubmit = async (evt: React.SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -114,14 +115,14 @@ const TrialsDownload = (props: Props) => {
     setStatus("sending");
     document.body.classList.add("is-fetching");
 
-    const typefacesId = _collectTypefacesId();
+    // const typefacesId = _collectTypefacesId();
     // console.log(typefacesId);
     // return;
-    if (!typefacesId[0]) return;
+    if (!trials[0]) return;
     // console.log(typefacesId);
     const payload = {
       clientInfos: state,
-      typefacesId: typefacesId,
+      trials: trials,
     };
     console.log(payload);
     // return;

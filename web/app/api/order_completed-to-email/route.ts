@@ -2,7 +2,7 @@ import { NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { client } from "../../utils/sanity-client";
-import { Typeface } from "@/app/types/schema";
+import { Product, ProductBundle, Typeface } from "@/app/types/schema";
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -27,8 +27,22 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
        * dans items, parser metadata
        * on a besoin des zip
        */
-      const _typefacesId = _collectTypefacesId(items);
-      const _zipFiles = await _collectTypefacesZip(_typefacesId);
+      // const _typefacesId = _collectTypefacesId(items);
+      // const _zipFiles = await _collectTypefacesZip(_typefacesId);
+      /**
+       * collect product ids from items.metada
+       */
+      const _productIds = await _collectProductsId(items);
+
+      /**
+       * from these ids get content (bundles, singles)
+       */
+      const _productsData = await _collectProductsData(_productIds);
+
+      /**
+       * filter content to get only bundles and zip that are in items.metadata
+       */
+      const _zipFiles = await _filterBundlesAndSingles(items, _productsData);
       const _attachments = await _generateAttachments(_zipFiles);
       console.log(_attachments);
 
@@ -81,42 +95,121 @@ type SendProps = {
   destination: string;
 };
 
-const _collectTypefacesId = (items: any) => {
-  let _ids: String[] = [];
+const _collectProductsId = (items: any) => {
+  let _ids: string[] = [];
   items.forEach((element: any) => {
     const metadata = JSON.parse(element.metadata);
-    const { typefaces } = metadata;
-    const _typefacesId = typefaces.map((item: any) => item._id);
-    _ids = [..._ids, ..._typefacesId];
+    const { productId } = metadata;
+    _ids.push(productId);
   });
   return _ids;
 };
 
-const _collectTypefacesZip = async (_ids: any) => {
-  const query = `*[_type == "typeface"
-    && _id in $_ids
-  ]{
+const _collectProductsData = async (_ids: string[]) => {
+  const query = `*[_type == "product" && _id in $_ids
+    ]{
     title,
-    style,
-    zip{
-      asset->{
-        url
+    singles[]{
+      _key,
+      title,
+      zip{
+        asset->{
+          url
+        }
+      }
+    },
+    bundles[]{
+      _key,
+      title,
+      zip{
+        asset->{
+          url
+        }
       }
     }
   }`;
-
   const res = await client.fetch(query, { _ids: _ids });
-  const validData = res.filter((el: Typeface) => el.zip !== null);
-  // const data = await res.json();
-  // console.log(res);
-  return validData;
+  return res;
 };
 
+/**
+ * 2 arrays, one with items from snipcart, one with products from sanity
+ * items (metadata): Snipcart
+ * _productsData (bundleOrSingle): Sanity
+ *
+ */
+
+const _filterBundlesAndSingles = async (
+  items: any,
+  _productsData: Product[]
+) => {
+  let zips: any[] = [];
+  items.forEach((element: any) => {
+    const metadata = JSON.parse(element.metadata);
+    const { _key, type } = metadata;
+
+    _productsData.forEach((el) => {
+      const bundleOrSingleFiltered: any = _getBundleOrSingle(type, _key, el);
+      // console.log(bundleOrSingleFiltered);
+      if (bundleOrSingleFiltered) {
+        bundleOrSingleFiltered[0].typefaceTitle = el.title;
+        console.log(el.title);
+        zips.push(bundleOrSingleFiltered[0]);
+      }
+    });
+  });
+  // console.log(zips);
+
+  return zips;
+};
+
+const _getBundleOrSingle = (
+  type: string,
+  _key: string,
+  _productData: Product
+) => {
+  const bundleOrSingle =
+    type === "bundle" ? _productData.bundles : _productData.singles;
+
+  return bundleOrSingle?.filter((el) => el._key === _key);
+};
+
+// const _collectTypefacesId = (items: any) => {
+//   let _ids: String[] = [];
+//   items.forEach((element: any) => {
+//     const metadata = JSON.parse(element.metadata);
+//     const { typefaces } = metadata;
+//     const _typefacesId = typefaces.map((item: any) => item._id);
+//     _ids = [..._ids, ..._typefacesId];
+//   });
+//   return _ids;
+// };
+
+// const _collectTypefacesZip = async (_ids: any) => {
+//   const query = `*[_type == "typeface"
+//     && _id in $_ids
+//   ]{
+//     title,
+//     style,
+//     zip{
+//       asset->{
+//         url
+//       }
+//     }
+//   }`;
+
+//   const res = await client.fetch(query, { _ids: _ids });
+//   const validData = res.filter((el: Typeface) => el.zip !== null);
+//   // const data = await res.json();
+//   // console.log(res);
+//   return validData;
+// };
+
 const _generateAttachments = (items: any) => {
-  return items.map((item: Typeface) => {
+  return items.map((item: any) => {
     if (item.zip) {
       return {
-        filename: `${item.title}-${item.style}.zip`,
+        filename: `${item.typefaceTitle}-${item.title}.zip`,
         path: item.zip.asset.url,
       };
     } else {

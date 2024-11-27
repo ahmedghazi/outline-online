@@ -11,8 +11,9 @@ import Price from "./Price";
 
 type MetadataProps = {
   type: string;
+  _key: string;
   productId: string;
-  typefaces: Typeface[];
+  // typefaces: Typeface[];
 };
 type Props = {
   id: string;
@@ -142,7 +143,7 @@ const AddToCart = (props: Props) => {
     licenseSizeProfil.licenseType.forEach((item, i) => {
       index = i + 1;
       const price = _getLicensePriceByLabel(item);
-      console.log("_getLicensePriceByLabel", price);
+      // console.log("_getLicensePriceByLabel", price);
       const name = item.label
         ? item.label.replace(" ", "-").toLowerCase()
         : "no-label";
@@ -223,7 +224,8 @@ const AddToCart = (props: Props) => {
     // ],
     metadata: JSON.stringify(metadata),
   };
-  console.log(productData);
+  // console.log("-------- Add to cart");
+  // console.log(metadata);
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")

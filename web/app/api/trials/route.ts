@@ -8,7 +8,7 @@ import nodemailer from "nodemailer";
 // require("dotenv").config();
 // import sanityClient from "@sanity/client";
 import { client } from "../../utils/sanity-client";
-import { Typeface } from "@/app/types/schema";
+import { Product, ProductSingle, Typeface } from "@/app/types/schema";
 
 // const client = sanityClient({
 //   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -25,7 +25,7 @@ type SendProps = {
 };
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
-  console.log("SENDER_EMAIL", process.env.SENDER_EMAIL);
+  // console.log("SENDER_EMAIL", process.env.SENDER_EMAIL);
   if (req.method !== "POST") {
     // res.status(405).json({ message: "INVALID_METHOD" });
     // return;
@@ -36,22 +36,37 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
   }
   try {
     const body = await req.json(); // res now contains body
+
     const { data } = body;
-    const { clientInfos, typefacesId } = data;
+    const { clientInfos, trials } = data;
     const destination = clientInfos.email;
 
-    const zipFiles = await _collectTypefacesZip(typefacesId);
+    /**
+     * collect product ids from items.metada
+     */
+    const _productIds = _collectProductsId(trials);
+
+    /**
+     * from these ids get content (bundles, singles)
+     */
+    const _productsData = await _collectProductsData(_productIds);
+
+    const _attachments = _collectZips(_productsData);
     // const _downloadButtons = await _generateDownloadButtons(zipFiles);
-    const _attachments = await _generateAttachments(zipFiles);
+    // const _attachments = _generateAttachments(zipFiles);
     // console.log("zipFiles");
     // console.log(zipFiles);
-    console.log(_attachments);
+    // console.log(_attachments);
 
     const params: SendProps = {
       destination: destination,
       payload: _attachments,
     };
     // _sendEmail(destination, _downloadButtons);
+    // return new NextResponse(JSON.stringify(_attachments), {
+    //   status: 500,
+    //   headers: { "Content-Type": "application/json" },
+    // });
     const _sendEmailresult = await _sendEmail(params);
     if (_sendEmailresult.status === "success") {
       const response_success = {
@@ -91,30 +106,79 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
   }
 }
 
-const _collectTypefacesZip = async (_ids: any) => {
-  const query = `*[_type == "typeface"
-    && _id in $_ids
-  ]{
+const _collectProductsId = (items: ProductSingle[]) => {
+  let _ids: string[] = [];
+  items.forEach((element: any) => {
+    // const metadata = JSON.parse(element.metadata);
+    const { productId } = element;
+    _ids.push(productId);
+  });
+  return _ids;
+};
+
+const _collectProductsData = async (_ids: string[]) => {
+  const query = `*[_type == "product" && _id in $_ids
+    ]{
     title,
-    style,
-    zip{
-      asset->{
-        url
+    singles[]{
+      _key,
+      title,
+      zipTrials{
+        asset->{
+          url
+        }
       }
     }
   }`;
+  // console.log(query);
   const res = await client.fetch(query, { _ids: _ids });
-  const validData = res.filter((el: Typeface) => el.zip !== null);
   // const data = await res.json();
-  // console.log(res);
-  return validData;
+  return res;
+};
+
+const _collectZips = (items: Product[]) => {
+  const zips: any[] = [];
+  items.forEach((product) => {
+    product.singles?.forEach((single) => {
+      let zip = {};
+      if (single.zipTrials) {
+        zip = {
+          filename: `${product.title}-${single.title}.zip`,
+          path: single.zipTrials.asset.url,
+        };
+      } else {
+        zip = {
+          filename: "no zip found",
+          path: "",
+        };
+      }
+      zips.push(zip);
+    });
+  });
+  return zips;
+  // return items.map((item: Product) => {
+  //   return item.singles?.map((_item) => {
+  //     console.log(_item);
+  //     if (_item.zipTrials) {
+  //       return {
+  //         filename: `${item.title}-${_item.title}.zip`,
+  //         path: _item.zipTrials.asset.url,
+  //       };
+  //     } else {
+  //       return {
+  //         filename: "no zip found",
+  //         path: "",
+  //       };
+  //     }
+  //   });
+  // });
 };
 
 const _generateAttachments = (items: any) => {
-  return items.map((item: Typeface) => {
-    if (item.zip) {
+  return items.map((item: any) => {
+    if (item.zipTrials) {
       return {
-        filename: `${item.title}.zip`,
+        filename: `${item.typefaceTitle}-${item.title}.zip`,
         path: item.zip.asset.url,
       };
     } else {
@@ -125,6 +189,23 @@ const _generateAttachments = (items: any) => {
     }
   });
 };
+
+// const _generateAttachments = (items: ProductSingle[]) => {
+//   return items.map((item: ProductSingle) => {
+//     console.log(item);
+//     if (item.zipTrials) {
+//       return {
+//         filename: `${item.typefaceTitle}.zip`,
+//         path: item.zipTrials.asset.url,
+//       };
+//     } else {
+//       return {
+//         filename: "no zip found",
+//         path: "",
+//       };
+//     }
+//   });
+// };
 // const _generateDownloadButtons = (items: any) => {
 //   return items.map((item: Typeface) => {
 //     if (item.zip) {

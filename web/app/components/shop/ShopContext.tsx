@@ -89,7 +89,7 @@ function trialsReducer(state: any, action: any) {
       return [...state, payload];
     case "REMOVE":
       return state.filter((item: SanityKeyed<ProductSingle>) => {
-        console.log(item._key, payload._key);
+        // console.log(item._key, payload._key);
         return item._key !== payload._key;
       });
 
