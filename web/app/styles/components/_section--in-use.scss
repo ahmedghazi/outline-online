@@ -59,12 +59,23 @@
     }
     .modal {
       inset: var(--space-sm);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: center;
+      & > div {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
       img {
         width: 100% !important;
         height: auto !important;
+      }
+      figcaption {
+        left: 0;
+        transform: translateX(0);
+        bottom: calc(1em + var(--space-sm));
       }
     }
   }

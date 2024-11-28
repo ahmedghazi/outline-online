@@ -66,7 +66,6 @@ const Glyphs = ({ input }: Props) => {
         ))}
       {glyh && (
         <div className='overview'>
-          {/* <pre>{JSON.stringify(glyh)}</pre> */}
           {typeof glyh === "object" && (
             <span
               style={{
