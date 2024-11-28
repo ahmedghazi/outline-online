@@ -1,0 +1,21 @@
+.buy-modal-notices {
+  background-color: var(--color-gray);
+  padding-top: toRem(53);
+  padding-bottom: 0.5em;
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+  dialog {
+    .header {
+      padding: var(--space-sm);
+    }
+    .footer {
+      a {
+        background-color: var(--color-green);
+        color: white;
+        text-align: center;
+        padding: 0.5em;
+        display: block;
+      }
+    }
+  }
+}

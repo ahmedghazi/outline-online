@@ -286,6 +286,13 @@ export interface Settings extends SanityDocument {
   licenseSizes?: Array<SanityKeyed<LicenseSize>>;
 
   /**
+   * buyModalNotices — `buyModalNotices`
+   *
+   *
+   */
+  buyModalNotices?: BuyModalNotices;
+
+  /**
    * Message Cookie — `blockContent`
    *
    *
@@ -915,6 +922,23 @@ export type ProductSingle = {
    * Digital good client will receive
    */
   zipTrials?: { _type: "file"; asset: SanityReference<any> };
+};
+
+export type BuyModalNotices = {
+  _type: "buyModalNotices";
+  /**
+   * Title — `string`
+   *
+   * Licenses for
+   */
+  title?: string;
+
+  /**
+   * items — `array`
+   *
+   *
+   */
+  items?: Array<SanityKeyed<KeyVal>>;
 };
 
 export type BlockContent = Array<SanityKeyed<SanityBlock>>;

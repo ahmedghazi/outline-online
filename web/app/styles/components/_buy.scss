@@ -43,6 +43,9 @@
   }
   & .body > .items {
     border-top: var(--border);
+    &:last-child {
+      border-bottom: var(--border);
+    }
   }
   .typeface-item {
     &:last-child:not(.is-active) > ._row {

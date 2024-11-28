@@ -19,6 +19,7 @@ import productSingle from './shop/productSingle'
 import vendor from './shop/vendor'
 import licenseType from './shop/licenseType'
 import licenseSize from './shop/licenseSize'
+import buyModalNotices from './shop/buyModalNotices'
 // import licenseSizeOption from './shop/licenseSizeOption'
 
 import imageUI from './objects/modules/imageUI'
@@ -67,6 +68,7 @@ export const schemaTypes = [
   typefaceFile,
   productBundle,
   productSingle,
+  buyModalNotices,
   // style,
 
   blockContent,

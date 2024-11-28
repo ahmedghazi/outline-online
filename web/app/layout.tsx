@@ -34,7 +34,7 @@ export default async function RootLayout({
 }) {
   const settings = await getSettings();
   const productsCart = await getProductsCart();
-  console.log(settings.licenseSizes);
+  // console.log(settings.buyModalNotices);
   return (
     <html lang='en'>
       <Script id='snipcart-sources'>{`
@@ -60,7 +60,10 @@ export default async function RootLayout({
                 <span></span>
               </div>
               <Header settings={settings} productsCart={productsCart} />
-              <BuyModal productsCart={productsCart} />
+              <BuyModal
+                productsCart={productsCart}
+                buyModalNotices={settings.buyModalNotices}
+              />
               <main>{children}</main>
               <div className='dashes dashes--right'>
                 <span></span>

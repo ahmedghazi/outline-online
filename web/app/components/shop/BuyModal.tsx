@@ -1,5 +1,6 @@
 "use client";
 import {
+  BuyModalNotices,
   LicenseSize,
   // LabelPrice,
   // LicenseSize,
@@ -19,6 +20,7 @@ import AddToCart from "./AddToCart";
 import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
 import { usePageContext } from "@/app/context/PageContext";
+import BuyModalNoticesComponent from "./BuyModalNoticesComponent";
 
 declare global {
   interface Window {
@@ -73,20 +75,6 @@ const CartProductItem = ({
   let greenText = "";
   let isPriceCrossed: boolean =
     typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
-  // let priceCrossed: number = 0;
-  // if (input.price && input.priceDiscount && isPriceCrossed) {
-  //   // isPriceCrossed = true;
-  //   priceCrossed = input.price + (input.price / 100) * input.priceDiscount;
-  //   greenText = `Save ${input.priceDiscount}%`;
-  // }
-  // const isPriceCrossed: boolean = input.priceCrossed !== null;
-  // if (input.price && input.priceCrossed) {
-  //   const saving = (input.price * 100) / input.priceCrossed;
-  //   const perc = (saving * 100) / input.priceCrossed;
-  //   greenText = `Save (${perc.toFixed(2)}%)`;
-  //   // console.log(saving, perc);
-  // }
-  // console.log(input.title, input.priceDiscount, isPriceCrossed);
 
   return (
     <div
@@ -100,9 +88,6 @@ const CartProductItem = ({
           <div className='title'>{input.title}</div>
           <div className='desc flex-2 flex justify-between hidden-sm'>
             <span className='text-muted '>{input.description}</span>
-            {/* {input._type === "productBundle" && input.descriptionAlt && (
-              <span className='text-green'>{input.descriptionAlt}</span>
-            )} */}
             {input._type === "productBundle" && input.priceDiscount && (
               <span className='text-green blink'>
                 Save {input.priceDiscount}%
@@ -146,10 +131,8 @@ type CartProductProps = {
 
 const CartProduct = ({ input }: CartProductProps) => {
   const [active, setActive] = useState<boolean>(false);
-  // const { licenseSizeProfil } = useShop();
   const pathname = usePathname();
-  // console.log(pathname);
-  // console.log(input);
+
   useEffect(() => {
     const isProductPage = pathname.indexOf("product") > -1;
     if (isProductPage) {
@@ -214,9 +197,10 @@ const CartProduct = ({ input }: CartProductProps) => {
 
 type Props = {
   productsCart: Product[];
+  buyModalNotices?: BuyModalNotices;
 };
 
-const BuyModal = ({ productsCart }: Props) => {
+const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   // const [active, setActive] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
   const [active, setActive] = useState<boolean>(false);
@@ -241,22 +225,6 @@ const BuyModal = ({ productsCart }: Props) => {
 
   useEffect(() => {
     setReady(true);
-
-    /*
-      LISTEN TO BUY Button click
-    */
-    // const token = subscribe("HEADER_TAB_CHANGE", (e, d) => {
-    //   const { item, active } = d;
-    //   if (item === "CART") {
-    //     setActive(false);
-    //   } else {
-    //     setActive(active);
-    //   }
-    // });
-
-    // return () => {
-    //   unsubscribe(token);
-    // };
   }, []);
 
   useEffect(() => {
@@ -271,37 +239,21 @@ const BuyModal = ({ productsCart }: Props) => {
     // }
   }, [active]);
 
-  // const _setDefaultLicenses = () => {
-  //   // console.log(licenseTypeProfil);
-  //   //setLicenseSizeProfil()
-  //   //setLicenseTypeProfil()
-  // };
-
   const _updateLicenseSize = (val: LicenseSize) => {
     setLicenseSizeProfil(val);
   };
   useEffect(() => {
-    // console.log(licenseSizeProfil);
-    // console.log("*********** old license types");
-    // console.table(licenseTypeProfil);
     if (licenseTypeProfil) {
-      //replace
-      //Lisense Size a changé
-      //anciens tableau de licenseYupe
       licenseTypeProfil.forEach((el) => {
         if (licenseSizeProfil && licenseSizeProfil?.licenseType) {
           const replacer = licenseSizeProfil?.licenseType.filter(
             (_el) => _el.label === el.label
           );
           if (replacer && replacer.length === 1) {
-            // console.log("*********** new license types");
-            // console.table(replacer[0]);
-
             setLicenseTypeProfil({ type: "REPLACE", payload: replacer[0] });
           }
         }
       });
-      //nx tableau de licenseYupe
     }
   }, [licenseSizeProfil]);
 
@@ -340,12 +292,6 @@ const BuyModal = ({ productsCart }: Props) => {
       console.log(error);
     }
   };
-
-  // const hasLicenseType = licenseTypeProfil && licenseTypeProfil?.length > 0;
-  // const hasProducts = products && products.length > 0;
-  // console.log(licenseSizeProfil);
-  // if (licenseSizeProfil) console.table(licenseSizeProfil.licenseType);
-  // console.log(licenseTypeProfil);
 
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
@@ -404,6 +350,9 @@ const BuyModal = ({ productsCart }: Props) => {
             </div>
           </div>
           <div className='footer'>
+            {buyModalNotices && (
+              <BuyModalNoticesComponent input={buyModalNotices} />
+            )}
             <button
               onClick={_addToCart}
               className={clsx(

@@ -118,6 +118,12 @@ export default defineType({
     }),
 
     defineField({
+      name: 'buyModalNotices',
+      type: 'buyModalNotices',
+      group: 'shop',
+    }),
+
+    defineField({
       name: 'messageCookie',
       title: 'Message Cookie',
       type: 'blockContent',
