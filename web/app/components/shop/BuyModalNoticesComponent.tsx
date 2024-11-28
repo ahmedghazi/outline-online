@@ -26,12 +26,14 @@ const BuyModalNoticesComponent = ({ input }: Props) => {
   return (
     <div className='buy-modal-notices'>
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
-      <div className='nav'>
-        <span className='title'>{title}</span>:{" "}
+      <div className='nav flex'>
+        <span className='title'>{title}</span>{" "}
         {items?.map((item, i) => (
           <Fragment key={i}>
-            <button onClick={() => setCurrentItem(item.val)}>{item.key}</button>
-            {i < items.length - 1 && ", "}
+            <button onClick={() => setCurrentItem(item.val)}>
+              <span className='underline'>{item.key}</span>
+            </button>
+            {/* {i < items.length - 1 && ", "} */}
           </Fragment>
         ))}
       </div>

@@ -4,6 +4,16 @@
   padding-bottom: 0.5em;
   padding-left: var(--space-sm);
   padding-right: var(--space-sm);
+  .nav.flex {
+    gap: 0.4em;
+  }
+  button {
+    // text-decoration: underline;
+    &:not(:last-child)::after {
+      content: ",";
+      text-decoration: none;
+    }
+  }
   dialog {
     .header {
       padding: var(--space-sm);
