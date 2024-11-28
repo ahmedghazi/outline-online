@@ -1,6 +1,7 @@
 .modules {
-  section {
+  .module {
     width: 100%;
+
     // margin-bottom: var(--space-xl);
     &:last-child {
       // margin-bottom: 0;
@@ -12,7 +13,18 @@
       //   padding-right: 186px;
       // }
     }
-
+    &.module--slider-ui {
+      .slick-arrow {
+        top: calc(100% - calc(2em * 1.2) + 2px);
+      }
+      img {
+        // aspect-ratio: 4 / 3;
+        // object-fit: contain;
+      }
+      figcaption {
+        height: calc(2em * 1.2);
+      }
+    }
     &.module--images {
       @media screen and (min-width: 1080px) {
         // .col-span-1.row-span-1 {

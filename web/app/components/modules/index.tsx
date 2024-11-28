@@ -1,14 +1,12 @@
 "use client";
-import "./index.scss";
 import React from "react";
-
 import { SanityKeyed } from "sanity-codegen";
-
 import { ImageUI, SliderUI, TextUI } from "@/app/types/schema";
 import ModuleTextUI from "./TextUI";
 import ModuleImageUI from "./ImageUI";
 import ModuleSidebarUI from "./SidebarUI";
 import ModuleSliderUI from "./SliderUI";
+import "./index.scss";
 
 type ModulesProps =
   | Array<SanityKeyed<TextUI> | SanityKeyed<ImageUI> | SanityKeyed<SliderUI>>
