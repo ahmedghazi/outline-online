@@ -12,22 +12,16 @@ type Props = {
 
 const Glyphs = ({ input }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [glyh, setGlyph] = useState<string>("");
+  const [glyh, setGlyph] = useState<string | KeyValString>("");
   const { type } = useType();
 
-  // console.log({ type });
-  const _getUnicode = (item: string) => {};
-  const _renderGlyphStyle = (g: KeyValString) => {
-    const parts = g.split(" ");
-    if (parts.length === 0) return;
-    const style = parts[1];
-    return "oldstyle";
-  };
+  console.log(glyh);
+
   return (
     <section
       className='glyphs '
       // ref={ref}
-      onMouseLeave={() => setGlyph("")}
+      // onMouseLeave={() => setGlyph("")}
       style={{
         fontFamily: type?.slug?.current,
       }}>
@@ -53,8 +47,8 @@ const Glyphs = ({ input }: Props) => {
                   <div
                     className='item'
                     key={j}
-                    onClick={() => setGlyph(_item.key || "")}
-                    onMouseEnter={() => setGlyph(_item.key || "")}>
+                    onClick={() => setGlyph(_item || "")}
+                    onMouseEnter={() => setGlyph(_item || "")}>
                     <div
                       className='glyph'
                       style={{
@@ -72,7 +66,16 @@ const Glyphs = ({ input }: Props) => {
         ))}
       {glyh && (
         <div className='overview'>
-          <span>{glyh}</span>
+          {/* <pre>{JSON.stringify(glyh)}</pre> */}
+          {typeof glyh === "object" && (
+            <span
+              style={{
+                fontVariant: glyh.val,
+              }}>
+              {glyh.key}
+            </span>
+          )}
+          {typeof glyh === "string" && <span>{glyh}</span>}
         </div>
       )}
     </section>
