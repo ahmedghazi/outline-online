@@ -228,6 +228,7 @@ body[data-template="is-product"],
     .content {
       .text {
         transform: translateY(-0.2em);
+        font-size: var(--text-xs);
       }
       .col-span-8 ~ .col-span-8 {
         grid-row: unset;
