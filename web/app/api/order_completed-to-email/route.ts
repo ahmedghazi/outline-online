@@ -244,14 +244,27 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
     // text: "le message: " + JSON.stringify(payload),
     html: `
       <div style="font-family:monospace,sans-serif">
-        <p>hi ${destination}</p>
-        <p>Thx for your request.</p>
-        <p>You will found attached the fonts you bought.</p>
-        <p>Cheers from Outline Online.</p>
+        <p>Dear @ ${destination} [@company Name?],</p>
+        <p>Your payment has been successfully processed. You can find the font files for download below in the zip files along with our EULA. If any problems might occur, please get in touch through info@outline-online.com. A PDF with an invoice is included in this email.</p>
+        <p>Thank you for using Outline Online typefaces!</p>
+        <p>Best from,<br />
+        Outline Online</p>
+
+        <p>P.S. We would love to see our typefaces in use, so don’t hesitate to reach out to us at info@outline-online.com with your designs!</p>
       </div>
     `,
     attachments: payload,
   };
+
+  /*
+   <p>Dear @ ${destination} [@company Name?],</p>
+   <p>Your payment has been successfully processed. You can find the font files for download below in the zip files along with our EULA. If any problems might occur, please get in touch through info@outline-online.com. A PDF with an invoice is included in this email.</p>
+   <p>Thank you for using Outline Online typefaces!</p>
+   <p>Best from,<br />
+  Outline Online</p>
+
+  <p>P.S. We would love to see our typefaces in use, so don’t hesitate to reach out to us at info@outline-online.com with your designs!</p>
+  */
 
   try {
     const res = await transporter.sendMail(mailOptions);
