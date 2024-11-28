@@ -24,7 +24,7 @@ const BuyModalNoticesComponent = ({ input }: Props) => {
   }, [openModal]);
 
   return (
-    <div className='buy-modal-notices px-sm'>
+    <div className='buy-modal-notices'>
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
       <div className='nav'>
         <span className='title'>{title}</span>:{" "}
