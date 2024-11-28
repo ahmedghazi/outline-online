@@ -14,6 +14,7 @@
     .typeface--item {
       display: flex;
       justify-content: space-between;
+      line-height: 1.3;
       &.is-active {
         .title {
           font-size: var(--text-xl);
