@@ -74,12 +74,13 @@
     }
     .form-group {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       margin-bottom: 1em;
       .fields {
-        grid-column: span 2 / span 2;
+        grid-column: span 3 / span 3;
       }
     }
+
     .fields {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -89,7 +90,11 @@
         // width: 50%;
         // display: flex;
         // gap: 0.4em;
-
+        input {
+          background-color: red;
+          // max-width: 10em;
+          width: calc(100% - 100px);
+        }
         label {
           color: #666666;
           white-space: nowrap;
