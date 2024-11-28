@@ -9,7 +9,7 @@ export default defineField({
     defineField({
       name: 'key',
       type: 'string',
-      title: 'Clef',
+      title: 'key',
     }),
     defineField({
       name: 'val',

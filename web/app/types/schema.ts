@@ -1046,7 +1046,7 @@ export type KeyVal = {
 export type KeyValString = {
   _type: "keyValString";
   /**
-   * Clef — `string`
+   * key — `string`
    *
    *
    */
@@ -1210,9 +1210,16 @@ export type GlyphSet = {
   /**
    * items — `array`
    *
-   *
+   * Simple glyph (abcdefg...)
    */
   items?: Array<SanityKeyed<string>>;
+
+  /**
+   * Items Advanced — `array`
+   *
+   * Advanced glyph (liga, oldstyle, ...). https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
+   */
+  itemsAdvanced?: Array<SanityKeyed<KeyValString>>;
 };
 
 export type ImageUI = {

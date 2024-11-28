@@ -1,8 +1,9 @@
 "use client";
-import { ProductSingle } from "@/app/types/schema";
+import { KeyValString, ProductSingle } from "@/app/types/schema";
 import React, { useEffect, useRef, useState } from "react";
 import { alphabets } from "./alphabets";
 import useType from "./TypeContext";
+import clsx from "clsx";
 // import useType from "./typeContext";
 
 type Props = {
@@ -14,33 +15,14 @@ const Glyphs = ({ input }: Props) => {
   const [glyh, setGlyph] = useState<string>("");
   const { type } = useType();
 
-  const glyphsList = [
-    ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    ..."abcdefghijklmnopqrstuvwxyz",
-    ..."0123456789",
-    ..."abčděfghíjklmňopqřštůvwxýž",
-    ...'!@#$%^&*()_+-=[]{}|;:",.<>/?`~',
-  ];
-
-  // const str = '!@#$%^&*()_+-=[]{}|;:",.<>/?`~'.split("").join(" ");
-  // console.log(str);
-  // const latin = alphabets.latin.split("");
-  // const latin_extended = alphabets.latin_extended.split("");
-  // console.log(input);
-  useEffect(() => {
-    // if (!ref.current) return;
-    // var content = "";
-    // var max = 65535; // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode
-    // for (var i = 34; i < max; i++) {
-    //   if (i % 1000 === 0) {
-    //     content += "<hr>";
-    //   }
-    //   content += "<div title='" + i + "'>" + String.fromCharCode(i) + "</div>";
-    // }
-    // ref.current.innerHTML = content;
-  }, []);
   // console.log({ type });
   const _getUnicode = (item: string) => {};
+  const _renderGlyphStyle = (g: KeyValString) => {
+    const parts = g.split(" ");
+    if (parts.length === 0) return;
+    const style = parts[1];
+    return "oldstyle";
+  };
   return (
     <section
       className='glyphs '
@@ -61,13 +43,28 @@ const Glyphs = ({ input }: Props) => {
                     className='item'
                     key={j}
                     onClick={() => setGlyph(_item)}
-                    onMouseEnter={() => setGlyph(_item)}
-                    // onMouseLeave={() => setGlyph("")}
-                  >
-                    {/* <div className='pointer-events-none '> */}
+                    onMouseEnter={() => setGlyph(_item)}>
                     <div className='glyph'>{_item}</div>
                     <div className='unicode'>{_item.codePointAt(0)}</div>
-                    {/* </div> */}
+                  </div>
+                ))}
+              {item.itemsAdvanced &&
+                item.itemsAdvanced.map((_item, j) => (
+                  <div
+                    className='item'
+                    key={j}
+                    onClick={() => setGlyph(_item.key || "")}
+                    onMouseEnter={() => setGlyph(_item.key || "")}>
+                    <div
+                      className='glyph'
+                      style={{
+                        fontVariant: _item.val,
+                      }}>
+                      {_item.key}
+                    </div>
+                    <div className='unicode'>
+                      {_item.key ? _item.key.codePointAt(0) : ""}
+                    </div>
                   </div>
                 ))}
             </div>

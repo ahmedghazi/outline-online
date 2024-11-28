@@ -207,5 +207,8 @@ sub {
   top: 0.5ex;
 }
 
+.oldstyle {
+  font-variant-numeric: oldstyle-nums;
+}
 @media all and (max-width: $sm) {
 }
