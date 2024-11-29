@@ -56,6 +56,7 @@
   }
   @media all and (max-width: $md) {
     min-height: unset !important;
+    background-color: white;
     .thumbnails {
     }
     .modal {
@@ -83,6 +84,8 @@
         transform: translateX(0);
         bottom: 0;
         font-size: var(--text-sm);
+        color: white;
+        mix-blend-mode: difference;
       }
     }
   }
