@@ -91,7 +91,7 @@ const TrialsDownload = (props: Props) => {
       case "sending":
         return "Please wait...";
       case "success":
-        return "Thanks, check your email :)";
+        return "Thank you! Your selected trial fonts will arrive in your inbox shortly.";
       case "error":
         return "ERROR";
       default:
