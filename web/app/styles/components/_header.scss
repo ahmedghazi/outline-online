@@ -153,7 +153,6 @@ header#main-header {
             }
             .submenu.is-active {
               display: block;
-              min-height: unset;
               z-index: 10;
             }
           }
@@ -166,6 +165,8 @@ header#main-header {
             padding-top: 2px !important;
             padding-bottom: 0;
             position: initial;
+            min-height: unset !important;
+
             // position: initial;
             .is-half {
               margin-bottom: 0 !important;

@@ -55,6 +55,7 @@
     }
   }
   @media all and (max-width: $md) {
+    min-height: unset !important;
     .thumbnails {
     }
     .modal {
@@ -76,6 +77,7 @@
         left: 0;
         transform: translateX(0);
         bottom: calc(1em + var(--space-sm));
+        font-size: var(--text-sm);
       }
     }
   }
