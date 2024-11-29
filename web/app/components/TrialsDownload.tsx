@@ -119,7 +119,8 @@ const TrialsDownload = (props: Props) => {
     // console.log(typefacesId);
     // return;
     if (!trials[0]) return;
-    // console.log(typefacesId);
+    console.log(state);
+    // return;
     const payload = {
       clientInfos: state,
       trials: trials,

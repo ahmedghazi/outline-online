@@ -21,6 +21,7 @@ import { Product, ProductSingle, Typeface } from "@/app/types/schema";
 
 type SendProps = {
   payload: any;
+  client_name: string;
   destination: string;
 };
 
@@ -40,6 +41,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     const { data } = body;
     const { clientInfos, trials } = data;
     const destination = clientInfos.email;
+    const client_name = `${clientInfos.first_name}, ${clientInfos.last_name}`;
 
     /**
      * collect product ids from items.metada
@@ -60,6 +62,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 
     const params: SendProps = {
       destination: destination,
+      client_name: client_name,
       payload: _attachments,
     };
     // _sendEmail(destination, _downloadButtons);
@@ -216,7 +219,7 @@ const _generateAttachments = (items: any) => {
 //   });
 // };
 
-const _sendEmail = async ({ destination, payload }: SendProps) => {
+const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
   console.log("_sending to :", destination);
 
@@ -235,11 +238,11 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
   var mailOptions = {
     from: process.env.SENDER_EMAIL,
     to: destination,
-    subject: "Your fonts :)",
+    subject: "Outline Online trial fonts",
     // text: "le message: " + JSON.stringify(payload),
     html: `
       <div style="font-family:monospace,sans-serif">
-        <p>Dear ${destination}</p>
+        <p>Dear @${client_name}</p>
         <p>Thank you for downloading the trial versions of our typefaces! Please, find them attached below in this email.</p>
         <p>Outline Online trial fonts come with a full character set, meaning numbers, punctuation, diacritics and specific symbols are all included in the character set. This approach allows the effective testing and functional presentation of our typefaces. Trial font files are intended solely for testing and pitching purposes. In order to use the trial fonts in a published project, the appropriate license needs to be purchased for the respective license holder. By downloading these files, you agree to Outline Online’s End User Licence Agreement (EULA).</p>
         <p>Best from,<br />

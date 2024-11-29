@@ -4,6 +4,12 @@ import nodemailer from "nodemailer";
 import { client } from "../../utils/sanity-client";
 import { Product, ProductBundle, Typeface } from "@/app/types/schema";
 
+type SendProps = {
+  payload: any;
+  client_name: string;
+  destination: string;
+};
+
 export async function POST(req: NextRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     // res.status(405).json({ message: "INVALID_METHOD" });
@@ -48,6 +54,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 
       const params: SendProps = {
         destination: user.email,
+        client_name: `${user.billingAddress.fullName}`,
         payload: _attachments,
       };
       const _sendEmailresult = await _sendEmail(params);
@@ -89,11 +96,6 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     });
   }
 }
-
-type SendProps = {
-  payload: any;
-  destination: string;
-};
 
 const _collectProductsId = (items: any) => {
   let _ids: string[] = [];
@@ -221,7 +223,7 @@ const _generateAttachments = (items: any) => {
   });
 };
 
-const _sendEmail = async ({ destination, payload }: SendProps) => {
+const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
   console.log("_sending to :", destination);
 
@@ -240,11 +242,11 @@ const _sendEmail = async ({ destination, payload }: SendProps) => {
   var mailOptions = {
     from: process.env.SENDER_EMAIL,
     to: destination,
-    subject: "Your fonts :)",
+    subject: "Your Outline Online fonts",
     // text: "le message: " + JSON.stringify(payload),
     html: `
       <div style="font-family:monospace,sans-serif">
-        <p>Dear @ ${destination} [@company Name?],</p>
+        <p>Dear @${client_name} [@company Name?],</p>
         <p>Your payment has been successfully processed. You can find the font files for download below in the zip files along with our EULA. If any problems might occur, please get in touch through info@outline-online.com. A PDF with an invoice is included in this email.</p>
         <p>Thank you for using Outline Online typefaces!</p>
         <p>Best from,<br />
