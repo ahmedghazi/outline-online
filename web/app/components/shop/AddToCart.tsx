@@ -144,9 +144,7 @@ const AddToCart = (props: Props) => {
       index = i + 1;
       const price = _getLicensePriceByLabel(item);
       // console.log("_getLicensePriceByLabel", price);
-      const name = item.label
-        ? item.label.replace(" ", "-").toLowerCase()
-        : "no-label";
+      const name = item.label ? item.label.replace(" ", "-") : "no-label";
 
       /**
        * FOR BOTS
@@ -225,7 +223,7 @@ const AddToCart = (props: Props) => {
     metadata: JSON.stringify(metadata),
   };
   // console.log("-------- Add to cart");
-  // console.log(metadata);
+  console.log(productData);
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")

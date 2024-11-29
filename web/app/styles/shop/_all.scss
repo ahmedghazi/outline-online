@@ -189,13 +189,14 @@
             // grid-column: span 6 / span 6;
             min-width: 100%;
             flex-basis: 100%;
+            // text-transform: unset;
             // padding-bottom: 0.5em;
             // border-bottom: var(--border);
           }
           .snipcart-item-custom-fields__field {
             padding-right: 0;
             margin: 0;
-            text-transform: capitalize;
+            // text-transform: capitalize;
           }
         }
       }
