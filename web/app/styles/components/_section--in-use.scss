@@ -1,5 +1,5 @@
 .section--in-use {
-  height: calc(var(--vh) * 100 - calc(var(--header-height) * 2));
+  height: calc(var(--vh) * 100 - calc(var(--header-height) * 0));
   position: relative;
   overflow: clip;
   .thumbnails {
@@ -60,6 +60,11 @@
     }
     .modal {
       inset: var(--space-sm);
+
+      height: calc(
+        var(--vh) * 100 - calc(var(--header-height) + var(--footer-height))
+      );
+      top: var(--header-height);
       // display: flex;
       // flex-direction: column;
       // justify-content: center;
@@ -76,7 +81,7 @@
       figcaption {
         left: 0;
         transform: translateX(0);
-        bottom: calc(1em + var(--space-sm));
+        bottom: 0;
         font-size: var(--text-sm);
       }
     }
