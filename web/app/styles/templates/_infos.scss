@@ -1,5 +1,7 @@
-body[data-template="is-infos"] {
-  .template--infos {
-    padding-bottom: var(--footer-height);
+body[data-template="is-infos"],
+body[data-template="is-page"] {
+  .template--infos,
+  .template--page {
+    padding-bottom: calc(var(--footer-height) * 2 + var(--space-md));
   }
 }
