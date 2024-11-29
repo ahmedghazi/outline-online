@@ -50,7 +50,7 @@ const BuyModalNoticesComponent = ({ input }: Props) => {
               </div>
             </div>
             <div className='footer'>
-              <a href='mailto:mail@samiraschneuwly.ch'>Send email</a>
+              <a href='mailto:info@outline-online.com'>Send email</a>
             </div>
           </div>
         )}
