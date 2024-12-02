@@ -41,7 +41,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     const { data } = body;
     const { clientInfos, trials } = data;
     const destination = clientInfos.email;
-    const client_name = `${clientInfos.first_name}, ${clientInfos.last_name}`;
+    const client_name = clientInfos.fullName;
 
     /**
      * collect product ids from items.metada
