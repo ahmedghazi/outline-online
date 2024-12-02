@@ -2,6 +2,8 @@ body[data-template="is-infos"],
 body[data-template="is-page"] {
   .template--infos,
   .template--page {
-    padding-bottom: calc(var(--footer-height) * 2 + var(--space-md));
+    @media all and (min-width: $md) {
+      padding-bottom: calc(var(--footer-height) * 2 + var(--space-md));
+    }
   }
 }

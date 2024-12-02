@@ -244,9 +244,10 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
     to: destination,
     subject: "Your Outline Online fonts",
     // text: "le message: " + JSON.stringify(payload),
+    //[@company Name?]
     html: `
       <div style="font-family:monospace,sans-serif">
-        <p>Dear @${client_name} [@company Name?],</p>
+        <p>Dear ${client_name},</p>
         <p>Your payment has been successfully processed. You can find the font files for download below in the zip files along with our EULA. If any problems might occur, please get in touch through info@outline-online.com. A PDF with an invoice is included in this email.</p>
         <p>Thank you for using Outline Online typefaces!</p>
         <p>Best from,<br />

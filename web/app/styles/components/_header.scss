@@ -164,6 +164,7 @@ header#main-header {
             padding-top: 0 !important;
             padding-top: 2px !important;
             padding-bottom: 0;
+            padding-right: 0;
             position: initial;
             min-height: unset !important;
 
@@ -172,7 +173,8 @@ header#main-header {
               margin-bottom: 0 !important;
             }
             a {
-              text-align: left !important;
+              // text-align: left !important;
+              text-align: center;
             }
           }
         }

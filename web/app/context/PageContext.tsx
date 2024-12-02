@@ -74,7 +74,7 @@ export const PageContextProvider = (props: PageContextProps) => {
   useEffect(() => {
     _handlePageTemplate();
     document.body.classList.remove("has-scrolled");
-
+    _format();
     setTab({
       name: "",
       active: false,

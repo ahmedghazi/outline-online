@@ -298,7 +298,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
       <div className='outter'>
         <div className='inner'>
           <div className='header'>
-            <p className='message '>
+            {/* <p className='message '>
               If you are a non profit ....{" "}
               <a
                 href='http://'
@@ -307,7 +307,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                 className='button-ui'>
                 contazct us
               </a>
-            </p>
+            </p> */}
 
             {licenses && (
               <div className='_row grid md:grid-cols-8 '>
