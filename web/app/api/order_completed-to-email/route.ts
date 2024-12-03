@@ -228,15 +228,13 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   console.log("_sending to :", destination);
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      // user: process.env.SENDER_EMAIL,
-      // pass: process.env.SENDER_PASSWORD,
-      // user: "oswaldnomadness@gmail.com",
-      // // pass: "$$$vviirrggiill***",
-      // pass: "dbom dpcq mtrt hduk",
-    },
+    host: "asmtp.mail.hostpoint.ch",
+    port: 465,
     secure: true,
+    auth: {
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.SENDER_PASSWORD,
+    },
   });
 
   var mailOptions = {

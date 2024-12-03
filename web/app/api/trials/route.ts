@@ -222,7 +222,7 @@ const _generateAttachments = (items: any) => {
 const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
   console.log("_sending to :", destination);
-
+  //https://stackoverflow.com/questions/38024428/error-connect-econnrefused-127-0-0-1465-nodemailer
   // const transporter = nodemailer.createTransport({
   //   service: "gmail",
   //   auth: {
@@ -235,17 +235,12 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   //   secure: true,
   // });
   const transporter = nodemailer.createTransport({
-    service: "asmtp.mail.hostpoint.ch",
+    host: "asmtp.mail.hostpoint.ch",
     port: 465,
     secure: true,
     auth: {
-      // user: process.env.SENDER_EMAIL,
-      // pass: process.env.SENDER_PASSWORD,
-      user: "info@outline-online.com",
-      pass: "OOutline_Onlinee_HP",
-      // user: "oswaldnomadness@gmail.com",
-      // pass: "$$$vviirrggiill***",
-      // pass: "dbom dpcq mtrt hduk",
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.SENDER_PASSWORD,
     },
   });
 
