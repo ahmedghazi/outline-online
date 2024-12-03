@@ -54,11 +54,6 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     const _productsData = await _collectProductsData(_productIds);
 
     const _attachments = _collectZips(_productsData);
-    // const _downloadButtons = await _generateDownloadButtons(zipFiles);
-    // const _attachments = _generateAttachments(zipFiles);
-    // console.log("zipFiles");
-    // console.log(zipFiles);
-    // console.log(_attachments);
 
     const params: SendProps = {
       destination: destination,
@@ -159,22 +154,6 @@ const _collectZips = (items: Product[]) => {
     });
   });
   return zips;
-  // return items.map((item: Product) => {
-  //   return item.singles?.map((_item) => {
-  //     console.log(_item);
-  //     if (_item.zipTrials) {
-  //       return {
-  //         filename: `${item.title}-${_item.title}.zip`,
-  //         path: _item.zipTrials.asset.url,
-  //       };
-  //     } else {
-  //       return {
-  //         filename: "no zip found",
-  //         path: "",
-  //       };
-  //     }
-  //   });
-  // });
 };
 
 const _generateAttachments = (items: any) => {
@@ -193,47 +172,11 @@ const _generateAttachments = (items: any) => {
   });
 };
 
-// const _generateAttachments = (items: ProductSingle[]) => {
-//   return items.map((item: ProductSingle) => {
-//     console.log(item);
-//     if (item.zipTrials) {
-//       return {
-//         filename: `${item.typefaceTitle}.zip`,
-//         path: item.zipTrials.asset.url,
-//       };
-//     } else {
-//       return {
-//         filename: "no zip found",
-//         path: "",
-//       };
-//     }
-//   });
-// };
-// const _generateDownloadButtons = (items: any) => {
-//   return items.map((item: Typeface) => {
-//     if (item.zip) {
-//       return `<a href="${item.zip.asset.url}">${item.title} - ${item.style}</a>`;
-//     } else {
-//       return "no zip found";
-//     }
-//   });
-// };
-
 const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
   console.log("_sending to :", destination);
   //https://stackoverflow.com/questions/38024428/error-connect-econnrefused-127-0-0-1465-nodemailer
-  // const transporter = nodemailer.createTransport({
-  //   service: "gmail",
-  //   auth: {
-  //     user: process.env.SENDER_EMAIL,
-  //     pass: process.env.SENDER_PASSWORD,
-  //     // user: "oswaldnomadness@gmail.com",
-  //     // pass: "$$$vviirrggiill***",
-  //     // pass: "dbom dpcq mtrt hduk",
-  //   },
-  //   secure: true,
-  // });
+
   const transporter = nodemailer.createTransport({
     host: "asmtp.mail.hostpoint.ch",
     port: 465,
