@@ -23,7 +23,7 @@ const TrialsDownload = (props: Props) => {
   const [status, setStatus] = useState<string>("");
   const [agree, setAgree] = useState<boolean>(false);
   const { trials } = useShop();
-  console.log(trials);
+  // console.log(trials);
   const groups = [
     {
       title: "CONTACT",
@@ -98,7 +98,7 @@ const TrialsDownload = (props: Props) => {
         return "Download Trials";
     }
   };
-  console.log(state);
+  // console.log(state);
 
   useEffect(() => {
     // console.log(Object.keys(state), requiredLength);

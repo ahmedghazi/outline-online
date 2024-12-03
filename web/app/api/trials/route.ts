@@ -223,16 +223,30 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
   console.log("_sending to :", destination);
 
+  // const transporter = nodemailer.createTransport({
+  //   service: "gmail",
+  //   auth: {
+  //     user: process.env.SENDER_EMAIL,
+  //     pass: process.env.SENDER_PASSWORD,
+  //     // user: "oswaldnomadness@gmail.com",
+  //     // pass: "$$$vviirrggiill***",
+  //     // pass: "dbom dpcq mtrt hduk",
+  //   },
+  //   secure: true,
+  // });
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: "asmtp.mail.hostpoint.ch",
+    port: 465,
+    secure: true,
     auth: {
-      user: process.env.SENDER_EMAIL,
-      pass: process.env.SENDER_PASSWORD,
+      // user: process.env.SENDER_EMAIL,
+      // pass: process.env.SENDER_PASSWORD,
+      user: "info@outline-online.com",
+      pass: "OOutline_Onlinee_HP",
       // user: "oswaldnomadness@gmail.com",
       // pass: "$$$vviirrggiill***",
       // pass: "dbom dpcq mtrt hduk",
     },
-    secure: true,
   });
 
   var mailOptions = {

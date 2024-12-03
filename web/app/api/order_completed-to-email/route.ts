@@ -232,9 +232,9 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
     auth: {
       // user: process.env.SENDER_EMAIL,
       // pass: process.env.SENDER_PASSWORD,
-      user: "oswaldnomadness@gmail.com",
-      // pass: "$$$vviirrggiill***",
-      pass: "dbom dpcq mtrt hduk",
+      // user: "oswaldnomadness@gmail.com",
+      // // pass: "$$$vviirrggiill***",
+      // pass: "dbom dpcq mtrt hduk",
     },
     secure: true,
   });
