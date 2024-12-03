@@ -98,6 +98,7 @@ const TrialsDownload = (props: Props) => {
         return "Download Trials";
     }
   };
+  console.log(state);
 
   useEffect(() => {
     // console.log(Object.keys(state), requiredLength);
@@ -119,7 +120,6 @@ const TrialsDownload = (props: Props) => {
     // console.log(typefacesId);
     // return;
     if (!trials[0]) return;
-    console.log(state);
     // return;
     const payload = {
       clientInfos: state,
