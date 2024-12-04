@@ -1,0 +1,12 @@
+.snipcart-overwrite #snipcart {
+  #snipcart-billing-form {
+    /*
+font-size: inherit !important;
+  font-weight: unset !important;
+  line-height: 1.2 !important;
+    */
+    .snipcart-form__select {
+      padding: 0;
+    }
+  }
+}
