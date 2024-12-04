@@ -9,4 +9,25 @@ font-size: inherit !important;
       padding: 0;
     }
   }
+  .snipcart-cart-summary {
+    .snipcart-cart-summary__actions button {
+      display: none;
+    }
+    .snipcart-item-list {
+      border: none;
+    }
+    .snipcart-summary-item-list-custom {
+      &:not(:last-child) {
+        border-bottom: var(--border);
+        padding-bottom: 0.5em;
+        margin-bottom: 0.5em;
+      }
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .snipcart-summary-item-name {
+        min-width: 100%;
+      }
+    }
+  }
 }
