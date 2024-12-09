@@ -12,7 +12,7 @@ export default defineField({
       title: 'base64',
       name: 'base64',
       type: 'string',
-      description: 'for the front end',
+      description: 'for the front end (to prevent people from stealing it)',
       components: {
         input: TypefaceBase64,
       },

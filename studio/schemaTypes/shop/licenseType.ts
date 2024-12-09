@@ -20,7 +20,21 @@ export default defineField({
       description: 'Displayed on front end',
     }),
     defineField({
-      name: 'category',
+      name: 'categoryZip',
+      title: 'Category Zip',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Desktop', value: 'Desktop'},
+          {title: 'Web', value: 'Web'},
+        ], // <-- predefined values
+        //layout: 'radio' // <-- defaults to 'dropdown'
+      },
+      description: 'Used for zips',
+    }),
+    defineField({
+      name: 'CategoryDiscount',
+      title: 'Category Discount',
       type: 'string',
       description: 'Used for discounts',
     }),

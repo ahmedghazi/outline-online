@@ -97,6 +97,7 @@ export async function getProductsCart(): Promise<Product[]> {
         _key,
         _type,
         title,
+        categoryLicensePrice,
         price,
         priceDiscount,
         description,

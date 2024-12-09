@@ -76,6 +76,19 @@ export default defineField({
       name: 'zip',
       type: 'file',
       description: 'Digital good client will receive',
+      hidden: true,
+    }),
+    defineField({
+      title: 'Zip File Desktop',
+      name: 'zipDesktop',
+      type: 'file',
+      description: 'Digital good client will receive',
+    }),
+    defineField({
+      title: 'Zip File Web',
+      name: 'zipWeb',
+      type: 'file',
+      description: 'Digital good client will receive',
     }),
     defineField({
       title: 'Zip File Trials',

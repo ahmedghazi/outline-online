@@ -37,11 +37,25 @@ export default defineField({
     }),
     defineField({
       name: 'categories',
+      title: 'Categories discount',
       description: 'Used for discounts',
       type: 'array',
       of: [{type: 'string'}],
       options: {
         layout: 'tags',
+      },
+    }),
+    defineField({
+      name: 'categoryLicensePrice',
+      description: 'Used to link the bundle price with the correct license price',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Full Family', value: 'Full Family'},
+          {title: 'Essentials', value: 'Essentials'},
+          {title: 'Regular + Italic', value: 'Regular + Italic'},
+        ], // <-- predefined values
+        //layout: 'radio' // <-- defaults to 'dropdown'
       },
     }),
     defineField({
@@ -84,6 +98,19 @@ export default defineField({
     defineField({
       title: 'Zip File',
       name: 'zip',
+      type: 'file',
+      description: 'Digital good client will receive',
+      hidden: true,
+    }),
+    defineField({
+      title: 'Zip File Desktop',
+      name: 'zipDesktop',
+      type: 'file',
+      description: 'Digital good client will receive',
+    }),
+    defineField({
+      title: 'Zip File Web',
+      name: 'zipWeb',
       type: 'file',
       description: 'Digital good client will receive',
     }),

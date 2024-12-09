@@ -55,6 +55,7 @@ export default defineField({
       title: 'File',
       name: 'typefaceFile',
       type: 'typefaceFile',
+      description: 'File displayed on typeface page (comp tool, glyphs), typefaces in home page',
       group: 'editorial',
     }),
     defineField({

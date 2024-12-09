@@ -13,10 +13,10 @@ type MetadataProps = {
   type: string;
   _key: string;
   productId: string;
-  // typefaces: Typeface[];
 };
 type Props = {
   id: string;
+  categoryLicensePrice?: string;
   price: number;
   priceCrossed?: number | undefined;
   priceDiscount?: number;
@@ -26,28 +26,11 @@ type Props = {
   categories?: string[];
   metadata: MetadataProps;
   defaultActive: boolean;
-  // url: string;
-  // description: string;
-  // dataattributes: Array<string> | null;
 };
-
-// interface ProductData {
-//   id: string;
-//   price: number;
-//   alternatePrices: any;
-//   url: string;
-//   description: string;
-//   name: string;
-//   quantity: number;
-//   stackable: string;
-//   shippable: boolean;
-//   customFields: any[];
-//   metadata: string;
-//   categories: string;
-// }
 
 const AddToCart = (props: Props) => {
   const {
+    categoryLicensePrice,
     price,
     priceCrossed,
     priceDiscount,
@@ -76,12 +59,14 @@ const AddToCart = (props: Props) => {
   // console.log(price);
   const isBundle = metadata.type === "bundle";
 
-  const _getLicensePriceByLabel = (license: LicenseType) => {
-    // console.log(title);
-    switch (title) {
+  const _getLicensePriceByCategoryLicensePrice = (license: LicenseType) => {
+    console.log("———", categoryLicensePrice);
+    // console.log(license);
+    switch (categoryLicensePrice) {
       case "Full Family":
         return license.priceFamily;
-      case "Essential":
+      case "Essentials":
+        console.log(license.priceEssentials);
         return license.priceEssentials;
       case "Regular + Italic":
         return license.priceRegIt;
@@ -95,10 +80,11 @@ const AddToCart = (props: Props) => {
     licenseTypeProfil.forEach((element) => {
       // console.log(price, finalPrice, element.price);
       const elementPrice = isBundle
-        ? _getLicensePriceByLabel(element)
+        ? _getLicensePriceByCategoryLicensePrice(element)
         : element.price;
       // console.log({ elementPrice });
       if (elementPrice) finalPrice += elementPrice;
+      // if (elementPrice) finalPrice = elementPrice;
     });
   }
   // console.log({ finalPrice });
@@ -142,8 +128,8 @@ const AddToCart = (props: Props) => {
 
     licenseSizeProfil.licenseType.forEach((item, i) => {
       index = i + 1;
-      const price = _getLicensePriceByLabel(item);
-      // console.log("_getLicensePriceByLabel", price);
+      const price = _getLicensePriceByCategoryLicensePrice(item);
+      // console.log("_getLicensePriceByCategoryLicensePrice", price);
       const name = item.label ? item.label.replace(" ", "-") : "no-label";
 
       /**

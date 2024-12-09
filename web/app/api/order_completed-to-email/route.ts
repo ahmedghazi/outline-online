@@ -114,7 +114,12 @@ const _collectProductsData = async (_ids: string[]) => {
     singles[]{
       _key,
       title,
-      zip{
+      zipDesktop{
+        asset->{
+          url
+        }
+      },
+      zipWeb{
         asset->{
           url
         }
@@ -123,7 +128,12 @@ const _collectProductsData = async (_ids: string[]) => {
     bundles[]{
       _key,
       title,
-      zip{
+      zipDesktop{
+        asset->{
+          url
+        }
+      },
+      zipWeb{
         asset->{
           url
         }
@@ -175,6 +185,8 @@ const _getBundleOrSingle = (
 
   return bundleOrSingle?.filter((el) => el._key === _key);
 };
+
+const _getZipByCategoryZip = (categoryZip: string) => {};
 
 // const _collectTypefacesId = (items: any) => {
 //   let _ids: String[] = [];

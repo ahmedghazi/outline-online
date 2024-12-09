@@ -602,7 +602,7 @@ export interface Typeface extends SanityDocument {
   /**
    * File — `typefaceFile`
    *
-   *
+   * File displayed on typeface page (comp tool, glyphs), typefaces in home page
    */
   typefaceFile?: TypefaceFile;
 
@@ -694,11 +694,18 @@ export type LicenseType = {
   label?: string;
 
   /**
-   * category — `string`
+   * Category Zip — `string`
+   *
+   * Used for zips
+   */
+  categoryZip?: "Desktop" | "Web";
+
+  /**
+   * Category Discount — `string`
    *
    * Used for discounts
    */
-  category?: string;
+  CategoryDiscount?: string;
 
   /**
    * Infos — `string`
@@ -773,7 +780,7 @@ export type TypefaceFile = {
   /**
    * base64 — `string`
    *
-   * for the front end
+   * for the front end (to prevent people from stealing it)
    */
   base64?: string;
 };
@@ -802,11 +809,18 @@ export type ProductBundle = {
   descriptionAlt?: string;
 
   /**
-   * categories — `array`
+   * Categories discount — `array`
    *
    * Used for discounts
    */
   categories?: Array<SanityKeyed<string>>;
+
+  /**
+   * categoryLicensePrice — `string`
+   *
+   * Used to link the bundle price with the correct license price
+   */
+  categoryLicensePrice?: "Full Family" | "Essentials" | "Regular + Italic";
 
   /**
    * Price — `number`
@@ -842,6 +856,20 @@ export type ProductBundle = {
    * Digital good client will receive
    */
   zip?: { _type: "file"; asset: SanityReference<any> };
+
+  /**
+   * Zip File Desktop — `file`
+   *
+   * Digital good client will receive
+   */
+  zipDesktop?: { _type: "file"; asset: SanityReference<any> };
+
+  /**
+   * Zip File Web — `file`
+   *
+   * Digital good client will receive
+   */
+  zipWeb?: { _type: "file"; asset: SanityReference<any> };
 
   /**
    * Zip File Trials — `file`
@@ -915,6 +943,20 @@ export type ProductSingle = {
    * Digital good client will receive
    */
   zip?: { _type: "file"; asset: SanityReference<any> };
+
+  /**
+   * Zip File Desktop — `file`
+   *
+   * Digital good client will receive
+   */
+  zipDesktop?: { _type: "file"; asset: SanityReference<any> };
+
+  /**
+   * Zip File Web — `file`
+   *
+   * Digital good client will receive
+   */
+  zipWeb?: { _type: "file"; asset: SanityReference<any> };
 
   /**
    * Zip File Trials — `file`

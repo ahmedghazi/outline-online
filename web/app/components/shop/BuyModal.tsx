@@ -109,6 +109,9 @@ const CartProductItem = ({
           fullTitle={title || ""}
           blurb={""}
           categories={input.categories || []}
+          categoryLicensePrice={
+            input._type === "productBundle" ? input.categoryLicensePrice : ""
+          }
           price={input.price || 0}
           // priceCrossed={isPriceCrossed ? priceCrossed : undefined}
           priceDiscount={input.priceDiscount}
@@ -292,23 +295,12 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
       console.log(error);
     }
   };
-  console.log(licenses);
+  // console.log(licenses);
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
       <div className='outter'>
         <div className='inner'>
           <div className='header'>
-            {/* <p className='message '>
-              If you are a non profit ....{" "}
-              <a
-                href='http://'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='button-ui'>
-                contazct us
-              </a>
-            </p> */}
-
             {licenses && (
               <div className='_row grid md:grid-cols-8 '>
                 <div className='label'>Company Size</div>
