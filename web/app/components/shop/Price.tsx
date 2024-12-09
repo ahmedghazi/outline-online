@@ -13,17 +13,19 @@ const Price = ({ price, priceDiscount }: Props) => {
     discount = (priceDiscount * price) / 100;
   }
   return (
-    <div className='price  grid grid-cols-2 gap-sm'>
+    <div className='price flex gap-sm'>
       {!displayPriceCrossed && (
-        <span className='min-w-[80px]'>{price} EUR</span>
+        <span className='w-[80px] text-right'>{price} EUR</span>
       )}
       {}
       {/* <div>saving in CHH</div>
       <div>original price - saving</div> */}
       {displayPriceCrossed && (
         <>
-          <span className='min-w-[80px]'>{price - discount} EUR</span>
-          <span className='text-muted line-through'>{price} EUR</span>
+          <span className='w-[80px] text-right'>{price - discount} EUR</span>
+          <span className='text-muted line-through max-w-[70px] text-right'>
+            {price} EUR
+          </span>
         </>
         // <span className='text-muted line-through'>{priceCrossed} EUR</span>
       )}
