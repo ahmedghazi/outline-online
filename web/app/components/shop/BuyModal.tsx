@@ -292,7 +292,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
       console.log(error);
     }
   };
-
+  console.log(licenses);
   return (
     <div className={clsx("buy-modal", active ? "block" : "hidden")}>
       <div className='outter'>
