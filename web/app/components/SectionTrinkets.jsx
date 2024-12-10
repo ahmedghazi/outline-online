@@ -122,7 +122,7 @@ const Scene = (props) => {
                   file={item.file}
                   initialPosition={item.position}
                   metadata={item.metadata}
-                  scale={isMobile ? [0.7, 0.7, 0.7] : [0.4, 0.4, 0.4]}
+                  scale={isMobile ? [0.9, 0.9, 0.9] : [0.4, 0.4, 0.4]}
                 />
               )}
               {item._type === "image" && (
