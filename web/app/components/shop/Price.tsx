@@ -15,15 +15,15 @@ const Price = ({ price, priceDiscount }: Props) => {
   return (
     <div className='price flex gap-sm'>
       {!displayPriceCrossed && (
-        <span className='w-[80px] text-right'>{price} EUR</span>
+        <span className='w-[90px] text-right'>{price} EUR</span>
       )}
       {}
       {/* <div>saving in CHH</div>
       <div>original price - saving</div> */}
       {displayPriceCrossed && (
         <>
-          <span className='w-[80px] text-right'>{price - discount} EUR</span>
-          <span className='text-muted line-through max-w-[70px] text-right'>
+          <span className='w-[90px] text-right'>{price - discount} EUR</span>
+          <span className='text-muted line-through max-w-[80px] text-right'>
             {price} EUR
           </span>
         </>
