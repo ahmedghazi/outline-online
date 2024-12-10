@@ -65,10 +65,10 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       );
       const _attachments = await _generateAttachments(_productOrderDataZips);
       console.log("got _attachments, ready to send email");
-      // return new NextResponse(JSON.stringify(_attachments), {
-      //   status: 200,
-      //   headers: { "Content-Type": "application/json" },
-      // });
+      return new NextResponse(JSON.stringify(_productOrderDataZips), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
 
       const params: SendProps = {
         destination: user.email,
@@ -169,6 +169,8 @@ const _collectProductsOrderZips = async (items: ProductOrderData[]) => {
     const title = `${data.title} ${bundleOrsingle?.title}`;
     const sanitizedData = {
       zipTitle: title,
+      licenseWeb: item.licenseWeb,
+      licenseDesktop: item.licenseDesktop,
       zipWeb: item.licenseWeb ? bundleOrsingle?.zipWeb : null,
       zipDesktop: item.licenseDesktop ? bundleOrsingle?.zipDesktop : null,
     };
