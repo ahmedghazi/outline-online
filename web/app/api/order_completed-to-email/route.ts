@@ -235,12 +235,12 @@ const _generateAttachments = (items: any) => {
   return items.map((item: any) => {
     if (item.zipWeb) {
       return {
-        filename: _sanitizeTitle(`${item.zipTitle}.zip`),
+        filename: _sanitizeTitle(`${item.zipTitle}--web.zip`),
         path: item.zipWeb.asset.url,
       };
     } else if (item.zipDesktop) {
       return {
-        filename: _sanitizeTitle(`${item.zipTitle}.zip`),
+        filename: _sanitizeTitle(`${item.zipTitle}--desktop.zip`),
         path: item.zipDesktop.asset.url,
       };
     } else {
