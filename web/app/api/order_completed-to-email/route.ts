@@ -139,8 +139,14 @@ const _getLicenseWebOrDesktop = (input: any[], searchFor: string): boolean => {
   let returnValue: boolean = false;
   const values =
     searchFor === "web"
-      ? ["web", "app/game/epub"]
-      : ["desktop/print", "logo", "social-media/ad", "video/streaming"];
+      ? ["web"]
+      : [
+          "desktop/print",
+          "logo",
+          "social-media/ad",
+          "video/streaming",
+          "app/game/epub",
+        ];
   const filteredLicensesByType = input.filter(
     (el) => values.indexOf(el.name.toLowerCase()) > -1
   );
