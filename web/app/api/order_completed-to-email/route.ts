@@ -60,13 +60,15 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       */
 
       const _productOrderData = _collectProductsOrderData(items);
-      const _zips = await _getZips(_productOrderData);
-      const _attachments = await _generateAttachments(_zips);
-      // console.log(_attachments);
-      // return new NextResponse(JSON.stringify(_attachments), {
-      //   status: 200,
-      //   headers: { "Content-Type": "application/json" },
-      // });
+      const _productOrderDataZips = await _collectProductsOrderZips(
+        _productOrderData
+      );
+      const _attachments = await _generateAttachments(_productOrderDataZips);
+      console.log(_attachments);
+      return new NextResponse(JSON.stringify(_attachments), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
 
       const params: SendProps = {
         destination: user.email,
@@ -153,7 +155,7 @@ const _getLicenseWebOrDesktop = (input: any[], searchFor: string): boolean => {
   return returnValue;
 };
 
-const _getZips = async (items: ProductOrderData[]) => {
+const _collectProductsOrderZips = async (items: ProductOrderData[]) => {
   const result = [];
   for await (const item of items) {
     const data = await _getProductData(item.productId);
@@ -232,24 +234,46 @@ const _getBundleOrSingle = (
 };
 
 const _generateAttachments = (items: any) => {
-  return items.map((item: any) => {
+  const result: any[] = [];
+  items.forEach((item: any) => {
     if (item.zipWeb) {
-      return {
+      result.push({
         filename: _sanitizeTitle(`${item.zipTitle}--web.zip`),
         path: item.zipWeb.asset.url,
-      };
-    } else if (item.zipDesktop) {
-      return {
+      });
+    }
+    if (item.zipDesktop) {
+      result.push({
         filename: _sanitizeTitle(`${item.zipTitle}--desktop.zip`),
         path: item.zipDesktop.asset.url,
-      };
-    } else {
-      return {
-        filename: "no zip found",
-        path: "",
-      };
+      });
     }
+    // else {
+    //   result.push({
+    //     filename: "no zip found",
+    //     path: "",
+    //   });
+    // }
   });
+  return result;
+  // return items.map((item: any) => {
+  //   if (item.zipWeb) {
+  //     return {
+  //       filename: _sanitizeTitle(`${item.zipTitle}--web.zip`),
+  //       path: item.zipWeb.asset.url,
+  //     };
+  //   } else if (item.zipDesktop) {
+  //     return {
+  //       filename: _sanitizeTitle(`${item.zipTitle}--desktop.zip`),
+  //       path: item.zipDesktop.asset.url,
+  //     };
+  //   } else {
+  //     return {
+  //       filename: "no zip found",
+  //       path: "",
+  //     };
+  //   }
+  // });
 };
 
 const _sanitizeTitle = (str: string) =>
