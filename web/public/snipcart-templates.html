@@ -28,8 +28,10 @@
     <cart v-if="hasItems">
       <section class="snipcart-cart__content">
         <div class="px-sm ">
-          <div class="grid md:grid-cols-16 b-t b-b">
-            <div class="title py-05e">ITEMS</div>
+          <div class="grid md:grid-cols-16 b-t b-b items-baseline ">
+            <div class="title py-05e">
+              <div>ITEMS</div>
+            </div>
 
             <item-list item-template="item-line" class="snipcart-item-list--no-shadow md:col-span-15"
               :show-description="!isSideCart">
