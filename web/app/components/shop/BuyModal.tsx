@@ -79,7 +79,7 @@ const CartProductItem = ({
   return (
     <div
       className={clsx(
-        "item _row grid md:grid-cols-6 md:gap-md cursor-pointer",
+        "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer",
         isPriceCrossed && "is-price-crossed"
       )}
       onClick={() => setActive(!active)}>

@@ -22,6 +22,7 @@ const Price = ({ price, priceDiscount }: Props) => {
       <div>original price - saving</div> */}
       {displayPriceCrossed && (
         <>
+          {/* <span className="text-green">save</span> */}
           <span className='w-[90px] text-right'>{price - discount} EUR</span>
           <span className='text-muted line-through max-w-[80px] text-right'>
             {price} EUR
