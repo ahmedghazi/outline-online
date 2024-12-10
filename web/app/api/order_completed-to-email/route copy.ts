@@ -60,13 +60,40 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       */
 
       const _productOrderData = _collectProductsOrderData(items);
-      const _zips = await _getZips(_productOrderData);
-      const _attachments = await _generateAttachments(_zips);
-      // console.log(_attachments);
-      return new NextResponse(JSON.stringify(_attachments), {
+      const _finalZips = await _getFinalZips(_productOrderData);
+      // return new NextResponse(JSON.stringify(_productOrderData), {
+      //   status: 500,
+      //   headers: { "Content-Type": "application/json" },
+      // });
+      /**
+       * on a les items,
+       * dans items, parser metadata
+       * dans items, récup license pour savoir quels zip envoyer (Web/Desktop)
+       * on a besoin des zip
+       */
+      // const _typefacesId = _collectTypefacesId(items);
+      // const _zipFiles = await _collectTypefacesZip(_typefacesId);
+      /**
+       * collect product ids from items.metada
+       */
+      const _productIds = await _collectProductsId(items);
+
+      /**
+       * from these ids get content (bundles, singles)
+       */
+      const _productsData = await _collectProductsData(_productIds);
+
+      /**
+       * filter content to get only bundles and zip that are in items.metadata
+       */
+      const _zipFiles = await _filterBundlesOrSingles(items, _productsData);
+
+      return new NextResponse(JSON.stringify(_productOrderData), {
         status: 200,
         headers: { "Content-Type": "application/json" },
       });
+      const _attachments = await _generateAttachments(_zipFiles);
+      console.log(_attachments);
 
       const params: SendProps = {
         destination: user.email,
@@ -114,8 +141,13 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 }
 
 const _collectProductsOrderData = (items: any): ProductOrderData[] => {
-  // let _data: ProductOrderData[] = [];
+  let _data: ProductOrderData[] = [];
+  // items.forEach((el: any) => {
+  //   const _ProductOrderData: ProductOrderData = {
 
+  //   }
+  //   _data.push()
+  // }
   return items.map((item: any) => {
     const metadata = JSON.parse(item.metadata);
     const { productId, type, _key } = metadata;
@@ -153,30 +185,25 @@ const _getLicenseWebOrDesktop = (input: any[], searchFor: string): boolean => {
   return returnValue;
 };
 
-const _getZips = async (items: ProductOrderData[]) => {
-  const result = [];
+const _getFinalZips = async (items: ProductOrderData[]) => {
   for await (const item of items) {
-    const data = await _getProductData(item.productId);
-    const bundleOrsingle = _getBundleOrSingle(
-      item.type,
-      item.bundleOrSingleKey,
-      data
-    );
-    // console.log(bundleOrsingle);
-    // result.push(bundleOrsingle);
-    const title = `${data.title} ${bundleOrsingle?.title}`;
-    const sanitizedData = {
-      zipTitle: title,
-      zipWeb: item.licenseWeb ? bundleOrsingle?.zipWeb : null,
-      zipDesktop: item.licenseDesktop ? bundleOrsingle?.zipDesktop : null,
-    };
-    result.push(sanitizedData);
+    const productData = await _getProductData(item);
   }
-  return result;
 };
 
-const _getProductData = async (productId: string) => {
-  const query = `*[_type == "product" && _id == $productId][0]{
+const _collectProductsId = (items: any) => {
+  let _ids: string[] = [];
+  items.forEach((element: any) => {
+    const metadata = JSON.parse(element.metadata);
+    const { productId } = metadata;
+    _ids.push(productId);
+  });
+  return _ids;
+};
+
+const _collectProductsData = async (_ids: string[]) => {
+  const query = `*[_type == "product" && _id in $_ids
+    ]{
     title,
     singles[]{
       _key,
@@ -207,41 +234,60 @@ const _getProductData = async (productId: string) => {
       }
     }
   }`;
-  const res = await client.fetch(query, { productId: productId });
+  const res = await client.fetch(query, { _ids: _ids });
   return res;
 };
 
 /**
+ * 2 arrays, one with items from snipcart, one with products from sanity
+ * items (metadata): Snipcart
+ * _productsData (bundleOrSingle): Sanity
  *
- * @param type Bundle or Single
- * @param bundleOrSingleKey Bundle or Single key
- * @param productData Product
- * @returns
  */
+
+const _filterBundlesOrSingles = async (
+  items: any,
+  _productsData: Product[]
+) => {
+  let zips: any[] = [];
+  items.forEach((element: any) => {
+    const metadata = JSON.parse(element.metadata);
+    const { _key, type } = metadata;
+
+    _productsData.forEach((el) => {
+      const bundleOrSingleFiltered: any = _getBundleOrSingle(type, _key, el);
+      // console.log(bundleOrSingleFiltered);
+      if (bundleOrSingleFiltered) {
+        bundleOrSingleFiltered[0].typefaceTitle = el.title;
+        console.log(el.title);
+        zips.push(bundleOrSingleFiltered[0]);
+      }
+    });
+  });
+  // console.log(zips);
+
+  return zips;
+};
+
 const _getBundleOrSingle = (
   type: string,
-  bundleOrSingleKey: string,
-  productData: Product
+  _key: string,
+  _productData: Product
 ) => {
   const bundleOrSingle =
-    type === "bundle" ? productData.bundles : productData.singles;
-  const filtered = bundleOrSingle?.filter(
-    (el) => el._key === bundleOrSingleKey
-  );
-  return filtered ? filtered[0] : null;
+    type === "bundle" ? _productData.bundles : _productData.singles;
+
+  return bundleOrSingle?.filter((el) => el._key === _key);
 };
+
+const _getZipByCategoryZip = (categoryZip: string) => {};
 
 const _generateAttachments = (items: any) => {
   return items.map((item: any) => {
-    if (item.zipWeb) {
+    if (item.zip) {
       return {
-        filename: _sanitizeTitle(`${item.zipTitle}.zip`),
-        path: item.zipWeb.asset.url,
-      };
-    } else if (item.zipDesktop) {
-      return {
-        filename: _sanitizeTitle(`${item.zipTitle}.zip`),
-        path: item.zipDesktop.asset.url,
+        filename: `${item.typefaceTitle}-${item.title}.zip`,
+        path: item.zip.asset.url,
       };
     } else {
       return {
@@ -252,12 +298,6 @@ const _generateAttachments = (items: any) => {
   });
 };
 
-const _sanitizeTitle = (str: string) =>
-  str.replace(/ /g, "-").toLocaleLowerCase();
-
-/************************
- * ***********************
- */
 const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
   console.log("_sending to :", destination);
