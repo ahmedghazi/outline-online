@@ -65,10 +65,10 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       );
       const _attachments = await _generateAttachments(_productOrderDataZips);
       console.log("got _attachments, ready to send email");
-      return new NextResponse(JSON.stringify(_productOrderDataZips), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
+      // return new NextResponse(JSON.stringify(_productOrderDataZips), {
+      //   status: 200,
+      //   headers: { "Content-Type": "application/json" },
+      // });
 
       const params: SendProps = {
         destination: user.email,
