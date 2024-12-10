@@ -89,9 +89,7 @@ const CartProductItem = ({
           <div className='desc flex-2 flex justify-between hidden-sm'>
             <span className='text-muted '>{input.description}</span>
             {input._type === "productBundle" && input.priceDiscount && (
-              <span className='text-green blink'>
-                Save {input.priceDiscount}%
-              </span>
+              <span className='text-green '>Save {input.priceDiscount}%</span>
             )}
           </div>
         </div>
