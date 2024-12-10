@@ -101,6 +101,11 @@
       box-shadow: none;
       // border-top: var(--border);
       padding: 0.5em 0;
+      @media all and (max-width: 1024px) {
+        &:not(:last-child) {
+          border-bottom: var(--border);
+        }
+      }
       .snipcart-item-line__container {
         margin: 0;
         padding: 0;
@@ -112,6 +117,7 @@
 
         display: grid;
         grid-template-columns: repeat(15, minmax(0, 1fr));
+
         .snipcart-item-line__header,
         .snipcart-item-line__price {
           // width: 50%;
@@ -124,6 +130,18 @@
           display: flex;
           justify-content: start;
           gap: 0.5em;
+          @media all and (max-width: 1024px) {
+            flex-direction: column;
+            .product-title {
+              width: 100%;
+              padding-right: 5px;
+              h2 {
+                hyphens: auto;
+                // word-wrap: break-word;
+                // overflow-wrap: break-word;
+              }
+            }
+          }
           button {
             transform: translateY(-0.2em);
           }
@@ -160,6 +178,7 @@
               margin: 0;
               padding-bottom: 0.5em;
               border-bottom: var(--border);
+
               label {
                 padding: 0;
                 margin: 0;
@@ -173,6 +192,14 @@
             }
           }
         }
+
+        @media all and (max-width: 1024px) {
+          // .snipcart-item-line__header,
+          // .snipcart-item-line__content {
+          //   grid-column: span 8 / span 8 !important;
+          // }
+        }
+
         .snipcart-item-line__info,
         .snipcart-item-line__variants {
           padding: 0;
@@ -184,7 +211,9 @@
           // grid-template-columns: repeat(6, minmax(0, 1fr));
           display: flex;
           flex-wrap: wrap;
-
+          @media all and (max-width: 1024px) {
+            flex-direction: column;
+          }
           .snipcart-item-custom-fields__field:first-child {
             // grid-column: span 6 / span 6;
             min-width: 100%;
@@ -673,9 +702,11 @@
       .grid-cols-8 {
         .title {
           grid-column: span 2 / span 2;
+          display: none;
         }
         .snipcart-summary-fees {
           grid-column: span 6 / span 6;
+          grid-column: span 8 / span 8;
         }
       }
     }
