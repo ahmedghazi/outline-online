@@ -351,7 +351,7 @@
       grid-column: span 15 / span 15;
       margin-bottom: 0;
       .snipcart-summary-fees__item {
-        padding: 0.6em 0 0.4em;
+        padding: 0.5em 0 0.4em;
         border-bottom: var(--border);
         border-color: var(--color-blue);
         margin: 0;
@@ -415,6 +415,7 @@
     svg {
       position: absolute;
       top: -0.9em;
+      // visibility: hidden;
       path {
         fill: black;
       }
