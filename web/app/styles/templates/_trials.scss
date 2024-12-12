@@ -32,6 +32,10 @@ body[data-template="is-trials"],
       }
     }
   }
-  @media all and (max-width: $md) {
+  .template--trials {
+    @media all and (max-width: $md) {
+      padding-top: calc(var(--header-height) + 0em);
+      // padding-top: 0;
+    }
   }
 }
