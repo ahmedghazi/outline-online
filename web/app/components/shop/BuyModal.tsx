@@ -97,8 +97,11 @@ const CartProductItem = ({
       {/* <Price price={item.price} /> */}
       <div className='actions md:col-span-2'>
         <div className='sm-only'>
-          {input._type === "productBundle" && input.descriptionAlt && (
+          {/* {input._type === "productBundle" && input.descriptionAlt && (
             <span className='text-green'>{input.descriptionAlt}</span>
+          )} */}
+          {input._type === "productBundle" && input.priceDiscount && (
+            <span className='text-green '>Save {input.priceDiscount}%</span>
           )}
         </div>
         <AddToCart
