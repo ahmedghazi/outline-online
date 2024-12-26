@@ -23,9 +23,14 @@ footer#site-footer {
     display: flex;
     justify-content: space-between;
   }
+}
 
-  @media all and (max-width: $md) {
-    // padding: var(--space-sm);
+@media all and (max-width: $md) {
+  // padding: var(--space-sm);
+  [data-template="is-home"] footer {
+    padding-top: 0;
+  }
+  footer {
     font-size: var(--text-xs);
     max-height: 34px;
     & > .inner {
