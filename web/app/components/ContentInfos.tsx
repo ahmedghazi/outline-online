@@ -12,8 +12,8 @@ type Props = {
 const ContentInfos = ({ input }: Props) => {
   return (
     <div className='content content--infos pt-header-height px-sm md:px-lg'>
-      <div className='grid md:grid-cols-8 gap-md'>
-        <div className='md:col-span-5 md:col-start-4 mb-lg'>
+      <div className='grid md:grid-cols-8 md:gap-md'>
+        <div className='md:col-span-5 md:col-start-4 mb-1e md:mb-lg'>
           {input.about && (
             <div className='grid md:grid-cols-5 gap-md'>
               <h2 className='md:col-span-2'>ABOUT</h2>
@@ -28,7 +28,7 @@ const ContentInfos = ({ input }: Props) => {
             </div>
           )}
         </div>
-        <div className='md:col-span-5 md:col-start-4 mb-xl'>
+        <div className='md:col-span-5 md:col-start-4 mb-1e md:mb-xl'>
           {input.textsDropDown &&
             input.textsDropDown.map((item, i) => (
               <div className='item' key={i}>
@@ -51,7 +51,9 @@ const ContentInfos = ({ input }: Props) => {
         {input.colophon && (
           <div className='md:col-span-4'>
             {input.colophon.map((item, i) => (
-              <div className='item grid md:grid-cols-4 gap-md mb-md' key={i}>
+              <div
+                className='item grid md:grid-cols-4 gap-md mb-1e md:mb-md'
+                key={i}>
                 <div className='key'>{item.key}</div>
                 <div className='text md:col-span-2'>
                   {item.val && (
