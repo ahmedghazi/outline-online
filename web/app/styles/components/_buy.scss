@@ -108,6 +108,7 @@
   }
 
   @media all and (max-width: $md) {
+    // background-color: red;
     padding-top: calc(var(--header-height) + 2em);
     padding: var(--header-height) var(--space-sm) var(--footer-height);
     .outter {
@@ -160,6 +161,9 @@
           justify-content: space-between;
           .add-to-cart {
             padding: 0;
+          }
+          .checkbox-ui {
+            margin-left: var(--space-xs);
           }
         }
       }
