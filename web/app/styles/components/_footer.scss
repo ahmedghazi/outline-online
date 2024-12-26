@@ -27,6 +27,7 @@ footer#site-footer {
   @media all and (max-width: $md) {
     // padding: var(--space-sm);
     font-size: var(--text-xs);
+    max-height: 34px;
     & > .inner {
       padding: var(--space-sm);
     }
