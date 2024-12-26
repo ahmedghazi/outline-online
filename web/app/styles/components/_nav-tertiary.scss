@@ -8,6 +8,7 @@
   @media all and (max-width: $md) {
     margin-top: var(--space-lg);
     margin-bottom: var(--footer-height);
+    margin-bottom: 0;
     position: initial;
     padding: 0;
   }
