@@ -26,7 +26,7 @@ const BuyModalNoticesComponent = ({ input }: Props) => {
   return (
     <div className='buy-modal-notices'>
       {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
-      <div className='nav flex'>
+      <div className='nav flex flex-wrap'>
         <span className='title'>{title}</span>{" "}
         {items?.map((item, i) => (
           <Fragment key={i}>

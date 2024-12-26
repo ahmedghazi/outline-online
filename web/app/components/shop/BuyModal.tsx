@@ -338,11 +338,11 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                 <CartProduct input={item} key={i} />
               ))}
             </div>
-          </div>
-          <div className='footer'>
             {buyModalNotices && (
               <BuyModalNoticesComponent input={buyModalNotices} />
             )}
+          </div>
+          <div className='footer'>
             <button
               onClick={_addToCart}
               className={clsx(
