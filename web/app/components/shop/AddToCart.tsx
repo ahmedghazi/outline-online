@@ -60,13 +60,13 @@ const AddToCart = (props: Props) => {
   const isBundle = metadata.type === "bundle";
 
   const _getLicensePriceByCategoryLicensePrice = (license: LicenseType) => {
-    console.log("———", categoryLicensePrice);
+    // console.log("———", categoryLicensePrice);
     // console.log(license);
     switch (categoryLicensePrice) {
       case "Full Family":
         return license.priceFamily;
       case "Essentials":
-        console.log(license.priceEssentials);
+        // console.log(license.priceEssentials);
         return license.priceEssentials;
       case "Regular + Italic":
         return license.priceRegIt;

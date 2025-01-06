@@ -1,32 +1,13 @@
 "use client";
-import React, {
-  Fragment,
-  Suspense,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { Canvas, useThree } from "@react-three/fiber";
-import {
-  Bounds,
-  Center,
-  Stage,
-  OrbitControls,
-  OrthographicCamera,
-  PerspectiveCamera,
-  CameraControls,
-} from "@react-three/drei";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Stage, CameraControls } from "@react-three/drei";
 import { Box3 } from "three";
-// import { PerspectiveCamera } from "three";
 import Trinket from "./Trinket";
 import TrinketImage from "./TrinketImage";
-// import TrinketTest from "./trinkets/TrinketTest";
-
 import { subscribe, unsubscribe } from "pubsub-js";
 import { _shuffle, _randomNum } from "../utils/utils";
 import useDeviceDetect from "../hooks/useDeviceDetect";
-// import { metadata } from "../layout";
 
 //https://gltf.pmnd.rs/
 
@@ -154,10 +135,23 @@ const Scene = (props) => {
 };
 
 const SectionTrinkets = (props) => {
-  // const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(false);
   const [infos, setInfos] = useState(null);
+  const { isMobile } = useDeviceDetect();
+
+  const _getChain = () => {
+    return props.input.filter((el) => {
+      // console.log(el);
+      return el.name === "KEYCHAIN";
+    });
+  };
+  // const chain = _getChain();
+  let items = isMobile ? _getChain() : props.input;
+
+  console.log(items);
+
   useEffect(() => {
-    // setReady(true);
+    setReady(true);
 
     const token = subscribe("TRINKET_INFO", (e, d) => {
       setInfos(d);
@@ -170,16 +164,17 @@ const SectionTrinkets = (props) => {
 
   return (
     <section className='section--trinkets h-screen'>
-      <Canvas orthographic camera={{ position: [0, 0, 5], fov: 60 }}>
-        <Stage
-          preset='rembrandt'
-          intensity={1}
-          environment='city'
-          shadows={false}>
-          <Scene input={props.input} />
-        </Stage>
-      </Canvas>
-
+      {ready && (
+        <Canvas orthographic camera={{ position: [0, 0, 5], fov: 60 }}>
+          <Stage
+            preset='rembrandt'
+            intensity={1}
+            environment='city'
+            shadows={false}>
+            <Scene input={items} />
+          </Stage>
+        </Canvas>
+      )}
       {infos !== "" && <TrinketInfo infos={infos} />}
     </section>
   );
