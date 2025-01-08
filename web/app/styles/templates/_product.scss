@@ -28,6 +28,8 @@ body[data-template="is-product"],
         bottom: calc(var(--footer-height) + 11px);
         transform: translateX(-50%);
         z-index: 251;
+        text-align: center;
+        padding-right: 0.6em;
       }
       .modal {
         display: none;
