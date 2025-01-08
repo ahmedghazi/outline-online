@@ -152,10 +152,15 @@
         .snipcart-item-line__price {
           // order: 2;
           // grid-column: span 1 / span 1;
-          position: absolute;
-          right: 0;
-          // top: -0.25em;
-          top: 0;
+          @media all and (min-width: 1024px) {
+            position: absolute;
+            right: 0;
+            // top: -0.25em;
+            top: 0;
+          }
+          @media all and (max-width: 1024px) {
+            grid-column: span 8 / span 8;
+          }
           .flex {
             justify-content: flex-end;
           }
@@ -169,6 +174,10 @@
           // padding-top: 0.5em;
           // order: 3;
           grid-column: span 12 / span 12;
+          @media all and (max-width: 1024px) {
+            padding-bottom: 0.5em;
+            border-bottom: var(--border);
+          }
           .snipcart-item-line__body {
             .snipcart-item-custom-fields--readonly {
               display: flex;

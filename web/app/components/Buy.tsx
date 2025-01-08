@@ -16,6 +16,15 @@ const Buy = ({ productsCart }: Props) => {
   const pathname = usePathname();
   const { tab, setTab } = usePageContext();
 
+  useEffect(() => {
+    window.addEventListener("hashchange", (event) => {
+      console.log(event, location.hash);
+      if (location.hash === "#cart") {
+        setActive(false);
+      }
+    });
+  }, []);
+
   const _onClick = () => {
     const nextActive = !active;
     setTab({
