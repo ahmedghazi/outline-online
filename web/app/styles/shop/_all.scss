@@ -76,12 +76,23 @@
   .snipcart-cart__footer {
     flex-direction: column;
     margin: 0;
+    @media all and (max-width: 1024px) {
+      margin-bottom: var(--footer-height);
+    }
   }
   .snipcart-cart__footer-col:not(:empty) {
     width: 100%;
     padding: 0.5em 0;
     padding: 0em 0;
     margin-top: toRem(70);
+    @media all and (max-width: 1024px) {
+      margin-top: 0em;
+      .grid.grid-cols-8 {
+        &::before {
+          display: none;
+        }
+      }
+    }
   }
   .snipcart-item-list {
     border-bottom: var(--border);
@@ -408,6 +419,9 @@
       margin-bottom: toRem(50);
       padding: 0.5em;
       align-items: baseline;
+      @media all and (max-width: 1024px) {
+        margin: 0;
+      }
       .snipcart-featured-payment-methods__title {
         position: relative;
         &,

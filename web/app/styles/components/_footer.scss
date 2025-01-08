@@ -30,7 +30,7 @@ footer#site-footer {
   [data-template="is-home"] footer {
     padding-top: 0;
   }
-  footer {
+  footer#site-footer {
     font-size: var(--text-xs);
     max-height: 34px;
     & > .inner {
