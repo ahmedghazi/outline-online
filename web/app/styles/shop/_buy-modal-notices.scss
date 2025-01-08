@@ -15,8 +15,13 @@
     }
   }
   dialog {
+    background-color: var(--color-gray-50);
+    @media (max-width: 1080px) {
+      min-width: calc(var(--vw) * 100 - var(--space-md)) !important;
+    }
     .header {
       padding: var(--space-sm);
+      background-color: var(--color-gray-50);
     }
     .footer {
       a {
