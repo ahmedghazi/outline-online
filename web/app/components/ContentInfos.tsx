@@ -69,8 +69,6 @@ const ContentInfos = ({ input }: Props) => {
         )}
       </div>
       {input.withNav && <NavTertiary />}
-
-      {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
     </div>
   );
 };
