@@ -57,9 +57,13 @@
     padding-top: var(--header-height);
     padding-top: calc(var(--header-height) + 2em);
     .item {
-      .title {
-        font-size: var(--sm--text-lg);
+      .typeface--item {
+        .title,
+        &.is-active .title {
+          font-size: var(--sm--text-lg);
+        }
       }
+
       .actions {
         display: none;
       }
