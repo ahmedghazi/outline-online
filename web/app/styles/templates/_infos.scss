@@ -4,7 +4,7 @@ body[data-template="is-page"] {
   .template--page {
     // padding-bottom: calc(var(--footer-height) * 2 + var(--space-md));
     @media all and (max-width: $md) {
-      padding-bottom: calc(var(--footer-height) * 2 + var(--space-md));
+      padding-bottom: calc(var(--footer-height) * 2 + var(--space-sm));
     }
   }
 }
