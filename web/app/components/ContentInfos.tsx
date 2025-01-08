@@ -15,7 +15,7 @@ const ContentInfos = ({ input }: Props) => {
       <div className='grid md:grid-cols-8 md:gap-md'>
         <div className='md:col-span-5 md:col-start-4 mb-1e md:mb-lg'>
           {input.about && (
-            <div className='grid md:grid-cols-5 gap-md'>
+            <div className='grid md:grid-cols-5 gap-1e'>
               <h2 className='md:col-span-2'>ABOUT</h2>
               <div className='md:col-span-3'>
                 <div className='text'>
@@ -52,7 +52,7 @@ const ContentInfos = ({ input }: Props) => {
           <div className='md:col-span-4'>
             {input.colophon.map((item, i) => (
               <div
-                className='item grid md:grid-cols-4 gap-md mb-1e md:mb-md'
+                className='item grid md:grid-cols-4 gap-1e mb-1e md:mb-md'
                 key={i}>
                 <div className='key'>{item.key}</div>
                 <div className='text md:col-span-2'>
