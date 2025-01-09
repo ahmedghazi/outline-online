@@ -9,6 +9,7 @@ import { PageContextProvider } from "./context/PageContext";
 import { ShopWrapper } from "./components/shop/ShopContext";
 import BuyModal from "./components/shop/BuyModal";
 import { Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata = {
   metadataBase: new URL(website.url),
@@ -76,6 +77,7 @@ export default async function RootLayout({
             </ShopWrapper>
           </PageContextProvider>
         </div>
+        <GoogleAnalytics gaId='G-57LHXDXJH4' />
       </body>
     </html>
   );
