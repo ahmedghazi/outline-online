@@ -36,5 +36,11 @@ footer#site-footer {
     & > .inner {
       padding: var(--space-sm);
     }
+    form {
+      font-size: var(--text-md-mobile);
+      input {
+        max-width: 15em;
+      }
+    }
   }
 }
