@@ -26,7 +26,6 @@ footer#site-footer {
 }
 
 @media all and (max-width: $md) {
-  // padding: var(--space-sm);
   [data-template="is-home"] footer {
     padding-top: 0;
   }
