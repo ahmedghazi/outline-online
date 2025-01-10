@@ -313,11 +313,11 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
     html: `
       <div style="font-family:monospace,sans-serif">
         <p>Dear ${client_name},</p>
-        <p>Your payment has been successfully processed. You can find the font files for download below in the zip files along with our EULA. If any problems might occur, please get in touch through info@outline-online.com. A PDF with an invoice is included in this email.</p>
+        <p>Your payment has been successfully processed. You can find the font files for download below in the zip files along with our EULA. If any problems might occur, please get in touch through info@outline-online.com. The order details will be sent in a separate email. </p>
         <p>Thank you for using Outline Online typefaces!</p>
         <p>Best from,<br />
         Outline Online</p>
-
+        <p></p>
         <p>P.S. We would love to see our typefaces in use, so don’t hesitate to reach out to us at info@outline-online.com with your designs!</p>
       </div>
     `,
