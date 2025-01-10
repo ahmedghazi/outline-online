@@ -43,6 +43,7 @@ export default async function RootLayout({
           publicApiKey: '${process.env.NEXT_PUBLIC_SNIPCART_API_KEY}',
           loadStrategy: "on-user-interaction",
           version: "3.5.0",
+          addProductBehavior: "none",
           templatesUrl: '/snipcart-templates.html'
           // modalStyle: "side",
         };
