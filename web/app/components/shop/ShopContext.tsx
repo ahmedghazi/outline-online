@@ -217,6 +217,10 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
         // console.log("item.added", cartItem)
       });
 
+      Snipcart.events.on("item.removed", (cartItem: any) => {
+        console.log(cartItem);
+      });
+
       Snipcart.events.on("cart.confirm.error", (confirmError: any) => {
         console.log(confirmError);
       });

@@ -34,6 +34,13 @@ const Cart = () => {
     if (cartObject) {
       // console.log(cartObject.items.count);
       setCount(cartObject.items.count);
+      if (cartObject.items.count === 0) {
+        setTab({
+          name: "",
+          active: false,
+        });
+        // setOpen(tab.name === "CART");
+      }
     }
   }, [cartObject]);
 
