@@ -58,6 +58,7 @@ const AddToCart = (props: Props) => {
   const [active, setActive] = useState<boolean>(false);
   // console.log(price);
   const isBundle = metadata.type === "bundle";
+  const isDiscount = priceDiscount && priceDiscount > 0;
 
   const _getLicensePriceByCategoryLicensePrice = (license: LicenseType) => {
     // console.log("———", categoryLicensePrice);
@@ -100,6 +101,19 @@ const AddToCart = (props: Props) => {
     setActive(defaultActive);
   }, [defaultActive]);
 
+  const _getPriceWithOrWithoutDiscount = (
+    _price: number,
+    _discount: number
+  ) => {
+    let discount = 0;
+    let priceWithOrWithoutDiscount = _price;
+
+    if (_discount) {
+      discount = (_discount * _price) / 100;
+      priceWithOrWithoutDiscount = priceWithOrWithoutDiscount - discount;
+    }
+    return priceWithOrWithoutDiscount;
+  };
   /**
    * LicenseProfil (company size > price web, price logo, ...)
    * Data is for add to card sdk, dataAttributes is for snipcart robot crawler
@@ -149,9 +163,16 @@ const AddToCart = (props: Props) => {
       // dataAttributes[`data-item-custom${index}-required`] = "true";
       dataAttributes[`data-item-custom${index}-shippable`] = "false";
 
+      const priceWithOrWithoutDiscount =
+        price && isDiscount
+          ? _getPriceWithOrWithoutDiscount(price, priceDiscount)
+          : price;
+      // dataAttributes[
+      //   `data-item-custom${index}-options`
+      // ] = `true[+${price}]|false`;
       dataAttributes[
         `data-item-custom${index}-options`
-      ] = `true[+${price}]|false`;
+      ] = `true[+${priceWithOrWithoutDiscount}]|false`;
 
       let exist;
       if (licenseTypeProfil) {
@@ -173,8 +194,8 @@ const AddToCart = (props: Props) => {
         name: name,
         // required: true,
         type: "checkbox",
-        options: `true[+${price}]|false`,
-        // options: options.toString().split(",").join("|"),
+        // options: `true[+${price}]|false`,
+        options: `true[+${priceWithOrWithoutDiscount}]|false`,
         value: exist && exist.length > 0,
       });
     });
@@ -202,7 +223,7 @@ const AddToCart = (props: Props) => {
     price: price,
     alternatePrices: {
       // vip: 10.00
-      vip: finalPriceWithDiscount,
+      // vip: finalPriceWithDiscount,
     },
     url: pathname,
     description: blurb || "",
@@ -215,8 +236,8 @@ const AddToCart = (props: Props) => {
 
     metadata: JSON.stringify(metadata),
   };
-  // console.log("-------- Add to cart");
-  console.log(productData);
+  console.log("-------- Add to cart", price, finalPrice);
+  // console.log(productData);
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")
@@ -242,7 +263,7 @@ const AddToCart = (props: Props) => {
             data-item-categories={categoriesClean}
             data-item-id={id || ""}
             data-item-price={price}
-            data-item-price-vip={finalPriceWithDiscount}
+            // data-item-price-vip={finalPriceWithDiscount}
             // data-item-price={finalPriceWithDiscount}
             data-item-url={pathname}
             data-item-description={blurb || ""}
