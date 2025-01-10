@@ -190,7 +190,8 @@ const AddToCart = (props: Props) => {
 
   const productData = {
     id: id || "",
-    price: price.toFixed(2),
+    // price: price.toFixed(2),
+    price: finalPrice,
     alternatePrices: {
       // vip: 10.00
     },
@@ -202,10 +203,7 @@ const AddToCart = (props: Props) => {
     stackable: "never",
     shippable: false,
     customFields: [..._getDataAttributes()?.data],
-    // customFields: [
-    //   ..._getDataAttributes(),
-    //   // ...websiteData,
-    // ],
+
     metadata: JSON.stringify(metadata),
   };
   // console.log("-------- Add to cart");
@@ -234,7 +232,8 @@ const AddToCart = (props: Props) => {
             className='snipcart-add-item- '
             data-item-categories={categoriesClean}
             data-item-id={id || ""}
-            data-item-price={price}
+            // data-item-price={price}
+            data-item-price={finalPrice}
             data-item-url={pathname}
             data-item-description={blurb || ""}
             data-item-name={fullTitle || ""}
