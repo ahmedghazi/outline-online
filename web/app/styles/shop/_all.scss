@@ -711,6 +711,9 @@
     .snipcart-modal__container {
       width: calc(var(--vw) * 100 - var(--space-sm) * 2);
       left: var(--space-sm);
+      max-height: calc(
+        var(--vh) * 100 - var(--header-height) + var(--footer-height)
+      );
     }
     .snipcart-item-list .snipcart-item-line .snipcart-item-line__product {
       grid-template-columns: repeat(8, minmax(0, 1fr));

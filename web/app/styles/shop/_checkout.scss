@@ -30,4 +30,9 @@ font-size: inherit !important;
       }
     }
   }
+  @media all and (max-width: 1024px) {
+    form.snipcart-payment {
+      // margin-bottom: 10vh;
+    }
+  }
 }
