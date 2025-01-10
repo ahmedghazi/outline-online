@@ -76,6 +76,7 @@ const AddToCart = (props: Props) => {
   };
   // console.log(title, isBundle);
   let finalPrice: number = price;
+  let finalPriceWithDiscount: number = price;
   if (licenseTypeProfil) {
     licenseTypeProfil.forEach((element) => {
       // console.log(price, finalPrice, element.price);
@@ -86,7 +87,14 @@ const AddToCart = (props: Props) => {
       if (elementPrice) finalPrice += elementPrice;
       // if (elementPrice) finalPrice = elementPrice;
     });
+    finalPriceWithDiscount = finalPrice;
+    let discount = 0;
+    if (priceDiscount) {
+      discount = (priceDiscount * finalPrice) / 100;
+      finalPriceWithDiscount = finalPriceWithDiscount - discount;
+    }
   }
+  // console.log(finalPrice, finalPriceWithDiscount);
   // console.log({ finalPrice });
   useEffect(() => {
     setActive(defaultActive);
@@ -191,9 +199,10 @@ const AddToCart = (props: Props) => {
   const productData = {
     id: id || "",
     // price: price.toFixed(2),
-    price: finalPrice,
+    price: price,
     alternatePrices: {
       // vip: 10.00
+      vip: finalPriceWithDiscount,
     },
     url: pathname,
     description: blurb || "",
@@ -207,7 +216,7 @@ const AddToCart = (props: Props) => {
     metadata: JSON.stringify(metadata),
   };
   // console.log("-------- Add to cart");
-  // console.log(productData);
+  console.log(productData);
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")
@@ -232,8 +241,9 @@ const AddToCart = (props: Props) => {
             className='snipcart-add-item- '
             data-item-categories={categoriesClean}
             data-item-id={id || ""}
-            // data-item-price={price}
-            data-item-price={finalPrice}
+            data-item-price={price}
+            data-item-price-vip={finalPriceWithDiscount}
+            // data-item-price={finalPriceWithDiscount}
             data-item-url={pathname}
             data-item-description={blurb || ""}
             data-item-name={fullTitle || ""}
