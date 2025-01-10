@@ -236,7 +236,7 @@ const AddToCart = (props: Props) => {
 
     metadata: JSON.stringify(metadata),
   };
-  console.log("-------- Add to cart", price, finalPrice);
+  // console.log("-------- Add to cart", price, finalPrice);
   // console.log(productData);
 
   const categoriesClean = categories

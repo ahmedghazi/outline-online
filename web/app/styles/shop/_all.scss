@@ -77,7 +77,7 @@
     flex-direction: column;
     margin: 0;
     @media all and (max-width: 1024px) {
-      margin-bottom: var(--footer-height);
+      // margin-bottom: var(--footer-height);
     }
   }
   .snipcart-cart__footer-col:not(:empty) {
@@ -712,7 +712,7 @@
       width: calc(var(--vw) * 100 - var(--space-sm) * 2);
       left: var(--space-sm);
       max-height: calc(
-        var(--vh) * 100 - var(--header-height) + var(--footer-height)
+        var(--vh) * 100 - calc(var(--header-height) + var(--footer-height))
       );
     }
     .snipcart-item-list .snipcart-item-line .snipcart-item-line__product {

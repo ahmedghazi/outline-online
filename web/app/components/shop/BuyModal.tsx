@@ -72,7 +72,7 @@ const CartProductItem = ({
       ? [input.typeface]
       : [];
 
-  let greenText = "";
+  // let greenText = "";
   let isPriceCrossed: boolean =
     typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
 
@@ -211,7 +211,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   const [buttonStatus, setButtonStatus] = useState("Add To Cart");
   const pathname = usePathname();
   const { tab } = usePageContext();
-
+  console.log({ tab });
   const {
     licenses,
     licenseSizeProfil,

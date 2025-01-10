@@ -148,7 +148,7 @@ const SectionTrinkets = (props) => {
   // const chain = _getChain();
   let items = isMobile ? _getChain() : props.input;
 
-  console.log(items);
+  // console.log(items);
 
   useEffect(() => {
     setReady(true);

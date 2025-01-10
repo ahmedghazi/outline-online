@@ -1,0 +1,15 @@
+@media (max-width: 1080px) {
+  .buy-modal .outter,
+  .snipcart-overwrite #snipcart .snipcart-modal__container {
+    height: auto !important;
+    overflow-y: auto !important;
+  }
+  .buy-modal .outter {
+    max-height: calc(
+      var(--vh) * 100 - (var(--header-height) + var(--footer-height))
+    ) !important;
+  }
+  .snipcart-overwrite #snipcart .snipcart-modal__container {
+    max-height: calc(var(--vh) * 100 - var(--footer-height)) !important;
+  }
+}

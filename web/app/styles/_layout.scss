@@ -91,4 +91,14 @@ main {
       padding-top: calc(var(--header-height) + 2em);
     }
   }
+  .is-product--open,
+  .cart-opened {
+    &,
+    body {
+      overflow: hidden !important;
+      main section {
+        pointer-events: none;
+      }
+    }
+  }
 }
