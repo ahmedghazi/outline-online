@@ -39,7 +39,7 @@ export const PageContextProvider = (props: PageContextProps) => {
   const pathname = usePathname();
   const { browser } = useDeviceDetect();
   const [tab, setTab] = useState<TabProps>(defaultTab);
-
+  console.log(tab);
   useEffect(() => {
     // console.log(browser);
     _format();

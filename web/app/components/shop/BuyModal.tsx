@@ -207,11 +207,11 @@ type Props = {
 const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   // const [active, setActive] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
-  const [active, setActive] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [buttonStatus, setButtonStatus] = useState("Add To Cart");
   const pathname = usePathname();
   const { tab } = usePageContext();
-  console.log({ tab });
+  // console.log({ tab });
   const {
     licenses,
     licenseSizeProfil,
@@ -224,24 +224,32 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
 
   useEffect(() => {
     // console.log(pathname);
-    setActive(tab.name === "BUY" && tab.active);
+    // setActive(tab.name === "BUY" && tab.active);
+    setOpen(tab.name === "BUY");
   }, [tab]);
 
   useEffect(() => {
     setReady(true);
+
+    window.addEventListener("hashchange", (event) => {
+      // console.log(event, location.hash);
+      if (location.hash.indexOf("cart") > -1) {
+        setOpen(false);
+      }
+    });
   }, []);
 
   useEffect(() => {
     // console.log(pathname);
-    setActive(false);
+    setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    document.body.classList.toggle("is-product--open", active);
+    document.body.classList.toggle("is-product--open", open);
     // if (active && pathname === "/") {
     //   window.scroll(0, window.innerHeight);
     // }
-  }, [active]);
+  }, [open]);
 
   const _updateLicenseSize = (val: LicenseSize) => {
     setLicenseSizeProfil(val);
@@ -298,7 +306,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   };
   // console.log(licenses);
   return (
-    <div className={clsx("buy-modal", active ? "block" : "hidden")}>
+    <div className={clsx("buy-modal", open ? "block" : "hidden")}>
       <div className='outter'>
         <div className='inner'>
           <div className='header'>

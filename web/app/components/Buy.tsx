@@ -18,8 +18,8 @@ const Buy = ({ productsCart }: Props) => {
 
   useEffect(() => {
     window.addEventListener("hashchange", (event) => {
-      console.log(event, location.hash);
-      if (location.hash === "#cart") {
+      // console.log(location.hash);
+      if (location.hash.indexOf("cart") > -1) {
         setActive(false);
       }
     });
