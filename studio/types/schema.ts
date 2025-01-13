@@ -472,6 +472,13 @@ export interface Product extends SanityDocument {
   subTitle?: string;
 
   /**
+   * Visible in buy area — `boolean`
+   *
+   *
+   */
+  visible?: boolean;
+
+  /**
    * licenseSizes — `array`
    *
    *

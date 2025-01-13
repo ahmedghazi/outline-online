@@ -74,6 +74,13 @@ export default defineType({
       group: 'editorial',
     }),
 
+    defineField({
+      name: 'visible',
+      title: 'Visible in buy area',
+      type: 'boolean',
+      group: 'editorial',
+    }),
+
     // defineField({
     //   name: 'tag',
     //   title: 'Tag',
@@ -182,6 +189,7 @@ export default defineType({
       title: 'Sidebar',
       type: 'blockContent',
       group: 'editorial',
+      hidden: true,
     }),
 
     defineField({

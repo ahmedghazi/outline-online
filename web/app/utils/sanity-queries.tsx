@@ -73,7 +73,7 @@ export async function getSettings(): Promise<Settings> {
 export async function getProductsCart(): Promise<Product[]> {
   return client.fetch(
     groq`
-    *[_type == "product" && !(_id in path('drafts.**'))]{
+    *[_type == "product" && !(_id in path('drafts.**')) && visible == true]{
       _id,
       title,
       slug{
