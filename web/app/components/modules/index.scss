@@ -14,15 +14,19 @@
       // }
     }
     &.module--slider-ui {
+      .slick-slide {
+        // transition: height 0.2s;
+      }
       .slick-arrow {
-        top: calc(100% - calc(2em * 1.2) + 2px);
+        // top: calc(var(--current-slide-h, 100%) - calc(2em * 1.2) + 2px);
+        top: calc(var(--current-slide-h, 100%) + 0.2em);
       }
       img {
         // aspect-ratio: 4 / 3;
         // object-fit: contain;
       }
       figcaption {
-        height: calc(2em * 1.2);
+        min-height: calc(2em * 1.2);
       }
     }
     &.module--images {

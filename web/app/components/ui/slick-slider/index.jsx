@@ -5,6 +5,7 @@ import ReactSlick from "react-slick";
 import PubSub from "pubsub-js";
 import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 import "./slick.scss"; //impossible de l'importer direct ici à cause de purge-css
+// import { afterImage } from "three/webgpu";
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
@@ -30,14 +31,17 @@ function SampleNextArrow(props) {
 }
 
 const Slider = ({ children, settingsOverride }) => {
+  // console.log(settingsOverride);
   const sliderRef = useRef();
   const { isMobile } = useDeviceDetect();
 
   const [index, setIndex] = useState(0);
 
   const _sliderBeforeChange = (oldIndex, newIndex) => {
-    // setH2(input[newIndex].project.document.data.title.text);
     setIndex(newIndex);
+  };
+  const _sliderAfterChange = (oldIndex, newIndex) => {
+    // setIndex(newIndex);
   };
 
   useEffect(() => {
@@ -65,6 +69,7 @@ const Slider = ({ children, settingsOverride }) => {
     slidesToScroll: 1,
     cssEase: "cubic-bezier(0.53, 0, 0.36, 1)",
     beforeChange: _sliderBeforeChange,
+    afterChange: _sliderAfterChange,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     // prevArrow: <SliderCursorPrevNextText label="prev" left="0%" />,
@@ -74,7 +79,7 @@ const Slider = ({ children, settingsOverride }) => {
     ...settingsDefault,
     ...settingsOverride,
   };
-  // console.log(settings)
+  // console.log(settings);
 
   return (
     <ReactSlick {...settings} ref={sliderRef}>
