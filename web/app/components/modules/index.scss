@@ -14,12 +14,22 @@
       // }
     }
     &.module--slider-ui {
+      .slick-track {
+        display: flex;
+      }
+      &.has-bounding {
+        .slick-arrow {
+          visibility: visible;
+        }
+      }
       .slick-slide {
         // transition: height 0.2s;
+        display: inline-block;
       }
       .slick-arrow {
         // top: calc(var(--current-slide-h, 100%) - calc(2em * 1.2) + 2px);
         top: calc(var(--current-slide-h, 100%) + 0.2em);
+        visibility: hidden;
       }
       img {
         // aspect-ratio: 4 / 3;

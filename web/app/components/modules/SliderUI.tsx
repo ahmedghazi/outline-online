@@ -17,7 +17,10 @@ const ModuleSliderUI = ({ input }: Props) => {
   useEffect(() => {
     setTimeout(() => {
       _handleBoundingByIndex(0);
-    }, 1000);
+      setTimeout(() => {
+        _handleBoundingByIndex(0);
+      }, 1000);
+    }, 150);
   }, []);
 
   const _onInit = () => {
@@ -27,8 +30,8 @@ const ModuleSliderUI = ({ input }: Props) => {
   };
 
   const _sliderAfterChange = (current: number) => {
-    console.log(current);
-    console.log(ref);
+    // console.log(current);
+    // console.log(ref);
 
     _handleBoundingByIndex(current);
   };
@@ -45,6 +48,7 @@ const ModuleSliderUI = ({ input }: Props) => {
       const bounding = currentSlide
         .querySelector("figure")
         ?.getBoundingClientRect();
+      console.log(bounding);
       setCurrentBounding(bounding);
     }
   };
@@ -64,7 +68,8 @@ const ModuleSliderUI = ({ input }: Props) => {
       ref={ref}
       className={clsx(
         "module module--slider-ui",
-        input.size && `md:col-span-${input.size}`
+        input.size && `md:col-span-${input.size}`,
+        currentBounding && "has-bounding"
       )}
       style={
         {
