@@ -16,6 +16,11 @@ const Cart = () => {
 
   const _onClick = () => {
     const nextActive = !open;
+
+    if (nextActive && pathname === "/") {
+      window.scroll(0, window.innerHeight);
+    }
+
     setTab({
       name: nextActive ? "CART" : "",
       active: nextActive,
