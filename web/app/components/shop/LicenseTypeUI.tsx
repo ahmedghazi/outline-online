@@ -37,7 +37,6 @@ const LicenseTypeUI = ({ input, index, ready }: Props) => {
             _updateLicenseType(checked, input);
             // setIsChecked(checked);
           }}
-          // onClick={(val: boolean) => setIsChecked(val)}
         />
       )}
     </div>
