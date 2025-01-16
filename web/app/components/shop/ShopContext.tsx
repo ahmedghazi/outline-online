@@ -65,6 +65,8 @@ function licenseTypeReducer(state: any, action: any) {
   // console.log(state, action);
   const { type, payload } = action;
   switch (type) {
+    case "SET":
+      return payload;
     case "ADD":
       return [...state, payload];
     case "REMOVE":
@@ -161,6 +163,10 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
     licenseTypeReducer,
     initialLicenseTypeState
   );
+  // const [licenseTypeProfil, setLicenseTypeProfil] = useState<
+  //   LicenseType[] | null
+  // >([]);
+  // if (licenseTypeProfil) console.log(licenseTypeProfil[0]);
 
   const [dataAttributes, setDataAttributes] = useState<Array<string>>([""]);
   const [isVip, setIsVip] = useState<boolean>(false);

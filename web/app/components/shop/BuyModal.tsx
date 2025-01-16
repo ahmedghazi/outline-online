@@ -21,6 +21,7 @@ import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
 import { usePageContext } from "@/app/context/PageContext";
 import BuyModalNoticesComponent from "./BuyModalNoticesComponent";
+import LicenseTypeUI from "./LicenseTypeUI";
 
 declare global {
   interface Window {
@@ -325,18 +326,22 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                 <div className='licenses md:col-span-5 md:py-05e'>
                   <div className='flex flex-wrap md:justify-between gap-sm md:gap-0'>
                     {licenseSizeProfil?.licenseType?.map((item, i) => (
-                      <div className='input flex gap-sm' key={i}>
-                        <Checkbox
-                          name={item.label || ""}
-                          checked={ready && i === 0}
-                          onChange={(checked: boolean) => {
-                            // console.log(checked, item.label);
-                            _updateLicenseType(checked, item);
-                          }}
-                        />
-                        {/* <span className='text-red'>{item.price}</span> */}
-                        {/* <div className='label !p-0'>{item.label}</div> */}
-                      </div>
+                      // <div className='input flex gap-sm' key={i}>
+                      //   <Checkbox
+                      //     name={item.label || ""}
+                      //     checked={ready && i === 0}
+                      //     onChange={(checked: boolean) => {
+                      //       // console.log(checked, item.label);
+                      //       _updateLicenseType(checked, item);
+                      //     }}
+                      //   />
+                      // </div>
+                      <LicenseTypeUI
+                        key={i}
+                        input={item}
+                        index={i}
+                        ready={ready}
+                      />
                     ))}
                   </div>
                 </div>
