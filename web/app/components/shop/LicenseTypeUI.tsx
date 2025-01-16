@@ -18,33 +18,13 @@ const LicenseTypeUI = ({ input, index, ready }: Props) => {
     setIsChecked(index === 0);
   }, []);
 
-  useEffect(() => {
-    // const item = licenseTypeProfil?.filter((el) => el.label === input.label);
-    // setIsChecked(item?.length === 1);
-  }, [licenseTypeProfil]);
-
-  // useEffect(() => {
-  //   // console.log(isChecked, input.label);
-
-  //   _updateLicenseType(isChecked, input);
-  // }, [isChecked]);
-
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
     // const items = licenseTypeProfil?.filter((el) => el.label === val.label);
     if (checked) {
       console.log(licenseTypeProfil?.length, val.label, checked);
-      //no dubplicate
-      // setLicenseTypeProfil({ type: "REMOVE_ALL" });
+
       setLicenseTypeProfil({ type: "SET", payload: [val] });
-      // if (licenseTypeProfil?.length === 0) {
-      //   setLicenseTypeProfil({ type: "ADD", payload: val });
-      // } else {
-      //   setLicenseTypeProfil({ type: "REPLACE", payload: val });
-      // }
     }
-    // else {
-    //   setLicenseTypeProfil({ type: "REMOVE_ALL" });
-    // }
   };
   return (
     <div className='input flex gap-sm'>
