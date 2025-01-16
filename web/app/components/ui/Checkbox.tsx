@@ -3,10 +3,11 @@ import React, { BaseSyntheticEvent, useEffect, useState } from "react";
 type Props = {
   name: string;
   checked?: boolean;
-  onChange: Function;
+  onChange?: Function;
+  onClick?: Function;
 };
 
-const Checkbox = ({ name, checked = false, onChange }: Props) => {
+const Checkbox = ({ name, checked = false, onChange, onClick }: Props) => {
   const [active, setActive] = useState<boolean>(checked);
 
   useEffect(() => {
@@ -19,13 +20,13 @@ const Checkbox = ({ name, checked = false, onChange }: Props) => {
   }, []);
 
   useEffect(() => {
-    // console.log(name, active);
+    // console.log("----Checkbox", name, active);
     setActive(checked);
   }, [checked]);
 
   useEffect(() => {
     // console.log(name, active);
-    onChange(active);
+    if (typeof onChange === "function") onChange(active);
   }, [active]);
 
   const _handleChange = (e: BaseSyntheticEvent) => {
@@ -34,7 +35,15 @@ const Checkbox = ({ name, checked = false, onChange }: Props) => {
   };
 
   return (
-    <div className='checkbox-ui'>
+    <div
+      className='checkbox-ui'
+      onClick={() => {
+        if (typeof onClick === "function") {
+          setTimeout(() => {
+            onClick(active);
+          }, 150);
+        }
+      }}>
       <label htmlFor={name}>
         <input
           type='checkbox'

@@ -21,6 +21,7 @@ import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
 import { usePageContext } from "@/app/context/PageContext";
 import BuyModalNoticesComponent from "./BuyModalNoticesComponent";
+import LicenseTypeUI from "./LicenseTypeUI";
 
 declare global {
   interface Window {
@@ -334,9 +335,13 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                             _updateLicenseType(checked, item);
                           }}
                         />
-                        {/* <span className='text-red'>{item.price}</span> */}
-                        {/* <div className='label !p-0'>{item.label}</div> */}
                       </div>
+                      // <LicenseTypeUI
+                      //   key={i}
+                      //   input={item}
+                      //   index={i}
+                      //   ready={ready}
+                      // />
                     ))}
                   </div>
                 </div>
@@ -371,6 +376,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
           </div>
         </div>
       </div>
+      {/* <pre>{JSON.stringify(licenseTypeProfil, null, 2)}</pre> */}
     </div>
   );
 };

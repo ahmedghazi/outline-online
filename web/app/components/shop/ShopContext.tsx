@@ -64,6 +64,7 @@ const initialLicenseTypeState: LabelPrice[] = [];
 function licenseTypeReducer(state: any, action: any) {
   // console.log(state, action);
   const { type, payload } = action;
+  console.log(type, payload);
   switch (type) {
     case "ADD":
       return [...state, payload];
@@ -71,9 +72,16 @@ function licenseTypeReducer(state: any, action: any) {
       return state.filter((item: any) => item.label !== payload.label);
 
     case "REPLACE":
-      return state.map((item: any) =>
-        item.label === payload.label ? payload : item
-      );
+      // console.log(state);
+      // return [payload];
+      return state.map((item: any) => {
+        return item.label === payload.label ? payload : item;
+        // if (item.label === payload.label) {
+        //   return payload;
+        // } else {
+        //   return item;
+        // }
+      });
     case "REMOVE_ALL":
       return [];
     default:
@@ -161,6 +169,9 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
     licenseTypeReducer,
     initialLicenseTypeState
   );
+  // const [licenseTypeProfil, setLicenseTypeProfil] = useState<
+  //   LicenseType | any | null
+  // >(null);
 
   const [dataAttributes, setDataAttributes] = useState<Array<string>>([""]);
   const [isVip, setIsVip] = useState<boolean>(false);

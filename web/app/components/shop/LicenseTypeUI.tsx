@@ -1,66 +1,64 @@
-// import React, { useEffect, useState } from "react";
-// import { Product, LabelPrice } from "@/app/types/schema";
+import React, { useEffect, useState } from "react";
+import Checkbox from "../ui/Checkbox";
+import { LicenseType } from "@/app/types/schema";
+import useShop from "./ShopContext";
+import Radio from "../ui/Radio";
 
-// import useShop from "./ShopContext";
-// import Price from "./Price";
-// import clsx from "clsx";
+type Props = {
+  input: LicenseType;
+  index: number;
+  ready: boolean;
+};
 
-// type LicenseProps = {
-//   input: LabelPrice;
-// };
+const LicenseTypeUI = ({ input, index, ready }: Props) => {
+  const { licenseTypeProfil, setLicenseTypeProfil } = useShop();
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
-// const Item = ({ input }: LicenseProps) => {
-//   const [active, setActive] = useState(false);
-//   const { licenseTypeProfil, setLicenseTypeProfil } = useShop();
+  useEffect(() => {
+    setIsChecked(index === 0);
+  }, []);
 
-//   // const _onClick = (item: LicenseType | any) => {
-//   //   setLicenseTypeProfil(item);
-//   // };
+  useEffect(() => {
+    // const item = licenseTypeProfil?.filter((el) => el.label === input.label);
+    // setIsChecked(item?.length === 1);
+  }, [licenseTypeProfil]);
 
-//   useEffect(() => {
-//     if (active) {
-//       const exist = licenseTypeProfil?.filter((el) => el.label === input.label);
-//       // console.log({ exist });
-//       if (exist && exist?.length > 0) {
-//         setLicenseTypeProfil({ type: "REMOVE", payload: input });
-//       } else {
-//         setLicenseTypeProfil({ type: "ADD", payload: input });
-//       }
-//     } else {
-//       setLicenseTypeProfil({ type: "REMOVE", payload: input });
-//     }
-//   }, [active]);
+  // useEffect(() => {
+  //   // console.log(isChecked, input.label);
 
-//   return (
-//     <div
-//       className={clsx(
-//         "grid grid-cols-2 py-sm b-b cursor-pointer",
-//         active && "bg-black text-white px-md"
-//       )}
-//       onClick={() => setActive(!active)}>
-//       <div className='label'>{input.label}</div>
-//       <div className='flex justify-end gap-md'>
-//         <Price price={input.price} />
-//         <span>SELECT</span>
-//       </div>
-//     </div>
-//   );
-// };
+  //   _updateLicenseType(isChecked, input);
+  // }, [isChecked]);
 
-// type LicenseTypeUIProps = {
-//   input: Product;
-// };
-// const LicenseTypeUI = ({ input }: LicenseTypeUIProps) => {
-//   return (
-//     <div className='license-typui'>
-//       <h2>1. Select your Licence</h2>
-//       <div className='b-t'>
-//         {input.licenseType?.items?.map((item, i) => (
-//           <Item input={item} key={i} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
+  const _updateLicenseType = (checked: boolean, val: LicenseType) => {
+    // const items = licenseTypeProfil?.filter((el) => el.label === val.label);
+    console.log(licenseTypeProfil?.length, val.label, checked);
+    if (checked) {
+      //no dubplicate
+      setLicenseTypeProfil([val]);
+      // if (licenseTypeProfil?.length === 0) {
+      //   setLicenseTypeProfil({ type: "ADD", payload: val });
+      // } else {
+      //   setLicenseTypeProfil({ type: "REPLACE", payload: val });
+      // }
+    }
+    // else {
+    //   setLicenseTypeProfil({ type: "REMOVE_ALL" });
+    // }
+  };
+  return (
+    <div className='input flex gap-sm'>
+      <Radio
+        name={input.label || ""}
+        checked={isChecked}
+        // checked={ready && index === 0}
+        onChange={(checked: boolean) => {
+          _updateLicenseType(checked, input);
+          // setIsChecked(checked);
+        }}
+        // onClick={(val: boolean) => setIsChecked(val)}
+      />
+    </div>
+  );
+};
 
-// export default LicenseTypeUI;
+export default LicenseTypeUI;
