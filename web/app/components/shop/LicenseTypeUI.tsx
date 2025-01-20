@@ -21,7 +21,7 @@ const LicenseTypeUI = ({ input, index, ready }: Props) => {
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
     // const items = licenseTypeProfil?.filter((el) => el.label === val.label);
     if (checked) {
-      console.log(licenseTypeProfil?.length, val.label, checked);
+      // console.log(licenseTypeProfil?.length, val.label, checked);
 
       setLicenseTypeProfil({ type: "SET", payload: [val] });
     }

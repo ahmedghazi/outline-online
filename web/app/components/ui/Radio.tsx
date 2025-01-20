@@ -35,7 +35,7 @@ const Radio = ({ name, checked = false, onChange }: Props) => {
   // }, [checked]);
 
   useEffect(() => {
-    console.log("---Radio", name, active, checked);
+    // console.log("---Radio", name, active, checked);
     if (typeof onChange === "function") onChange(active);
   }, [active]);
 

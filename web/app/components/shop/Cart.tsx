@@ -65,7 +65,7 @@ const Cart = () => {
 
   const _toggle = () => {
     if (!window.Snipcart) return;
-    console.log("cart _toggle");
+    // console.log("cart _toggle");
     if (tab.name === "CART") {
       window.Snipcart.api.theme.cart.open();
     } else {

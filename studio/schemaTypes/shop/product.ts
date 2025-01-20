@@ -145,6 +145,7 @@ export default defineType({
     defineField({
       name: 'singles',
       title: 'singles',
+      description: 'used also to display typeface in frontend',
       type: 'array',
       of: [
         {

@@ -160,6 +160,7 @@ const AddToCart = (props: Props) => {
       dataAttributes[`data-item-custom${index}-placeholder`] = "Licence";
       dataAttributes[`data-item-custom${index}-name`] = name;
       dataAttributes[`data-item-custom${index}-type`] = "checkbox";
+      // dataAttributes[`data-item-custom${index}-type`] = "radio";
       // dataAttributes[`data-item-custom${index}-required`] = "true";
       dataAttributes[`data-item-custom${index}-shippable`] = "false";
 

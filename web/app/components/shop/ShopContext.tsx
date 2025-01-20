@@ -220,7 +220,12 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
         // console.log("item.adding", item)
       });
       Snipcart.events.on("item.added", (cartItem: any) => {
-        // console.log("item.added", cartItem)
+        console.log("item.added", cartItem);
+      });
+
+      Snipcart.events.on("item.updated", (cartItem: any) => {
+        console.log("item.updated");
+        console.log(cartItem);
       });
 
       Snipcart.events.on("item.removed", (cartItem: any) => {
@@ -235,6 +240,7 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
         if (routesChange.from === "/" && routesChange.to !== "/") {
           // console.log("cart opened");
           document.body.classList.add("cart-opened");
+
           // publish("CART_OPENED", true);
           // publish("HEADER_TAB_CHANGE", {
           //   item: "CART",
@@ -263,6 +269,14 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
     };
   }, [ready]);
 
+  // const _handleCart = () => {
+  //   console.log("_handleCart");
+
+  //   const items = document.querySelector(".snipcart-item-custom-fields");
+  //   if (items) {
+  //     console.log(items);
+  //   }
+  // };
   // const _handleClickOutside = (e: Event) => {
   //   // console.log("click oustide modal");
   //   const target = e.target as Element;
