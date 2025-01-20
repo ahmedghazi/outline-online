@@ -1,0 +1,11 @@
+.snipcart-overwrite #snipcart {
+  .snipcart-item-custom-fields--checkbox {
+    pointer-events: none;
+  }
+  .snipcart-checkbox + label {
+    opacity: 0;
+  }
+  .snipcart-checkbox:checked + label {
+    opacity: 1;
+  }
+}
