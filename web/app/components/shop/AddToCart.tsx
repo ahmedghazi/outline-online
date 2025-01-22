@@ -218,6 +218,21 @@ const AddToCart = (props: Props) => {
     }
   }, [active]);
 
+  //update product in cart when license changes
+  useEffect(() => {
+    if (products.length === 0 || !active) return;
+    // productData.customFields = [..._getDataAttributes()?.data];
+    // const product = products.filter(el => el.id === productData.id)
+    // setProducts((prev: any) => [...prev, productData]);
+    setProducts(
+      products.map((_product) =>
+        _product.id === productData.id
+          ? { ..._product, customFields: [..._getDataAttributes()?.data] }
+          : _product
+      )
+    );
+  }, [licenseTypeProfil]);
+
   const productData = {
     id: id || "",
     // price: price.toFixed(2),

@@ -281,7 +281,7 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
       items.forEach((el) => {
         const input = el.querySelector("input");
         if (input?.checked) {
-          console.log(el);
+          // console.log(el);
           el.classList.add("has-input-checked");
         }
       });
