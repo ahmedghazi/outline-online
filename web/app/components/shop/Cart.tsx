@@ -13,7 +13,7 @@ const Cart = () => {
   const { cartObject } = useShop();
   const pathname = usePathname();
   const { tab, setTab } = usePageContext();
-
+  // console.log(cartObject);
   const _onClick = () => {
     const nextActive = !open;
 

@@ -240,7 +240,9 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
         if (routesChange.from === "/" && routesChange.to !== "/") {
           // console.log("cart opened");
           document.body.classList.add("cart-opened");
-
+          setTimeout(() => {
+            _handleCart();
+          }, 150);
           // publish("CART_OPENED", true);
           // publish("HEADER_TAB_CHANGE", {
           //   item: "CART",
@@ -269,14 +271,22 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
     };
   }, [ready]);
 
-  // const _handleCart = () => {
-  //   console.log("_handleCart");
+  const _handleCart = () => {
+    console.log("_handleCart");
 
-  //   const items = document.querySelector(".snipcart-item-custom-fields");
-  //   if (items) {
-  //     console.log(items);
-  //   }
-  // };
+    const items = document.querySelectorAll(
+      ".snipcart-item-custom-fields--checkbox"
+    );
+    if (items) {
+      items.forEach((el) => {
+        const input = el.querySelector("input");
+        if (input?.checked) {
+          console.log(el);
+          el.classList.add("has-input-checked");
+        }
+      });
+    }
+  };
   // const _handleClickOutside = (e: Event) => {
   //   // console.log("click oustide modal");
   //   const target = e.target as Element;

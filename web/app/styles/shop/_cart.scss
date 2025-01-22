@@ -1,11 +1,16 @@
 .snipcart-overwrite #snipcart {
+  .snipcart-item-line {
+    @media all and (min-width: 1024px) {
+      &:not(:first-child) {
+        border-top: var(--border);
+      }
+    }
+  }
   .snipcart-item-custom-fields--checkbox {
     pointer-events: none;
-  }
-  .snipcart-checkbox + label {
-    opacity: 0;
-  }
-  .snipcart-checkbox:checked + label {
-    opacity: 1;
+    display: none;
+    &.has-input-checked {
+      display: block;
+    }
   }
 }
