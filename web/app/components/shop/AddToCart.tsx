@@ -238,9 +238,9 @@ const AddToCart = (props: Props) => {
     metadata: JSON.stringify(metadata),
   };
   // console.log("-------- Add to cart", price, finalPrice);
-  if (active) {
-    console.log(productData);
-  }
+  // if (active) {
+  //   console.log(productData);
+  // }
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")
