@@ -502,7 +502,7 @@ export interface Product extends SanityDocument {
   /**
    * singles — `array`
    *
-   *
+   * used also to display typeface in frontend
    */
   singles?: Array<SanityKeyed<ProductSingle>>;
 

@@ -160,6 +160,7 @@ const AddToCart = (props: Props) => {
       dataAttributes[`data-item-custom${index}-placeholder`] = "Licence";
       dataAttributes[`data-item-custom${index}-name`] = name;
       dataAttributes[`data-item-custom${index}-type`] = "checkbox";
+      // dataAttributes[`data-item-custom${index}-type`] = "radio";
       // dataAttributes[`data-item-custom${index}-required`] = "true";
       dataAttributes[`data-item-custom${index}-shippable`] = "false";
 
@@ -217,6 +218,21 @@ const AddToCart = (props: Props) => {
     }
   }, [active]);
 
+  //update product in cart when license changes
+  useEffect(() => {
+    if (products.length === 0 || !active) return;
+    // productData.customFields = [..._getDataAttributes()?.data];
+    // const product = products.filter(el => el.id === productData.id)
+    // setProducts((prev: any) => [...prev, productData]);
+    setProducts(
+      products.map((_product) =>
+        _product.id === productData.id
+          ? { ..._product, customFields: [..._getDataAttributes()?.data] }
+          : _product
+      )
+    );
+  }, [licenseTypeProfil]);
+
   const productData = {
     id: id || "",
     // price: price.toFixed(2),
@@ -237,7 +253,9 @@ const AddToCart = (props: Props) => {
     metadata: JSON.stringify(metadata),
   };
   // console.log("-------- Add to cart", price, finalPrice);
-  // console.log(productData);
+  // if (active) {
+  //   console.log(productData);
+  // }
 
   const categoriesClean = categories
     ? categories.toString().replace(",", "|")

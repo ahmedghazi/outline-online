@@ -219,29 +219,31 @@ header#main-header {
 */
 body[data-template="is-home"] {
   header#main-header #nav-primary {
-    transform: translateY(
-      calc(var(--vh) * 50 - var(--header-height) / 2 - 1em)
-    );
+    @media all and (min-width: $md) {
+      transform: translateY(
+        calc(var(--vh) * 50 - var(--header-height) / 2 - 1em)
+      );
 
-    position: relative;
-    z-index: 2;
-    ul {
-      li.menu-item--outline.online {
-        pointer-events: none;
+      position: relative;
+      z-index: 2;
+      ul {
+        li.menu-item--outline.online {
+          pointer-events: none;
+        }
       }
-    }
-    .submenu {
-      // background-color: yellow;
-      min-height: calc(1.2em * 3 + 2em);
-      padding-top: 1em;
-      top: 50%;
-      transform: translateX(-50%) translateY(calc(-50% - 0em));
-      transition: transform 0.2s, top 0.2s;
+      .submenu {
+        // background-color: yellow;
+        min-height: calc(1.2em * 3 + 2em);
+        padding-top: 1em;
+        top: 50%;
+        transform: translateX(-50%) translateY(calc(-50% - 0em));
+        transition: transform 0.2s, top 0.2s;
 
-      // padding-bottom: 0;
-      .is-half {
-        transition: margin-bottom 0.2s;
-        margin-bottom: 1.2em;
+        // padding-bottom: 0;
+        .is-half {
+          transition: margin-bottom 0.2s;
+          margin-bottom: 1.2em;
+        }
       }
     }
   }
@@ -266,18 +268,20 @@ body[data-template="is-home"] {
 
 body[data-template="is-home"] {
   header#main-header {
-    color: white;
-    mix-blend-mode: difference;
-    a,
-    button {
+    @media all and (min-width: $md) {
       color: white;
-    }
+      mix-blend-mode: difference;
+      a,
+      button {
+        color: white;
+      }
 
-    &::after {
-      background-color: black;
-    }
-    a:hover {
-      color: white !important;
+      &::after {
+        background-color: black;
+      }
+      a:hover {
+        color: white !important;
+      }
     }
   }
   &.has-scrolled header#main-header {
@@ -322,19 +326,21 @@ body[data-template="is-home"] {
 /*************************************************************************************
  Btn Buy
 */
-header#main-header .menu-item--buy .btn--buy {
-  color: var(--color-blue);
-  &:hover {
-    background-color: var(--color-gray);
+@media all and (min-width: $md) {
+  header#main-header .menu-item--buy .btn--buy {
+    color: var(--color-blue);
+    &:hover {
+      background-color: var(--color-gray);
+    }
   }
-}
-body[data-template="is-home"]
-  header#main-header
-  #nav-primary
-  .menu-item--buy
-  .btn--buy {
-  color: #eaff00;
-  background-color: transparent;
+  body[data-template="is-home"]
+    header#main-header
+    #nav-primary
+    .menu-item--buy
+    .btn--buy {
+    color: #eaff00;
+    background-color: transparent;
+  }
 }
 body[data-template="is-home"].has-scrolled
   header#main-header
@@ -360,24 +366,26 @@ body.cart-opened header#main-header .menu-item--buy .btn--buy {
 /**************************************************************************************
  Btn Cart
 */
-header#main-header .menu-item--cart .btn--cart {
-  color: black;
+@media all and (min-width: $md) {
+  header#main-header .menu-item--cart .btn--cart {
+    color: black;
 
-  &:hover {
-    background-color: var(--color-gray-25);
+    &:hover {
+      background-color: var(--color-gray-25);
+    }
   }
-}
-body[data-template="is-home"]
-  header#main-header
-  #nav-primary
-  .menu-item--cart
-  .btn--cart {
-  color: white;
-  &:hover {
-    background-color: transparent;
-  }
-  .text-green {
-    color: purple;
+  body[data-template="is-home"]
+    header#main-header
+    #nav-primary
+    .menu-item--cart
+    .btn--cart {
+    color: white;
+    &:hover {
+      background-color: transparent;
+    }
+    .text-green {
+      color: purple;
+    }
   }
 }
 body[data-template="is-home"].has-scrolled

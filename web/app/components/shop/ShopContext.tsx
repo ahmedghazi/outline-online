@@ -66,6 +66,8 @@ function licenseTypeReducer(state: any, action: any) {
   const { type, payload } = action;
   console.log(type, payload);
   switch (type) {
+    case "SET":
+      return payload;
     case "ADD":
       return [...state, payload];
     case "REMOVE":
@@ -170,8 +172,9 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
     initialLicenseTypeState
   );
   // const [licenseTypeProfil, setLicenseTypeProfil] = useState<
-  //   LicenseType | any | null
-  // >(null);
+  //   LicenseType[] | null
+  // >([]);
+  // if (licenseTypeProfil) console.log(licenseTypeProfil[0]);
 
   const [dataAttributes, setDataAttributes] = useState<Array<string>>([""]);
   const [isVip, setIsVip] = useState<boolean>(false);
@@ -225,7 +228,12 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
         // console.log("item.adding", item)
       });
       Snipcart.events.on("item.added", (cartItem: any) => {
-        // console.log("item.added", cartItem)
+        console.log("item.added", cartItem);
+      });
+
+      Snipcart.events.on("item.updated", (cartItem: any) => {
+        console.log("item.updated");
+        console.log(cartItem);
       });
 
       Snipcart.events.on("item.removed", (cartItem: any) => {
@@ -240,6 +248,9 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
         if (routesChange.from === "/" && routesChange.to !== "/") {
           // console.log("cart opened");
           document.body.classList.add("cart-opened");
+          setTimeout(() => {
+            _handleCart();
+          }, 150);
           // publish("CART_OPENED", true);
           // publish("HEADER_TAB_CHANGE", {
           //   item: "CART",
@@ -268,6 +279,22 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
     };
   }, [ready]);
 
+  const _handleCart = () => {
+    console.log("_handleCart");
+
+    const items = document.querySelectorAll(
+      ".snipcart-item-custom-fields--checkbox"
+    );
+    if (items) {
+      items.forEach((el) => {
+        const input = el.querySelector("input");
+        if (input?.checked) {
+          // console.log(el);
+          el.classList.add("has-input-checked");
+        }
+      });
+    }
+  };
   // const _handleClickOutside = (e: Event) => {
   //   // console.log("click oustide modal");
   //   const target = e.target as Element;

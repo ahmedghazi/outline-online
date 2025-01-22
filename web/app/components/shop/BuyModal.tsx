@@ -305,7 +305,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
       console.log(error);
     }
   };
-  // console.log(licenses);
+  console.log(licenseTypeProfil);
   return (
     <div className={clsx("buy-modal", open ? "block" : "hidden")}>
       <div className='outter'>
@@ -326,22 +326,22 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                 <div className='licenses md:col-span-5 md:py-05e'>
                   <div className='flex flex-wrap md:justify-between gap-sm md:gap-0'>
                     {licenseSizeProfil?.licenseType?.map((item, i) => (
-                      <div className='input flex gap-sm' key={i}>
-                        <Checkbox
-                          name={item.label || ""}
-                          checked={ready && i === 0}
-                          onChange={(checked: boolean) => {
-                            // console.log(checked, item.label);
-                            _updateLicenseType(checked, item);
-                          }}
-                        />
-                      </div>
-                      // <LicenseTypeUI
-                      //   key={i}
-                      //   input={item}
-                      //   index={i}
-                      //   ready={ready}
-                      // />
+                      // <div className='input flex gap-sm' key={i}>
+                      //   <Checkbox
+                      //     name={item.label || ""}
+                      //     checked={ready && i === 0}
+                      //     onChange={(checked: boolean) => {
+                      //       // console.log(checked, item.label);
+                      //       _updateLicenseType(checked, item);
+                      //     }}
+                      //   />
+                      // </div>
+                      <LicenseTypeUI
+                        key={i}
+                        input={item}
+                        index={i}
+                        ready={ready}
+                      />
                     ))}
                   </div>
                 </div>

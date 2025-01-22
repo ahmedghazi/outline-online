@@ -108,7 +108,17 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
           </>
         )}
 
-        <Link href={_linkResolver(input)}>Visit {input.title}</Link>
+        {input.visible && (
+          <Link href={_linkResolver(input)}>Visit {input.title}</Link>
+        )}
+        {!input.visible && (
+          <a
+            href='mailto:info@outline-online.com'
+            target='_blank'
+            rel='noopener noreferrer'>
+            Request
+          </a>
+        )}
       </div>
     </div>
   );
@@ -120,7 +130,7 @@ type Props = {
 const SectionTypeFaces = ({ input }: Props) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const inViewport = useInViewPort(targetRef, { threshold: 0.5 });
-  // console.log(inViewport);
+  // console.log(input);
   useEffect(() => {
     publish("IS_PRODUCT", inViewport);
   }, [inViewport]);
