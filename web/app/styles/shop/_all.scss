@@ -1,3 +1,11 @@
+@keyframes slideIn {
+  0% {
+    transform: translateY(-110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 .snipcart-overwrite #snipcart {
   font-family: var(--font-primary) !important;
   font-size: var(--text-md) !important;
@@ -35,6 +43,7 @@
   .snipcart-modal__container,
   .snipcart-layout.snipcart-modal {
     // transform: none !important;
+    animation-duration: 0.2s;
   }
   .snipcart-modal__container {
     width: calc(var(--vw) * 100 - var(--space-lg) * 2);
