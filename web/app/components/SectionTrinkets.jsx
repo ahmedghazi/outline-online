@@ -80,7 +80,7 @@ const Scene = (props) => {
     });
   }, []);
 
-  // console.log(items);
+  console.log(items);
   return (
     <>
       {/* <Bounds fit clip observe margin={1.2}> */}
@@ -95,7 +95,7 @@ const Scene = (props) => {
                   dimensions={item.dimensions}
                   initialPosition={item.position}
                   metadata={item.metadata}
-                  scale={isMobile ? [0.9, 0.9, 0.9] : [0.4, 0.4, 0.4]}
+                  scale={isMobile ? [0.9, 0.9, 0.9] : [1, 1, 1]}
                 />
               )}
               {!item.image && item._type === "file" && (
@@ -104,7 +104,7 @@ const Scene = (props) => {
                   file={item.file}
                   initialPosition={item.position}
                   metadata={item.metadata}
-                  scale={isMobile ? [0.9, 0.9, 0.9] : [0.1, 0.1, 0.1]}
+                  scale={isMobile ? [0.9, 0.9, 0.9] : [0.4, 0.4, 0.4]}
                 />
               )}
               {/* {item._type === "file" && (

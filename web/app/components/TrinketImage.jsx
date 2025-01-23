@@ -25,6 +25,8 @@ const Texture = ({ texture, scale, dimensions, initialPosition, metadata }) => {
     // meshRef.current.rotation.y += 0.00001;
     // meshRef.current.rotation.x += randRotations.x;
     // meshRef.current.rotation.y += randRotations.y;
+    // meshRef.current.scale.x = 3;
+    // meshRef.current.scale.y = 3;
   });
 
   const _onPointerOver = () => {
@@ -43,6 +45,7 @@ const Texture = ({ texture, scale, dimensions, initialPosition, metadata }) => {
       <group
         ref={group}
         position={initialPosition}
+        scale={0.5}
         onPointerOver={_onPointerOver}
         onPointerOut={_onPointerOut}>
         <mesh ref={meshRef}>
@@ -58,8 +61,6 @@ const Texture = ({ texture, scale, dimensions, initialPosition, metadata }) => {
 const TrinketImage = (props) => {
   const { url } = props;
   const texture = useMemo(() => {
-    // const newMat = new THREE.MeshPhongMaterial({ map: url, transparent: true });
-    // return newMat;
     return new THREE.TextureLoader().load(url);
   }, [url]);
   return <Texture texture={texture} {...props} />;
