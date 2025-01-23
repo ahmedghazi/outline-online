@@ -34,7 +34,7 @@
 
   .snipcart-modal__container,
   .snipcart-layout.snipcart-modal {
-    transform: none !important;
+    // transform: none !important;
   }
   .snipcart-modal__container {
     width: calc(var(--vw) * 100 - var(--space-lg) * 2);
