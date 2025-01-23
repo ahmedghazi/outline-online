@@ -23,8 +23,8 @@ const Texture = ({ texture, scale, dimensions, initialPosition, metadata }) => {
 
     // meshRef.current.rotation.x += randRotations.x;
     // meshRef.current.rotation.y += 0.00001;
-    // meshRef.current.rotation.x += randRotations.x;
-    // meshRef.current.rotation.y += randRotations.y;
+    meshRef.current.rotation.x += randRotations.x;
+    meshRef.current.rotation.y += randRotations.y;
     // meshRef.current.scale.x = 3;
     // meshRef.current.scale.y = 3;
   });
