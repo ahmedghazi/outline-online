@@ -363,7 +363,9 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
               onClick={_addToCart}
               className={clsx(
                 "atc-all  block",
-                products.length > 0 ? "button-submit" : "button-disabled"
+                products.length > 0
+                  ? "button-submit"
+                  : "button-disabled pointer-events-none"
               )}>
               {buttonStatus}{" "}
               {products.length > 0 && (

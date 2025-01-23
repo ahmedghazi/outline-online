@@ -64,7 +64,7 @@ const initialLicenseTypeState: LabelPrice[] = [];
 function licenseTypeReducer(state: any, action: any) {
   // console.log(state, action);
   const { type, payload } = action;
-  console.log(type, payload);
+  // console.log(type, payload);
   switch (type) {
     case "SET":
       return payload;
@@ -280,7 +280,7 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
   }, [ready]);
 
   const _handleCart = () => {
-    console.log("_handleCart");
+    // console.log("_handleCart");
 
     const items = document.querySelectorAll(
       ".snipcart-item-custom-fields--checkbox"

@@ -80,7 +80,7 @@ const Scene = (props) => {
     });
   }, []);
 
-  console.log(items);
+  // console.log(items);
   return (
     <>
       {/* <Bounds fit clip observe margin={1.2}> */}
