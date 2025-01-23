@@ -62,15 +62,6 @@ const Scene = (props) => {
         paddingBottom: 2,
         paddingRight: 2,
       });
-      // setTimeout(() => {
-      //   // cameraControlsRef.current?.fitToBox(refGroup.current, true);
-      //   cameraControlsRef.current?.fitToBox(refGroup.current, true, {
-      //     paddingTop: 150,
-      //     paddingLeft: 150,
-      //     paddingBottom: 150,
-      //     paddingRight: 150,
-      //   });
-      // }, 1000);
     }, 1000);
   }, []);
 
@@ -89,7 +80,7 @@ const Scene = (props) => {
     });
   }, []);
 
-  // console.log(items);
+  console.log(items);
   return (
     <>
       {/* <Bounds fit clip observe margin={1.2}> */}
@@ -97,7 +88,26 @@ const Scene = (props) => {
         <Suspense fallback={null}>
           {items.map((item, i) => (
             <group key={i}>
-              {item._type === "file" && (
+              {item.image && (
+                <TrinketImage
+                  key={i}
+                  url={item.image}
+                  dimensions={item.dimensions}
+                  initialPosition={item.position}
+                  metadata={item.metadata}
+                  scale={isMobile ? [0.9, 0.9, 0.9] : [0.4, 0.4, 0.4]}
+                />
+              )}
+              {!item.image && item._type === "file" && (
+                <Trinket
+                  key={i}
+                  file={item.file}
+                  initialPosition={item.position}
+                  metadata={item.metadata}
+                  scale={isMobile ? [0.9, 0.9, 0.9] : [0.4, 0.4, 0.4]}
+                />
+              )}
+              {/* {item._type === "file" && (
                 <Trinket
                   key={i}
                   file={item.file}
@@ -114,7 +124,7 @@ const Scene = (props) => {
                   initialPosition={item.position}
                   metadata={item.metadata}
                 />
-              )}
+              )} */}
             </group>
           ))}
         </Suspense>
@@ -122,14 +132,6 @@ const Scene = (props) => {
       {/* </Bounds> */}
 
       <CameraControls ref={cameraControlsRef} enabled={false} />
-      {/* <CameraHelper /> */}
-      {/* <axesHelper args={[5]} /> */}
-      {/*test */}
-      {/* <OrbitControls
-      // enableZoom={false}
-      // enablePan={false}
-      // enableRotate={false}
-      /> */}
     </>
   );
 };

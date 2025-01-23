@@ -305,7 +305,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
       console.log(error);
     }
   };
-  console.log(licenseTypeProfil);
+  // console.log(licenseTypeProfil);
   return (
     <div className={clsx("buy-modal", open ? "block" : "hidden")}>
       <div className='outter'>

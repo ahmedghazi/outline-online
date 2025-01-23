@@ -4,14 +4,14 @@ import { useFrame } from "@react-three/fiber";
 import { DragControls } from "@react-three/drei";
 import { publish } from "pubsub-js";
 
-const Texture = ({ texture, dimensions, initialPosition, metadata }) => {
-  const args = [2.5, 2.5 / dimensions.aspectRatio];
+const Texture = ({ texture, scale, dimensions, initialPosition, metadata }) => {
+  const args = [1.5, 1.5 / dimensions.aspectRatio];
   const group = useRef();
   const meshRef = useRef();
   const [isHover, setIsHover] = useState(false);
 
   const randRotations = useMemo(() => {
-    const x = Math.random() * 0.001;
+    const x = Math.random() * 0.005;
     const y = Math.random() * 0.005;
     return { x, y };
   }, []);
@@ -21,18 +21,20 @@ const Texture = ({ texture, dimensions, initialPosition, metadata }) => {
     if (isHover) return;
     if (!meshRef.current) return;
 
-    meshRef.current.rotation.x += randRotations.x;
-    meshRef.current.rotation.y += 0.00001;
+    // meshRef.current.rotation.x += randRotations.x;
+    // meshRef.current.rotation.y += 0.00001;
+    // meshRef.current.rotation.x += randRotations.x;
+    // meshRef.current.rotation.y += randRotations.y;
   });
 
   const _onPointerOver = () => {
-    console.logmetadata;
-    setIsHover(true);
+    // console.logmetadata;
+    // setIsHover(true);
     publish("TRINKET_INFO", metadata);
     // publish("TRINKET_INFO", "here is the infos");
   };
   const _onPointerOut = () => {
-    setIsHover(false);
+    // setIsHover(false);
     publish("TRINKET_INFO", "");
   };
 
@@ -45,8 +47,8 @@ const Texture = ({ texture, dimensions, initialPosition, metadata }) => {
         onPointerOut={_onPointerOut}>
         <mesh ref={meshRef}>
           {/* <planeBufferGeometry attach='geometry' args={[5, 4]} /> */}
-          <planeGeometry attach='geometry' args={args} />
-          <meshBasicMaterial attach='material' map={texture} />
+          <planeGeometry attach='geometry' args={args} scale={scale} />
+          <meshBasicMaterial attach='material' transparent map={texture} />
         </mesh>
       </group>
     </DragControls>
@@ -55,7 +57,11 @@ const Texture = ({ texture, dimensions, initialPosition, metadata }) => {
 
 const TrinketImage = (props) => {
   const { url } = props;
-  const texture = useMemo(() => new THREE.TextureLoader().load(url), [url]);
+  const texture = useMemo(() => {
+    // const newMat = new THREE.MeshPhongMaterial({ map: url, transparent: true });
+    // return newMat;
+    return new THREE.TextureLoader().load(url);
+  }, [url]);
   return <Texture texture={texture} {...props} />;
 };
 
