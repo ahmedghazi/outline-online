@@ -57,7 +57,7 @@ const Radio = ({ name, checked = false, onChange }: Props) => {
         />
         <span className='checkmark'></span>
         <span className='label'>{name}</span>
-        {checked && "checked"}
+        {/* {checked && "checked"} */}
       </label>
     </div>
   );

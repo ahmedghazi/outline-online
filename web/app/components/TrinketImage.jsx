@@ -45,7 +45,7 @@ const Texture = ({ texture, scale, dimensions, initialPosition, metadata }) => {
       <group
         ref={group}
         position={initialPosition}
-        scale={0.5}
+        scale={0.3}
         onPointerOver={_onPointerOver}
         onPointerOut={_onPointerOut}>
         <mesh ref={meshRef}>
