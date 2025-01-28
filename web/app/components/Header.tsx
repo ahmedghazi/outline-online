@@ -10,6 +10,7 @@ import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
 import { useScrollDirection } from "../hooks/useScrollDirection";
 import { usePageContext } from "../context/PageContext";
+import clsx from "clsx";
 
 type Props = {
   settings: Settings;
@@ -22,6 +23,33 @@ const Header = ({ settings, productsCart }: Props) => {
   const pathname = usePathname();
   const { scrollDirection } = useScrollDirection();
   const { tab } = usePageContext();
+
+  const [isHome, setIsHome] = useState<boolean>(false);
+  const [headerCentered, setHeaderCentered] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsHome(pathname === "/");
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isHome) return;
+    setHeaderCentered(true);
+
+    const events = ["click", "scroll", "wheel"];
+    events.forEach((event) => {
+      window.addEventListener(event, _handleAnyInteraction);
+    });
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, _handleAnyInteraction);
+      });
+    };
+  }, [isHome]);
+
+  const _handleAnyInteraction = () => {
+    setHeaderCentered(false);
+  };
 
   useEffect(() => {
     const token = subscribe("IS_PRODUCT", (e, d) => {
@@ -68,7 +96,7 @@ const Header = ({ settings, productsCart }: Props) => {
   };
 
   return (
-    <header id='main-header'>
+    <header id='main-header' className={clsx(headerCentered && "is-centered")}>
       <div className='sup-header'>
         <div className='flex justify-between'>
           <div className='item'>Metadata</div>

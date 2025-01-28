@@ -48,7 +48,7 @@ const ModuleSliderUI = ({ input }: Props) => {
       const bounding = currentSlide
         .querySelector("figure")
         ?.getBoundingClientRect();
-      console.log(bounding);
+      // console.log(bounding);
       setCurrentBounding(bounding);
     }
   };

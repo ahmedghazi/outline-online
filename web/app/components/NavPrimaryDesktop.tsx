@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { LinkExternal, MenuItem } from "../types/schema";
 import { _linkResolver } from "../utils/utils";
 import Buy from "./Buy";
@@ -7,6 +7,7 @@ import Cart from "./shop/Cart";
 
 import clsx from "clsx";
 import NavLink from "./NavLink";
+import { usePathname } from "next/navigation";
 
 type NavProps = {
   navPrimary: Array<MenuItem | LinkExternal> | undefined;
@@ -17,7 +18,7 @@ const NavPrimaryDesktop = ({ navPrimary, productsCart }: NavProps) => {
   const ref = useRef<HTMLElement | null>(null);
 
   return (
-    <nav ref={ref} id='nav-primary' className='hidden-sm'>
+    <nav ref={ref} id='nav-primary' className={clsx("hidden-sm")}>
       <ul className='flex'>
         <li className=''>
           <NavLink href='/' label='Outline Online' depth={0} />{" "}

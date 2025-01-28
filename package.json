@@ -10,7 +10,8 @@
     "d": "git add . && git commit -m 'let s gooo' && git push",
     "d:p": "git add . && git commit -m 'let s gooo' && git push origin preprod",
     "dm": "func() { git add . && git commit -m \"$1\" && git push; }; func",
-    "dm:p": "func() { git add . && git commit -m \"$1\" && git push origin preprod; }; func"
+    "dm:p": "func() { git add . && git commit -m \"$1\" && git push origin preprod; }; func",
+    "dm:n": "func() { git add . && git commit -m \"$1\" && git push origin nav; }; func"
   },
   "keywords": [],
   "author": "",
