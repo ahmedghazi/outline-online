@@ -218,6 +218,9 @@ header#main-header {
   Home Animation
 */
 header#main-header {
+  #nav-primary {
+    // background-color: red;
+  }
   &.is-centered #nav-primary {
     transform: translateY(
       calc(var(--vh) * 50 - var(--header-height) / 2 - 1em)

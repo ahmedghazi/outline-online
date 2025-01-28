@@ -35,10 +35,12 @@ const Header = ({ settings, productsCart }: Props) => {
     if (!isHome) return;
     setHeaderCentered(true);
 
-    const events = ["click", "scroll", "wheel"];
-    events.forEach((event) => {
-      window.addEventListener(event, _handleAnyInteraction);
-    });
+    const events = ["click", "wheel"];
+    setTimeout(() => {
+      events.forEach((event) => {
+        window.addEventListener(event, _handleAnyInteraction);
+      });
+    }, 1000);
 
     return () => {
       events.forEach((event) => {
