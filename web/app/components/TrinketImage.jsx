@@ -8,26 +8,26 @@ const Texture = ({ texture, scale, dimensions, initialPosition, metadata }) => {
   const args = [1.5, 1.5 / dimensions.aspectRatio];
   const group = useRef();
   const meshRef = useRef();
-  const [isHover, setIsHover] = useState(false);
+  // const [isHover, setIsHover] = useState(false);
 
-  const randRotations = useMemo(() => {
-    const x = Math.random() * 0.005;
-    const y = Math.random() * 0.005;
-    return { x, y };
-  }, []);
+  // const randRotations = useMemo(() => {
+  //   const x = Math.random() * 0.005;
+  //   const y = Math.random() * 0.005;
+  //   return { x, y };
+  // }, []);
 
   // console.log(meshRef.current);
-  useFrame((state) => {
-    if (isHover) return;
-    if (!meshRef.current) return;
+  // useFrame((state) => {
+  //   if (isHover) return;
+  //   if (!meshRef.current) return;
 
-    // meshRef.current.rotation.x += randRotations.x;
-    // meshRef.current.rotation.y += 0.00001;
-    meshRef.current.rotation.x += randRotations.x;
-    meshRef.current.rotation.y += randRotations.y;
-    // meshRef.current.scale.x = 3;
-    // meshRef.current.scale.y = 3;
-  });
+  //   // meshRef.current.rotation.x += randRotations.x;
+  //   // meshRef.current.rotation.y += 0.00001;
+  //   meshRef.current.rotation.x += randRotations.x;
+  //   meshRef.current.rotation.y += randRotations.y;
+  //   // meshRef.current.scale.x = 3;
+  //   // meshRef.current.scale.y = 3;
+  // });
 
   const _onPointerOver = () => {
     // console.logmetadata;
