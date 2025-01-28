@@ -307,7 +307,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   };
   // console.log(licenseTypeProfil);
   return (
-    <div className={clsx("buy-modal", open ? "block" : "hidden")}>
+    <div className={clsx("buy-modal", open ? "is-open" : "")}>
       <div className='outter'>
         <div className='inner'>
           <div className='header'>
