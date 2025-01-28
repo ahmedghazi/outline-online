@@ -35,6 +35,9 @@ const Header = ({ settings, productsCart }: Props) => {
     if (!isHome) return;
     setHeaderCentered(true);
 
+    setTimeout(() => {
+      setHeaderCentered(false);
+    }, 2000);
     const events = ["click", "wheel"];
     setTimeout(() => {
       events.forEach((event) => {
