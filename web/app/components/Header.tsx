@@ -39,7 +39,7 @@ const Header = ({ settings, productsCart }: Props) => {
     //   setHeaderCentered(false);
     // }, 2000);
 
-    const events = ["click", "wheel"];
+    const events = ["click", "wheel", "touchstart"];
     setTimeout(() => {
       events.forEach((event) => {
         window.addEventListener(event, _handleAnyInteraction);
