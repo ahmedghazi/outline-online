@@ -72,17 +72,18 @@ export default defineField({
       description: '%, Displayed in buy modal (green text) => save Xx%',
     }),
     defineField({
+      hidden: true,
       title: 'Price crossed',
       name: 'priceCrossed',
       type: 'number',
       description: 'Displayed in buy modal',
-      hidden: true,
     }),
 
     defineField({
+      hidden: true,
       title: 'Typefaces',
       name: 'typefaces',
-      description: 'Used in buy area',
+      description: 'Used in buy area (seems deprecated, will keep it for now)',
       type: 'array',
       of: [
         {
@@ -115,10 +116,11 @@ export default defineField({
       description: 'Digital good client will receive',
     }),
     defineField({
+      hidden: true,
       title: 'Zip File Trials',
       name: 'zipTrials',
       type: 'file',
-      description: 'Digital good client will receive',
+      description: 'Digital good client will receive. (seems deprecated, will keep it for now)',
     }),
   ],
 })

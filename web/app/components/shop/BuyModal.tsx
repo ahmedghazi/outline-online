@@ -64,14 +64,14 @@ const CartProductItem = ({
   type,
 }: CartProductItemProps) => {
   const [active, setActive] = useState<boolean>(false);
-  const typefaces =
-    input._type === "productBundle"
-      ? input.typefaces
-        ? input.typefaces
-        : []
-      : input.typeface
-      ? [input.typeface]
-      : [];
+  // const typefaces =
+  //   input._type === "productBundle"
+  //     ? input.typefaces
+  //       ? input.typefaces
+  //       : []
+  //     : input.typeface
+  //     ? [input.typeface]
+  //     : [];
 
   // let greenText = "";
   let isPriceCrossed: boolean =

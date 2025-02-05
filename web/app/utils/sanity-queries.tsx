@@ -88,10 +88,10 @@ export async function getProductsCart(): Promise<Product[]> {
         description,
         descriptionAlt,
         categories,
-        typeface->{
-          _id,
-          title,
-        }
+        // typeface->{
+        //   _id,
+        //   title,
+        // }
       },
       bundles[]{
         _key,
@@ -103,10 +103,10 @@ export async function getProductsCart(): Promise<Product[]> {
         description,
         descriptionAlt,
         categories,
-        typefaces[]->{
-          _id,
-          title,
-        }
+        // typefaces[]->{
+        //   _id,
+        //   title,
+        // }
       },
       licenseSizes[]{
         ...

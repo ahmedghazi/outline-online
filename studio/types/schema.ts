@@ -844,7 +844,7 @@ export type ProductBundle = {
   /**
    * Typefaces — `array`
    *
-   * Used in buy area
+   * Used in buy area (seems deprecated, will keep it for now)
    */
   typefaces?: Array<SanityKeyedReference<Typeface>>;
 
@@ -872,7 +872,7 @@ export type ProductBundle = {
   /**
    * Zip File Trials — `file`
    *
-   * Digital good client will receive
+   * Digital good client will receive. (seems deprecated, will keep it for now)
    */
   zipTrials?: { _type: "file"; asset: SanityReference<any> };
 };
