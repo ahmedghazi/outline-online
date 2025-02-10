@@ -511,7 +511,7 @@ export interface Product extends SanityDocument {
   /**
    * singles — `array`
    *
-   *
+   * used also to display typeface in frontend
    */
   singles?: Array<SanityKeyed<ProductSingle>>;
 
@@ -853,7 +853,7 @@ export type ProductBundle = {
   /**
    * Typefaces — `array`
    *
-   * Used in buy area
+   * Used in buy area (seems deprecated, will keep it for now)
    */
   typefaces?: Array<SanityKeyedReference<Typeface>>;
 
@@ -881,7 +881,7 @@ export type ProductBundle = {
   /**
    * Zip File Trials — `file`
    *
-   * Digital good client will receive
+   * Digital good client will receive. (seems deprecated, will keep it for now)
    */
   zipTrials?: { _type: "file"; asset: SanityReference<any> };
 };
@@ -894,6 +894,13 @@ export type ProductSingle = {
    *
    */
   title?: string;
+
+  /**
+   * isDefault — `boolean`
+   *
+   *
+   */
+  isDefault?: boolean;
 
   /**
    * Description — `string`

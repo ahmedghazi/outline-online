@@ -41,6 +41,7 @@ export const productCard = `
 		_key,
 		_type,
 		title,
+		isDefault,
 		typeface->{
 			_type,
 			slug,

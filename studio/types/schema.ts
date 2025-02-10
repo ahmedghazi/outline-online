@@ -887,6 +887,13 @@ export type ProductSingle = {
   title?: string;
 
   /**
+   * isDefault — `boolean`
+   *
+   *
+   */
+  isDefault?: boolean;
+
+  /**
    * Description — `string`
    *
    *

@@ -1,6 +1,11 @@
 "use client";
 import React, { MouseEvent, useEffect, useMemo, useRef, useState } from "react";
-import { KeyValString, Product, Typeface } from "../types/schema";
+import {
+  KeyValString,
+  Product,
+  ProductSingle,
+  Typeface,
+} from "../types/schema";
 import Link from "next/link";
 import { _linkResolver } from "../utils/utils";
 import clsx from "clsx";
@@ -80,6 +85,16 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
     return arr;
   }, []);
 
+  const _defaultLabel = useMemo(() => {
+    if (!input.singles) return;
+    const item: ProductSingle[] = input.singles.filter((el) => el.isDefault);
+    if (item && item.length === 1) {
+      return item[0].title;
+    } else {
+      return "";
+    }
+  }, []);
+
   return (
     <div className={clsx("typeface--item", active && "is-active")}>
       <div
@@ -103,6 +118,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
                 options={_singles}
                 onChange={_handleStyles}
                 // label='Family'
+                label={_defaultLabel}
               />
             )}
           </>
@@ -135,6 +151,14 @@ const SectionTypeFaces = ({ input }: Props) => {
     publish("IS_PRODUCT", inViewport);
   }, [inViewport]);
 
+  const _getDefaultStyle = (item: Product) => {
+    const hasFefault = item.singles?.filter((el) => el.isDefault);
+    if (hasFefault && hasFefault.length === 1) {
+      return hasFefault[0].typeface;
+    } else if (item.singles) {
+      return item.singles[0].typeface;
+    }
+  };
   return (
     <section className='section--typefaces' ref={targetRef}>
       <div className='items'>
@@ -142,7 +166,7 @@ const SectionTypeFaces = ({ input }: Props) => {
           <div key={i} className='item'>
             {item && item.singles && item.singles.length > 0 && (
               <TypeContextProvider>
-                <Item input={item} defaultStyle={item.singles[0].typeface} />
+                <Item input={item} defaultStyle={_getDefaultStyle(item)} />
               </TypeContextProvider>
             )}
           </div>

@@ -6,17 +6,36 @@ export default defineField({
   name: 'productSingle',
   type: 'object',
   icon: BsFonts,
+  // preview: {
+  //   select: {
+  //     title: 'title',
+  //     subtitle: 'isDefault',
+  //   },
+  // },
   preview: {
     select: {
-      title: 'title',
-      subtitle: 'price',
+      title: `title`,
+      isDefault: 'isDefault',
+    },
+    prepare(selection) {
+      const {title, isDefault} = selection
+      // console.log(images)
+      return {
+        title: title,
+        subtitle: isDefault ? 'default' : '',
+      }
     },
   },
+
   fields: [
     defineField({
       title: 'Title',
       name: 'title',
       type: 'string',
+    }),
+    defineField({
+      name: 'isDefault',
+      type: 'boolean',
     }),
     defineField({
       title: 'Description',
