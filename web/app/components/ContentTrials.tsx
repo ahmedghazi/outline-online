@@ -133,7 +133,7 @@ const ContentTrials = ({ input }: Props) => {
     if (trials.length === 0) return "Select all";
     else if (trials.length > 0 && trials.length < total)
       return "Download selected";
-    else if (trials.length === total) return "Download all";
+    else if (trials.length === total) return "Download";
     else return "";
   };
   /*
