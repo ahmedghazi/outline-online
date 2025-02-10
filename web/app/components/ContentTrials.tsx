@@ -155,11 +155,12 @@ const ContentTrials = ({ input }: Props) => {
           // trials.length > 0 && "has-trials-"
           trials.length > 0 ? "button-submit" : "button-disabled"
         )}
-        onClick={() => {
-          // if (trials.length > 0) {
-          //   setOpenModal(true);
-          // }
-        }}>
+        // onClick={() => {
+        //   // if (trials.length > 0) {
+        //   //   setOpenModal(true);
+        //   // }
+        // }}
+      >
         {trials.length === 0 && (
           <Checkbox
             name={_getDlButtonLabel()}
