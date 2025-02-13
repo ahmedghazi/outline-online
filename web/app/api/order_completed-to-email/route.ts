@@ -99,6 +99,11 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
           headers: { "Content-Type": "application/json" },
         });
       }
+    } else {
+      return new NextResponse(JSON.stringify({ eventName: eventName }), {
+        status: 201,
+        headers: { "Content-Type": "application/json" },
+      });
     }
   } catch (error: any) {
     console.log(error);
