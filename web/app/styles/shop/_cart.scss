@@ -13,4 +13,18 @@
       display: block;
     }
   }
+
+  .cart__footer-discount-box {
+    padding: 0 var(--space-sm);
+    .snipcart-discount-box__button {
+      padding: 0.5em;
+    }
+    .snipcart-input {
+      padding-right: 10em;
+      background-color: transparent;
+      input {
+        background-color: var(--bgColor-input, #fff);
+      }
+    }
+  }
 }
