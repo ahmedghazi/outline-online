@@ -14,11 +14,32 @@
     }
   }
 
+  .snipcart-cart__footer:has(.cart__footer-discount-box) {
+    .snipcart-cart__footer-col + .snipcart-cart__footer-col {
+      margin-top: 0;
+    }
+  }
+
   .cart__footer-discount-box {
-    padding: 0 var(--space-sm) !important;
+    padding: var(--space-sm) !important;
+    .snipcart-discount-box {
+      display: flex;
+      justify-content: end;
+    }
+
+    button.snipcart-discount-box__button,
+    .snipcart-discount-box__form-container {
+      max-width: 20em;
+    }
     button.snipcart-discount-box__button {
       padding: 0.5em;
       border: none;
+    }
+    .snipcart-discount-box__form-container {
+      button {
+        padding: 0;
+        margin-left: 0;
+      }
     }
     .snipcart-input {
       padding-right: 6em;
