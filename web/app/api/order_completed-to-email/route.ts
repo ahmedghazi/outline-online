@@ -70,6 +70,13 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       //   headers: { "Content-Type": "application/json" },
       // });
 
+      const stored = await _saveOrder(body.content, _attachments);
+      console.log("Stored order", stored);
+      // return new NextResponse(JSON.stringify(stored), {
+      //   status: 201,
+      //   headers: { "Content-Type": "application/json" },
+      // });
+
       const params: SendProps = {
         destination: user.email,
         client_name: `${user.billingAddress.fullName}`,
@@ -293,7 +300,55 @@ const _sanitizeTitle = (str: string) =>
   str.replace(/ /g, "-").toLocaleLowerCase();
 
 /************************
- * ***********************
+ * ********************************************************************************************
+ */
+
+type PayloadProps = {
+  email: string;
+  invoiceNumber: string;
+  creationDate: string;
+};
+const _saveOrder = async (payload: PayloadProps, attachments: any) => {
+  const { email, invoiceNumber, creationDate } = payload;
+  const _attachments = attachments.map((item: any) => {
+    return {
+      label: item.filename,
+      link: item.path,
+    };
+  });
+  console.log(_attachments);
+  const mutations = {
+    mutations: [
+      {
+        create: {
+          // id: lineItem.price.product.metadata.id,
+          _type: "order",
+          title: `#${invoiceNumber} by ${email}`,
+          invoiceNumber: `#${invoiceNumber}`,
+          creationDate: new Date(creationDate).toISOString(),
+          email: email,
+          attachments: _attachments,
+          json: JSON.stringify(payload),
+        },
+      },
+    ],
+  };
+  const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}?autoGenerateArrayKeys=true`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${process.env.SANITY_API_READ_TOKEN}`,
+    },
+    body: JSON.stringify(mutations),
+  });
+
+  const result = await response.json();
+  return result;
+};
+
+/************************
+ * ********************************************************************************************
  */
 const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");

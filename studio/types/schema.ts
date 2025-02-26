@@ -682,6 +682,57 @@ export interface Vendor extends SanityDocument {
   description?: BlockContent;
 }
 
+/**
+ * Order
+ *
+ *
+ */
+export interface Order extends SanityDocument {
+  _type: "order";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Invoice Number — `string`
+   *
+   *
+   */
+  invoiceNumber?: string;
+
+  /**
+   * dateTime — `date`
+   *
+   *
+   */
+  creationDate?: string;
+
+  /**
+   * email — `string`
+   *
+   *
+   */
+  email?: string;
+
+  /**
+   * attachments — `array`
+   *
+   *
+   */
+  attachments?: Array<SanityKeyed<LinkExternal>>;
+
+  /**
+   * json — `text`
+   *
+   *
+   */
+  json?: string;
+}
+
 export type LicenseType = {
   _type: "licenseType";
   /**
@@ -1410,4 +1461,5 @@ export type Documents =
   | Tag
   | Product
   | Typeface
-  | Vendor;
+  | Vendor
+  | Order;

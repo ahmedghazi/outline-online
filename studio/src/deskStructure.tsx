@@ -19,6 +19,7 @@ const hiddenDocTypes = (listItem: any) => {
     'page',
     'tag',
     'product',
+    'order',
     'typeface',
     'settings',
     'linkExpire',
@@ -79,7 +80,7 @@ export const structure = (S) =>
         .title('Typefaces (regular,italic,...)')
         .schemaType('typeface')
         .child(S.documentTypeList('typeface')),
-
+      S.listItem().title('Orders').schemaType('order').child(S.documentTypeList('order')),
       /**
        * with seo preview
        */
@@ -99,7 +100,7 @@ export const structure = (S) =>
       //     ),
       //   ),
 
-      S.listItem().title('Tags').schemaType('tag').child(S.documentTypeList('tag')),
+      // S.listItem().title('Tags').schemaType('tag').child(S.documentTypeList('tag')),
       S.divider(),
 
       // We also need to remove the new singletons from the main list

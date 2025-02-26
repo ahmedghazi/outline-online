@@ -45,6 +45,7 @@ import trinket from './objects/trinket'
 import textDropDown from './objects/textDropDown'
 import keyValString from './objects/keyValString'
 import glyphSet from './shop/glyphSet'
+import order from './shop/order'
 
 export const schemaTypes = [
   home,
@@ -58,6 +59,7 @@ export const schemaTypes = [
   product,
   typeface,
   vendor,
+  order,
   // linkExpire,
 
   licenseType,
