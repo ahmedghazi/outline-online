@@ -321,7 +321,6 @@ const _saveOrder = async (payload: PayloadProps, attachments: any) => {
     mutations: [
       {
         create: {
-          // id: lineItem.price.product.metadata.id,
           _type: "order",
           title: `#${invoiceNumber} by ${email}`,
           invoiceNumber: `#${invoiceNumber}`,
