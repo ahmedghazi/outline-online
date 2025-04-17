@@ -26,7 +26,6 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
   }, []);
 
   const _format = () => {
-    // const width = window.innerWidth;
     const height = window.innerHeight;
     const leftOverHeight = height - 200;
     const length = input.length;
