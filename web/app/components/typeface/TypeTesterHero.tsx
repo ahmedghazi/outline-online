@@ -1,5 +1,5 @@
 import { KeyValString, ProductSingle } from "@/app/types/schema";
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 // import TypeTester from "./TypeTester";
 // import useType from "./TypeContext";
 // import TesterSize from "./TesterSize";
@@ -15,31 +15,27 @@ type Props = {
 };
 
 const TypeTesterHero = ({ input, pangram }: Props) => {
-  // const { type } = useType();
-  // const ref = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState<number>(6);
 
-  // const _stylisticSets = useMemo(() => {
-  //   let arr: KeyValString[] = [];
-  //   input.forEach((el) => {
-  //     if (el.typeface?.stylisticSets && el.typeface?.stylisticSets.length > 0) {
-  //       el.typeface?.stylisticSets.forEach((s) => {
-  //         if (arr.some((e) => e.key === s.key)) {
-  //         } else {
-  //           arr.push(s);
-  //         }
-  //       });
-  //     }
-  //   });
+  useEffect(() => {
+    _format();
+    window.addEventListener("resize", _format);
+    return () => {
+      window.removeEventListener("resize", _format);
+    };
+  }, []);
 
-  //   return arr;
-  // }, []);
-
-  // const _handleStylisticSets = (ss: KeyValString) => {
-  //   // console.log(ss);
-  //   if (!ref.current) return;
-  //   if (!ss || !ss.val) return;
-  //   ref.current.style.setProperty("--type-features", ss.val);
-  // };
+  const _format = () => {
+    // const width = window.innerWidth;
+    const height = window.innerHeight;
+    const leftOverHeight = height - 200;
+    const length = input.length;
+    const itemMaxHeight = Math.floor(leftOverHeight / length);
+    const size = (itemMaxHeight * 100) / height;
+    console.log(height, leftOverHeight, length, itemMaxHeight);
+    // const size = Math.floor((width + height) / 100);
+    setSize(size);
+  };
 
   return (
     <section className='type-tester--hero'>
@@ -52,7 +48,13 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
               fontFamily: item.typeface?.slug?.current,
             }}>
             {/* <TypeTester title={item.typeface?.title || item.title || ""} /> */}
-            <div className='item'>
+            <div
+              className='item'
+              style={{
+                // fontSize: `${size}vh`,
+                fontSize: `clamp(6vh, ${size}vh, 8vh)`,
+                lineHeight: 1,
+              }}>
               {item.typeface?.title || item.title || ""}
             </div>
           </div>

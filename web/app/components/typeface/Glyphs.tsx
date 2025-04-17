@@ -21,16 +21,17 @@ const Glyphs = ({ input }: Props) => {
     <section
       className='glyphs '
       // ref={ref}
-      onMouseLeave={() => setGlyph("")}
-      style={{
-        fontFamily: type?.slug?.current,
-      }}>
+      onMouseLeave={() => setGlyph("")}>
       {input.typeface?.glyphs &&
         input.typeface?.glyphs.length > 0 &&
         input.typeface?.glyphs.map((item, i) => (
           <div className='mb-md' key={i}>
             <h3 className='mb-sm'>{item.title}</h3>
-            <div className='grid '>
+            <div
+              className='grid '
+              style={{
+                fontFamily: type?.slug?.current,
+              }}>
               {item.items &&
                 item.items.map((_item, j) => (
                   <div

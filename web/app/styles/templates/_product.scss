@@ -12,9 +12,13 @@ body[data-template="is-product"],
       height: calc(var(--vh) * 100);
       @include flex_center_h_v;
       flex-direction: column;
+      // text-align: left;
+      // align-items: start;
       font-feature-settings: var(--type-features);
       .item {
-        font-size: 8vw;
+        // font-size: 8vw;
+        font-size: 7vh;
+        line-height: 1;
       }
     }
     .composition-tool {
