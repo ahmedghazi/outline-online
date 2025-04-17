@@ -21,7 +21,7 @@ const ContentProduct = ({ input }: Props) => {
 
   const { type, dispatchType, dispatchTypes } = useType();
   const [ready, setReady] = useState<boolean>(false);
-  // console.log(type);
+  // console.log(input);
   const _gerRandomPangram = (p: string[] | any) => {
     if (!p)
       return "24 wacky bandmates mixed zany rhythms, blowing jazzy saxophones and fixing broken xylophones for a quirky gig.";
