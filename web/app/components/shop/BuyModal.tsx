@@ -206,6 +206,7 @@ type Props = {
 };
 
 const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
+  // console.log(JSON.stringify(productsCart, null, 2));
   // const [active, setActive] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);

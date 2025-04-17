@@ -32,8 +32,8 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
     const length = input.length;
     const itemMaxHeight = Math.floor(leftOverHeight / length);
     const size = (itemMaxHeight * 100) / height;
-    console.log(height, leftOverHeight, length, itemMaxHeight);
-    // const size = Math.floor((width + height) / 100);
+    // console.log(height, leftOverHeight, length, itemMaxHeight);
+
     setSize(size);
   };
 
