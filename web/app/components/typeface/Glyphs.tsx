@@ -15,8 +15,6 @@ const Glyphs = ({ input }: Props) => {
   const [glyh, setGlyph] = useState<string | KeyValString>("");
   const { type } = useType();
 
-  // console.log(glyh);
-
   return (
     <section
       className='glyphs '
