@@ -66,7 +66,7 @@ const Glyphs = ({ input }: Props) => {
           </div>
         ))}
       {glyh && (
-        <div className='overview'>
+        <div className='overview' style={{ fontFamily: type?.slug?.current }}>
           {typeof glyh === "object" && (
             <span
               style={{
