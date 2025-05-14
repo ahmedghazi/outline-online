@@ -11,15 +11,11 @@ type Props = {
 };
 
 const Glyphs = ({ input }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
   const [glyh, setGlyph] = useState<string | KeyValString>("");
   const { type } = useType();
 
   return (
-    <section
-      className='glyphs '
-      // ref={ref}
-      onMouseLeave={() => setGlyph("")}>
+    <section className='glyphs ' onMouseLeave={() => setGlyph("")}>
       {input.typeface?.glyphs &&
         input.typeface?.glyphs.length > 0 &&
         input.typeface?.glyphs.map((item, i) => (
