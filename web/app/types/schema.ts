@@ -588,23 +588,35 @@ export interface Typeface extends SanityDocument {
   /**
    * Style — `string`
    *
-   *
+   * Tell the website what is the style of the typeface, used in the typefaces menu, in the typeface page introduction, in bundles
    */
   style?:
+    | "hairline"
+    | "hairlineItalic"
     | "thin"
     | "thinItalic"
+    | "extraLight"
+    | "extraLightItalic"
     | "light"
     | "lightItalic"
+    | "book"
+    | "bookItalic"
     | "regular"
     | "regularItalic"
     | "medium"
     | "mediumItalic"
-    | "book"
-    | "bookItalic"
+    | "semiBold"
+    | "semiBoldItalic"
     | "bold"
     | "boldItalic"
+    | "extraBold"
+    | "extraBoldItalic"
     | "black"
-    | "blackItalic";
+    | "blackItalic"
+    | "ultraBlack"
+    | "ultraBlackItalic"
+    | "superBlack"
+    | "superBlackItalic";
 
   /**
    * File — `typefaceFile`
@@ -689,6 +701,57 @@ export interface Vendor extends SanityDocument {
    *
    */
   description?: BlockContent;
+}
+
+/**
+ * Order
+ *
+ *
+ */
+export interface Order extends SanityDocument {
+  _type: "order";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Invoice Number — `string`
+   *
+   *
+   */
+  invoiceNumber?: string;
+
+  /**
+   * dateTime — `date`
+   *
+   *
+   */
+  creationDate?: string;
+
+  /**
+   * email — `string`
+   *
+   *
+   */
+  email?: string;
+
+  /**
+   * attachments — `array`
+   *
+   *
+   */
+  attachments?: Array<SanityKeyed<LinkExternal>>;
+
+  /**
+   * json — `text`
+   *
+   *
+   */
+  json?: string;
 }
 
 export type LicenseType = {
@@ -1419,4 +1482,5 @@ export type Documents =
   | Tag
   | Product
   | Typeface
-  | Vendor;
+  | Vendor
+  | Order;

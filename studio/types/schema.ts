@@ -579,23 +579,35 @@ export interface Typeface extends SanityDocument {
   /**
    * Style — `string`
    *
-   *
+   * Tell the website what is the style of the typeface, used in the typefaces menu, in the typeface page introduction, in bundles
    */
   style?:
+    | "hairline"
+    | "hairlineItalic"
     | "thin"
     | "thinItalic"
+    | "extraLight"
+    | "extraLightItalic"
     | "light"
     | "lightItalic"
+    | "book"
+    | "bookItalic"
     | "regular"
     | "regularItalic"
     | "medium"
     | "mediumItalic"
-    | "book"
-    | "bookItalic"
+    | "semiBold"
+    | "semiBoldItalic"
     | "bold"
     | "boldItalic"
+    | "extraBold"
+    | "extraBoldItalic"
     | "black"
-    | "blackItalic";
+    | "blackItalic"
+    | "ultraBlack"
+    | "ultraBlackItalic"
+    | "superBlack"
+    | "superBlackItalic";
 
   /**
    * File — `typefaceFile`
