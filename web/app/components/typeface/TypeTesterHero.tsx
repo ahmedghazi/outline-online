@@ -8,6 +8,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 // import Select from "../ui/Select";
 // import { div } from "three/examples/jsm/nodes/Nodes.js";
 import CompositionTool from "./CompositionTool";
+import useDeviceDetect from "@/app/hooks/useDeviceDetect";
 
 type Props = {
   input: ProductSingle[];
@@ -21,8 +22,8 @@ type Item = {
 
 const TypeTesterHero = ({ input, pangram }: Props) => {
   const [size, setSize] = useState<number>(6);
-
-  console.log("input", input);
+  const { isMobile } = useDeviceDetect();
+  // console.log("input", input);
   const items = useMemo(() => {
     let arr: Item[] = [];
     const allStyles = input.map((item) => item.typeface?.style);
@@ -36,7 +37,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
     // console.log(uniqueStyles);
     uniqueStyles.forEach((style) => {
       if (!style) return;
-      console.log(style);
+      // console.log(style);
       let obj: Item = {
         regular: undefined,
         italic: undefined,
@@ -63,7 +64,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
     // console.log(arr);
     return arr;
   }, [input]);
-  console.log("output", items);
+  // console.log("output", items);
 
   useEffect(() => {
     _format();
@@ -71,15 +72,17 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
     return () => {
       window.removeEventListener("resize", _format);
     };
-  }, []);
+  }, [isMobile]);
 
   const _format = () => {
-    const height = window.innerHeight;
-    const leftOverHeight = height - 200;
+    console.log("format");
+    const minus = isMobile ? 400 : 200;
+    const wHeight = window.innerHeight;
+    const leftOverHeight = wHeight - minus;
     const length = items.length;
     const itemMaxHeight = Math.floor(leftOverHeight / length);
-    const size = (itemMaxHeight * 100) / height;
-    // console.log(height, leftOverHeight, length, itemMaxHeight);
+    const size = (itemMaxHeight * 100) / wHeight;
+    console.log(wHeight, leftOverHeight, minus, length, itemMaxHeight);
 
     setSize(size);
   };
@@ -87,24 +90,6 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
   return (
     <section className='type-tester--hero'>
       <div className='items'>
-        {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
-        {/* {input.map((item, i) => (
-          <div
-            key={i}
-            style={{
-              fontFamily: item.typeface?.slug?.current,
-            }}>
-            <div
-              className='item'
-              style={{
-                fontSize: `clamp(6vh, ${size}vh, 8vh)`,
-                lineHeight: 1,
-              }}>
-              <span></span>
-              {item.typeface?.title || item.title || ""}
-            </div>
-          </div>
-        ))} */}
         {items.map((item, i) => (
           <div
             key={i}
