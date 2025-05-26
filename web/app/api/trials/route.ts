@@ -69,6 +69,14 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     // });
     const _sendEmailresult = await _sendEmail(params);
     console.log(_sendEmailresult);
+    const paramsLogs: SendProps = {
+      destination: "atmet.ghazi@gmail.com",
+      client_name: "atmet.ghazi@gmail.com",
+      error: _sendEmailresult,
+    };
+
+    const messError = await _sendErrorEmail(paramsLogs);
+
     if (_sendEmailresult.status === "success") {
       const response_success = {
         ok: true,
