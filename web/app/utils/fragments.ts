@@ -53,6 +53,28 @@ export const productCard = `
 		}
 	}
 `;
+export const productCardLight = `
+	_id,
+  _type,
+  slug,
+  title,
+	price,
+	metadata,
+	visible,
+	singles[]{
+		_key,
+		_type,
+		title,
+		isDefault,
+		typeface->{
+			_type,
+			slug,
+			_id,
+			title,
+
+		}
+	}
+`;
 
 export const moduleText = `
 	_type == 'moduleText' => {

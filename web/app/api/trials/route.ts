@@ -89,13 +89,13 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
         headers: { "Content-Type": "application/json" },
       });
     } else {
-      const params: SendProps = {
+      const paramsLogs: SendProps = {
         destination: "atmet.ghazi@gmail.com",
         client_name: "atmet.ghazi@gmail.com",
         error: _sendEmailresult,
       };
 
-      const messError = await _sendErrorEmail(params);
+      const messError = await _sendErrorEmail(paramsLogs);
 
       // console.log('Payload size:', JSON.stringify(body).length / 1024, 'KB');
       const response_error = {

@@ -10,7 +10,7 @@ import {
   Trials,
 } from "../types/schema";
 import { cache } from "react";
-import { figure, productCard, seo } from "./fragments";
+import { figure, productCard, productCardLight, seo } from "./fragments";
 
 export const cachedClient = cache(client.fetch.bind(client));
 
@@ -191,7 +191,7 @@ export const trialsQuery = groq`*[_type == "trials"][0]{
     ${seo}
   },
   typefaces[]->{
-    ${productCard}
+    ${productCardLight}
   },
 }`;
 
