@@ -20,7 +20,8 @@ import { Product, ProductSingle, Typeface } from "@/app/types/schema";
 // });
 
 type SendProps = {
-  payload: any;
+  payload?: any;
+  error?: any;
   client_name: string;
   destination: string;
 };
@@ -52,8 +53,9 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
      * from these ids get content (bundles, singles)
      */
     const _productsData = await _collectProductsData(_productIds);
-
+    console.log(_productsData);
     const _attachments = _collectZips(_productsData);
+    console.log(_attachments);
 
     const params: SendProps = {
       destination: destination,
@@ -66,6 +68,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     //   headers: { "Content-Type": "application/json" },
     // });
     const _sendEmailresult = await _sendEmail(params);
+    console.log(_sendEmailresult);
     if (_sendEmailresult.status === "success") {
       const response_success = {
         ok: true,
@@ -78,6 +81,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
         headers: { "Content-Type": "application/json" },
       });
     } else {
+      // console.log('Payload size:', JSON.stringify(body).length / 1024, 'KB');
       const response_error = {
         ok: false,
         status: "error",
@@ -91,6 +95,14 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     }
   } catch (error: any) {
     console.log(error);
+    const params: SendProps = {
+      destination: "atmet.ghazi@gmail.com",
+      client_name: "atmet.ghazi@gmail.com",
+      error: error,
+    };
+
+    const messError = await _sendErrorEmail(params);
+    console.log(messError);
     const response_error = {
       ok: false,
       status: "error",
@@ -219,77 +231,48 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
       raw: error,
     };
   }
-
-  // transporter.sendMail(mailOptions, function (error, info) {
-  //   if (error) {
-  //     console.log(error);
-  //     throw new Error(error);
-  //   } else {
-  //     console.log("Email Sent");
-  //     console.log(info);
-  //     return info;
-  //   }
-  // });
-
-  // const str = JSON.stringify(payload);
-  // const btns =
-  // const html = `
-  //     <div>
-  //        Hi ${destination}! <br><br>
-  //        Thanks for getting in touch.
-  //        Here is a link to <a href="${str}">donwload</a> your pack
-  //        <br><br>
-  //        ${str}
-  //        <br><br>
-  //        Best <br>
-  //        outline online
-  //     </div>
-  //   `;
-  // const mail = {
-  //   from: process.env.SENDER_EMAIL || "hello@ahmedghazi.com",
-  //   to: destination,
-  //   subject: "Your fonts :)",
-  //   // html,
-  //   templateId: "d-45468a3d093f4d6d9ab8a51d68de256f",
-  //   dynamic_template_data: {
-  //     subject: "Download Your fonts",
-  //     destination: destination,
-  //     download_link: payload,
-  //   },
-  // };
-  // console.log(mail);
-  // const res = await sendGridMail.send(mail);
-  // // console.log(res);
-  // console.log(`Email sent`);
-  // return res;
 };
-// const _mutation = async (data: Podcast) => {
-//   const client = createClient({
-//     projectId: "5l8pdqi8",
-//     dataset: "production",
-//     token: process.env.SANITY_AUTH_TOKEN,
-//     apiVersion: "2023-03-04",
-//     useCdn: true,
-//   });
 
-//   const { title, url, author, text, tags } = data;
+const _sendErrorEmail = async ({
+  destination,
+  client_name,
+  error,
+}: SendProps) => {
+  const transporter = nodemailer.createTransport({
+    host: "asmtp.mail.hostpoint.ch",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.SENDER_PASSWORD,
+    },
+  });
+  const mailOptions = {
+    from: process.env.SENDER_EMAIL,
+    to: destination,
+    subject: "Outline Online trial fonts",
+    // text: "le message: " + JSON.stringify(payload),
+    html: `
+      <div style="font-family:monospace,sans-serif">
+        <p>Dear ${client_name}</p>
+        ${JSON.stringify(error)}
+      </div>
+    `,
+  };
 
-//   const mutations = [
-//     {
-//       createIfNotExists: {
-//         // _id: `drafts.${uuidv4()}`,
-//         _id: uuidv4(),
-//         _type: "podcast",
-//         title: title,
-//         url: url,
-//         author: author,
-//         text: text,
-//         tags: tags,
-//         // {...data}
-//       },
-//     },
-//   ];
-
-//   const res = await client.mutate(mutations);
-//   return res;
-// };
+  try {
+    const res = await transporter.sendMail(mailOptions);
+    console.log(res);
+    return {
+      status: "success",
+      raw: res,
+    };
+  } catch (error) {
+    console.log(error);
+    //throw new Error(error);
+    return {
+      status: "error",
+      raw: error,
+    };
+  }
+};
