@@ -269,7 +269,6 @@ const _sendErrorEmail = async ({
     };
   } catch (error) {
     console.log(error);
-    //throw new Error(error);
     return {
       status: "error",
       raw: error,
