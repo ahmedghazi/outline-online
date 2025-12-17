@@ -100,3 +100,4 @@ yarn-error.log*
 next-env.d.ts
 
 archive/
+backup/

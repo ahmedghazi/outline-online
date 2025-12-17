@@ -22,10 +22,11 @@ import clsx from "clsx";
 import NavLink from "./NavLink";
 
 type NavProps = {
+  siteName: string;
   navPrimary: Array<MenuItem | LinkExternal> | undefined;
   productsCart: any;
 };
-const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
+const NavPrimaryMobile = ({ siteName, navPrimary, productsCart }: NavProps) => {
   const ref = useRef<HTMLElement | null>(null);
   const pathname = usePathname();
   useEffect(() => {
@@ -67,7 +68,7 @@ const NavPrimaryMobile = ({ navPrimary, productsCart }: NavProps) => {
     <nav ref={ref} id='nav-primary' className='sm-only'>
       <ul className='flex flex-wrap !justify-between '>
         <li className='flex-2- nav-item--home'>
-          <NavLink href='/' label='Outline Online' depth={0} />
+          <NavLink href='/' label={siteName} depth={0} />
         </li>
 
         {navPrimary?.map((item, i) => (

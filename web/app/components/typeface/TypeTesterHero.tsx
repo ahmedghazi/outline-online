@@ -75,14 +75,12 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
   }, [isMobile]);
 
   const _format = () => {
-    console.log("format");
     const minus = isMobile ? 400 : 200;
     const wHeight = window.innerHeight;
     const leftOverHeight = wHeight - minus;
     const length = items.length;
     const itemMaxHeight = Math.floor(leftOverHeight / length);
     const size = (itemMaxHeight * 100) / wHeight;
-    console.log(wHeight, leftOverHeight, minus, length, itemMaxHeight);
 
     setSize(size);
   };

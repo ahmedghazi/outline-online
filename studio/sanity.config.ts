@@ -9,28 +9,38 @@ import {getStartedPlugin} from './plugins/sanity-plugin-tutorial'
 import {defaultDocumentNode} from './src/defaultDocumentNode'
 
 const devOnlyPlugins = [getStartedPlugin()]
+const plugins = [
+  structureTool({defaultDocumentNode, structure}),
+  visionTool(),
+  ...(isDev ? devOnlyPlugins : []),
+  media(),
+]
+export default defineConfig([
+  {
+    name: 'default',
+    title: 'Outline Online (Production)',
+    basePath: '/production',
+    projectId: 'ztvzoay0',
+    dataset: 'production',
 
-export default defineConfig({
-  name: 'default',
-  title: 'Outline Online',
-
-  projectId: 'ztvzoay0',
-  dataset: 'production',
-
-  // plugins: [structureTool({structure}), visionTool(), ...(isDev ? devOnlyPlugins : []), media()],
-
-  plugins: [
-    structureTool({defaultDocumentNode, structure}),
-    visionTool(),
-    ...(isDev ? devOnlyPlugins : []),
-    media(),
-  ],
-
-  schema: {
-    types: schemaTypes,
+    plugins: plugins,
+    schema: {
+      types: schemaTypes,
+    },
+    document: {
+      // productionUrl: resolveProductionUrl,
+      // actions: [resolveProductionUrl],
+    },
   },
-  document: {
-    // productionUrl: resolveProductionUrl,
-    actions: [resolveProductionUrl],
+  {
+    name: 'preprod',
+    title: 'Outline Online [Preprod]',
+    basePath: '/preprod',
+    projectId: 'ztvzoay0',
+    dataset: 'preprod',
+    plugins: plugins,
+    schema: {
+      types: schemaTypes,
+    },
   },
-})
+])

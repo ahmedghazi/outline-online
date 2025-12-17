@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import { useScrollDirection } from "../hooks/useScrollDirection";
 import { usePageContext } from "../context/PageContext";
 import clsx from "clsx";
+import website from "../config/website";
 
 type Props = {
   settings: Settings;
@@ -119,10 +120,12 @@ const Header = ({ settings, productsCart }: Props) => {
         </div>
       </div>
       <NavPrimaryDesktop
+        siteName={settings.siteName || website.title}
         navPrimary={settings.navPrimary}
         productsCart={productsCart}
       />
       <NavPrimaryMobile
+        siteName={settings.siteName || website.title}
         navPrimary={settings.navPrimary}
         productsCart={productsCart}
       />

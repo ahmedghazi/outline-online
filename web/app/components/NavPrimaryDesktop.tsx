@@ -10,18 +10,23 @@ import NavLink from "./NavLink";
 import { usePathname } from "next/navigation";
 
 type NavProps = {
+  siteName: string;
   navPrimary: Array<MenuItem | LinkExternal> | undefined;
   productsCart: any;
 };
 
-const NavPrimaryDesktop = ({ navPrimary, productsCart }: NavProps) => {
+const NavPrimaryDesktop = ({
+  siteName,
+  navPrimary,
+  productsCart,
+}: NavProps) => {
   const ref = useRef<HTMLElement | null>(null);
 
   return (
     <nav ref={ref} id='nav-primary' className={clsx("hidden-sm")}>
       <ul className='flex'>
         <li className=''>
-          <NavLink href='/' label='Outline Online' depth={0} />{" "}
+          <NavLink href='/' label={siteName} depth={0} />{" "}
         </li>
 
         {navPrimary?.map((item, i) => (
