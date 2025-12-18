@@ -12,6 +12,7 @@ type Props = {
 };
 
 const ContentProduct = ({ input }: Props) => {
+  // console.log(input);
   const {
     setCurrentProduct,
     licenseTypeProfil,

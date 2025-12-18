@@ -14,7 +14,7 @@ body[data-template="is-product"],
       flex-direction: column;
       // text-align: left;
       // align-items: start;
-      font-feature-settings: var(--type-features);
+      // font-feature-settings: var(--type-features);
       .item {
         // font-size: 8vw;
         font-size: 7vh;
@@ -102,7 +102,9 @@ body[data-template="is-product"],
           font-family: var(--type-family);
           text-align: var(--type-textAlign);
           text-transform: var(--type-textTransform);
+          font-feature-settings: var(--type-features);
           column-count: var(--type-columnCount);
+
           word-break: break-word;
           -ms-overflow-style: none; /* Internet Explorer 10+ */
           scrollbar-width: none; /* Firefox */

@@ -68,10 +68,11 @@ const CompositionTool = ({ input, pangram }: Props) => {
   // console.log(_styles);
 
   const _handleStylisticSets = (ss: KeyValString) => {
-    // console.log(ss);
+    console.log(ss);
     if (!ref.current) return;
     if (!ss || !ss.val) return;
-    ref.current.style.setProperty("--type-features", ss.val);
+
+    ref.current.style.setProperty("--type-features", `"${ss.val}"`);
   };
 
   const _handleStyles = (s: KeyValString) => {
