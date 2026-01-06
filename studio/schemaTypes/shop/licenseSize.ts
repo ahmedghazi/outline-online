@@ -9,6 +9,7 @@ export default defineField({
   preview: {
     select: {
       title: 'title',
+      subtitle: 'priceMultiplier',
     },
   },
   fields: [
@@ -24,7 +25,11 @@ export default defineField({
       type: 'string',
       description: 'Displayed on front end',
     }),
-
+    defineField({
+      name: 'priceMultiplier',
+      type: 'number',
+      description: 'Multiplier for the base price',
+    }),
     // defineField({
     //   title: 'Items',
     //   name: 'items',

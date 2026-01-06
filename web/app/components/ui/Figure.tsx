@@ -1,5 +1,5 @@
 import website from "@/app/config/website";
-import { urlFor } from "@/app/utils/sanity-utils";
+import { urlFor } from "@/app/sanity-api/sanity-utils";
 import Image from "next/image";
 import React from "react";
 import { SanityImageAsset } from "sanity-codegen";

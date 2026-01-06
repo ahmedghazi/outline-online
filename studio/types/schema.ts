@@ -277,6 +277,13 @@ export interface Settings extends SanityDocument {
   licenseSizes?: Array<SanityKeyed<LicenseSize>>;
 
   /**
+   * licenseTypes — `array`
+   *
+   *
+   */
+  licenseTypes?: Array<SanityKeyed<LicenseType>>;
+
+  /**
    * buyModalNotices — `buyModalNotices`
    *
    *
@@ -610,6 +617,13 @@ export interface Typeface extends SanityDocument {
     | "superBlackItalic";
 
   /**
+   * variableAxe — `variableAxe`
+   *
+   * If is a variable typeface? then add the axe
+   */
+  variableAxe?: VariableAxe;
+
+  /**
    * File — `typefaceFile`
    *
    * File displayed on typeface page (comp tool, glyphs), typefaces in home page
@@ -755,6 +769,20 @@ export type LicenseType = {
   label?: string;
 
   /**
+   * Infos — `string`
+   *
+   * Displayed on front end
+   */
+  infos?: string;
+
+  /**
+   * priceMultiplier — `number`
+   *
+   * Multiplier for the base price
+   */
+  priceMultiplier?: number;
+
+  /**
    * Category Zip — `string`
    *
    * Used for zips
@@ -767,13 +795,6 @@ export type LicenseType = {
    * Used for discounts
    */
   CategoryDiscount?: string;
-
-  /**
-   * Infos — `string`
-   *
-   * Displayed on front end
-   */
-  infos?: string;
 
   /**
    * price — `number`
@@ -826,6 +847,13 @@ export type LicenseSize = {
    * Displayed on front end
    */
   infos?: string;
+
+  /**
+   * priceMultiplier — `number`
+   *
+   * Multiplier for the base price
+   */
+  priceMultiplier?: number;
 
   /**
    * licenseType — `array`
@@ -1049,6 +1077,45 @@ export type BuyModalNotices = {
    *
    */
   items?: Array<SanityKeyed<KeyVal>>;
+};
+
+export type VariableAxe = {
+  _type: "variableAxe";
+  /**
+   * Name — `string`
+   *
+   *
+   */
+  name?:
+    | "wdth"
+    | "wght"
+    | "ital"
+    | "mono"
+    | "cont"
+    | "slnt"
+    | "opsz"
+    | "trap"
+    | "waff"
+    | "shck"
+    | "cstm"
+    | "grnd"
+    | "uppr"
+    | "goth"
+    | "spik";
+
+  /**
+   * min — `number`
+   *
+   *
+   */
+  min?: number;
+
+  /**
+   * max — `number`
+   *
+   *
+   */
+  max?: number;
 };
 
 export type BlockContent = Array<SanityKeyed<SanityBlock>>;

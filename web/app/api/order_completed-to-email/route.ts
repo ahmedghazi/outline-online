@@ -1,8 +1,9 @@
 import { NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { client } from "../../utils/sanity-client";
+
 import { Product, ProductBundle, Typeface } from "@/app/types/schema";
+import { client } from "@/app/sanity-api/sanity-client";
 
 type SendProps = {
   payload: any;

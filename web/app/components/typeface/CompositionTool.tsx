@@ -7,6 +7,7 @@ import { KeyValString, ProductSingle } from "@/app/types/schema";
 import clsx from "clsx";
 import TesterColor from "./TesterColor";
 import TesterParagraph from "./TesterParagraph";
+import TesterVariable from "./TesterVariable";
 
 type Props = {
   input: ProductSingle[];
@@ -144,6 +145,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
         {ref && ref.current && (
           <div className='footer '>
             <TesterSize initialValue='89' target={ref.current} />
+            <TesterVariable axe='wght' initialValue='50' target={ref.current} />
             <TesterSpacing initialValue='0' target={ref.current} />
             <TesterLeading initialValue='89' target={ref.current} />
 

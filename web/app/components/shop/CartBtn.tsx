@@ -6,7 +6,7 @@ import useShop from "./ShopContext";
 import { usePathname } from "next/navigation";
 import { usePageContext } from "@/app/context/PageContext";
 
-const Cart = () => {
+const CartBtn = () => {
   const [count, setCount] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
   const cartRef = useRef<HTMLDivElement>(null);
@@ -89,4 +89,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartBtn;

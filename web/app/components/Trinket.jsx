@@ -12,7 +12,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 import { publish } from "pubsub-js";
 import * as THREE from "three";
-import { _randomNum } from "../utils/utils";
+import { _randomNum } from "../utils-old/utils";
 
 // import { DragControls } from "three/examples/jsm/controls/DragControls";
 //https://www.youtube.com/watch?v=tBSbgRRpNzI

@@ -9,7 +9,7 @@ export default defineField({
   preview: {
     select: {
       title: 'label',
-      subtitle: 'price',
+      subtitle: 'priceMultiplier',
     },
   },
   fields: [
@@ -18,6 +18,17 @@ export default defineField({
       name: 'label',
       type: 'string',
       description: 'Displayed on front end',
+    }),
+    defineField({
+      title: 'Infos',
+      name: 'infos',
+      type: 'string',
+      description: 'Displayed on front end',
+    }),
+    defineField({
+      name: 'priceMultiplier',
+      type: 'number',
+      description: 'Multiplier for the base price',
     }),
     defineField({
       name: 'categoryZip',
@@ -38,12 +49,7 @@ export default defineField({
       type: 'string',
       description: 'Used for discounts',
     }),
-    defineField({
-      title: 'Infos',
-      name: 'infos',
-      type: 'string',
-      description: 'Displayed on front end',
-    }),
+
     defineField({
       title: 'price',
       name: 'price',

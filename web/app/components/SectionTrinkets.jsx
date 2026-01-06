@@ -6,7 +6,7 @@ import { Box3 } from "three";
 import Trinket from "./Trinket";
 import TrinketImage from "./TrinketImage";
 import { subscribe, unsubscribe } from "pubsub-js";
-import { _shuffle, _randomNum } from "../utils/utils";
+import { _shuffle, _randomNum } from "../utils-old/utils";
 import useDeviceDetect from "../hooks/useDeviceDetect";
 
 //https://gltf.pmnd.rs/

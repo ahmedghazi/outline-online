@@ -116,6 +116,12 @@ export default defineType({
       of: [{type: 'licenseSize'}],
       group: 'shop',
     }),
+    defineField({
+      name: 'licenseTypes',
+      type: 'array',
+      of: [{type: 'licenseType'}],
+      group: 'shop',
+    }),
 
     defineField({
       name: 'buyModalNotices',

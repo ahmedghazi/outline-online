@@ -2,15 +2,15 @@ import React from "react";
 
 type Props = {
   price: number | any;
-  priceDiscount?: number;
+  discount?: number;
 };
 
-const Price = ({ price, priceDiscount }: Props) => {
+const Price = ({ price, discount }: Props) => {
   // console.log(price, priceDiscount);
-  const displayPriceCrossed = priceDiscount && priceDiscount > 0;
-  let discount = 0;
+  const displayPriceCrossed = discount && discount > 0;
+  let priceDiscount = 0;
   if (displayPriceCrossed) {
-    discount = (priceDiscount * price) / 100;
+    priceDiscount = (discount * price) / 100;
   }
   return (
     <div className='price flex gap-sm'>
@@ -23,7 +23,9 @@ const Price = ({ price, priceDiscount }: Props) => {
       {displayPriceCrossed && (
         <>
           {/* <span className="text-green">save</span> */}
-          <span className='w-[90px] text-right'>{price - discount} EUR</span>
+          <span className='w-[90px] text-right'>
+            {price - priceDiscount} EUR
+          </span>
           <span className='text-muted line-through md:max-w-[90px] text-right'>
             {price} EUR
           </span>

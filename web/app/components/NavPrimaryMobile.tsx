@@ -1,25 +1,13 @@
 "use client";
-import React, {
-  MouseEvent,
-  SyntheticEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import {
-  LinkExternal,
-  LinkInternal,
-  MenuItem,
-  SanityKeyed,
-} from "../types/schema";
-import Link from "next/link";
-import { _linkResolver } from "../utils/utils";
+import React, { useEffect, useRef } from "react";
+import { LinkExternal, MenuItem } from "../types/schema";
+import { _linkResolver } from "../utils-old/utils";
 import Buy from "./Buy";
-import Cart from "./shop/Cart";
-import { usePathname, useRouter } from "next/navigation";
-import { publish, subscribe, unsubscribe } from "pubsub-js";
+import { usePathname } from "next/navigation";
+import { publish } from "pubsub-js";
 import clsx from "clsx";
 import NavLink from "./NavLink";
+import CartBtn from "./shop/CartBtn";
 
 type NavProps = {
   siteName: string;
@@ -125,7 +113,7 @@ const NavPrimaryMobile = ({ siteName, navPrimary, productsCart }: NavProps) => {
               <Buy productsCart={productsCart} />
             </li>
             <li className='menu-item--cart'>
-              <Cart />
+              <CartBtn />
             </li>
           </ul>
         </li>

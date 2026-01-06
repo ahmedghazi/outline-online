@@ -1,13 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { LinkExternal, MenuItem } from "../types/schema";
-import { _linkResolver } from "../utils/utils";
+import { _linkResolver } from "../utils-old/utils";
 import Buy from "./Buy";
-import Cart from "./shop/Cart";
-
 import clsx from "clsx";
 import NavLink from "./NavLink";
-import { usePathname } from "next/navigation";
+import CartBtn from "./shop/CartBtn";
 
 type NavProps = {
   siteName: string;
@@ -88,7 +86,7 @@ const NavPrimaryDesktop = ({
             <Buy productsCart={productsCart} />
           </li>
           <li className='menu-item--cart'>
-            <Cart />
+            <CartBtn />
           </li>
         </ul>
       </ul>

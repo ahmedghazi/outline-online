@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { ImageUI } from "@/app/types/schema";
 import Figure from "../ui/Figure";
 // import PreJson from "../ui/PreJson";
-// import portableTextComponents from "@/app/utils/portableTextComponents";
+// import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 // import { PortableText } from "@portabletext/react";
 
 type Props = {

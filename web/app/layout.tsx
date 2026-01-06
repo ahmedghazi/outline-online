@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Script from "next/script";
 import website from "./config/website";
-import { getProductsCart, getSettings } from "./utils/sanity-queries";
+import { getProductsCart, getSettings } from "./utils-old/sanity-queries";
 import { PageContextProvider } from "./context/PageContext";
 import { ShopWrapper } from "./components/shop/ShopContext";
 import BuyModal from "./components/shop/BuyModal";
@@ -36,6 +36,7 @@ export default async function RootLayout({
   const settings = await getSettings();
   const productsCart = await getProductsCart();
   // console.log(settings.buyModalNotices);
+  console.log(productsCart);
   return (
     <html lang='en'>
       <Script id='snipcart-sources'>{`
@@ -54,7 +55,10 @@ export default async function RootLayout({
       <body className='is-loading snipcart-overwrite'>
         <div id='page'>
           <PageContextProvider settings={settings}>
-            <ShopWrapper licenses={settings.licenseSizes}>
+            <ShopWrapper
+              licenses={settings.licenseSizes}
+              licenseTypes={settings.licenseTypes}
+              licenseSizes={settings.licenseSizes}>
               <div className='dashes dashes--left'>
                 <span></span>
                 <span></span>

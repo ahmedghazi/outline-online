@@ -103,6 +103,7 @@ body[data-template="is-product"],
           text-align: var(--type-textAlign);
           text-transform: var(--type-textTransform);
           font-feature-settings: var(--type-features);
+          font-variation-settings: var(--font-variation-settings);
           column-count: var(--type-columnCount);
 
           word-break: break-word;

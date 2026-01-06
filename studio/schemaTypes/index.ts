@@ -20,6 +20,7 @@ import vendor from './shop/vendor'
 import licenseType from './shop/licenseType'
 import licenseSize from './shop/licenseSize'
 import buyModalNotices from './shop/buyModalNotices'
+import variableAxe from './shop/variableAxe'
 // import licenseSizeOption from './shop/licenseSizeOption'
 
 import imageUI from './objects/modules/imageUI'
@@ -71,6 +72,7 @@ export const schemaTypes = [
   productBundle,
   productSingle,
   buyModalNotices,
+  variableAxe,
   // style,
 
   blockContent,

@@ -1,6 +1,6 @@
 import { usePathname } from "next/navigation";
 import React from "react";
-import { _linkResolver } from "../utils/utils";
+import { _linkResolver } from "../utils-old/utils";
 import { LinkExternal, LinkInternal } from "../types/schema";
 import Link from "next/link";
 import LinkTransition from "./ui/LinkTransition";

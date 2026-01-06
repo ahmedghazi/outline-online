@@ -67,6 +67,12 @@ export default defineField({
       group: 'editorial',
     }),
     defineField({
+      name: 'variableAxe',
+      type: 'variableAxe',
+      description: 'If is a variable typeface? then add the axe',
+      group: 'editorial',
+    }),
+    defineField({
       title: 'File',
       name: 'typefaceFile',
       type: 'typefaceFile',

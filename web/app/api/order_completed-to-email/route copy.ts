@@ -1,7 +1,7 @@
 // import { NextApiResponse } from "next";
 // import { NextRequest, NextResponse } from "next/server";
 // import nodemailer from "nodemailer";
-// import { client } from "../../utils/sanity-client";
+// import { client } from "../../sanity-api/sanity.client";
 // import { Product, ProductBundle, Typeface } from "@/app/types/schema";
 
 // type SendProps = {

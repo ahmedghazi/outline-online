@@ -4,7 +4,7 @@
 // // import { _localizeField } from "@/app/utils/utils";
 // // import { ModuleImagesUI } from "@/app/types/schema";
 // // import PreJson from "../ui/PreJson";
-// // import portableTextComponents from "@/app/utils/portableTextComponents";
+// // import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 // // import { PortableText } from "@portabletext/react";
 
 // type Props = {

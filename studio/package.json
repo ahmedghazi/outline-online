@@ -10,6 +10,7 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
+    "deploy-graphql-preprod": "sanity graphql deploy preprod --playground",
     "d": "yarn run deploy-graphql && yarn run deploy && yarn run codegen && code ../web/app/types/schema.ts && code types/schema.ts ",
     "codegen": "npx sanity-codegen"
   },

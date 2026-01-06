@@ -1,6 +1,6 @@
 // import React from "react";
 // import { PortableText } from "@portabletext/react";
-// import portableTextComponents from "@/app/utils/portableTextComponents";
+// import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 
 // type Props = {
 //   input: ModuleTextUI;

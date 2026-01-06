@@ -5,7 +5,7 @@ here is a list of tasks I need to do.
 - Cart Error 2 (later)
 - Safari cutting off edge of textboxes in glyphs panel
 - Trial dl with expiring link
-- Apply OT features
+  #- Apply OT features
 - Variable slider UI
 - More family packages
 - More essential packages

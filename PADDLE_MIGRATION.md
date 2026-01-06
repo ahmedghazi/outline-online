@@ -1,3 +1,22 @@
+licenses (print, web, ...) have base price
+— Print: 1
+— Web: 2
+...
+
+Company size multiply licenses' licenses price * x
+— <5 : 1
+— <20: 2
+...
+
+<20 + Print
+final multiplier = 1 * 2 = 2
+
+Singles : 90€
+final price = 180€
+
+Bundles based on single price unit * amount of singles in the bundle: Ex bundle essentials = 4 typfaces = base price * 4
+— numberOfItems: x
+
 # Paddle Migration Roadmap
 
 ## Overview

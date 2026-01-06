@@ -1,13 +1,13 @@
 import React from "react";
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
-import { getClient } from "@/app/utils/sanity-client";
+import { getClient } from "@/app/sanity-api/sanity.client";
 import { Infos, Licensing } from "@/app/types/schema";
 import {
   getLicensing,
   infosQuery,
   licensingQuery,
-} from "@/app/utils/sanity-queries";
+} from "@/app/utils-old/sanity-queries";
 import website from "@/app/config/website";
 import ContentInfos from "@/app/components/ContentInfos";
 import ContentLicensing from "@/app/components/ContentLicensing";

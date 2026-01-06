@@ -1,8 +1,8 @@
 import { NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
-import { client } from "../../utils/sanity-client";
 import nodemailer from "nodemailer";
 import { Product } from "@/app/types/schema";
+import { client } from "@/app/sanity-api/sanity-client";
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
   if (req.method !== "POST") {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Infos } from "../types/schema";
 import { PortableText } from "next-sanity";
-import portableTextComponents from "../utils/portableTextComponents";
+import portableTextComponents from "../utils-old/portableTextComponents";
 import SummaryDetailFramer from "./ui/SummaryDetailFramer";
 import NavTertiary from "./NavTertiary";
 

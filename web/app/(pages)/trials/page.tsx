@@ -1,9 +1,13 @@
 import React from "react";
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
-import { getClient } from "@/app/utils/sanity-client";
+import { getClient } from "@/app/sanity-api/sanity.client";
 import { Trials } from "@/app/types/schema";
-import { getInfos, getTrials, infosQuery } from "@/app/utils/sanity-queries";
+import {
+  getInfos,
+  getTrials,
+  infosQuery,
+} from "@/app/utils-old/sanity-queries";
 import website from "@/app/config/website";
 import ContentTrials from "@/app/components/ContentTrials";
 // import ContentInfos from "@/app/components/ContentInfos";

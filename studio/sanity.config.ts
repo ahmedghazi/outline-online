@@ -17,7 +17,7 @@ const plugins = [
 ]
 export default defineConfig([
   {
-    name: 'default',
+    name: 'production',
     title: 'Outline Online (Production)',
     basePath: '/production',
     projectId: 'ztvzoay0',
@@ -26,6 +26,9 @@ export default defineConfig([
     plugins: plugins,
     schema: {
       types: schemaTypes,
+    },
+    graphql: {
+      playground: true, // Explicitly enable
     },
     document: {
       // productionUrl: resolveProductionUrl,
@@ -41,6 +44,9 @@ export default defineConfig([
     plugins: plugins,
     schema: {
       types: schemaTypes,
+    },
+    graphql: {
+      playground: false, // Explicitly enable
     },
   },
 ])

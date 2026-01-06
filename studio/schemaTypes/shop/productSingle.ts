@@ -37,6 +37,7 @@ export default defineField({
       name: 'isDefault',
       type: 'boolean',
     }),
+
     defineField({
       title: 'Description',
       name: 'description',

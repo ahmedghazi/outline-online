@@ -6,7 +6,6 @@ import React, {
   useEffect,
   ReactNode,
   useReducer,
-  SyntheticEvent,
 } from "react";
 import {
   LabelPrice,
@@ -18,72 +17,48 @@ import {
 } from "@/app/types/schema";
 import { usePathname } from "next/navigation";
 import { _getDataAttributes } from "./utils";
-import { publish } from "pubsub-js";
-import path from "path";
+import { ProductData } from "@/app/types/extra-types";
 
 interface ShopContextProps {
-  // location?: object;
   children: ReactNode;
   licenses: LicenseSize[] | undefined;
-  // pageContext: object;
+  licenseTypes: LicenseType[] | undefined;
+  licenseSizes: LicenseSize[] | undefined;
 }
 
-// An enum with all the types of actions to use in our reducer
-// enum CountActionKind {
-//   INCREASE = "INCREASE",
-//   DECREASE = "DECREASE",
+// interface ProductData {
+//   id: string;
+//   price: number;
+//   alternatePrices: any;
+//   url: string;
+//   description: string;
+//   name: string;
+//   quantity: number;
+//   stackable: string;
+//   shippable: boolean;
+//   customFields: any[];
+//   metadata: string;
 // }
-
-// // An interface for our actions
-// interface CountAction {
-//   type: CountActionKind;
-//   payload: number;
-// }
-
-// // An interface for our state
-// interface CountState {
-//   count: number;
-// }
-
-interface ProductData {
-  id: string;
-  price: number;
-  alternatePrices: any;
-  url: string;
-  description: string;
-  name: string;
-  quantity: number;
-  stackable: string;
-  shippable: boolean;
-  customFields: any[];
-  metadata: string;
-}
 
 const initialLicenseTypeState: LabelPrice[] = [];
 
 function licenseTypeReducer(state: any, action: any) {
-  // console.log(state, action);
   const { type, payload } = action;
-  // console.log(type, payload);
   switch (type) {
     case "SET":
       return payload;
     case "ADD":
-      return [...state, payload];
+      // only add if it doesn't already exist
+      return state.some((item: any) => item._key === payload._key)
+        ? state
+        : [...state, payload];
+    case "REPLACE":
+      return state.map((item: any) =>
+        item._key === payload._key ? payload : item
+      );
     case "REMOVE":
       return state.filter((item: any) => item.label !== payload.label);
 
-    case "REPLACE":
-      // console.log(state);
-      // return [payload];
-      return state.map((item: any) => {
-        return item.label === payload.label ? payload : item;
-        // if (item.label === payload.label) {
-        //   return payload;
-        // } else {
-        //   return item;
-        // }
-      });
     case "REMOVE_ALL":
       return [];
     default:
@@ -92,21 +67,15 @@ function licenseTypeReducer(state: any, action: any) {
 }
 
 function trialsReducer(state: any, action: any) {
-  // console.log(state);
   const { type, payload } = action;
   switch (type) {
     case "ADD":
       return [...state, payload];
     case "REMOVE":
       return state.filter((item: SanityKeyed<ProductSingle>) => {
-        // console.log(item._key, payload._key);
         return item._key !== payload._key;
       });
 
-    // case "REPLACE":
-    //   return state.map((item: any) =>
-    //     item.title === payload.title ? payload : item
-    //   );
     case "REMOVE_ALL":
       return [];
     default:
@@ -117,24 +86,21 @@ function trialsReducer(state: any, action: any) {
 type ContextProps = {
   ready: boolean;
   licenses: LicenseSize[] | undefined;
-  // userStatus: string;
-  // customer: any;
+  licenseSizes: LicenseSize[] | undefined;
+  licenseTypes: LicenseType[] | undefined;
   cartObject: any;
-  // products: any;
   currentProduct: Product | null;
   products: ProductData[];
   setProducts: Function;
   setCurrentProduct: Function;
-  licenseTypeProfil: Array<SanityKeyed<LicenseType>> | null;
-  setLicenseTypeProfil: Function;
   licenseSizeProfil: LicenseSize | null;
   setLicenseSizeProfil: Function;
+  licenseTypeProfil: Array<SanityKeyed<LicenseType>> | null;
+  setLicenseTypeProfil: Function;
   dataAttributes: Array<string> | null;
   setDataAttributes: Function;
   trials: ProductSingle[];
   setTrials: Function;
-  // isVip: boolean;
-  // setIsVip: Function;
 };
 
 const ShopContext = createContext<ContextProps>({} as ContextProps);
@@ -147,17 +113,13 @@ declare global {
 
 type EmptyObj = Record<PropertyKey, never | any>;
 
-export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
+export const ShopWrapper = ({
+  children,
+  licenses,
+  licenseSizes,
+  licenseTypes,
+}: ShopContextProps) => {
   const defaultLicense = licenses && licenses?.length > 0 ? licenses[0] : null;
-  // const initialLicenseTypeState: (LicenseType & { _key: string })[] =
-  //   defaultLicense &&
-  //   defaultLicense?.licenseType &&
-  //   defaultLicense?.licenseType?.length > 0
-  //     ? [defaultLicense?.licenseType[0]]
-  //     : [];
-  // const initialLicenseTypeState: (LicenseType & { _key: string })[] = [];
-
-  // console.log(licenses);
 
   const [ready, setReady] = useState<boolean>(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
@@ -171,17 +133,11 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
     licenseTypeReducer,
     initialLicenseTypeState
   );
-  // const [licenseTypeProfil, setLicenseTypeProfil] = useState<
-  //   LicenseType[] | null
-  // >([]);
-  // if (licenseTypeProfil) console.log(licenseTypeProfil[0]);
 
   const [dataAttributes, setDataAttributes] = useState<Array<string>>([""]);
   const [isVip, setIsVip] = useState<boolean>(false);
   const [trials, setTrials] = useReducer(trialsReducer, []);
   const pathname = usePathname();
-  // console.log("------------- ShopWrapper");
-  // console.log(licenseTypeProfil);
 
   useEffect(() => {
     const Snipcart = window.Snipcart;
@@ -295,36 +251,14 @@ export const ShopWrapper = ({ children, licenses }: ShopContextProps) => {
       });
     }
   };
-  // const _handleClickOutside = (e: Event) => {
-  //   // console.log("click oustide modal");
-  //   const target = e.target as Element;
-  //   // console.log(target.closest(".snipcart-modal__container"));
-  //   if (!target.closest(".snipcart-modal__container")) {
-  //     // blur();
-  //     const cartClose: HTMLElement = document.querySelector(
-  //       ".snipcart-modal__close"
-  //     ) as HTMLElement;
-  //     if (cartClose) {
-  //       // cartClose.click();
-  //       // publish("BUY_MODAL_ACTIVE", true);
-  //     }
-  //   }
-  //   // const cartClose: HTMLElement = document.querySelector(
-  //   //   ".snipcart-modal__close"
-  //   // ) as HTMLElement;
-  //   // if (cartClose) {
-  //   //   // cartClose.click();
-  //   // }
-  // };
-  // const _handleClickOutsideReset = (evt: Event) => {
-  //   evt.stopPropagation();
-  // };
 
   return (
     <ShopContext.Provider
       value={{
         ready,
         licenses,
+        licenseSizes,
+        licenseTypes,
         cartObject,
         currentProduct,
         setCurrentProduct,

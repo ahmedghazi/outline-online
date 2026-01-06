@@ -7,9 +7,9 @@ import Checkbox from "./ui/Checkbox";
 // import { usePageContext } from "../context/PageContext";
 import useShop from "./shop/ShopContext";
 import TrialsDownload from "./TrialsDownload";
-import { _removeFromArr } from "../utils/utils";
+import { _removeFromArr } from "../utils-old/utils";
 import { PortableText } from "next-sanity";
-import portableTextComponents from "../utils/portableTextComponents";
+import portableTextComponents from "../utils-old/portableTextComponents";
 
 type TypeFaceItemProps = {
   input: Product;

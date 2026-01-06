@@ -19,21 +19,35 @@ const LicenseTypeUI = ({ input, index, ready }: Props) => {
   }, []);
 
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
-    // const items = licenseTypeProfil?.filter((el) => el.label === val.label);
+    const exist = licenseTypeProfil?.some((el) => el.label === val.label);
     if (checked) {
-      // console.log(licenseTypeProfil?.length, val.label, checked);
-
-      setLicenseTypeProfil({ type: "SET", payload: [val] });
+      if (exist) {
+        setLicenseTypeProfil({ type: "REPLACE", payload: val });
+      } else {
+        setLicenseTypeProfil({ type: "ADD", payload: val });
+      }
+    } else {
+      setLicenseTypeProfil({ type: "REMOVE", payload: val });
     }
   };
   return (
     <div className='input flex gap-sm'>
       {ready && (
-        <Radio
+        // <Radio
+        //   name={input.label || ""}
+        //   checked={index === 0}
+        //   // checked={ready && index === 0}
+        //   onChange={(checked: boolean) => {
+        //     console.log(checked, input);
+        //     _updateLicenseType(checked, input);
+        //     // setIsChecked(checked);
+        //   }}
+        // />
+        <Checkbox
           name={input.label || ""}
           checked={index === 0}
-          // checked={ready && index === 0}
           onChange={(checked: boolean) => {
+            // console.log(checked, input);
             _updateLicenseType(checked, input);
             // setIsChecked(checked);
           }}

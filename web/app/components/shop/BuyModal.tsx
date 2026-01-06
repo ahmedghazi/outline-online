@@ -2,8 +2,6 @@
 import {
   BuyModalNotices,
   LicenseSize,
-  // LabelPrice,
-  // LicenseSize,
   LicenseType,
   Product,
   ProductBundle,
@@ -13,15 +11,13 @@ import {
 import React, { useEffect, useState } from "react";
 import Select from "../ui/Select";
 import clsx from "clsx";
-import Checkbox from "../ui/Checkbox";
-// import Price from "./Price";
 import useShop from "./ShopContext";
 import AddToCart from "./AddToCart";
-import { subscribe, unsubscribe } from "pubsub-js";
 import { usePathname } from "next/navigation";
 import { usePageContext } from "@/app/context/PageContext";
 import BuyModalNoticesComponent from "./BuyModalNoticesComponent";
 import LicenseTypeUI from "./LicenseTypeUI";
+import PaddleAddToCart from "./PaddleAddToCart";
 
 declare global {
   interface Window {
@@ -51,29 +47,22 @@ Default is first license type
 }
 */
 type CartProductItemProps = {
-  title: string;
+  productTitle: string;
   productId: string;
   input: SanityKeyed<ProductSingle | ProductBundle>;
-  type: "bundle" | "single";
+  type: "productBundle" | "productSingle";
+  priceMultiplier: number;
 };
 
 const CartProductItem = ({
   input,
-  title,
+  productTitle,
   productId,
   type,
+  priceMultiplier,
 }: CartProductItemProps) => {
   const [active, setActive] = useState<boolean>(false);
-  // const typefaces =
-  //   input._type === "productBundle"
-  //     ? input.typefaces
-  //       ? input.typefaces
-  //       : []
-  //     : input.typeface
-  //     ? [input.typeface]
-  //     : [];
 
-  // let greenText = "";
   let isPriceCrossed: boolean =
     typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
 
@@ -95,17 +84,13 @@ const CartProductItem = ({
           </div>
         </div>
       </div>
-      {/* <Price price={item.price} /> */}
       <div className='actions md:col-span-2'>
         <div className='sm-only'>
-          {/* {input._type === "productBundle" && input.descriptionAlt && (
-            <span className='text-green'>{input.descriptionAlt}</span>
-          )} */}
           {input._type === "productBundle" && input.priceDiscount && (
             <span className='text-green '>Save {input.priceDiscount}%</span>
           )}
         </div>
-        <AddToCart
+        {/* <AddToCart
           id={input._key || ""}
           title={input.title || ""}
           fullTitle={title || ""}
@@ -124,6 +109,24 @@ const CartProductItem = ({
             // typefaces: typefaces,
           }}
           defaultActive={active}
+        /> */}
+
+        <PaddleAddToCart
+          productData={{
+            productTypeRef: input._key || "",
+            productType: type,
+            sku: input._key || "",
+            price: input.price || 0,
+            discount: input.priceDiscount || 0,
+            finalPrice: input.price || 0,
+            productId: productId || "",
+            productTitle: productTitle || "",
+            fullTitle: `${productTitle} ${input.title || ""}`,
+            description: input.description || "",
+            license: "",
+            licenseInfos: "",
+          }}
+          priceMultiplier={priceMultiplier}
         />
       </div>
     </div>
@@ -132,12 +135,13 @@ const CartProductItem = ({
 
 type CartProductProps = {
   input: Product;
+  priceMultiplier: number;
 };
 
-const CartProduct = ({ input }: CartProductProps) => {
-  const [active, setActive] = useState<boolean>(false);
+const CartProduct = ({ input, priceMultiplier }: CartProductProps) => {
+  const [active, setActive] = useState<boolean>(true);
   const pathname = usePathname();
-
+  // console.log(input);
   useEffect(() => {
     const isProductPage = pathname.indexOf("product") > -1;
     if (isProductPage) {
@@ -169,9 +173,10 @@ const CartProduct = ({ input }: CartProductProps) => {
                 <CartProductItem
                   key={i}
                   productId={input._id}
-                  title={`${input.title} ${item.title}`}
+                  productTitle={input.title || ""}
                   input={item}
-                  type='bundle'
+                  type={item._type}
+                  priceMultiplier={priceMultiplier}
                 />
               ))}
             </div>
@@ -187,9 +192,10 @@ const CartProduct = ({ input }: CartProductProps) => {
                 <CartProductItem
                   key={i}
                   productId={input._id}
-                  title={`${input.title} ${item.title}`}
+                  productTitle={input.title || ""}
                   input={item}
-                  type='single' //style ???
+                  type={item._type} //style ???
+                  priceMultiplier={priceMultiplier}
                 />
               ))}
             </div>
@@ -206,16 +212,18 @@ type Props = {
 };
 
 const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
-  // console.log(JSON.stringify(productsCart, null, 2));
   // const [active, setActive] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
   const [buttonStatus, setButtonStatus] = useState("Add To Cart");
   const pathname = usePathname();
   const { tab } = usePageContext();
+  const [priceMultiplier, setPriceMultiplier] = useState<number>(1);
   // console.log({ tab });
   const {
     licenses,
+    licenseSizes,
+    licenseTypes,
     licenseSizeProfil,
     setLicenseSizeProfil,
     licenseTypeProfil,
@@ -227,23 +235,23 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   useEffect(() => {
     // console.log(pathname);
     // setActive(tab.name === "BUY" && tab.active);
-    setOpen(tab.name === "BUY");
+    // setOpen(tab.name === "BUY");
   }, [tab]);
 
   useEffect(() => {
     setReady(true);
 
-    window.addEventListener("hashchange", (event) => {
-      // console.log(event, location.hash);
-      if (location.hash.indexOf("cart") > -1) {
-        setOpen(false);
-      }
-    });
+    // window.addEventListener("hashchange", (event) => {
+    //   // console.log(event, location.hash);
+    //   if (location.hash.indexOf("cart") > -1) {
+    //     setOpen(false);
+    //   }
+    // });
   }, []);
 
   useEffect(() => {
     // console.log(pathname);
-    setOpen(false);
+    // setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -253,40 +261,38 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
     // }
   }, [open]);
 
-  const _updateLicenseSize = (val: LicenseSize) => {
-    setLicenseSizeProfil(val);
-  };
   useEffect(() => {
-    if (licenseTypeProfil) {
+    let priceMultiplier = 1;
+    if (licenseSizeProfil && licenseTypeProfil) {
+      priceMultiplier = licenseSizeProfil.priceMultiplier || 1;
       licenseTypeProfil.forEach((el) => {
-        if (licenseSizeProfil && licenseSizeProfil?.licenseType) {
-          const replacer = licenseSizeProfil?.licenseType.filter(
-            (_el) => _el.label === el.label
-          );
-          if (replacer && replacer.length === 1) {
-            setLicenseTypeProfil({ type: "REPLACE", payload: replacer[0] });
-          }
+        if (el.label) {
+          // à préciser, + ou *
+          priceMultiplier *= el.priceMultiplier || 0;
         }
       });
     }
-  }, [licenseSizeProfil]);
+    setPriceMultiplier(priceMultiplier);
+  }, [licenseSizeProfil, licenseTypeProfil]);
 
-  const _updateLicenseType = (checked: boolean, val: LicenseType) => {
-    const items = licenseTypeProfil?.filter((el) => el.label === val.label);
-    // console.log(checked, val.label, items);
-    if (checked) {
-      //no dubplicate
-      if (items?.length === 0) {
-        setLicenseTypeProfil({ type: "ADD", payload: val });
-      }
-    } else {
-      if (items && items.length > 0) {
-        //remove
-        // console.log("----- remove", val);
-        setLicenseTypeProfil({ type: "REMOVE", payload: val });
-      }
-    }
+  const _updateLicenseSize = (val: LicenseSize) => {
+    setLicenseSizeProfil(val);
   };
+
+  // useEffect(() => {
+  //   if (licenseTypeProfil) {
+  //     licenseTypeProfil.forEach((el) => {
+  //       if (licenseSizeProfil && licenseSizeProfil?.licenseType) {
+  //         const replacer = licenseSizeProfil?.licenseType.filter(
+  //           (_el) => _el.label === el.label
+  //         );
+  //         if (replacer && replacer.length === 1) {
+  //           setLicenseTypeProfil({ type: "REPLACE", payload: replacer[0] });
+  //         }
+  //       }
+  //     });
+  //   }
+  // }, [licenseSizeProfil]);
 
   const _addToCart = async () => {
     //https://docs.snipcart.com/v3/sdk/api#cart
@@ -306,13 +312,40 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
       console.log(error);
     }
   };
-  // console.log(licenseTypeProfil);
   return (
     <div className={clsx("buy-modal", open ? "is-open" : "")}>
       <div className='outter'>
         <div className='inner'>
           <div className='header'>
-            {licenses && (
+            <pre>{JSON.stringify(products, null, 2)}</pre>
+
+            {licenseSizes && licenseTypes && (
+              <div className='_row grid md:grid-cols-8 '>
+                <div className='label'>Company Size</div>
+                <div className='input'>
+                  <Select
+                    options={licenseSizes}
+                    onChange={(val: LicenseSize) => _updateLicenseSize(val)}
+                    // disabled={hasProducts && hasLicenseType ? true : false}
+                  />
+                </div>
+
+                <div className='label'>Licenses</div>
+                <div className='licenses md:col-span-5 md:py-05e'>
+                  <div className='flex flex-wrap md:justify-between gap-sm md:gap-0'>
+                    {licenseTypes.map((item, i) => (
+                      <LicenseTypeUI
+                        key={i}
+                        input={item}
+                        index={i}
+                        ready={ready}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+            {/* {licenses && (
               <div className='_row grid md:grid-cols-8 '>
                 <div className='label'>Company Size</div>
                 <div className='input'>
@@ -327,16 +360,6 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                 <div className='licenses md:col-span-5 md:py-05e'>
                   <div className='flex flex-wrap md:justify-between gap-sm md:gap-0'>
                     {licenseSizeProfil?.licenseType?.map((item, i) => (
-                      // <div className='input flex gap-sm' key={i}>
-                      //   <Checkbox
-                      //     name={item.label || ""}
-                      //     checked={ready && i === 0}
-                      //     onChange={(checked: boolean) => {
-                      //       // console.log(checked, item.label);
-                      //       _updateLicenseType(checked, item);
-                      //     }}
-                      //   />
-                      // </div>
                       <LicenseTypeUI
                         key={i}
                         input={item}
@@ -347,12 +370,16 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
           <div className='body overflow-y-auto- h-screen-'>
             <div className='items'>
               {productsCart.map((item, i) => (
-                <CartProduct input={item} key={i} />
+                <CartProduct
+                  input={item}
+                  key={i}
+                  priceMultiplier={priceMultiplier}
+                />
               ))}
             </div>
             {buyModalNotices && (
@@ -379,7 +406,6 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
           </div>
         </div>
       </div>
-      {/* <pre>{JSON.stringify(licenseTypeProfil, null, 2)}</pre> */}
     </div>
   );
 };
