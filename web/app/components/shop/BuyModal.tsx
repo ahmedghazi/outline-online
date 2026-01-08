@@ -12,41 +12,14 @@ import React, { useEffect, useState } from "react";
 import Select from "../ui/Select";
 import clsx from "clsx";
 import useShop from "./ShopContext";
-import AddToCart from "./AddToCart";
 import { usePathname } from "next/navigation";
 import { usePageContext } from "@/app/context/PageContext";
 import BuyModalNoticesComponent from "./BuyModalNoticesComponent";
 import LicenseTypeUI from "./LicenseTypeUI";
-import PaddleAddToCart from "./PaddleAddToCart";
+import AddToTmpCart from "./AddToTmpCart";
+import AddToCart from "./AddToCart";
 
-declare global {
-  interface Window {
-    Snipcart: any; // 👈️ turn off type checking
-  }
-}
-
-/*
-# PROCESS
-set context licenseSize (type LicenseSize)
-- default is company size <5 or first item
-1 row = 1 product (pizza)
-each product (bundle, single style) has custom attr of type license
-input checkbox snipcart, on change set Products
-# TO DO
-Default is first license type
-
-{
-  productID: xxx,
-  type: bundle,
-  ref: bundle.ref
-}
-{
-  productID: xxx,
-  type: style
-  ref: style.ref
-}
-*/
-type CartProductItemProps = {
+type ProductItemProps = {
   productTitle: string;
   productId: string;
   input: SanityKeyed<ProductSingle | ProductBundle>;
@@ -54,13 +27,13 @@ type CartProductItemProps = {
   priceMultiplier: number;
 };
 
-const CartProductItem = ({
+const ProductItem = ({
   input,
   productTitle,
   productId,
   type,
   priceMultiplier,
-}: CartProductItemProps) => {
+}: ProductItemProps) => {
   const [active, setActive] = useState<boolean>(false);
 
   let isPriceCrossed: boolean =
@@ -90,32 +63,14 @@ const CartProductItem = ({
             <span className='text-green '>Save {input.priceDiscount}%</span>
           )}
         </div>
-        {/* <AddToCart
-          id={input._key || ""}
-          title={input.title || ""}
-          fullTitle={title || ""}
-          blurb={""}
-          categories={input.categories || []}
-          categoryLicensePrice={
-            input._type === "productBundle" ? input.categoryLicensePrice : ""
-          }
-          price={input.price || 0}
-          // priceCrossed={isPriceCrossed ? priceCrossed : undefined}
-          priceDiscount={input.priceDiscount}
-          metadata={{
-            productId: productId,
-            type: type,
-            _key: input._key,
-            // typefaces: typefaces,
-          }}
-          defaultActive={active}
-        /> */}
 
-        <PaddleAddToCart
+        <AddToTmpCart
+          active={active}
           productData={{
-            productTypeRef: input._key || "",
+            bundleOrSingleKey: input._key || "",
             productType: type,
             sku: input._key || "",
+            basePrice: input.price || 0,
             price: input.price || 0,
             discount: input.priceDiscount || 0,
             finalPrice: input.price || 0,
@@ -123,7 +78,8 @@ const CartProductItem = ({
             productTitle: productTitle || "",
             fullTitle: `${productTitle} ${input.title || ""}`,
             description: input.description || "",
-            license: "",
+            licenseSize: "",
+            licenseType: "",
             licenseInfos: "",
           }}
           priceMultiplier={priceMultiplier}
@@ -133,13 +89,13 @@ const CartProductItem = ({
   );
 };
 
-type CartProductProps = {
+type BuyProductProps = {
   input: Product;
   priceMultiplier: number;
 };
 
-const CartProduct = ({ input, priceMultiplier }: CartProductProps) => {
-  const [active, setActive] = useState<boolean>(true);
+const BuyProduct = ({ input, priceMultiplier }: BuyProductProps) => {
+  const [active, setActive] = useState<boolean>(false);
   const pathname = usePathname();
   // console.log(input);
   useEffect(() => {
@@ -170,7 +126,7 @@ const CartProduct = ({ input, priceMultiplier }: CartProductProps) => {
             <div className='label text-gray-100 md:col-span-2'>Bundles</div>
             <div className='items md:col-span-6'>
               {input.bundles?.map((item, i) => (
-                <CartProductItem
+                <ProductItem
                   key={i}
                   productId={input._id}
                   productTitle={input.title || ""}
@@ -189,7 +145,7 @@ const CartProduct = ({ input, priceMultiplier }: CartProductProps) => {
             </div>
             <div className='items md:col-span-6'>
               {input.singles?.map((item, i) => (
-                <CartProductItem
+                <ProductItem
                   key={i}
                   productId={input._id}
                   productTitle={input.title || ""}
@@ -214,28 +170,25 @@ type Props = {
 const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   // const [active, setActive] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(true);
-  const [buttonStatus, setButtonStatus] = useState("Add To Cart");
+  const [open, setOpen] = useState<boolean>(false);
   const pathname = usePathname();
   const { tab } = usePageContext();
   const [priceMultiplier, setPriceMultiplier] = useState<number>(1);
   // console.log({ tab });
   const {
-    licenses,
     licenseSizes,
     licenseTypes,
     licenseSizeProfil,
     setLicenseSizeProfil,
     licenseTypeProfil,
-    setLicenseTypeProfil,
-    products,
+    tmpProducts,
   } = useShop();
   // console.log(products);
 
   useEffect(() => {
     // console.log(pathname);
     // setActive(tab.name === "BUY" && tab.active);
-    // setOpen(tab.name === "BUY");
+    setOpen(tab.name === "BUY");
   }, [tab]);
 
   useEffect(() => {
@@ -251,14 +204,11 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
 
   useEffect(() => {
     // console.log(pathname);
-    // setOpen(false);
+    setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
     document.body.classList.toggle("is-product--open", open);
-    // if (active && pathname === "/") {
-    //   window.scroll(0, window.innerHeight);
-    // }
   }, [open]);
 
   useEffect(() => {
@@ -279,45 +229,14 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
     setLicenseSizeProfil(val);
   };
 
-  // useEffect(() => {
-  //   if (licenseTypeProfil) {
-  //     licenseTypeProfil.forEach((el) => {
-  //       if (licenseSizeProfil && licenseSizeProfil?.licenseType) {
-  //         const replacer = licenseSizeProfil?.licenseType.filter(
-  //           (_el) => _el.label === el.label
-  //         );
-  //         if (replacer && replacer.length === 1) {
-  //           setLicenseTypeProfil({ type: "REPLACE", payload: replacer[0] });
-  //         }
-  //       }
-  //     });
-  //   }
-  // }, [licenseSizeProfil]);
-
-  const _addToCart = async () => {
-    //https://docs.snipcart.com/v3/sdk/api#cart
-    // console.log(products);
-    setButtonStatus("Adding...");
-    try {
-      await Promise.all(
-        products.map(async (product) => {
-          // console.log(product);
-          await window.Snipcart.api.cart.items.add(product);
-        })
-      );
-
-      await window.Snipcart.api.theme.cart.open();
-      setButtonStatus("Add");
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <div className={clsx("buy-modal", open ? "is-open" : "")}>
       <div className='outter'>
         <div className='inner'>
           <div className='header'>
-            <pre>{JSON.stringify(products, null, 2)}</pre>
+            {/* <pre>{priceMultiplier}</pre> */}
+            {/* <pre>{JSON.stringify(tmpProducts, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
 
             {licenseSizes && licenseTypes && (
               <div className='_row grid md:grid-cols-8 '>
@@ -326,7 +245,6 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                   <Select
                     options={licenseSizes}
                     onChange={(val: LicenseSize) => _updateLicenseSize(val)}
-                    // disabled={hasProducts && hasLicenseType ? true : false}
                   />
                 </div>
 
@@ -345,37 +263,11 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
                 </div>
               </div>
             )}
-            {/* {licenses && (
-              <div className='_row grid md:grid-cols-8 '>
-                <div className='label'>Company Size</div>
-                <div className='input'>
-                  <Select
-                    options={licenses}
-                    onChange={(val: LicenseSize) => _updateLicenseSize(val)}
-                    // disabled={hasProducts && hasLicenseType ? true : false}
-                  />
-                </div>
-
-                <div className='label'>Licenses</div>
-                <div className='licenses md:col-span-5 md:py-05e'>
-                  <div className='flex flex-wrap md:justify-between gap-sm md:gap-0'>
-                    {licenseSizeProfil?.licenseType?.map((item, i) => (
-                      <LicenseTypeUI
-                        key={i}
-                        input={item}
-                        index={i}
-                        ready={ready}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )} */}
           </div>
-          <div className='body overflow-y-auto- h-screen-'>
+          <div className='body'>
             <div className='items'>
               {productsCart.map((item, i) => (
-                <CartProduct
+                <BuyProduct
                   input={item}
                   key={i}
                   priceMultiplier={priceMultiplier}
@@ -387,22 +279,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
             )}
           </div>
           <div className='footer'>
-            <button
-              onClick={_addToCart}
-              className={clsx(
-                "atc-all  block",
-                products.length > 0
-                  ? "button-submit"
-                  : "button-disabled pointer-events-none"
-              )}>
-              {buttonStatus}{" "}
-              {products.length > 0 && (
-                <span className='length'>
-                  <span>{products.length} </span>
-                  <span>product{products.length > 1 && "s"}</span>
-                </span>
-              )}
-            </button>
+            <AddToCart />
           </div>
         </div>
       </div>

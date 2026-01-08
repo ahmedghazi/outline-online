@@ -88,30 +88,51 @@ type ContextProps = {
   licenses: LicenseSize[] | undefined;
   licenseSizes: LicenseSize[] | undefined;
   licenseTypes: LicenseType[] | undefined;
-  cartObject: any;
   currentProduct: Product | null;
   products: ProductData[];
   setProducts: Function;
+  tmpProducts: ProductData[];
+  setTmpProducts: Function;
   setCurrentProduct: Function;
   licenseSizeProfil: LicenseSize | null;
   setLicenseSizeProfil: Function;
   licenseTypeProfil: Array<SanityKeyed<LicenseType>> | null;
   setLicenseTypeProfil: Function;
-  dataAttributes: Array<string> | null;
-  setDataAttributes: Function;
   trials: ProductSingle[];
   setTrials: Function;
 };
 
 const ShopContext = createContext<ContextProps>({} as ContextProps);
 
-declare global {
-  interface Window {
-    Snipcart: any; // 👈️ turn off type checking
+function productsReducer(state: any, action: any) {
+  // console.log(state, action);
+  const { type, payload } = action;
+  console.log(type, payload);
+  switch (type) {
+    case "SET":
+      return payload;
+    case "ADD":
+      const exist = state.filter((item: any) => item.sku === payload.sku);
+      if (exist.length === 0) {
+        return [...state, payload];
+      }
+      return state;
+    case "REMOVE":
+      return state.filter((item: any) => item.sku !== payload.sku);
+    case "REMOVE_BY_SKU":
+      console.log("REMOVE_BY_SKU", payload);
+      // console.log(state);
+      return state.filter((item: any) => item.sku !== payload);
+    case "REPLACE":
+      return state.map((item: any) => {
+        return item.sku === payload.sku ? payload : item;
+      });
+    case "REMOVE_ALL":
+      return [];
+    default:
+      throw new Error();
   }
 }
-
-type EmptyObj = Record<PropertyKey, never | any>;
 
 export const ShopWrapper = ({
   children,
@@ -123,8 +144,9 @@ export const ShopWrapper = ({
 
   const [ready, setReady] = useState<boolean>(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
-  const [products, setProducts] = useState([]);
-  const [cartObject, setCartObject] = useState(null);
+  const [products, setProducts] = useReducer(productsReducer, []);
+  const [tmpProducts, setTmpProducts] = useReducer(productsReducer, []);
+  // const [cartObject, setCartObject] = useState(null);
   // console.log(products);
   const [licenseSizeProfil, setLicenseSizeProfil] = useState<
     LabelPrice | any | null
@@ -134,123 +156,50 @@ export const ShopWrapper = ({
     initialLicenseTypeState
   );
 
-  const [dataAttributes, setDataAttributes] = useState<Array<string>>([""]);
   const [isVip, setIsVip] = useState<boolean>(false);
   const [trials, setTrials] = useReducer(trialsReducer, []);
-  const pathname = usePathname();
+  const [licenseFor, setLicenseFor] = useState<"me" | "client">("me");
+  const [licenseForData, setLicenseForData] = useState<{
+    companyName?: string;
+    email?: string;
+    inUseFor?: string;
+  }>({
+    companyName: "",
+    email: "",
+    inUseFor: "",
+  });
 
-  useEffect(() => {
-    const Snipcart = window.Snipcart;
-    // console.log(window);
-    if (!Snipcart) {
-      document.addEventListener("snipcart.ready", (e) => {
-        // console.log(e);
-        setReady(true);
-      });
-    } else {
-      setReady(true);
-    }
-  }, []);
+  const pathname = usePathname();
 
   useEffect(() => {
     // setLicenseTypeProfil({ type: "REMOVE_ALL" });
   }, [pathname]);
 
+  /**
+   * handle local storage
+   */
   useEffect(() => {
-    // console.log(licenseTypeProfil);
+    // return;
+    console.log(status);
+    //preprod-overtype-foundry.vercel.app/post-checkout?status=success
+    if (status === "success") return;
 
-    if (!currentProduct) return;
-
-    // const _dataAttributes = _getDataAttributes(
-    //   currentProduct,
-    //   licenseTypeProfil,
-    //   licenseSizeProfil
-    // );
-    // if (_dataAttributes) setDataAttributes(_dataAttributes);
-  }, [currentProduct, licenseTypeProfil, licenseSizeProfil]);
-
-  useEffect(() => {
-    if (!ready) return;
-    const { Snipcart } = window;
-    // const snipcartModal: HTMLElement = document.querySelector(
-    //   ".snipcart-modal__container"
-    // ) as HTMLElement;
-    const listenSnipcart = () => {
-      const { cart } = Snipcart.store.getState();
-
-      setCartObject(cart);
-
-      Snipcart.events.on("item.adding", (item: any, items: any) => {
-        // console.log("item.adding", item)
-      });
-      Snipcart.events.on("item.added", (cartItem: any) => {
-        console.log("item.added", cartItem);
-      });
-
-      Snipcart.events.on("item.updated", (cartItem: any) => {
-        console.log("item.updated");
-        console.log(cartItem);
-      });
-
-      Snipcart.events.on("item.removed", (cartItem: any) => {
-        console.log(cartItem);
-      });
-
-      Snipcart.events.on("cart.confirm.error", (confirmError: any) => {
-        console.log(confirmError);
-      });
-
-      Snipcart.events.on("theme.routechanged", (routesChange: any) => {
-        if (routesChange.from === "/" && routesChange.to !== "/") {
-          // console.log("cart opened");
-          document.body.classList.add("cart-opened");
-          setTimeout(() => {
-            _handleCart();
-          }, 150);
-          // publish("CART_OPENED", true);
-          // publish("HEADER_TAB_CHANGE", {
-          //   item: "CART",
-          //   active: true,
-          // });
-          // document.body.addEventListener("click", _handleClickOutside);
-        }
-
-        if (routesChange.from !== "/" && routesChange.to === "/") {
-          // console.log("cart closed");
-          document.body.classList.remove("cart-opened");
-          // publish("CART_OPENED", false);
-          // publish("HEADER_TAB_CHANGE", {
-          //   item: "CART",
-          //   active: false,
-          // });
-        }
-      });
-    };
-    // listen store update
-    const unsubscribe = Snipcart.store.subscribe(listenSnipcart);
-    // call first
-    listenSnipcart();
-    return () => {
-      unsubscribe();
-    };
-  }, [ready]);
-
-  const _handleCart = () => {
-    // console.log("_handleCart");
-
-    const items = document.querySelectorAll(
-      ".snipcart-item-custom-fields--checkbox"
-    );
-    if (items) {
-      items.forEach((el) => {
-        const input = el.querySelector("input");
-        if (input?.checked) {
-          // console.log(el);
-          el.classList.add("has-input-checked");
-        }
+    const cart = localStorage.getItem("oo-cart");
+    if (cart) {
+      const cartArr = JSON.parse(cart);
+      cartArr.forEach((item: ProductData) => {
+        setProducts({ type: "ADD", payload: item });
       });
     }
-  };
+
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (ready) {
+      localStorage.setItem("oo-cart", JSON.stringify(products));
+    }
+  }, [products, ready]);
 
   return (
     <ShopContext.Provider
@@ -259,7 +208,8 @@ export const ShopWrapper = ({
         licenses,
         licenseSizes,
         licenseTypes,
-        cartObject,
+        tmpProducts,
+        setTmpProducts,
         currentProduct,
         setCurrentProduct,
         products,
@@ -268,8 +218,7 @@ export const ShopWrapper = ({
         setLicenseTypeProfil,
         licenseSizeProfil,
         setLicenseSizeProfil,
-        dataAttributes,
-        setDataAttributes,
+
         trials,
         setTrials,
       }}>

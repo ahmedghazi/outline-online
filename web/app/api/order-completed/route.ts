@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 
 import { Product, ProductBundle, Typeface } from "@/app/types/schema";
 import { client } from "@/app/sanity-api/sanity-client";
+import { ProductData } from "@/app/types/extra-types";
 
 type SendProps = {
   payload: any;
@@ -16,8 +17,56 @@ type ProductOrderData = {
   // licenseCategoryZip: string
   licenseWeb: boolean;
   licenseDesktop: boolean;
-  type: "bundle" | "single";
+  // type: "bundle" | "single";
+  productType: "productBundle" | "productSingle";
   bundleOrSingleKey: string;
+};
+
+interface PaddleWebhookData {
+  id: string;
+  transaction_id: string;
+  status: string;
+  currency_code: string;
+  custom_data: {
+    license_for: string;
+    license_for_data: {
+      email: string;
+      in_use_for: string;
+      company_name: string;
+    };
+  };
+  customer: {
+    id: string;
+    email: string;
+    address: {
+      country_code: string;
+      postal_code: string;
+      city: string;
+      region: string;
+      first_line: string;
+    };
+    business?: {
+      name?: string;
+      tax_identifier?: string;
+    };
+  };
+  items: Array<{
+    price_id: string;
+    product: {
+      id: string;
+      name: string;
+      description: string;
+    };
+    totals: {
+      total: number;
+    };
+    billing_cycle: any;
+  }>;
+}
+
+const formatedTimestamp = () => {
+  const now = new Date();
+  return now.toISOString();
 };
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
@@ -31,85 +80,75 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
   }
 
   try {
-    const body = await req.json(); // res now contains body
+    // const body = await req.json(); // res now contains body
     // console.log(body);
-    const { eventName } = body;
-    if (eventName === "order.completed") {
-      const { items, user } = body.content;
-      // console.log(items);
+    // const { eventName } = body;
+    const { paddleData, products } = (await req.json()) as {
+      paddleData: PaddleWebhookData;
+      products: ProductData[];
+    };
 
-      /*
-      on a
-      - licenses
-      - metadata
-      - - productId
-      - - type: "bundle" | "single";
-      - - bundle or single ref Id
+    // const { paddleData, products } = body;
+    // if (eventName === "order.completed") {
+    const { status, transaction_id, customer } = paddleData;
+    console.log(transaction_id);
 
+    const _productOrderData = _collectProductsOrderData(products);
 
-      on veut
-      [
-        {
-          zipName
-          zipUrl
-        },
-        {
-          zipName
-          zipUrl
-        }
-      ]
-      */
+    const _productOrderDataZips = await _collectProductsOrderZips(
+      _productOrderData
+    );
 
-      const _productOrderData = _collectProductsOrderData(items);
-      const _productOrderDataZips = await _collectProductsOrderZips(
-        _productOrderData
-      );
-      const _attachments = await _generateAttachments(_productOrderDataZips);
-      console.log("got _attachments, ready to send email");
-      // return new NextResponse(JSON.stringify(_productOrderDataZips), {
-      //   status: 200,
-      //   headers: { "Content-Type": "application/json" },
-      // });
+    const _attachments = await _generateAttachments(_productOrderDataZips);
+    console.log("got _attachments, ready to send email");
+    // return new NextResponse(JSON.stringify(_productOrderDataZips), {
+    //   status: 200,
+    //   headers: { "Content-Type": "application/json" },
+    // });
 
-      const stored = await _saveOrder(body.content, _attachments);
-      console.log("Stored order", stored);
-      // return new NextResponse(JSON.stringify(stored), {
-      //   status: 201,
-      //   headers: { "Content-Type": "application/json" },
-      // });
+    /*
+  invoiceNumber: string;
+  creationDate: string;
+    */
+    const orderPayload = {
+      email: customer.email,
+      invoiceNumber: transaction_id,
+      creationDate: formatedTimestamp(),
+      status: status,
+    };
+    const stored = await _saveOrder(orderPayload, _attachments, paddleData);
+    console.log("Stored order", stored);
+    // return new NextResponse(JSON.stringify(stored), {
+    //   status: 201,
+    //   headers: { "Content-Type": "application/json" },
+    // });
 
-      const params: SendProps = {
-        destination: user.email,
-        client_name: `${user.billingAddress.fullName}`,
-        payload: _attachments,
+    const params: SendProps = {
+      destination: customer.email,
+      client_name: customer.business?.name || customer.email.split("@")[0],
+      payload: _attachments,
+    };
+    const _sendEmailresult = await _sendEmail(params);
+    if (_sendEmailresult.status === "success") {
+      const response_success = {
+        ok: true,
+        message: "success",
+        data: JSON.stringify(_sendEmailresult),
       };
-      const _sendEmailresult = await _sendEmail(params);
-      if (_sendEmailresult.status === "success") {
-        const response_success = {
-          ok: true,
-          message: "success",
-          data: JSON.stringify(_sendEmailresult),
-        };
-        // console.log(response_success);
-        return new NextResponse(JSON.stringify(response_success), {
-          status: 201,
-          headers: { "Content-Type": "application/json" },
-        });
-      } else {
-        const response_error = {
-          ok: false,
-          status: "error",
-          message: "something went wrong with the email",
-          // raw: error,
-        };
-        return new NextResponse(JSON.stringify(response_error), {
-          status: 500,
-          headers: { "Content-Type": "application/json" },
-        });
-      }
-    } else {
-      return new NextResponse(JSON.stringify({ eventName: eventName }), {
+      // console.log(response_success);
+      return new NextResponse(JSON.stringify(response_success), {
         status: 201,
+        headers: { "Content-Type": "application/json" },
+      });
+    } else {
+      const response_error = {
+        ok: false,
+        status: "error",
+        message: "something went wrong with the email",
+        // raw: error,
+      };
+      return new NextResponse(JSON.stringify(response_error), {
+        status: 500,
         headers: { "Content-Type": "application/json" },
       });
     }
@@ -132,15 +171,14 @@ const _collectProductsOrderData = (items: any): ProductOrderData[] => {
   // let _data: ProductOrderData[] = [];
 
   return items.map((item: any) => {
-    const metadata = JSON.parse(item.metadata);
-    const { productId, type, _key } = metadata;
-
+    // const metadata = JSON.parse(item.metadata);
+    const { productId, productType, bundleOrSingleKey, licenseType } = item;
     return {
       productId: productId,
-      type: type,
-      bundleOrSingleKey: _key,
-      licenseDesktop: _getLicenseWebOrDesktop(item.customFields, "desktop"),
-      licenseWeb: _getLicenseWebOrDesktop(item.customFields, "web"),
+      productType: productType,
+      bundleOrSingleKey: bundleOrSingleKey,
+      licenseDesktop: _getLicenseWebOrDesktop(licenseType, "desktop"),
+      licenseWeb: _getLicenseWebOrDesktop(licenseType, "web"),
     };
   });
 };
@@ -148,28 +186,34 @@ const _collectProductsOrderData = (items: any): ProductOrderData[] => {
 /*
   SEARCH ORDER CUSTOM FIELDS (VARIANTS),
 */
-const _getLicenseWebOrDesktop = (input: any[], searchFor: string): boolean => {
+const _getLicenseWebOrDesktop = (
+  licenses: string,
+  searchFor: string
+): boolean => {
   let returnValue: boolean = false;
+  const licensesArray = licenses.split("|");
   const values =
     searchFor === "web"
       ? ["web"]
       : [
+          "print",
           "desktop/print",
           "logo",
           "social-media/ad",
           "video/streaming",
           "app/game/epub",
         ];
-  const filteredLicensesByType = input.filter(
-    (el) => values.indexOf(el.name.toLowerCase()) > -1
+  const filteredLicensesByType = licensesArray.filter(
+    (el: string) => values.indexOf(el.toLowerCase()) > -1
   );
   //ici on a les licenses web ou desktop triées
   // maintenant on doit filter les licenses achetées
   if (filteredLicensesByType.length > 0) {
-    const activeLicenses = filteredLicensesByType.filter(
-      (el) => el.value === "true"
-    );
-    returnValue = activeLicenses.length > 0;
+    // const activeLicenses = filteredLicensesByType.filter(
+    //   (el) => el.value === "true"
+    // );
+    // returnValue = activeLicenses.length > 0;
+    returnValue = true;
   }
   return returnValue;
 };
@@ -179,11 +223,11 @@ const _collectProductsOrderZips = async (items: ProductOrderData[]) => {
   for await (const item of items) {
     const data = await _getProductData(item.productId);
     const bundleOrsingle = _getBundleOrSingle(
-      item.type,
+      item.productType,
       item.bundleOrSingleKey,
       data
     );
-    // console.log(bundleOrsingle);
+    console.log(bundleOrsingle);
     // result.push(bundleOrsingle);
     const title = `${data.title} ${bundleOrsingle?.title}`;
     const sanitizedData = {
@@ -247,7 +291,7 @@ const _getBundleOrSingle = (
   productData: Product
 ) => {
   const bundleOrSingle =
-    type === "bundle" ? productData.bundles : productData.singles;
+    type === "productBundle" ? productData.bundles : productData.singles;
   const filtered = bundleOrSingle?.filter(
     (el) => el._key === bundleOrSingleKey
   );
@@ -269,32 +313,8 @@ const _generateAttachments = (items: any) => {
         path: item.zipDesktop.asset.url,
       });
     }
-    // else {
-    //   result.push({
-    //     filename: "no zip found",
-    //     path: "",
-    //   });
-    // }
   });
   return result;
-  // return items.map((item: any) => {
-  //   if (item.zipWeb) {
-  //     return {
-  //       filename: _sanitizeTitle(`${item.zipTitle}--web.zip`),
-  //       path: item.zipWeb.asset.url,
-  //     };
-  //   } else if (item.zipDesktop) {
-  //     return {
-  //       filename: _sanitizeTitle(`${item.zipTitle}--desktop.zip`),
-  //       path: item.zipDesktop.asset.url,
-  //     };
-  //   } else {
-  //     return {
-  //       filename: "no zip found",
-  //       path: "",
-  //     };
-  //   }
-  // });
 };
 
 const _sanitizeTitle = (str: string) =>
@@ -308,27 +328,33 @@ type PayloadProps = {
   email: string;
   invoiceNumber: string;
   creationDate: string;
+  status: string;
 };
-const _saveOrder = async (payload: PayloadProps, attachments: any) => {
-  const { email, invoiceNumber, creationDate } = payload;
+const _saveOrder = async (
+  payload: PayloadProps,
+  attachments: any,
+  pauloadRaw: PaddleWebhookData
+) => {
+  const { email, invoiceNumber, creationDate, status } = payload;
   const _attachments = attachments.map((item: any) => {
     return {
       label: item.filename,
       link: item.path,
     };
   });
-  console.log(_attachments);
+  // console.log(_attachments);
   const mutations = {
     mutations: [
       {
         create: {
           _type: "order",
-          title: `#${invoiceNumber} by ${email}`,
+          status: status,
+          title: `${invoiceNumber} by ${email}`,
           invoiceNumber: `#${invoiceNumber}`,
           creationDate: new Date(creationDate).toISOString(),
           email: email,
           attachments: _attachments,
-          json: JSON.stringify(payload),
+          json: JSON.stringify(pauloadRaw),
         },
       },
     ],

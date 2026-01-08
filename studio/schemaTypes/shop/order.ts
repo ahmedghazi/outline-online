@@ -19,6 +19,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+    }),
+    defineField({
       name: 'invoiceNumber',
       title: 'Invoice Number',
       type: 'string',
@@ -26,7 +31,7 @@ export default defineType({
     defineField({
       name: 'creationDate',
       title: 'dateTime',
-      type: 'date',
+      type: 'datetime',
     }),
     defineField({
       name: 'email',

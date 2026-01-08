@@ -1014,6 +1014,16 @@
   resolved "https://registry.yarnpkg.com/@nolyfill/is-core-module/-/is-core-module-1.0.39.tgz#3dc35ba0f1e66b403c00b39344f870298ebb1c8e"
   integrity sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==
 
+"@paddle/paddle-js@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@paddle/paddle-js/-/paddle-js-1.6.1.tgz#19b764d84310d9b49b27f693b4531227a504c6e9"
+  integrity sha512-Yh6i99Wz22EcJ0KyZfTxzzDHduet3fpKmqEKSmZlHxlgIXDyBjkzdGNWw3/yR7Esdvr6HuLu3WfDTod5lC0alw==
+
+"@paddle/paddle-node-sdk@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@paddle/paddle-node-sdk/-/paddle-node-sdk-3.5.0.tgz#b156382566a2c644621432e4466de5efe2f4d969"
+  integrity sha512-/Ac1N5i01/YJhiqOKlfW+Rz+nfhkaCyqpkG2P5ByeUNERNFYbAOkNc/TaXO/Nhgf9r3PoatnXH6YSpEs4KdtjA==
+
 "@parcel/watcher-android-arm64@2.5.1":
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/@parcel/watcher-android-arm64/-/watcher-android-arm64-2.5.1.tgz#507f836d7e2042f798c7d07ad19c3546f9848ac1"

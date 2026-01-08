@@ -1,10 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Product } from "../types/schema";
-import BuyModal from "./shop/BuyModal";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { publish, subscribe, unsubscribe } from "pubsub-js";
 import { usePageContext } from "../context/PageContext";
 
 type Props = {
@@ -15,15 +13,6 @@ const Buy = ({ productsCart }: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const pathname = usePathname();
   const { tab, setTab } = usePageContext();
-
-  useEffect(() => {
-    window.addEventListener("hashchange", (event) => {
-      // console.log(location.hash);
-      if (location.hash.indexOf("cart") > -1) {
-        setActive(false);
-      }
-    });
-  }, []);
 
   const _onClick = () => {
     const nextActive = !active;

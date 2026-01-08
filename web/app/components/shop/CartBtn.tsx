@@ -5,22 +5,18 @@ import React, { useEffect, useRef, useState } from "react";
 import useShop from "./ShopContext";
 import { usePathname } from "next/navigation";
 import { usePageContext } from "@/app/context/PageContext";
+import clsx from "clsx";
 
 const CartBtn = () => {
-  const [count, setCount] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
-  const cartRef = useRef<HTMLDivElement>(null);
-  const { cartObject } = useShop();
   const pathname = usePathname();
   const { tab, setTab } = usePageContext();
+  const [active, setActive] = useState<boolean>(false);
+  const { products } = useShop();
+  const count = products.length;
   // console.log(cartObject);
   const _onClick = () => {
-    const nextActive = !open;
-
-    if (nextActive && pathname === "/") {
-      window.scroll(0, window.innerHeight);
-    }
-
+    const nextActive = !active;
     setTab({
       name: nextActive ? "CART" : "",
       active: nextActive,
@@ -28,56 +24,18 @@ const CartBtn = () => {
   };
 
   useEffect(() => {
-    _toggle();
-  }, [open]);
-
-  useEffect(() => {
-    setOpen(tab.name === "CART");
+    setActive(tab.name === "CART");
   }, [tab]);
 
   useEffect(() => {
-    if (cartObject) {
-      // console.log(cartObject.items.count);
-      setCount(cartObject.items.count);
-      if (cartObject.items.count === 0) {
-        setTab({
-          name: "",
-          active: false,
-        });
-        // setOpen(tab.name === "CART");
-      }
-    }
-  }, [cartObject]);
-
-  useEffect(() => {
-    // _onClose();
-    setOpen(false);
+    setActive(false);
   }, [pathname]);
 
-  const _onClose = () => {
-    if (!window.Snipcart) return;
-    window.Snipcart.api.theme.cart.close();
-    // const btnClose: HTMLElement = document.querySelector(
-    //   ".snipcart-modal__close"
-    // ) as HTMLElement;
-    // if (btnClose) btnClose.click();
-  };
-
-  const _toggle = () => {
-    if (!window.Snipcart) return;
-    // console.log("cart _toggle");
-    if (tab.name === "CART") {
-      window.Snipcart.api.theme.cart.open();
-    } else {
-      window.Snipcart.api.theme.cart.close();
-    }
-  };
-
   return (
-    <div className='cart' ref={cartRef}>
+    <div className='cart'>
       <button
         onClick={_onClick}
-        className='btn--cart snipcart-checkout-'
+        className={clsx("btn--cart", active && "bg-gray")}
         aria-label='open cart'
         title='open cart'>
         <span className='label'>CART</span>

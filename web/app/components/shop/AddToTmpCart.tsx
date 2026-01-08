@@ -3,23 +3,31 @@ import Price from "./Price";
 import useShop from "./ShopContext";
 import { usePathname } from "next/navigation";
 import { ProductData } from "@/app/types/extra-types";
+import { _getPriceWithDiscount } from "./utils";
 
 type Props = {
   productData: ProductData;
   priceMultiplier: number;
+  active?: boolean;
 };
 
-const PaddleAddToCart = ({ productData, priceMultiplier }: Props) => {
+const AddToTmpCart = ({
+  productData,
+  priceMultiplier,
+  active = false,
+}: Props) => {
   const { price, discount } = productData;
-  const { products, setProducts } = useShop();
-  const [active, setActive] = useState<boolean>(false);
+  const { tmpProducts, setTmpProducts, licenseTypeProfil, licenseSizeProfil } =
+    useShop();
+  // const [active, setActive] = useState<boolean>(false);
   // const isBundle = metadata.type === "bundle";
   // const isDiscount = discount && discount > 0;
   const pathname = usePathname();
   let _price: number = price * (priceMultiplier || 1);
   let finalPriceWithDiscount: number = _price;
   if (discount) {
-    const discountAmount = (discount * _price) / 100;
+    // const discountAmount = (discount * _price) / 100;
+    const discountAmount = _getPriceWithDiscount(_price, discount);
     finalPriceWithDiscount = finalPriceWithDiscount - discountAmount;
   }
   // console.log(title, price);
@@ -27,27 +35,32 @@ const PaddleAddToCart = ({ productData, priceMultiplier }: Props) => {
     basePrice: price,
     price: _price,
     finalPrice: discount ? finalPriceWithDiscount : _price,
+    licenseSize: licenseSizeProfil?.title || "",
+    licenseType: licenseTypeProfil?.map((e) => e.label).join("|") || "",
+    licenseInfos: "",
   };
   const _productData: ProductData = {
     ...productData,
     ..._updatedProductData,
   };
-  console.log(_productData);
 
   useEffect(() => {
     // console.log(title, active);
     if (active) {
-      const exist = products.filter((el) => el.sku === _productData.sku);
+      console.log(_productData);
+      const exist = tmpProducts.filter((el) => el.sku === _productData.sku);
       if (exist.length === 0)
-        setProducts((prev: any) => [...prev, _productData]);
+        setTmpProducts({ type: "ADD", payload: _productData });
+      else setTmpProducts({ type: "REPLACE", payload: _productData });
     } else {
-      const _productToRemove = products.filter(
-        (item) => item.sku !== _productData.sku
-      );
+      // const _productToRemove = tmpProducts.filter(
+      //   (item) => item.sku !== _productData.sku
+      // );
       // console.log(_productToRemove);
-      setProducts(_productToRemove);
+      // setProducts(_productToRemove);
+      setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
     }
-  }, [active]);
+  }, [active, priceMultiplier]);
 
   /**
    * if license changes, update
@@ -55,9 +68,10 @@ const PaddleAddToCart = ({ productData, priceMultiplier }: Props) => {
   return (
     <div
       className='add-to-cart cursor-pointer bg-red-'
-      onClick={() => {
-        setActive(!active);
-      }}>
+      // onClick={() => {
+      //   setActive(!active);
+      // }}
+    >
       <div className='flex justify-between'>
         <Price discount={discount} price={_price} />
         <div className='checkbox-ui'>
@@ -75,4 +89,4 @@ const PaddleAddToCart = ({ productData, priceMultiplier }: Props) => {
   );
 };
 
-export default PaddleAddToCart;
+export default AddToTmpCart;

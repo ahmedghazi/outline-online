@@ -1,4 +1,5 @@
 import React from "react";
+import { _getPriceWithDiscount } from "./utils";
 
 type Props = {
   price: number | any;
@@ -10,19 +11,18 @@ const Price = ({ price, discount }: Props) => {
   const displayPriceCrossed = discount && discount > 0;
   let priceDiscount = 0;
   if (displayPriceCrossed) {
-    priceDiscount = (discount * price) / 100;
+    // priceDiscount = (discount * price) / 100;
+    priceDiscount = _getPriceWithDiscount(price, discount);
   }
+
   return (
     <div className='price flex gap-sm'>
       {!displayPriceCrossed && (
         <span className='w-[90px] text-right'>{price} EUR</span>
       )}
-      {}
-      {/* <div>saving in CHH</div>
-      <div>original price - saving</div> */}
-      {displayPriceCrossed && (
+
+      {displayPriceCrossed === true && (
         <>
-          {/* <span className="text-green">save</span> */}
           <span className='w-[90px] text-right'>
             {price - priceDiscount} EUR
           </span>
@@ -30,7 +30,6 @@ const Price = ({ price, discount }: Props) => {
             {price} EUR
           </span>
         </>
-        // <span className='text-muted line-through'>{priceCrossed} EUR</span>
       )}
     </div>
   );

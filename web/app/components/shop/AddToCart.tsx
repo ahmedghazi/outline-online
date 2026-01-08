@@ -1,301 +1,61 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useMemo, useState } from "react";
 import useShop from "./ShopContext";
-import { usePathname } from "next/navigation";
-import {
-  // LabelPrice,
-  LicenseType,
-  // Product,
-  Typeface,
-} from "@/app/types/schema";
-import Price from "./Price";
+import clsx from "clsx";
+import { usePageContext } from "@/app/context/PageContext";
 
-type MetadataProps = {
-  type: string;
-  _key: string;
-  productId: string;
-};
-type Props = {
-  id: string;
-  categoryLicensePrice?: string;
-  price: number;
-  priceCrossed?: number | undefined;
-  priceDiscount?: number;
-  title: string;
-  fullTitle: string;
-  blurb: string;
-  categories?: string[];
-  metadata: MetadataProps;
-  defaultActive: boolean;
-};
+// type Props = {};
 
-const AddToCart = (props: Props) => {
-  const {
-    categoryLicensePrice,
-    price,
-    priceCrossed,
-    priceDiscount,
-    title,
-    fullTitle,
-    blurb,
-    categories,
-    id,
-    metadata,
-    defaultActive,
-  } = props;
-  const {
-    // dataAttributes,
-    // currentProduct,
-    // licenses,
-    licenseSizeProfil,
-    licenseTypeProfil,
-    products,
-    setProducts,
-  } = useShop();
-  const pathname = usePathname();
-  // const productExistsInStore = products.filter((el) => el.id === id).length > 0;
-  // console.log(title, defaultActive);
-  // console.log(productExistsInStore, defaultActive);
-  const [active, setActive] = useState<boolean>(false);
-  // console.log(price);
-  const isBundle = metadata.type === "bundle";
-  const isDiscount = priceDiscount && priceDiscount > 0;
+const AddToCart = () => {
+  const { tmpProducts, products, setProducts } = useShop();
+  const [buttonStatus, setButtonStatus] = useState("Add To Cart");
+  const { setTab } = usePageContext();
+  const _addToCart = async () => {
+    //clean
+    setButtonStatus("Adding...");
 
-  const _getLicensePriceByCategoryLicensePrice = (license: LicenseType) => {
-    // console.log("———", categoryLicensePrice);
-    // console.log(license);
-    switch (categoryLicensePrice) {
-      case "Full Family":
-        return license.priceFamily;
-      case "Essentials":
-        // console.log(license.priceEssentials);
-        return license.priceEssentials;
-      case "Regular + Italic":
-        return license.priceRegIt;
-      default:
-        return license.price;
-    }
-  };
-  // console.log(title, isBundle);
-  let finalPrice: number = price;
-  let finalPriceWithDiscount: number = price;
-  if (licenseTypeProfil) {
-    licenseTypeProfil.forEach((element) => {
-      // console.log(price, finalPrice, element.price);
-      const elementPrice = isBundle
-        ? _getLicensePriceByCategoryLicensePrice(element)
-        : element.price;
-      // console.log({ elementPrice });
-      if (elementPrice) finalPrice += elementPrice;
-      // if (elementPrice) finalPrice = elementPrice;
-    });
-    finalPriceWithDiscount = finalPrice;
-    let discount = 0;
-    if (priceDiscount) {
-      discount = (priceDiscount * finalPrice) / 100;
-      finalPriceWithDiscount = finalPriceWithDiscount - discount;
-    }
-  }
-  // console.log(finalPrice, finalPriceWithDiscount);
-  // console.log({ finalPrice });
-  useEffect(() => {
-    setActive(defaultActive);
-  }, [defaultActive]);
-
-  const _getPriceWithOrWithoutDiscount = (
-    _price: number,
-    _discount: number
-  ) => {
-    let discount = 0;
-    let priceWithOrWithoutDiscount = _price;
-
-    if (_discount) {
-      discount = (_discount * _price) / 100;
-      priceWithOrWithoutDiscount = priceWithOrWithoutDiscount - discount;
-    }
-    return priceWithOrWithoutDiscount;
-  };
-  /**
-   * LicenseProfil (company size > price web, price logo, ...)
-   * Data is for add to card sdk, dataAttributes is for snipcart robot crawler
-   */
-  const _getDataAttributes = () => {
-    if (!licenseSizeProfil || !licenseSizeProfil.licenseType) return;
-
-    //for sdk api
-    let data: any = [];
-    //for html markup
-    let dataAttributes: any = {};
-
-    let index: number = 0;
-
-    /**
-     * FOR BOTS
-     */
-    // console.log(licenseSizeProfil);
-    // dataAttributes[`data-item-custom${index}-placeholder`] = "Licence Size";
-    dataAttributes[`data-item-custom${index}-name`] = "Licence Size";
-    dataAttributes[`data-item-custom${index}-type`] = "readonly";
-    dataAttributes[`data-item-custom${index}-value`] = licenseSizeProfil.title;
-    // dataAttributes[`data-item-custom${i}-required`] = "true";
-    dataAttributes[`data-item-custom${index}-shippable`] = "false";
-
-    /**
-     * FOR SDK
-     */
-    data.push({
-      name: "Licence Size",
-      type: "readonly",
-      value: licenseSizeProfil.title,
-    });
-
-    licenseSizeProfil.licenseType.forEach((item, i) => {
-      index = i + 1;
-      const price = _getLicensePriceByCategoryLicensePrice(item);
-      // console.log("_getLicensePriceByCategoryLicensePrice", price);
-      const name = item.label ? item.label.replace(" ", "-") : "no-label";
-
-      /**
-       * FOR BOTS
-       */
-      dataAttributes[`data-item-custom${index}-placeholder`] = "Licence";
-      dataAttributes[`data-item-custom${index}-name`] = name;
-      dataAttributes[`data-item-custom${index}-type`] = "checkbox";
-      // dataAttributes[`data-item-custom${index}-type`] = "radio";
-      // dataAttributes[`data-item-custom${index}-required`] = "true";
-      dataAttributes[`data-item-custom${index}-shippable`] = "false";
-
-      const priceWithOrWithoutDiscount =
-        price && isDiscount
-          ? _getPriceWithOrWithoutDiscount(price, priceDiscount)
-          : price;
-      // dataAttributes[
-      //   `data-item-custom${index}-options`
-      // ] = `true[+${price}]|false`;
-      dataAttributes[
-        `data-item-custom${index}-options`
-      ] = `true[+${priceWithOrWithoutDiscount}]|false`;
-
-      let exist;
-      if (licenseTypeProfil) {
-        exist = licenseTypeProfil.filter(
-          (el: LicenseType) => el.label === item.label
-        );
-        if (exist && exist.length > 0) {
-          dataAttributes[`data-item-custom${index}-value`] = "true";
-        } else {
-          dataAttributes[`data-item-custom${index}-value`] = "false";
-        }
+    products.forEach((product) => {
+      if (
+        tmpProducts.some((dialogProduct) => dialogProduct.sku === product.sku)
+      ) {
+        setProducts({ type: "REMOVE", payload: product });
       }
-      // console.log(exist);
-
-      /**
-       * FOR SDK
-       */
-      data.push({
-        name: name,
-        // required: true,
-        type: "checkbox",
-        // options: `true[+${price}]|false`,
-        options: `true[+${priceWithOrWithoutDiscount}]|false`,
-        value: exist && exist.length > 0,
-      });
     });
-    return { data, dataAttributes };
-  };
 
-  useEffect(() => {
-    // console.log(title, active);
-    if (active) {
-      const exist = products.filter((el) => el.id === productData.id);
-      if (exist.length === 0)
-        setProducts((prev: any) => [...prev, productData]);
-    } else {
-      const _productToRemove = products.filter(
-        (item) => item.id !== productData.id
-      );
-      // console.log(_productToRemove);
-      setProducts(_productToRemove);
+    // console.log(uniqueBundlesOrSingles);
+    tmpProducts.forEach((item) => {
+      setProducts({ type: "ADD", payload: item });
+      // TOASTER
+      // publish("DIALOG.CLOSE");
+    });
+    if (tmpProducts.length > 0) {
+      setButtonStatus("Added");
+
+      setTimeout(() => {
+        // publish("CART_OPEN");
+        setTab({ name: "CART", active: true });
+      }, 700);
     }
-  }, [active]);
-
-  //update product in cart when license changes
-  useEffect(() => {
-    if (products.length === 0 || !active) return;
-    // productData.customFields = [..._getDataAttributes()?.data];
-    // const product = products.filter(el => el.id === productData.id)
-    // setProducts((prev: any) => [...prev, productData]);
-    setProducts(
-      products.map((_product) =>
-        _product.id === productData.id
-          ? { ..._product, customFields: [..._getDataAttributes()?.data] }
-          : _product
-      )
-    );
-  }, [licenseTypeProfil]);
-
-  const productData = {
-    id: id || "",
-    // price: price.toFixed(2),
-    price: price,
-    alternatePrices: {
-      // vip: 10.00
-      // vip: finalPriceWithDiscount,
-    },
-    url: pathname,
-    description: blurb || "",
-    name: fullTitle || "",
-    categories: categories,
-    quantity: 1,
-    stackable: "never",
-    shippable: false,
-    customFields: [..._getDataAttributes()?.data],
-
-    metadata: JSON.stringify(metadata),
   };
-  // console.log("-------- Add to cart", price, finalPrice);
-  // if (active) {
-  //   console.log(productData);
-  // }
 
-  const categoriesClean = categories
-    ? categories.toString().replace(",", "|")
-    : "";
   return (
-    <div
-      className='add-to-cart cursor-pointer'
-      onClick={() => {
-        setActive(!active);
-      }}>
-      <div className='flex justify-between'>
-        <Price priceDiscount={priceDiscount} price={finalPrice} />
-
-        <div className='checkbox-ui'>
-          <input
-            // onChange={_addToCart}
-            checked={active}
-            // defaultChecked={false}
-            onChange={() => {}}
-            type='checkbox'
-            name='atc'
-            className='snipcart-add-item- '
-            data-item-categories={categoriesClean}
-            data-item-id={id || ""}
-            data-item-price={price}
-            // data-item-price-vip={finalPriceWithDiscount}
-            // data-item-price={finalPriceWithDiscount}
-            data-item-url={pathname}
-            data-item-description={blurb || ""}
-            data-item-name={fullTitle || ""}
-            data-item-min-quantity='1'
-            data-item-quantity='1'
-            data-item-max-quantity='1'
-            data-item-stackable='never'
-            {..._getDataAttributes()?.dataAttributes}
-            data-item-metadata={JSON.stringify(metadata)}></input>
-          <span className='checkmark'></span>
-        </div>
-        {/* <pre>{JSON.stringify(_getDataAttributes(), null, 2)}</pre> */}
-      </div>
+    <div className='add-to-cart'>
+      <button
+        onClick={_addToCart}
+        className={clsx(
+          "atc-all  block",
+          tmpProducts.length > 0
+            ? "button-submit"
+            : "button-disabled pointer-events-none"
+        )}>
+        {buttonStatus}{" "}
+        {products.length > 0 && (
+          <span className='length'>
+            <span>{products.length} </span>
+            <span>product{products.length > 1 && "s"}</span>
+          </span>
+        )}
+      </button>
     </div>
   );
 };

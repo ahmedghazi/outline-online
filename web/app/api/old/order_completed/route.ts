@@ -16,6 +16,27 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 
   const body = await req.json(); // res now contains body
   const { items, user } = body.content;
+  /*
+  paddleData: data.data,
+  products: products.value,
+  */
+  /*
+  old:
+  item: {
+    metadata": {
+    "productId":"843ef4d8-d90a-444c-b534-d0328050f1a0",
+    "type":"single",
+    "_key":"e1d49c71e4dc66ee630c3b74f4b11e2d"
+}
+  },
+  new:
+  item: {
+    bundleOrSingleKey: "e1d49c71e4dc66ee630c3b74f4b11e2d",
+    type: "productBundle" | "productSingle";
+    productId: "843ef4d8-d90a-444c-b534-d0328050f1a0";
+  }
+
+  */
 
   /*
   ITEMS = products data from snipcart

@@ -1,6 +1,6 @@
 export interface ProductData {
   productType: "productBundle" | "productSingle";
-  productTypeRef: string;
+  bundleOrSingleKey: string;
   sku: string;
   basePrice: number;
   price: number;
@@ -11,7 +11,7 @@ export interface ProductData {
   productTitle: string;
   fullTitle: string;
   description: string;
-  license: string;
+  // license: string;
   licenseSize: string;
   licenseType: string;
   licenseInfos: string;
