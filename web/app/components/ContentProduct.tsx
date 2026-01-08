@@ -15,9 +15,9 @@ const ContentProduct = ({ input }: Props) => {
   // console.log(input);
   const {
     setCurrentProduct,
-    licenseTypeProfil,
-    licenseSizeProfil,
-    dataAttributes,
+    // licenseTypeProfil,
+    // licenseSizeProfil,
+    // dataAttributes,
   } = useShop();
 
   const { type, dispatchType, dispatchTypes } = useType();
