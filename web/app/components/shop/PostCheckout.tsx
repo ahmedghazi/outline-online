@@ -15,7 +15,7 @@ const CheckoutSuccess = () => {
 
   return (
     <div className='success'>
-      <div className='header mb-1e !p-0'>
+      <div className='header mb-lg !p-0'>
         <h1 className=''>Thank you for your purchase!!!</h1>
 
         <p className=''>

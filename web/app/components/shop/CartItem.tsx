@@ -2,6 +2,7 @@ import { ProductData } from "@/app/types/extra-types";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import useShop from "./ShopContext";
 import { log } from "console";
+import { _licensesTypesToString } from "./utils";
 
 type Props = {
   input: ProductData;
@@ -17,7 +18,9 @@ const CartItem = ({ input, _delete }: Props) => {
       <div className='cart-item__header'>
         <h3 className='title '>{input.fullTitle}</h3>
         {_delete && (
-          <button className='btn__delete' onClick={() => _delete(input.sku)}>
+          <button
+            className='btn__delete text-red'
+            onClick={() => _delete(input.sku)}>
             ×
           </button>
         )}
@@ -27,7 +30,7 @@ const CartItem = ({ input, _delete }: Props) => {
           License Size: {input.licenseSize}
         </div>
         <div className='license-types pt-05e'>
-          License Types: {input.licenseType}
+          License Types: {_licensesTypesToString(input.licenseType)}
         </div>
       </div>
       <div className='cart-item__price'>

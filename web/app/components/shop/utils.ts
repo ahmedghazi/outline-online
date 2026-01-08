@@ -18,6 +18,11 @@ export const _slugify = (str: string) => {
   return str.replace(" ", "-").toLowerCase();
 };
 
+export const _licensesTypesToString = (str: string) => {
+  const arr = str.replace("|", ", ");
+  return arr;
+};
+
 export const _getDataAttributes = (
   currentProduct: Product,
   licenseTypeProfil: LabelPrice[],

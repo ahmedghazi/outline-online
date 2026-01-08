@@ -5,6 +5,7 @@ import useShop from "./ShopContext";
 import website from "@/app/config/website";
 import { ProductData } from "@/app/types/extra-types";
 import clsx from "clsx";
+import { _licensesTypesToString } from "./utils";
 
 type Props = {
   canCheckout: boolean;
@@ -44,7 +45,9 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
       quantity: 1,
       priceId: null,
       price: {
-        name: `${product.fullTitle} license: ${product.licenseSize} `,
+        name: `License size: ${
+          product.licenseSize
+        }, License types: ${_licensesTypesToString(product.licenseType)}`,
         description: product.sku,
         quantity: {
           minimum: 1,
@@ -57,7 +60,6 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
         product: {
           // name: product.fullTitle,
           name: `${product.fullTitle}`,
-
           description: product.sku || "sku",
           taxCategory: "standard",
         },
