@@ -57,7 +57,6 @@ const ContentProduct = ({ input }: Props) => {
   const _loadAllTypefaces = () => {
     let arr: Typeface[] = [];
     input.singles?.forEach((el) => {
-      // console.log(el.typeface);
       if (el.typeface) arr.push(el.typeface);
     });
     dispatchTypes(arr);
