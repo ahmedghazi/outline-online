@@ -16,7 +16,7 @@ const CheckoutSuccess = () => {
   return (
     <div className='success'>
       <div className='header mb-1e !p-0'>
-        <h1 className=''>Thank you for your purchase!</h1>
+        <h1 className=''>Thank you for your purchase!!!</h1>
 
         <p className=''>
           {/* Your download link{items.length > 1 && "s"} is on its way to your
