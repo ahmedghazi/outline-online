@@ -12,6 +12,8 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { PaddleProvider } from "./components/shop/Paddle/PaddleProvider";
 import CartModal from "./components/shop/CartModal";
 import { getProductsCart, getSettings } from "./sanity-api/sanity-queries";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity";
 
 export const metadata = {
   metadataBase: new URL(website.url),
@@ -35,6 +37,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { isEnabled } = await draftMode();
   const settings = await getSettings();
   const productsCart = await getProductsCart();
   // console.log(settings.buyModalNotices);
@@ -71,6 +74,11 @@ export default async function RootLayout({
                   <span></span>
                 </div>
                 <Footer settings={settings} />
+                {isEnabled && (
+                  <VisualEditing
+                    zIndex={1000} // Optional
+                  />
+                )}
               </PaddleProvider>
             </ShopWrapper>
           </PageContextProvider>

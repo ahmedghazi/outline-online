@@ -11,19 +11,20 @@ import React from "react";
 import { getProduct, PRODUCT_QUERY } from "@/app/sanity-api/sanity-queries";
 
 // export const revalidate = 3600; // revalidate every hour
-export const revalidate = 10; // revalidate every hour
-export const dynamic = "force-dynamic";
+// export const revalidate = 10; // revalidate every hour
+// export const dynamic = "force-dynamic";
+
+type Params = Promise<{ slug: string }>;
 
 type PageProps = {
-  params: {
-    slug: string;
-  };
+  params: Params;
 };
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const data = await getProduct(params.slug);
+  const { slug } = await params;
+  const data = await getProduct(slug);
   return {
     title: `${data?.seo?.metaTitle || data?.title || ""}`,
     description: data?.seo?.metaDescription,
@@ -36,10 +37,8 @@ export async function generateMetadata({
 const Page: ({ params }: PageProps) => Promise<JSX.Element> = async ({
   params,
 }) => {
-  // const data = await getPageModulaire(params.slug);
-  // console.log(params.slug);
-
   const { isEnabled: preview } = draftMode();
+  const { slug } = await params;
   let data: Product;
   if (preview) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
@@ -47,7 +46,7 @@ const Page: ({ params }: PageProps) => Promise<JSX.Element> = async ({
       params
     );
   } else {
-    data = await getProduct(params.slug);
+    data = await getProduct(slug);
   }
 
   if (!data) return <div>please edit page</div>;

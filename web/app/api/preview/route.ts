@@ -1,32 +1,17 @@
-import { _linkResolver } from "@/app/sanity-api/utils";
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function GET(request: Request) {
+  const draft = await draftMode();
   const { searchParams } = new URL(request.url);
-  const slug = searchParams.get("slug");
-  const type = searchParams.get("type");
 
-  // const target = type === "project" ? `/project/${slug}` : `/${slug}`
-  let target = "";
-  switch (type) {
-    case "home":
-      target = `/`;
-      break;
-    case "product":
-      target = `/product/${slug}`;
-      break;
-    case "page":
-      target = `/page/${slug}`;
-      break;
+  const preview = searchParams.get("sanity-preview-pathname") || "";
+  console.log({ preview });
+  const target = preview;
 
-    default:
-      target = `/${slug}`;
-      break;
-  }
-  // console.log(request.url)
-  // console.log(type, slug, target)
+  console.log({ target });
 
-  draftMode().enable();
+  // draftMode().enable();
+  draft.enable();
   redirect(target);
 }

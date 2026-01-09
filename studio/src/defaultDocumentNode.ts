@@ -27,23 +27,23 @@ export const defaultDocumentNode: DefaultDocumentNodeResolver = (S, {schemaType}
     case `product`:
       return S.document().views([
         S.view.form(),
-        S.view
-          .component(Iframe)
-          .options({
-            // url: (doc: SanityDocument) => getPreviewUrl(doc),
-            url: {
-              origin: previewURL, // or 'same-origin' if the app and studio are on the same origin
-              preview: (document: SanityDocument) =>
-                document?.slug?.current
-                  ? `/api/preview?slug=${document?.slug?.current}&type=${document._type}`
-                  : new Error('Missing slug'),
-              draftMode: '', // the route you enable draft mode, see: https://github.com/sanity-io/visual-editing/tree/main/packages/preview-url-secret#sanitypreview-url-secret
-            },
-            reload: {
-              button: true, // default `undefined`
-            },
-          })
-          .title('Preview'),
+        // S.view
+        //   .component(Iframe)
+        //   .options({
+        //     // url: (doc: SanityDocument) => getPreviewUrl(doc),
+        //     url: {
+        //       origin: previewURL, // or 'same-origin' if the app and studio are on the same origin
+        //       preview: (document: SanityDocument) =>
+        //         document?.slug?.current
+        //           ? `/api/preview?slug=${document?.slug?.current}&type=${document._type}`
+        //           : new Error('Missing slug'),
+        //       draftMode: '', // the route you enable draft mode, see: https://github.com/sanity-io/visual-editing/tree/main/packages/preview-url-secret#sanitypreview-url-secret
+        //     },
+        //     reload: {
+        //       button: true, // default `undefined`
+        //     },
+        //   })
+        //   .title('Preview'),
       ])
     default:
       return S.document().views([S.view.form()])
