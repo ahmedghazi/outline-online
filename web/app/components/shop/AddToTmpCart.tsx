@@ -26,8 +26,8 @@ const AddToTmpCart = ({
   let finalPriceWithDiscount: number = _price;
   if (discount) {
     // const discountAmount = (discount * _price) / 100;
-    const discountAmount = _getPriceWithDiscount(_price, discount);
-    finalPriceWithDiscount = finalPriceWithDiscount - discountAmount;
+    // const discountAmount = _getPriceWithDiscount(_price, discount);
+    finalPriceWithDiscount = _getPriceWithDiscount(_price, discount);
   }
   // console.log(title, price);
   const _updatedProductData = {

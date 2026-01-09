@@ -24,7 +24,8 @@ const Price = ({ price, discount }: Props) => {
       {displayPriceCrossed === true && (
         <>
           <span className='w-[90px] text-right'>
-            {price - priceDiscount} EUR
+            {/* {price - priceDiscount} EUR */}
+            {priceDiscount} EUR
           </span>
           <span className='text-muted line-through md:max-w-[90px] text-right'>
             {price} EUR

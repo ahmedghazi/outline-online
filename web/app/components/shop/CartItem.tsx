@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import useShop from "./ShopContext";
 import { log } from "console";
 import { _licensesTypesToString } from "./utils";
+import Price from "./Price";
 
 type Props = {
   input: ProductData;
@@ -34,7 +35,18 @@ const CartItem = ({ input, _delete }: Props) => {
         </div>
       </div>
       <div className='cart-item__price'>
-        <div className='price'>{input.finalPrice}€</div>
+        {input.discount && (
+          <span className='text-green '>Saving {input.discount}%</span>
+        )}
+
+        {/* <div className='price'>{input.finalPrice}€</div> */}
+        {input.basePrice !== input.finalPrice && (
+          <Price price={input.price} discount={input.discount} />
+        )}
+        {input.basePrice === input.finalPrice && (
+          <div className='price'>{input.finalPrice}€</div>
+        )}
+        {/* <Price price={input.price} discount={input.discount} /> */}
       </div>
     </div>
   );

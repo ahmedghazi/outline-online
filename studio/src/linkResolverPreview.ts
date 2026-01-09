@@ -22,7 +22,7 @@ export const linkResolverPreview: PresentationPluginOptions['resolve'] = {
         ],
       }),
     }),
-    pageModulaire: defineLocations({
+    page: defineLocations({
       // Select one or more fields
       select: {
         title: 'title',
