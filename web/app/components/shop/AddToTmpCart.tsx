@@ -19,9 +19,8 @@ const AddToTmpCart = ({
   const { price, discount } = productData;
   const { tmpProducts, setTmpProducts, licenseTypeProfil, licenseSizeProfil } =
     useShop();
-  // const [active, setActive] = useState<boolean>(false);
-  // const isBundle = metadata.type === "bundle";
-  // const isDiscount = discount && discount > 0;
+  const [mounted, setMounted] = useState<boolean>(false);
+
   const pathname = usePathname();
   let _price: number = price * (priceMultiplier || 1);
   let finalPriceWithDiscount: number = _price;
@@ -36,7 +35,7 @@ const AddToTmpCart = ({
     price: _price,
     finalPrice: discount ? finalPriceWithDiscount : _price,
     licenseSize: licenseSizeProfil?.title || "",
-    licenseType: licenseTypeProfil?.map((e) => e.label).join("|") || "",
+    licenseTypes: licenseTypeProfil?.map((e) => e.label).join("|") || "",
     licenseInfos: "",
   };
   const _productData: ProductData = {
@@ -45,9 +44,14 @@ const AddToTmpCart = ({
   };
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     // console.log(title, active);
+    if (!mounted) return;
     if (active) {
-      console.log(_productData);
+      // console.log(_productData);
       const exist = tmpProducts.filter((el) => el.sku === _productData.sku);
       if (exist.length === 0)
         setTmpProducts({ type: "ADD", payload: _productData });
@@ -56,9 +60,15 @@ const AddToTmpCart = ({
       // const _productToRemove = tmpProducts.filter(
       //   (item) => item.sku !== _productData.sku
       // );
+      const isInTmpProducts = tmpProducts.some(
+        (el) => el.sku === _productData.sku
+      );
+      if (isInTmpProducts) {
+        setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
+      }
       // console.log(_productToRemove);
       // setProducts(_productToRemove);
-      setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
+      // setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
     }
   }, [active, priceMultiplier]);
 

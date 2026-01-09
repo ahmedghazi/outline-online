@@ -63,7 +63,7 @@ const PaddleProvider = ({ children }: { children: React.ReactNode }) => {
       "fullTitle": "Lyga Essentials",
       "description": "Book, Book Italic, Bold, Bold Italic",
       "licenseSize": "<5",
-      "licenseType": "PRINT, WEB",
+      "licenseTypes": "PRINT, WEB",
       "licenseInfos": ""
     }
     */

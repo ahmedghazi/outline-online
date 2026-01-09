@@ -30,7 +30,7 @@ const CartItem = ({ input, _delete }: Props) => {
           License Size: {input.licenseSize}
         </div>
         <div className='license-types pt-05e'>
-          License Types: {_licensesTypesToString(input.licenseType)}
+          License Types: {_licensesTypesToString(input.licenseTypes)}
         </div>
       </div>
       <div className='cart-item__price'>

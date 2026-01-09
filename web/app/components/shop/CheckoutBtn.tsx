@@ -47,7 +47,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
       price: {
         name: `License size: ${
           product.licenseSize
-        }, License types: ${_licensesTypesToString(product.licenseType)}`,
+        }, License types: ${_licensesTypesToString(product.licenseTypes)}`,
         description: product.sku,
         quantity: {
           minimum: 1,
@@ -65,11 +65,12 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
         },
         // use camelCase per Paddle SDK expectations
         customData: {
-          bundleOrSingleKey: product.bundleOrSingleKey,
-          productId: product.productId,
-          type: product.productType,
-          license: product.licenseSize,
           sku: product.sku,
+          productType: product.productType,
+          productId: product.productId,
+          bundleOrSingleKey: product.bundleOrSingleKey,
+          licenseSize: product.licenseSize,
+          licenseTypes: product.licenseTypes,
           // licenseFor,
           // licenseForData,
         },

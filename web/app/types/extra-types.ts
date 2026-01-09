@@ -13,7 +13,7 @@ export interface ProductData {
   description: string;
   // license: string;
   licenseSize: string;
-  licenseType: string;
+  licenseTypes: string;
   licenseInfos: string;
   // isLogo: string | boolean | undefined;
 }

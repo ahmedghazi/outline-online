@@ -79,7 +79,7 @@ const ProductItem = ({
             fullTitle: `${productTitle} ${input.title || ""}`,
             description: input.description || "",
             licenseSize: "",
-            licenseType: "",
+            licenseTypes: "",
             licenseInfos: "",
           }}
           priceMultiplier={priceMultiplier}

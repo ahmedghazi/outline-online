@@ -91,7 +91,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     // const { paddleData, products } = body;
     // if (eventName === "order.completed") {
     const { status, transaction_id, customer } = paddleData;
-    console.log(transaction_id);
+    // console.log(transaction_id);
 
     const _productOrderData = _collectProductsOrderData(products);
 
@@ -115,8 +115,13 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       invoiceNumber: transaction_id,
       creationDate: formatedTimestamp(),
       status: status,
+      // licenseSize: products[0]?.licenseSize,
+      // licenseTypes: products[0]?.licenseTypes,
     };
-    const stored = await _saveOrder(orderPayload, _attachments, paddleData);
+    const stored = await _saveOrder(orderPayload, _attachments, {
+      paddleData,
+      products,
+    });
     console.log("Stored order", stored);
     // return new NextResponse(JSON.stringify(stored), {
     //   status: 201,
@@ -172,13 +177,13 @@ const _collectProductsOrderData = (items: any): ProductOrderData[] => {
 
   return items.map((item: any) => {
     // const metadata = JSON.parse(item.metadata);
-    const { productId, productType, bundleOrSingleKey, licenseType } = item;
+    const { productId, productType, bundleOrSingleKey, licenseTypes } = item;
     return {
       productId: productId,
       productType: productType,
       bundleOrSingleKey: bundleOrSingleKey,
-      licenseDesktop: _getLicenseWebOrDesktop(licenseType, "desktop"),
-      licenseWeb: _getLicenseWebOrDesktop(licenseType, "web"),
+      licenseDesktop: _getLicenseWebOrDesktop(licenseTypes, "desktop"),
+      licenseWeb: _getLicenseWebOrDesktop(licenseTypes, "web"),
     };
   });
 };
@@ -333,7 +338,7 @@ type PayloadProps = {
 const _saveOrder = async (
   payload: PayloadProps,
   attachments: any,
-  pauloadRaw: PaddleWebhookData
+  pauloadRaw: any
 ) => {
   const { email, invoiceNumber, creationDate, status } = payload;
   const _attachments = attachments.map((item: any) => {
