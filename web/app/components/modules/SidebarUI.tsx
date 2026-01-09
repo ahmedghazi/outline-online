@@ -1,6 +1,6 @@
 import React from "react";
 import { PortableText } from "@portabletext/react";
-import portableTextComponents from "@/app/utils-old/portableTextComponents";
+import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 import { SidebarUI, TextUI } from "@/app/types/schema";
 import clsx from "clsx";
 

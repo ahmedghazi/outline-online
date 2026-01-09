@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Script from "next/script";
 import website from "./config/website";
-import { getProductsCart, getSettings } from "./utils-old/sanity-queries";
 import { PageContextProvider } from "./context/PageContext";
 import { ShopWrapper } from "./components/shop/ShopContext";
 import BuyModal from "./components/shop/BuyModal";
@@ -12,6 +11,7 @@ import { Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { PaddleProvider } from "./components/shop/Paddle/PaddleProvider";
 import CartModal from "./components/shop/CartModal";
+import { getProductsCart, getSettings } from "./sanity-api/sanity-queries";
 
 export const metadata = {
   metadataBase: new URL(website.url),

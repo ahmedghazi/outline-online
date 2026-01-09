@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { LinkExternal, MenuItem } from "../types/schema";
-import { _linkResolver } from "../utils-old/utils";
 import Buy from "./Buy";
 import clsx from "clsx";
 import NavLink from "./NavLink";
 import CartBtn from "./shop/CartBtn";
+import { _linkResolver } from "../sanity-api/utils";
 
 type NavProps = {
   siteName: string;

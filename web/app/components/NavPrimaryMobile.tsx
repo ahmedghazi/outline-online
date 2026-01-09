@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { LinkExternal, MenuItem } from "../types/schema";
-import { _linkResolver } from "../utils-old/utils";
+
 import Buy from "./Buy";
 import { usePathname } from "next/navigation";
 import { publish } from "pubsub-js";
 import clsx from "clsx";
 import NavLink from "./NavLink";
 import CartBtn from "./shop/CartBtn";
+import { _linkResolver } from "../sanity-api/utils";
 
 type NavProps = {
   siteName: string;

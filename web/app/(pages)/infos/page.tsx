@@ -3,9 +3,9 @@ import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import { Infos } from "@/app/types/schema";
-import { getInfos, infosQuery } from "@/app/utils-old/sanity-queries";
 import website from "@/app/config/website";
 import ContentInfos from "@/app/components/ContentInfos";
+import { getInfos, INFOS_QUERY } from "@/app/sanity-api/sanity-queries";
 // import ContentInfos from "@/app/components/ContentInfos";
 
 type PageProps = {
@@ -40,7 +40,7 @@ const Page: ({ params }: PageProps) => Promise<JSX.Element> = async ({
   let data: Infos;
   if (preview) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
-      infosQuery,
+      INFOS_QUERY,
       params
     );
   } else {

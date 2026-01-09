@@ -1,7 +1,7 @@
 "use client";
 import { Product, Typeface } from "@/app/types/schema";
 import React, { useEffect } from "react";
-import { _linkResolver } from "@/app/utils-old/utils";
+import { _linkResolver } from "@/app/sanity-api/utils";
 import Typetester from "../typeface/TypeTester";
 import ContentProduct from "../ContentProduct";
 

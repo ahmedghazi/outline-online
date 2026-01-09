@@ -2,7 +2,7 @@ import { BlockContent, BuyModalNotices, KeyVal } from "@/app/types/schema";
 import React, { Fragment, useEffect, useState } from "react";
 import Dialog from "../ui/Dialog";
 import { PortableText } from "next-sanity";
-import portableTextComponents from "@/app/utils-old/portableTextComponents";
+import portableTextComponents from "@/app/sanity-api/portableTextComponents";
 
 type Props = {
   input: BuyModalNotices;

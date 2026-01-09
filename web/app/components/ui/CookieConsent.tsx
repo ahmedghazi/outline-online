@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { hasCookie, setCookie } from "cookies-next";
 import { BlockContent } from "@/app/types/schema";
 import { PortableText } from "@portabletext/react";
-import components from "@/app/utils-old/portableTextComponents";
+import components from "@/app/sanity-api/portableTextComponents";
 import Link from "next/link";
 
 type Props = {

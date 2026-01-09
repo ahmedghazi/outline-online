@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useShop from "./ShopContext";
 import clsx from "clsx";
 import Link from "next/link";
-import { _linkResolver } from "@/app/utils-old/utils";
+import { _linkResolver } from "@/app/sanity-api/utils";
 import CartItem from "./CartItem";
 import { usePageContext } from "@/app/context/PageContext";
 import { cartTotalPrice } from "./utils";

@@ -1,11 +1,12 @@
 import createImageUrlBuilder from "@sanity/image-url";
 // import { definePreview } from 'next-sanity/preview'
-import { sanityConfig } from "./sanity-client";
+// import { sanityConfig } from "./sanity-client";
 import {
   SanityImageAsset,
   SanityImageCrop,
   SanityImageHotspot,
 } from "sanity-codegen";
+import { sanityConfig } from "./sanity.client";
 // import { SanityAsset } from "@sanity/image-url/lib/types/types";
 
 const imageBuilder = createImageUrlBuilder(sanityConfig);

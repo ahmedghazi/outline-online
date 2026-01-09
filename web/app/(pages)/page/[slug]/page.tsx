@@ -4,11 +4,11 @@ import ContentPage from "@/app/components/ContentPage";
 import website from "@/app/config/website";
 import { Page } from "@/app/types/schema";
 import { getClient } from "@/app/sanity-api/sanity.client";
-import { getPage, pageQuery } from "@/app/utils-old/sanity-queries";
 // import { getProduct, productQuery } from "@/app/utils/sanity-queries";
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import React from "react";
+import { getPage, PAGE_QUERY } from "@/app/sanity-api/sanity-queries";
 
 export const revalidate = 3600; // revalidate every hour
 export const dynamic = "force-dynamic";
@@ -39,7 +39,7 @@ const PageTemplate: ({ params }: PageProps) => Promise<JSX.Element> = async ({
   let data: Page;
   if (preview) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
-      pageQuery,
+      PAGE_QUERY,
       params
     );
   } else {

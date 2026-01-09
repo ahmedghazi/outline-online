@@ -10,7 +10,7 @@ import {
 } from "@react-three/fiber";
 import { DragControls, OrbitControls, useGLTF } from "@react-three/drei";
 import { useDrag } from "react-use-gesture";
-import { _randomNum } from "../../utils-old/utils";
+import { _randomNum } from "../../sanity-api/utils";
 // import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Trinket from "../Trinket";

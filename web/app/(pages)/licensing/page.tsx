@@ -3,14 +3,11 @@ import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import { Infos, Licensing } from "@/app/types/schema";
-import {
-  getLicensing,
-  infosQuery,
-  licensingQuery,
-} from "@/app/utils-old/sanity-queries";
+
 import website from "@/app/config/website";
 import ContentInfos from "@/app/components/ContentInfos";
 import ContentLicensing from "@/app/components/ContentLicensing";
+import { getLicensing, LICENSING_QUERY } from "@/app/sanity-api/sanity-queries";
 // import ContentInfos from "@/app/components/ContentInfos";
 
 type PageProps = {
@@ -45,7 +42,7 @@ const Page: ({ params }: PageProps) => Promise<JSX.Element> = async ({
   let data: Licensing;
   if (preview) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
-      licensingQuery,
+      LICENSING_QUERY,
       params
     );
   } else {

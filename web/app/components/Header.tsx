@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Clock from "./ui/Clock";
 import { Product, Settings } from "../types/schema";
-import { _linkResolver } from "../utils-old/utils";
 import ScreenTime from "./ui/ScreenTime";
 import NavPrimaryDesktop from "./NavPrimaryDesktop";
 import NavPrimaryMobile from "./NavPrimaryMobile";

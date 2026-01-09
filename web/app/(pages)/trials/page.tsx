@@ -3,13 +3,15 @@ import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { getClient } from "@/app/sanity-api/sanity.client";
 import { Trials } from "@/app/types/schema";
+
+import website from "@/app/config/website";
+import ContentTrials from "@/app/components/ContentTrials";
 import {
   getInfos,
   getTrials,
-  infosQuery,
-} from "@/app/utils-old/sanity-queries";
-import website from "@/app/config/website";
-import ContentTrials from "@/app/components/ContentTrials";
+  INFOS_QUERY,
+  TRIALS_QUERY,
+} from "@/app/sanity-api/sanity-queries";
 // import ContentInfos from "@/app/components/ContentInfos";
 
 type PageProps = {
@@ -24,7 +26,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const data = await getInfos();
+  const data = await getTrials();
   return {
     title: `${data?.seo?.metaTitle || data?.title || ""}`,
     description: data?.seo?.metaDescription,
@@ -44,7 +46,7 @@ const Page: ({ params }: PageProps) => Promise<JSX.Element> = async ({
   let data: Trials;
   if (preview) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
-      infosQuery,
+      TRIALS_QUERY,
       params
     );
   } else {

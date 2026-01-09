@@ -2,7 +2,7 @@
 import React from "react";
 import { usePageContext } from "../context/PageContext";
 import Link from "next/link";
-import { _linkResolver } from "../utils-old/utils";
+import { _linkResolver } from "../sanity-api/utils";
 
 type Props = {};
 

@@ -4,11 +4,11 @@ import { TypeContextProvider } from "@/app/components/typeface/TypeContext";
 import website from "@/app/config/website";
 import { Product } from "@/app/types/schema";
 import { getClient } from "@/app/sanity-api/sanity.client";
-import { getProduct, productQuery } from "@/app/utils-old/sanity-queries";
 // import { getProduct, productQuery } from "@/app/utils/sanity-queries";
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import React from "react";
+import { getProduct, PRODUCT_QUERY } from "@/app/sanity-api/sanity-queries";
 
 // export const revalidate = 3600; // revalidate every hour
 export const revalidate = 10; // revalidate every hour
@@ -43,7 +43,7 @@ const Page: ({ params }: PageProps) => Promise<JSX.Element> = async ({
   let data: Product;
   if (preview) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
-      productQuery,
+      PRODUCT_QUERY,
       params
     );
   } else {

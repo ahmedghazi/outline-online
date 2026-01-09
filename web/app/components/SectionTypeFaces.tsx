@@ -7,7 +7,7 @@ import {
   Typeface,
 } from "../types/schema";
 import Link from "next/link";
-import { _linkResolver } from "../utils-old/utils";
+import { _linkResolver } from "../sanity-api/utils";
 import clsx from "clsx";
 // import TypeCard from "./typeface/TypeCard";
 import useType, { TypeContextProvider } from "./typeface/TypeContext";

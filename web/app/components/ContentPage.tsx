@@ -1,7 +1,7 @@
 import React from "react";
 import { Page, Settings } from "../types/schema";
 import { PortableText } from "next-sanity";
-import portableTextComponents from "../utils-old/portableTextComponents";
+import portableTextComponents from "../sanity-api/portableTextComponents";
 import SummaryDetailFramer from "./ui/SummaryDetailFramer";
 import NavTertiary from "./NavTertiary";
 

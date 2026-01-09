@@ -1,5 +1,6 @@
 import { groq } from "next-sanity";
-import { client } from "./sanity-client";
+// import { client } from "./sanity-client";
+import { sanityFetch } from "./sanity.client";
 import {
   Home,
   Infos,
@@ -9,14 +10,13 @@ import {
   Settings,
   Trials,
 } from "../types/schema";
-import { cache } from "react";
+// import { cache } from "react";
 import { figure, productCard, productCardLight, seo } from "./fragments";
+// import { client } from "./sanity.client";
 
-export const cachedClient = cache(client.fetch.bind(client));
+// export const cachedClient = cache(client.fetch.bind(client));
 
-export async function getSettings(): Promise<Settings> {
-  return client.fetch(
-    groq`*[_type == "settings"][0]{
+const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
       ...,
 
       navPrimary[]{
@@ -62,17 +62,19 @@ export async function getSettings(): Promise<Settings> {
       licenseSizes[]{
         ...
       }
-    }`
-  );
+    }`;
+export async function getSettings(): Promise<Settings> {
+  return sanityFetch({
+    query: SETTINGS_QUERY,
+    tags: ["settings"],
+  });
 }
 
 /**
  * PRODUCTS CART
  * (only published ones)
  */
-export async function getProductsCart(): Promise<Product[]> {
-  return client.fetch(
-    groq`
+const PRODUCTS_CART_QUERY = groq`
     *[_type == "product" && !(_id in path('drafts.**')) && visible == true]{
       _id,
       title,
@@ -114,15 +116,19 @@ export async function getProductsCart(): Promise<Product[]> {
       },
       metadata
     }
-    `
-  );
+    `;
+export async function getProductsCart(): Promise<Product[]> {
+  return sanityFetch({
+    query: PRODUCTS_CART_QUERY,
+    tags: ["productsCart"],
+  });
 }
 
 /**
  * HOME
  *
  */
-export const homeQuery = groq`*[_type == "home"][0]{
+export const HOME_QUERY = groq`*[_type == "home"][0]{
   ...,
   seo{
     ${seo}
@@ -148,14 +154,17 @@ export const homeQuery = groq`*[_type == "home"][0]{
 }`;
 
 export async function getHome(): Promise<Home> {
-  return cachedClient(homeQuery, {});
+  return sanityFetch({
+    query: HOME_QUERY,
+    tags: ["home"],
+  });
 }
 
 /**
  * INFOS
  *
  */
-export const infosQuery = groq`*[_type == "infos"][0]{
+export const INFOS_QUERY = groq`*[_type == "infos"][0]{
   ...,
   seo{
     ${seo}
@@ -163,14 +172,17 @@ export const infosQuery = groq`*[_type == "infos"][0]{
 }`;
 
 export async function getInfos(): Promise<Infos> {
-  return cachedClient(infosQuery, {});
+  return sanityFetch({
+    query: INFOS_QUERY,
+    tags: ["infos"],
+  });
 }
 
 /**
  * LICENSING
  *
  */
-export const licensingQuery = groq`*[_type == "licensing"][0]{
+export const LICENSING_QUERY = groq`*[_type == "licensing"][0]{
   ...,
   seo{
     ${seo}
@@ -178,14 +190,17 @@ export const licensingQuery = groq`*[_type == "licensing"][0]{
 }`;
 
 export async function getLicensing(): Promise<Licensing> {
-  return cachedClient(licensingQuery, {});
+  return sanityFetch({
+    query: LICENSING_QUERY,
+    tags: ["licensing"],
+  });
 }
 
 /**
  * TRIALS
  *
  */
-export const trialsQuery = groq`*[_type == "trials"][0]{
+export const TRIALS_QUERY = groq`*[_type == "trials"][0]{
   ...,
   seo{
     ${seo}
@@ -196,14 +211,17 @@ export const trialsQuery = groq`*[_type == "trials"][0]{
 }`;
 
 export async function getTrials(): Promise<Trials> {
-  return cachedClient(trialsQuery, {});
+  return sanityFetch({
+    query: TRIALS_QUERY,
+    tags: ["trials"],
+  });
 }
 
 /**
  * PRODUCT
  *
  */
-export const productQuery = groq`*[_type == "product" && slug.current == $slug][0]{
+export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug][0]{
   ...,
   seo{
     ${seo}
@@ -215,14 +233,18 @@ export const productQuery = groq`*[_type == "product" && slug.current == $slug][
 }`;
 
 export async function getProduct(slug: string): Promise<Product> {
-  return cachedClient(productQuery, { slug: slug });
+  return sanityFetch({
+    query: PRODUCT_QUERY,
+    tags: ["product"],
+    qParams: { slug: slug },
+  });
 }
 
 /**
  * PAGE
  *
  */
-export const pageQuery = groq`*[_type == "page" && slug.current == $slug][0]{
+export const PAGE_QUERY = groq`*[_type == "page" && slug.current == $slug][0]{
   ...,
   seo{
     ${seo}
@@ -230,5 +252,9 @@ export const pageQuery = groq`*[_type == "page" && slug.current == $slug][0]{
 }`;
 
 export async function getPage(slug: string): Promise<Page> {
-  return cachedClient(pageQuery, { slug: slug });
+  return sanityFetch({
+    query: PAGE_QUERY,
+    tags: ["page"],
+    qParams: { slug: slug },
+  });
 }
