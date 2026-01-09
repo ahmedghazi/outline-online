@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import archiver from "archiver";
 import { PassThrough, Readable } from "stream";
-import { client } from "@/app/sanity-api/sanity-client";
+import { client } from "@/app/sanity-api/sanity.client";
 import { LinkExpire, LinkExternal } from "@/app/types/schema";
 
 export const runtime = "nodejs";
