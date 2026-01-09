@@ -81,7 +81,7 @@ export async function GET(req: Request) {
   archive.finalize();
 
   // Increment download ONCE (safe spot)
-  // await client.patch(data._id).inc({ downloads: 1 }).commit();
+  await client.patch(data._id).inc({ downloads: 1 }).commit();
 
   // Return response
   return new Response(passThrough as any, {
