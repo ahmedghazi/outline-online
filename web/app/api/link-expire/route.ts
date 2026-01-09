@@ -82,7 +82,7 @@ export async function GET(req: Request) {
 
   // Increment download ONCE (safe spot)
   await client.patch(data._id).inc({ downloads: 1 }).commit();
-
+  console.log("linkExpire incremented");
   // Return response
   return new Response(passThrough as any, {
     headers: {
