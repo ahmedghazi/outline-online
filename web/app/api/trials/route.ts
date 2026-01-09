@@ -21,7 +21,6 @@ import website from "@/app/config/website";
 // });
 
 type SendProps = {
-  payload?: any;
   error?: any;
   client_name: string;
   destination: string;
@@ -69,7 +68,6 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     const params: SendProps = {
       destination: destination,
       client_name: client_name,
-      // payload: _attachments,
       linksExpire: `${website.url}/api/link-expire?token=${_linksExpire.token}`,
     };
     // _sendEmail(destination, _downloadButtons);
@@ -237,7 +235,6 @@ const _createLinksExpire = async (items: ZipType[]) => {
 const _sendEmail = async ({
   destination,
   client_name,
-  payload,
   linksExpire,
 }: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
@@ -269,7 +266,6 @@ const _sendEmail = async ({
         Outline Online</p>
       </div>
     `,
-    // attachments: payload,
   };
 
   try {
@@ -306,7 +302,7 @@ const _sendErrorEmail = async ({
   const mailOptions = {
     from: process.env.SENDER_EMAIL,
     to: destination,
-    subject: "Outline Online trial fonts",
+    subject: "Outline Online trial fonts (error)",
     // text: "le message: " + JSON.stringify(payload),
     html: `
       <div style="font-family:monospace,sans-serif">
