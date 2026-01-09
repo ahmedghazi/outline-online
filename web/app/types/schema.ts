@@ -523,6 +523,13 @@ export interface Product extends SanityDocument {
   singles?: Array<SanityKeyed<ProductSingle>>;
 
   /**
+   * Zip File Trials — `file`
+   *
+   * Digital good client will receive. (seems deprecated, will keep it for now)
+   */
+  zipTrials?: { _type: "file"; asset: SanityReference<any> };
+
+  /**
    * Pangrams — `array`
    *
    *
@@ -733,6 +740,13 @@ export interface Order extends SanityDocument {
   title?: string;
 
   /**
+   * Status — `string`
+   *
+   *
+   */
+  status?: string;
+
+  /**
    * Invoice Number — `string`
    *
    *
@@ -740,7 +754,7 @@ export interface Order extends SanityDocument {
   invoiceNumber?: string;
 
   /**
-   * dateTime — `date`
+   * dateTime — `datetime`
    *
    *
    */
@@ -766,6 +780,50 @@ export interface Order extends SanityDocument {
    *
    */
   json?: string;
+}
+
+/**
+ * Link Expire
+ *
+ *
+ */
+export interface LinkExpire extends SanityDocument {
+  _type: "linkExpire";
+
+  /**
+   * token — `string`
+   *
+   * Used to access the link
+   */
+  token?: string;
+
+  /**
+   * zips — `array`
+   *
+   *
+   */
+  zips?: Array<SanityKeyed<LinkExternal>>;
+
+  /**
+   * maxDownloads — `number`
+   *
+   *
+   */
+  maxDownloads?: number;
+
+  /**
+   * downloads — `number`
+   *
+   *
+   */
+  downloads?: number;
+
+  /**
+   * expiresAt — `datetime`
+   *
+   *
+   */
+  expiresAt?: string;
 }
 
 export type LicenseType = {
@@ -1550,4 +1608,5 @@ export type Documents =
   | Product
   | Typeface
   | Vendor
-  | Order;
+  | Order
+  | LinkExpire;

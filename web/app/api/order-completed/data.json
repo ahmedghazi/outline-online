@@ -1,7 +1,7 @@
 {
   "paddleData": {
-    "id": "che_01kecgkpsb6s7ewfhhcw17k41q",
-    "transaction_id": "txn_01kecgknnxspa24nhazbssf58f",
+    "id": "che_01keh0ba94mfwmcmmcgh1k3s8y",
+    "transaction_id": "txn_01keh0b8z5fyt26xrz3z6fg1jb",
     "status": "completed",
     "custom_data": {
       "foo": "bar"
@@ -11,7 +11,7 @@
       "id": "ctm_01kecf2r1yx36mqhz0bhb7pxb6",
       "email": "atmet.ghazi@gmail.com",
       "address": {
-        "id": "add_01kecgm0md3fw8ngfemffc30gc",
+        "id": "add_01keh0mjy3nt29h0r434n8x8m1",
         "country_code": "FR",
         "postal_code": "75018",
         "city": "",
@@ -22,10 +22,10 @@
     },
     "items": [
       {
-        "price_id": "pri_01kecgknr4k1y2g5zanfcdhcv1",
-        "price_name": "Lyga Essentials license: <5 ",
+        "price_id": "pri_01keh0b91qnzq4ee6v3crt1x7x",
+        "price_name": "License size: <5, License types: PRINT, WEB",
         "product": {
-          "id": "pro_01kecgknp1622hf21agwwh0k64",
+          "id": "pro_01keh0b8z9k345ychrzd9rq45e",
           "name": "Lyga Essentials",
           "description": "63282b255bdc",
           "image_url": null
@@ -43,12 +43,12 @@
         }
       },
       {
-        "price_id": "pri_01kecgknrvy99fd784fjpg5yqk",
-        "price_name": "Lyga Light Italic license: <5 ",
+        "price_id": "pri_01keh0b92xqbx9k6re2aqcnbqe",
+        "price_name": "License size: <5, License types: PRINT, WEB",
         "product": {
-          "id": "pro_01kecgknp1622hf21agzbxmnv4",
-          "name": "Lyga Light Italic",
-          "description": "c5846f6bb527",
+          "id": "pro_01keh0b8z9k345ychrzet3qag6",
+          "name": "Lyga Thin",
+          "description": "d1984b79a173",
           "image_url": null
         },
         "billing_cycle": null,
@@ -108,16 +108,16 @@
       "licenseInfos": ""
     },
     {
-      "bundleOrSingleKey": "c5846f6bb527",
+      "bundleOrSingleKey": "d1984b79a173",
       "productType": "productSingle",
-      "sku": "c5846f6bb527",
+      "sku": "d1984b79a173",
       "basePrice": 90,
       "price": 180,
       "discount": 0,
       "finalPrice": 180,
       "productId": "0e8dd235-d6cc-4905-89a3-667d45e5d6a6",
       "productTitle": "Lyga",
-      "fullTitle": "Lyga Light Italic",
+      "fullTitle": "Lyga Thin",
       "description": "",
       "licenseSize": "<5",
       "licenseTypes": "PRINT|WEB",

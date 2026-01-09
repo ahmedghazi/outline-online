@@ -23,7 +23,7 @@ export const sanityConfig = {
   dataset: dataset,
 };
 
-const client = createClient(config);
+export const client = createClient(config);
 
 export function getClient(preview?: { token?: string }): SanityClient {
   // import { draftMode } from "next/headers";

@@ -8,8 +8,9 @@ import nodemailer from "nodemailer";
 // require("dotenv").config();
 // import sanityClient from "@sanity/client";
 import { Product, ProductSingle, Typeface } from "@/app/types/schema";
-import { client } from "@/app/sanity-api/sanity-client";
-
+import { client } from "@/app/sanity-api/sanity.client";
+import { v4 as uuidv4 } from "uuid";
+import website from "@/app/config/website";
 // const client = sanityClient({
 //   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
 //   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
@@ -24,6 +25,7 @@ type SendProps = {
   error?: any;
   client_name: string;
   destination: string;
+  linksExpire?: string;
 };
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
@@ -57,10 +59,18 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     const _attachments = _collectZips(_productsData);
     console.log(_attachments);
 
+    //create a linkExpire for the attachements
+    const _linksExpire = await _createLinksExpire(_attachments);
+    console.log(_linksExpire);
+    // return new NextResponse(JSON.stringify(_linksExpire), {
+    //   status: 201,
+    //   headers: { "Content-Type": "application/json" },
+    // });
     const params: SendProps = {
       destination: destination,
       client_name: client_name,
-      payload: _attachments,
+      // payload: _attachments,
+      linksExpire: `${website.url}/api/link-expire?token=${_linksExpire.token}`,
     };
     // _sendEmail(destination, _downloadButtons);
     // return new NextResponse(JSON.stringify(_attachments), {
@@ -69,11 +79,6 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     // });
     const _sendEmailresult = await _sendEmail(params);
     console.log(_sendEmailresult);
-    const paramsLogs: SendProps = {
-      destination: "atmet.ghazi@gmail.com",
-      client_name: "atmet.ghazi@gmail.com",
-      error: _sendEmailresult,
-    };
 
     // const messError = await _sendErrorEmail(paramsLogs);
 
@@ -132,12 +137,12 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
   }
 }
 
-const _collectProductsId = (items: ProductSingle[]) => {
+const _collectProductsId = (items: Product[]) => {
   let _ids: string[] = [];
   items.forEach((element: any) => {
     // const metadata = JSON.parse(element.metadata);
-    const { productId } = element;
-    _ids.push(productId);
+    const { _id } = element;
+    _ids.push(_id);
   });
   return _ids;
 };
@@ -146,13 +151,18 @@ const _collectProductsData = async (_ids: string[]) => {
   const query = `*[_type == "product" && _id in $_ids
     ]{
     title,
-    singles[]{
-      _key,
-      title,
-      zipTrials{
-        asset->{
-          url
-        }
+    // singles[]{
+    //   _key,
+    //   title,
+    //   zipTrials{
+    //     asset->{
+    //       url
+    //     }
+    //   }
+    // }
+    zipTrials{
+      asset->{
+        url
       }
     }
   }`;
@@ -162,45 +172,74 @@ const _collectProductsData = async (_ids: string[]) => {
   return res;
 };
 
-const _collectZips = (items: Product[]) => {
+type ZipType = {
+  label: string;
+  link: string;
+};
+const _collectZips = (items: Product[]): ZipType[] => {
   const zips: any[] = [];
   items.forEach((product) => {
-    product.singles?.forEach((single) => {
-      let zip = {};
-      if (single.zipTrials) {
-        zip = {
-          filename: `${product.title}-${single.title}.zip`,
-          path: single.zipTrials.asset.url,
-        };
-      } else {
-        zip = {
-          filename: "no zip found",
-          path: "",
-        };
-      }
-      zips.push(zip);
-    });
+    let zip = {};
+    if (product.zipTrials) {
+      zip = {
+        label: `${product.title}-trials.zip`,
+        link: product.zipTrials.asset.url,
+      };
+    } else {
+      zip = {
+        label: `${product.title} no zip found`,
+        link: "",
+      };
+    }
+    zips.push(zip);
   });
   return zips;
 };
 
-const _generateAttachments = (items: any) => {
-  return items.map((item: any) => {
-    if (item.zipTrials) {
-      return {
-        filename: `${item.typefaceTitle}-${item.title}.zip`,
-        path: item.zip.asset.url,
-      };
-    } else {
-      return {
-        filename: "no zip found",
-        path: "",
-      };
-    }
-  });
+const _createLinksExpire = async (items: ZipType[]) => {
+  try {
+    const res = await client.create({
+      _type: "linkExpire",
+      token: uuidv4(),
+      maxDownloads: 3,
+      downloads: 0,
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+      zips: items.map((item) => ({
+        _key: uuidv4(),
+        _type: "linkExternal",
+        label: item.label,
+        link: item.link,
+        // ...item,
+      })),
+    });
+    return res;
+  } catch (error) {
+    console.error("Error generating links expire:", error);
+    throw new Error("Failed to generate links expire");
+  }
 };
+// const _generateAttachments = (items: any) => {
+//   return items.map((item: any) => {
+//     if (item.zipTrials) {
+//       return {
+//         filename: `${item.typefaceTitle}-${item.title}.zip`,
+//         path: item.zip.asset.url,
+//       };
+//     } else {
+//       return {
+//         filename: "no zip found",
+//         path: "",
+//       };
+//     }
+//   });
+// };
 
-const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
+const _sendEmail = async ({
+  destination,
+  client_name,
+  payload,
+  linksExpire,
+}: SendProps) => {
   // sendGridMail.setApiKey(process.env.SENDGRID_API_KEY || "");
   console.log("_sending to :", destination);
   //https://stackoverflow.com/questions/38024428/error-connect-econnrefused-127-0-0-1465-nodemailer
@@ -223,13 +262,14 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
     html: `
       <div style="font-family:monospace,sans-serif">
         <p>Dear ${client_name}</p>
-        <p>Thank you for downloading the trial versions of our typefaces! Please, find them attached below in this email.</p>
+        <p>Thank you for downloading the trial versions of our typefaces! Please, find the download link below.</p>
+        <p><a href="${linksExpire}">Download</a></p>
         <p>Outline Online trial fonts come with a full character set, meaning numbers, punctuation, diacritics and specific symbols are all included in the character set. This approach allows the effective testing and functional presentation of our typefaces. Trial font files are intended solely for testing and pitching purposes. In order to use the trial fonts in a published project, the appropriate license needs to be purchased for the respective license holder. By downloading these files, you agree to Outline Online’s End User Licence Agreement (EULA).</p>
         <p>Best from,<br />
         Outline Online</p>
       </div>
     `,
-    attachments: payload,
+    // attachments: payload,
   };
 
   try {

@@ -81,6 +81,12 @@ export const structure = (S) =>
         .schemaType('typeface')
         .child(S.documentTypeList('typeface')),
       S.listItem().title('Orders').schemaType('order').child(S.documentTypeList('order')),
+      S.divider(),
+
+      S.listItem()
+        .title('Links expire')
+        .schemaType('linkExpire')
+        .child(S.documentTypeList('linkExpire')),
       /**
        * with seo preview
        */

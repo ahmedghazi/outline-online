@@ -9,53 +9,34 @@ export default defineType({
   icon: RiLinkUnlinkM,
   preview: {
     select: {
-      title: `title`,
+      title: `token`,
+      subtitle: `downloads`,
     },
   },
-  // groups: [
-  //   {
-  //     default: true,
-  //     name: 'editorial',
-  //     title: 'Editorial',
-  //   },
-  // ],
+
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
+      name: 'token',
       type: 'string',
-      // group: 'editorial',
+      description: 'Used to access the link',
     }),
     defineField({
-      name: 'url',
-      title: 'Url',
-      type: 'url',
-      // group: 'editorial',
+      name: 'zips',
+      type: 'array',
+      of: [{type: 'linkExternal'}],
     }),
     defineField({
-      name: 'expired',
-      title: 'expired',
-      type: 'boolean',
-      // group: 'editorial',
-    }),
-    defineField({
-      name: 'count',
-      title: 'Hit count',
+      name: 'maxDownloads',
       type: 'number',
-      // group: 'editorial',
+    }),
+    defineField({
+      name: 'downloads',
+      type: 'number',
+      initialValue: 0,
+    }),
+    defineField({
+      name: 'expiresAt',
+      type: 'datetime',
     }),
   ],
-
-  // orderings: [
-  //   {
-  //     title: 'Trier par theme ASC',
-  //     name: 'themeAsc',
-  //     by: [{field: 'tagType', direction: 'asc'}],
-  //   },
-  //   {
-  //     title: 'Trier par theme DESC',
-  //     name: 'themeDesc',
-  //     by: [{field: 'tagType', direction: 'desc'}],
-  //   },
-  // ],
 })

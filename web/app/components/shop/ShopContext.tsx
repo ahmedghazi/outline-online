@@ -12,11 +12,9 @@ import {
   LicenseSize,
   LicenseType,
   Product,
-  ProductSingle,
   SanityKeyed,
 } from "@/app/types/schema";
 import { usePathname } from "next/navigation";
-import { _getDataAttributes } from "./utils";
 import { ProductData } from "@/app/types/extra-types";
 
 interface ShopContextProps {
@@ -72,8 +70,8 @@ function trialsReducer(state: any, action: any) {
     case "ADD":
       return [...state, payload];
     case "REMOVE":
-      return state.filter((item: SanityKeyed<ProductSingle>) => {
-        return item._key !== payload._key;
+      return state.filter((item: Product) => {
+        return item._id !== payload._id;
       });
 
     case "REMOVE_ALL":
@@ -98,7 +96,7 @@ type ContextProps = {
   setLicenseSizeProfil: Function;
   licenseTypeProfil: Array<SanityKeyed<LicenseType>> | null;
   setLicenseTypeProfil: Function;
-  trials: ProductSingle[];
+  trials: Product[];
   setTrials: Function;
 };
 
@@ -107,7 +105,7 @@ const ShopContext = createContext<ContextProps>({} as ContextProps);
 function productsReducer(state: any, action: any) {
   // console.log(state, action);
   const { type, payload } = action;
-  console.log(type, payload);
+  // console.log(type, payload);
   switch (type) {
     case "SET":
       return payload;

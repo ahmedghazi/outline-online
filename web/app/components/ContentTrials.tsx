@@ -18,12 +18,15 @@ type TypeFaceItemProps = {
 
 /*
 TO DO
-- select, select all [product, product > style]
-- dialog form
-- api/get-trials
-- - array typeface > file
-- - email send (pj, link dl)
-- - link dl expire
+// - select, select all [product, product > style]
+// - dialog form
+// - api/get-trials
+// - - array typeface > file
+// - - email send (pj, link dl)
+// - - link dl expire
+
+get zip
+
 */
 const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
   const [active, setActive] = useState<boolean>(false);
@@ -63,22 +66,24 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
             checked={defaultActive}
             onChange={(checked: boolean) => {
               // console.log(checked);
-              const { singles } = input;
-              if (!singles) return;
+              // const { singles } = input;
+              // if (!singles) return;
 
               // console.log({ checked });
               if (checked) {
-                singles.forEach((el) => {
-                  const trial: any = el;
-                  trial.typefaceTitle = input.title;
-                  trial.productId = input._id;
-                  setTrials({ type: "ADD", payload: trial });
-                });
+                // singles.forEach((el) => {
+                //   const trial: any = el;
+                //   trial.typefaceTitle = input.title;
+                //   trial.productId = input._id;
+                //   setTrials({ type: "ADD", payload: trial });
+                // });
+                setTrials({ type: "ADD", payload: input });
               } else {
-                singles.forEach((el) => {
-                  // console.log(el);
-                  setTrials({ type: "REMOVE", payload: el });
-                });
+                setTrials({ type: "REMOVE", payload: input });
+                // singles.forEach((el) => {
+                //   // console.log(el);
+                //   setTrials({ type: "REMOVE", payload: el });
+                // });
               }
             }}
           />
@@ -111,7 +116,6 @@ const ContentTrials = ({ input }: Props) => {
   const [allActive, setAllActive] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { trials, setTrials } = useShop();
-
   const total = useMemo(() => {
     const sum =
       input.typefaces &&
@@ -152,15 +156,8 @@ const ContentTrials = ({ input }: Props) => {
       <div
         className={clsx(
           "footer",
-          // trials.length > 0 && "has-trials-"
           trials.length > 0 ? "button-submit" : "button-disabled"
-        )}
-        // onClick={() => {
-        //   // if (trials.length > 0) {
-        //   //   setOpenModal(true);
-        //   // }
-        // }}
-      >
+        )}>
         {trials.length === 0 && (
           <Checkbox
             name={_getDlButtonLabel()}

@@ -81,36 +81,6 @@ export default defineType({
       group: 'editorial',
     }),
 
-    // defineField({
-    //   name: 'tag',
-    //   title: 'Tag',
-    //   type: 'reference',
-    //   to: {type: 'tag'},
-    //   group: 'editorial',
-    // }),
-
-    // defineField({
-    //   title: 'Product variants',
-    //   name: 'variants',
-    //   type: 'array',
-    //   description:
-    //     'ex licence web, desktop, Base price defined here, company size will increment base price, bundle or single style will give the final price',
-    //   of: [
-    //     {
-    //       title: 'Variants',
-    //       type: 'variants',
-    //     },
-    //   ],
-    //   group: 'shop',
-    //   hidden: true,
-    // }),
-
-    // defineField({
-    //   name: 'noticeInternal',
-    //   type: 'text',
-    //   readOnly: true,
-    //   group: 'shop',
-    // }),
     defineField({
       name: 'licenseSizes',
       type: 'array',
@@ -152,6 +122,14 @@ export default defineType({
           type: 'productSingle',
         },
       ],
+      group: 'shop',
+    }),
+
+    defineField({
+      title: 'Zip File Trials',
+      name: 'zipTrials',
+      type: 'file',
+      description: 'Digital good client will receive. (seems deprecated, will keep it for now)',
       group: 'shop',
     }),
     // defineField({

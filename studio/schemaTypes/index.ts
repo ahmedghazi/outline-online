@@ -9,6 +9,8 @@ import tag from './documents/tag'
 // import linkExpire from './documents/linkExpire'
 
 import product from './shop/product'
+import order from './shop/order'
+import linkExpire from './documents/linkExpire'
 // import variants from './shop/variants'
 // import variant from './shop/variant'
 import typeface from './shop/typeface'
@@ -46,7 +48,6 @@ import trinket from './objects/trinket'
 import textDropDown from './objects/textDropDown'
 import keyValString from './objects/keyValString'
 import glyphSet from './shop/glyphSet'
-import order from './shop/order'
 
 export const schemaTypes = [
   home,
@@ -61,7 +62,7 @@ export const schemaTypes = [
   typeface,
   vendor,
   order,
-  // linkExpire,
+  linkExpire,
 
   licenseType,
   licenseSize,
