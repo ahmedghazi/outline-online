@@ -8,7 +8,7 @@ type Props = {
 
 const Price = ({ price, discount }: Props) => {
   // console.log(price, priceDiscount);
-  const displayPriceCrossed = discount && discount > 0;
+  const displayPriceCrossed = discount !== undefined && discount > 0;
   let priceDiscount = 0;
   if (displayPriceCrossed) {
     // priceDiscount = (discount * price) / 100;
@@ -20,13 +20,9 @@ const Price = ({ price, discount }: Props) => {
       {!displayPriceCrossed && (
         <span className='w-[90px] text-right'>{price} EUR</span>
       )}
-
       {displayPriceCrossed === true && (
         <>
-          <span className='w-[90px] text-right'>
-            {/* {price - priceDiscount} EUR */}
-            {priceDiscount} EUR
-          </span>
+          <span className='w-[90px] text-right'>{priceDiscount} EUR</span>
           <span className='text-muted line-through md:max-w-[90px] text-right'>
             {price} EUR
           </span>

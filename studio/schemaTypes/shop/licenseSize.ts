@@ -11,6 +11,14 @@ export default defineField({
       title: 'title',
       subtitle: 'priceMultiplier',
     },
+    prepare(selection) {
+      const {title, subtitle} = selection
+      // console.log(images)
+      return {
+        title: title,
+        subtitle: `*${subtitle}`,
+      }
+    },
   },
   fields: [
     defineField({
@@ -46,6 +54,7 @@ export default defineField({
       // title: 'licenses Type',
       type: 'array',
       of: [{type: 'licenseType'}],
+      hidden: true,
       // group: 'shop',
     }),
   ],

@@ -15,11 +15,27 @@ const LicenseTypeUI = ({ input, index, ready }: Props) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsChecked(index === 0);
+    // setIsChecked(index === 0);
+    if (index === 0 && !_exist()) {
+      setLicenseTypeProfil({ type: "ADD", payload: input });
+    }
   }, []);
 
+  useEffect(() => {
+    console.log("licenseTypeProfil length", index, licenseTypeProfil?.length);
+    if (licenseTypeProfil?.length === 0 && index === 0) {
+      setTimeout(() => {
+        setLicenseTypeProfil({ type: "ADD", payload: input });
+      }, 150);
+    }
+  }, [licenseTypeProfil]);
+
+  const _exist = () => {
+    return licenseTypeProfil?.some((el) => el.label === input.label);
+  };
   const _updateLicenseType = (checked: boolean, val: LicenseType) => {
-    const exist = licenseTypeProfil?.some((el) => el.label === val.label);
+    // const exist = licenseTypeProfil?.some((el) => el.label === val.label);
+    const exist = _exist();
     if (checked) {
       if (exist) {
         setLicenseTypeProfil({ type: "REPLACE", payload: val });
@@ -33,19 +49,10 @@ const LicenseTypeUI = ({ input, index, ready }: Props) => {
   return (
     <div className='input flex gap-sm'>
       {ready && (
-        // <Radio
-        //   name={input.label || ""}
-        //   checked={index === 0}
-        //   // checked={ready && index === 0}
-        //   onChange={(checked: boolean) => {
-        //     console.log(checked, input);
-        //     _updateLicenseType(checked, input);
-        //     // setIsChecked(checked);
-        //   }}
-        // />
         <Checkbox
           name={input.label || ""}
-          checked={index === 0}
+          // checked={index === 0}
+          checked={_exist()}
           onChange={(checked: boolean) => {
             // console.log(checked, input);
             _updateLicenseType(checked, input);

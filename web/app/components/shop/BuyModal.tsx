@@ -183,7 +183,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
     licenseTypeProfil,
     tmpProducts,
   } = useShop();
-  // console.log(products);
+  console.log({ licenseTypeProfil });
 
   useEffect(() => {
     // console.log(pathname);
@@ -215,12 +215,17 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
     let priceMultiplier = 1;
     if (licenseSizeProfil && licenseTypeProfil) {
       priceMultiplier = licenseSizeProfil.priceMultiplier || 1;
+      let counter = 0;
       licenseTypeProfil.forEach((el) => {
         if (el.label) {
           // à préciser, + ou *
-          priceMultiplier *= el.priceMultiplier || 0;
+          // priceMultiplier *= el.priceMultiplier || 0;
+          // console.log(priceMultiplier, el.priceMultiplier);
+          counter += el.priceMultiplier || 0;
         }
       });
+      priceMultiplier = priceMultiplier * counter;
+      // console.log({ priceMultiplier });
     }
     setPriceMultiplier(priceMultiplier);
   }, [licenseSizeProfil, licenseTypeProfil]);

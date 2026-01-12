@@ -23,6 +23,8 @@ const AddToTmpCart = ({
 
   const pathname = usePathname();
   let _price: number = price * (priceMultiplier || 1);
+  //to fixed if price = 119.99999999997
+  _price = Math.round(_price * 100) / 100;
   let finalPriceWithDiscount: number = _price;
   if (discount) {
     // const discountAmount = (discount * _price) / 100;
