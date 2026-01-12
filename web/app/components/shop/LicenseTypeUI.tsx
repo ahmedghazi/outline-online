@@ -22,7 +22,7 @@ const LicenseTypeUI = ({ input, index, ready }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log("licenseTypeProfil length", index, licenseTypeProfil?.length);
+    // console.log("licenseTypeProfil length", index, licenseTypeProfil?.length);
     if (licenseTypeProfil?.length === 0 && index === 0) {
       setTimeout(() => {
         setLicenseTypeProfil({ type: "ADD", payload: input });
