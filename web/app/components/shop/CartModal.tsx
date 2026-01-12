@@ -8,6 +8,7 @@ import CartItem from "./CartItem";
 import { usePageContext } from "@/app/context/PageContext";
 import { cartTotalPrice } from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
+import Image from "next/image";
 
 type Props = {};
 
@@ -71,6 +72,15 @@ const CartModal = (props: Props) => {
                   <div className='value'>
                     <div className='price'>{cartTotalPrice(products)}€ </div>
                   </div>
+                </div>
+                <div className='reassurances b-b py-05e flex items-center gap-sm justify-end'>
+                  Secured by{" "}
+                  <Image
+                    src='/paddle-logo-light.png'
+                    alt='Paddle'
+                    width={50}
+                    height={18}
+                  />
                 </div>
               </div>
               <CheckoutBtn canCheckout={products.length > 0} />

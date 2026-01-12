@@ -49,10 +49,10 @@ const AddToCart = () => {
             : "button-disabled pointer-events-none"
         )}>
         {buttonStatus}{" "}
-        {products.length > 0 && (
+        {tmpProducts.length > 0 && (
           <span className='length'>
-            <span>{products.length} </span>
-            <span>product{products.length > 1 && "s"}</span>
+            <span>{tmpProducts.length} </span>
+            <span>product{tmpProducts.length > 1 && "s"}</span>
           </span>
         )}
       </button>
