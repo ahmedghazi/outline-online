@@ -16,7 +16,7 @@ const CartModal = (props: Props) => {
   const { products, setProducts } = useShop();
   const [canCheckout, setCanCheckout] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(true);
-  const { tab } = usePageContext();
+  const { tab, setTab } = usePageContext();
   const isEmpty = products.length === 0;
 
   const _delete = (sku: string) => {
@@ -40,9 +40,13 @@ const CartModal = (props: Props) => {
               <section className='cart-empty py-xl flex justify-center'>
                 <div className='flex flex-col items-center gap-md'>
                   <div className=''>Your cart is empty</div>
-                  <Link href={"/"} className='ui-btn ui-btn__accent'>
+                  <button
+                    className='ui-btn ui-btn__accent'
+                    onClick={() => {
+                      setTab({ name: "BUY", active: true });
+                    }}>
                     Explore our catalogue
-                  </Link>
+                  </button>
                 </div>
               </section>
             )}

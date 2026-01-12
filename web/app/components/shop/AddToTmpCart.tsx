@@ -52,31 +52,22 @@ const AddToTmpCart = ({
   useEffect(() => {
     // console.log(title, active);
     if (!mounted) return;
-    if (active) {
+    if (active && _productData.finalPrice > 0) {
       // console.log(_productData);
       const exist = tmpProducts.filter((el) => el.sku === _productData.sku);
       if (exist.length === 0)
         setTmpProducts({ type: "ADD", payload: _productData });
       else setTmpProducts({ type: "REPLACE", payload: _productData });
     } else {
-      // const _productToRemove = tmpProducts.filter(
-      //   (item) => item.sku !== _productData.sku
-      // );
       const isInTmpProducts = tmpProducts.some(
         (el) => el.sku === _productData.sku
       );
       if (isInTmpProducts) {
         setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
       }
-      // console.log(_productToRemove);
-      // setProducts(_productToRemove);
-      // setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
     }
   }, [active, priceMultiplier]);
 
-  /**
-   * if license changes, update
-   */
   return (
     <div
       className='add-to-cart cursor-pointer bg-red-'

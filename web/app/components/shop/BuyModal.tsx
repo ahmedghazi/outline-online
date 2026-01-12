@@ -19,7 +19,7 @@ import LicenseTypeUI from "./LicenseTypeUI";
 import AddToTmpCart from "./AddToTmpCart";
 import AddToCart from "./AddToCart";
 
-type ProductItemProps = {
+type ProductSingleOrBundleProps = {
   productTitle: string;
   productId: string;
   input: SanityKeyed<ProductSingle | ProductBundle>;
@@ -27,25 +27,28 @@ type ProductItemProps = {
   priceMultiplier: number;
 };
 
-const ProductItem = ({
+const ProductSingleOrBundle = ({
   input,
   productTitle,
   productId,
   type,
   priceMultiplier,
-}: ProductItemProps) => {
+}: ProductSingleOrBundleProps) => {
   const [active, setActive] = useState<boolean>(false);
 
-  let isPriceCrossed: boolean =
-    typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
+  // let isPriceCrossed: boolean =
+  //   typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
 
+  const _addOrRemove = () => {
+    setActive(!active);
+  };
   return (
     <div
       className={clsx(
-        "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer",
-        isPriceCrossed && "is-price-crossed"
+        "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer"
+        // isPriceCrossed && "is-price-crossed"
       )}
-      onClick={() => setActive(!active)}>
+      onClick={_addOrRemove}>
       <div className='title md:col-span-4'>
         <div className='md:flex md:gap-sm '>
           <div className='title'>{input.title}</div>
@@ -126,7 +129,7 @@ const BuyProduct = ({ input, priceMultiplier }: BuyProductProps) => {
             <div className='label text-gray-100 md:col-span-2'>Bundles</div>
             <div className='items md:col-span-6'>
               {input.bundles?.map((item, i) => (
-                <ProductItem
+                <ProductSingleOrBundle
                   key={i}
                   productId={input._id}
                   productTitle={input.title || ""}
@@ -145,7 +148,7 @@ const BuyProduct = ({ input, priceMultiplier }: BuyProductProps) => {
             </div>
             <div className='items md:col-span-6'>
               {input.singles?.map((item, i) => (
-                <ProductItem
+                <ProductSingleOrBundle
                   key={i}
                   productId={input._id}
                   productTitle={input.title || ""}
