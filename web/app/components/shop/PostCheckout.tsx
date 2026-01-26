@@ -16,31 +16,26 @@ const CheckoutSuccess = () => {
   return (
     <div className='success'>
       <div className='header mb-lg !p-0'>
-        <h1 className=''>Thank you for your purchase!!!</h1>
+        <h1> Thank you for your order with Outline Online!</h1>
 
-        <p className=''>
-          {/* Your download link{items.length > 1 && "s"} is on its way to your
-          inbox. */}
-          Your payment has been successfully processed. You can find the font
-          files for download the zip files along with our EULA in your email. If
-          any problems might occur, please get in touch through
-          info@outline-online.com. The order details will be sent in a separate
-          email.
+        <p>
+          Your payment has been successfully processed. You’ll find the font
+          files ready for download in a separate email. The full order details
+          will also be sent to you shortly. If you run into any issues, please
+          don’t hesitate to get in touch.
         </p>
         <p>
-          Enjoy your new typeface! <br />
-          We would love to see our typefaces in use, so don’t hesitate to reach
-          out to us at{" "}
-          <a href='mailto:info@outline-online.com'>
-            info@outline-online.com
+          We’d also love to see our typefaces in use, so feel free to send{" "}
+          <a className='underline' href='mailto:info@outline-online.com'>
+            us
           </a>{" "}
-          with your designs!
+          images of your work anytime. ❤
         </p>
       </div>
 
       <section className='products mb-lg '>
         <div className='title py-05e'>
-          <div>ITEMS</div>
+          <div>Items</div>
         </div>
         <div className='items'>
           {items?.map((item: ProductData, i: number) => (

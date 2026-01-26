@@ -96,9 +96,8 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 
     const _productOrderData = _collectProductsOrderData(products);
 
-    const _productOrderDataZips = await _collectProductsOrderZips(
-      _productOrderData
-    );
+    const _productOrderDataZips =
+      await _collectProductsOrderZips(_productOrderData);
 
     const _attachments = await _generateAttachments(_productOrderDataZips);
     console.log("got _attachments, ready to send email");
@@ -194,7 +193,7 @@ const _collectProductsOrderData = (items: any): ProductOrderData[] => {
 */
 const _getLicenseWebOrDesktop = (
   licenses: string,
-  searchFor: string
+  searchFor: string,
 ): boolean => {
   let returnValue: boolean = false;
   const licensesArray = licenses.split("|");
@@ -210,7 +209,7 @@ const _getLicenseWebOrDesktop = (
           "app/game/epub",
         ];
   const filteredLicensesByType = licensesArray.filter(
-    (el: string) => values.indexOf(el.toLowerCase()) > -1
+    (el: string) => values.indexOf(el.toLowerCase()) > -1,
   );
   //ici on a les licenses web ou desktop triées
   // maintenant on doit filter les licenses achetées
@@ -231,7 +230,7 @@ const _collectProductsOrderZips = async (items: ProductOrderData[]) => {
     const bundleOrsingle = _getBundleOrSingle(
       item.productType,
       item.bundleOrSingleKey,
-      data
+      data,
     );
     console.log(bundleOrsingle);
     // result.push(bundleOrsingle);
@@ -294,12 +293,12 @@ const _getProductData = async (productId: string) => {
 const _getBundleOrSingle = (
   type: string,
   bundleOrSingleKey: string,
-  productData: Product
+  productData: Product,
 ) => {
   const bundleOrSingle =
     type === "productBundle" ? productData.bundles : productData.singles;
   const filtered = bundleOrSingle?.filter(
-    (el) => el._key === bundleOrSingleKey
+    (el) => el._key === bundleOrSingleKey,
   );
   return filtered ? filtered[0] : null;
 };
@@ -339,7 +338,7 @@ type PayloadProps = {
 const _saveOrder = async (
   payload: PayloadProps,
   attachments: any,
-  pauloadRaw: any
+  pauloadRaw: any,
 ) => {
   const { email, invoiceNumber, creationDate, status } = payload;
   const _attachments = attachments.map((item: any) => {
@@ -404,13 +403,16 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
     //[@company Name?]
     html: `
       <div style="font-family:monospace,sans-serif">
-        <p>Dear ${client_name},</p>
-        <p>Your payment has been successfully processed. You can find the font files for download below in the zip files along with our EULA. If any problems might occur, please get in touch through info@outline-online.com. The order details will be sent in a separate email. </p>
-        <p>Thank you for using Outline Online typefaces!</p>
-        <p>Best from,<br />
-        Outline Online</p>
-        <p></p>
-        <p>P.S. We would love to see our typefaces in use, so don’t hesitate to reach out to us at info@outline-online.com with your designs!</p>
+      <p>Dear ${client_name},</p>
+      <p>Thank you for your order with Outline Online!</p>
+
+      <p>Your payment has been successfully processed. You’ll find the font files here attached. The full order details will also be sent to you shortly. If you run into any issues, please don’t hesitate to get in touch.</p>
+
+      <p>Best from,<br />
+  Outline Online</p>
+
+      <p>P.S. We’d also love to see our typefaces in use, so feel free to send us images of your work anytime!</p>
+
       </div>
     `,
     attachments: payload,
