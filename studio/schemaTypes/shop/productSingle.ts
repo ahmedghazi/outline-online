@@ -16,13 +16,15 @@ export default defineField({
     select: {
       title: `title`,
       isDefault: 'isDefault',
+      price: 'price',
     },
     prepare(selection) {
-      const {title, isDefault} = selection
+      const {title, isDefault, price} = selection
       // console.log(images)
+      const priceStr = `Start at ${price}€`
       return {
         title: title,
-        subtitle: isDefault ? 'default' : '',
+        subtitle: isDefault ? `default (${priceStr})` : priceStr,
       }
     },
   },
@@ -85,6 +87,18 @@ export default defineField({
       name: 'typeface',
       type: 'reference',
       description: 'Used in typefaces, product page, trials, buy area',
+      to: [
+        {
+          type: 'typeface',
+        },
+      ],
+    }),
+    defineField({
+      title: 'Related Regular Typeface',
+      name: 'relatedTypeface',
+      description:
+        'Used to look for the regular version of the italic, to apply the discount if the regular is selected',
+      type: 'reference',
       to: [
         {
           type: 'typeface',

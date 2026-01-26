@@ -91,10 +91,16 @@ const PRODUCTS_CART_QUERY = groq`
         description,
         descriptionAlt,
         categories,
-        // typeface->{
-        //   _id,
-        //   title,
-        // }
+        relatedTypeface->{
+          slug{
+            current
+          }
+        },
+        typeface->{
+          slug{
+            current
+          },
+        }
       },
       bundles[]{
         _key,

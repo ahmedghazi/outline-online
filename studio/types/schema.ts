@@ -1092,6 +1092,13 @@ export type ProductSingle = {
   typeface?: SanityReference<Typeface>;
 
   /**
+   * Related Regular Typeface — `reference`
+   *
+   * Used to look for the regular version of the italic, to apply the discount if the regular is selected
+   */
+  relatedTypeface?: SanityReference<Typeface>;
+
+  /**
    * Zip File — `file`
    *
    * Digital good client will receive

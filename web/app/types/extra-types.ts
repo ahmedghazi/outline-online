@@ -1,7 +1,11 @@
+import { ProductSingle } from "./schema";
+
 export interface ProductData {
   productType: "productBundle" | "productSingle";
   bundleOrSingleKey: string;
   sku: string;
+  typefaceSlug?: string;
+  relatedTypefaceSlug?: string;
   basePrice: number;
   price: number;
   discount: number;

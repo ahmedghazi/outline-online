@@ -7,6 +7,7 @@ import Trinket from "./Trinket";
 import TrinketImage from "./TrinketImage";
 import { subscribe, unsubscribe } from "pubsub-js";
 import useDeviceDetect from "../hooks/useDeviceDetect";
+import { _randomNum } from "../sanity-api/utils";
 
 //https://gltf.pmnd.rs/
 

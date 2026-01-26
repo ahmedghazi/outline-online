@@ -18,6 +18,8 @@ import BuyModalNoticesComponent from "./BuyModalNoticesComponent";
 import LicenseTypeUI from "./LicenseTypeUI";
 import AddToTmpCart from "./AddToTmpCart";
 import AddToCart from "./AddToCart";
+import { div } from "framer-motion/client";
+import { subscribe, unsubscribe } from "pubsub-js";
 
 type ProductSingleOrBundleProps = {
   productTitle: string;
@@ -35,17 +37,44 @@ const ProductSingleOrBundle = ({
   priceMultiplier,
 }: ProductSingleOrBundleProps) => {
   const [active, setActive] = useState<boolean>(false);
+  const [canApplyDiscount, setCanApplyDiscount] = useState<boolean>(false);
 
   // let isPriceCrossed: boolean =
   //   typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
+  useEffect(() => {
+    // if (type === "productBundle" && input.priceDiscount) {
+    //   setCanApplyDiscount(true);
+    // }
+    const token = subscribe("TMP_PRODUCT_APPLY_DISCOUNT", (_e, data) => {
+      if (!input.priceDiscount) return;
+      if (input._key === data.sku) {
+        console.log(productTitle, input.title, data);
+        setCanApplyDiscount(data.applyDiscount);
+      }
+    });
+
+    return () => {
+      unsubscribe(token);
+    };
+  }, []);
 
   const _addOrRemove = () => {
     setActive(!active);
   };
+
+  // const _canApplydiscount = () => {
+  //   if (type === "productBundle") return true;
+  //   if (
+  //     input._type === "productSingle" &&
+  //     input.relatedTypeface &&
+  //     input.priceDiscount
+  //   )
+  //     return false;
+  // };
   return (
     <div
       className={clsx(
-        "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer"
+        "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer",
         // isPriceCrossed && "is-price-crossed"
       )}
       onClick={_addOrRemove}>
@@ -54,7 +83,7 @@ const ProductSingleOrBundle = ({
           <div className='title'>{input.title}</div>
           <div className='desc flex-2 flex justify-between hidden-sm'>
             <span className='text-muted '>{input.description}</span>
-            {input._type === "productBundle" && input.priceDiscount && (
+            {canApplyDiscount && (
               <span className='text-green '>Save {input.priceDiscount}%</span>
             )}
           </div>
@@ -62,10 +91,16 @@ const ProductSingleOrBundle = ({
       </div>
       <div className='actions md:col-span-2'>
         <div className='sm-only'>
-          {input._type === "productBundle" && input.priceDiscount && (
+          {/* {input._type === "productBundle" && input.priceDiscount && (
+            <span className='text-green '>Save {input.priceDiscount}%</span>
+          )} */}
+          {canApplyDiscount && input.priceDiscount && (
             <span className='text-green '>Save {input.priceDiscount}%</span>
           )}
         </div>
+        {/* {input._type === "productSingle" && (
+          <div>{input.relatedTypeface?.slug?.current}</div>
+        )} */}
 
         <AddToTmpCart
           active={active}
@@ -73,9 +108,18 @@ const ProductSingleOrBundle = ({
             bundleOrSingleKey: input._key || "",
             productType: type,
             sku: input._key || "",
+            typefaceSlug:
+              input._type === "productSingle"
+                ? input.typeface?.slug?.current || ""
+                : "",
+            relatedTypefaceSlug:
+              input._type === "productSingle"
+                ? input.relatedTypeface?.slug?.current || ""
+                : "",
             basePrice: input.price || 0,
             price: input.price || 0,
             discount: input.priceDiscount || 0,
+            applyDiscount: canApplyDiscount,
             finalPrice: input.price || 0,
             productId: productId || "",
             productTitle: productTitle || "",
@@ -177,7 +221,7 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   const pathname = usePathname();
   const { tab } = usePageContext();
   const [priceMultiplier, setPriceMultiplier] = useState<number>(1);
-  // console.log({ tab });
+  // console.log({ productsCart });
   const {
     licenseSizes,
     licenseTypes,
@@ -186,7 +230,6 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
     licenseTypeProfil,
     tmpProducts,
   } = useShop();
-  console.log({ licenseTypeProfil });
 
   useEffect(() => {
     // console.log(pathname);
@@ -217,13 +260,15 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   useEffect(() => {
     let priceMultiplier = 1;
     if (licenseSizeProfil && licenseTypeProfil) {
+      // here if two licenses for the same product, the second license gets 25% discount
+      // so the priceMultiplier should include 25% discount for the second license
+      // and so on...
+      // TODO: implement this logic
+
       priceMultiplier = licenseSizeProfil.priceMultiplier || 1;
       let counter = 0;
       licenseTypeProfil.forEach((el) => {
         if (el.label) {
-          // à préciser, + ou *
-          // priceMultiplier *= el.priceMultiplier || 0;
-          // console.log(priceMultiplier, el.priceMultiplier);
           counter += el.priceMultiplier || 0;
         }
       });

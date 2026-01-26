@@ -11,11 +11,12 @@ export default defineField({
       title: 'title',
       subtitle: 'price',
     },
-    // prepare({title}) {
-    //   return {
-    //     title:
-    //   }
-    // }
+    prepare({title, subtitle}) {
+      return {
+        title: title,
+        subtitle: `Start at ${subtitle}€`,
+      }
+    },
   },
   fields: [
     defineField({
