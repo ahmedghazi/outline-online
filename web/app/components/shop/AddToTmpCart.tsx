@@ -125,7 +125,7 @@ const AddToTmpCart = ({
     <div
       className={clsx(
         "add-to-cart cursor-pointer bg-red-",
-        applyDiscount && "bg-red",
+        // applyDiscount && "bg-red",
       )}
       // onClick={() => {
       //   setActive(!active);

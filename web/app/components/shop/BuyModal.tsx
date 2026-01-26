@@ -41,16 +41,24 @@ const ProductSingleOrBundle = ({
 
   useEffect(() => {
     //each tmpProduct tells if apply discount is on/off
-    const token = subscribe("TMP_PRODUCT_APPLY_DISCOUNT", (_e, data) => {
+    const tokenA = subscribe("TMP_PRODUCT_APPLY_DISCOUNT", (_e, data) => {
       if (!input.priceDiscount) return;
       if (input._key === data.sku) {
-        // console.log(productTitle, input.title, data);
         setCanApplyDiscount(data.applyDiscount);
       }
     });
 
+    // const tokenB = subscribe("PRODUCT_BUNDLE_IN_TMP_PRODUCTS", (_e, data) => {
+    //   if (input._type === "productBundle") {
+    //     console.log("PRODUCT_BUNDLE_IN_TMP_PRODUCTS", data);
+    //     // @ts-ignore
+    //     const bundleProducts = input.products;
+    //     // @ts-ignore
+    //   }
+    // });
+
     return () => {
-      unsubscribe(token);
+      unsubscribe(tokenA);
     };
   }, []);
 
