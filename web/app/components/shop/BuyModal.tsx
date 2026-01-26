@@ -42,9 +42,7 @@ const ProductSingleOrBundle = ({
   // let isPriceCrossed: boolean =
   //   typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
   useEffect(() => {
-    // if (type === "productBundle" && input.priceDiscount) {
-    //   setCanApplyDiscount(true);
-    // }
+    //each tmpProduct tells if apply discount is on/off
     const token = subscribe("TMP_PRODUCT_APPLY_DISCOUNT", (_e, data) => {
       if (!input.priceDiscount) return;
       if (input._key === data.sku) {
