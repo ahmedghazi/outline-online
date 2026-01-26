@@ -56,6 +56,7 @@ const AddToTmpCart = ({
     licenseSize: licenseSizeProfil?.title || "",
     licenseTypes: licenseTypeProfil?.map((e) => e.label).join("|") || "",
     licenseInfos: "",
+    applyDiscount: applyDiscount,
   };
   const _productData: ProductData = {
     ...productData,
@@ -105,6 +106,7 @@ const AddToTmpCart = ({
       if (exist.length === 0)
         setTmpProducts({ type: "ADD", payload: _productData });
       else {
+        console.log("REPLACE", _productData);
         //need to check if discount changed
         //if single, and apply discount
         setTmpProducts({ type: "REPLACE", payload: _productData });
@@ -123,7 +125,7 @@ const AddToTmpCart = ({
     <div
       className={clsx(
         "add-to-cart cursor-pointer bg-red-",
-        // applyDiscount && "bg-red",
+        applyDiscount && "bg-red",
       )}
       // onClick={() => {
       //   setActive(!active);

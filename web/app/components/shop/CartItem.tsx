@@ -35,9 +35,11 @@ const CartItem = ({ input, _delete }: Props) => {
         </div>
       </div>
       <div className='cart-item__price'>
-        {input.discount !== undefined && input.discount > 0 && (
-          <span className='text-green '>Saving {input.discount}%</span>
-        )}
+        {input.discount !== undefined &&
+          input.discount > 0 &&
+          input.applyDiscount && (
+            <span className='text-green '>Saving {input.discount}%</span>
+          )}
 
         {input.basePrice !== input.finalPrice && (
           <Price price={input.price} discount={input.discount} />

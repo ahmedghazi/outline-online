@@ -39,14 +39,12 @@ const ProductSingleOrBundle = ({
   const [active, setActive] = useState<boolean>(false);
   const [canApplyDiscount, setCanApplyDiscount] = useState<boolean>(false);
 
-  // let isPriceCrossed: boolean =
-  //   typeof input.priceDiscount !== "undefined" && input.priceDiscount !== null;
   useEffect(() => {
     //each tmpProduct tells if apply discount is on/off
     const token = subscribe("TMP_PRODUCT_APPLY_DISCOUNT", (_e, data) => {
       if (!input.priceDiscount) return;
       if (input._key === data.sku) {
-        console.log(productTitle, input.title, data);
+        // console.log(productTitle, input.title, data);
         setCanApplyDiscount(data.applyDiscount);
       }
     });
@@ -60,15 +58,6 @@ const ProductSingleOrBundle = ({
     setActive(!active);
   };
 
-  // const _canApplydiscount = () => {
-  //   if (type === "productBundle") return true;
-  //   if (
-  //     input._type === "productSingle" &&
-  //     input.relatedTypeface &&
-  //     input.priceDiscount
-  //   )
-  //     return false;
-  // };
   return (
     <div
       className={clsx(
