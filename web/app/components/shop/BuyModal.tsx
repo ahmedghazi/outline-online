@@ -77,7 +77,7 @@ const ProductSingleOrBundle = ({
         <div className='md:flex md:gap-sm '>
           <div className='title'>{input.title}</div>
           <div className='desc flex-2 flex justify-between hidden-sm'>
-            <span className='text-muted '>{input.description}</span>
+            <span className='text-gray-100 '>{input.description}</span>
             {canApplyDiscount && (
               <span className='text-green '>Save {input.priceDiscount}%</span>
             )}
