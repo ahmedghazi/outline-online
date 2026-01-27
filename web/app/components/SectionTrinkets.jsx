@@ -143,14 +143,10 @@ const SectionTrinkets = (props) => {
 
   const _getChain = () => {
     return props.input.filter((el) => {
-      // console.log(el);
       return el.name === "KEYCHAIN";
     });
   };
-  // const chain = _getChain();
   let items = isMobile ? _getChain() : props.input;
-
-  // console.log(items);
 
   useEffect(() => {
     setReady(true);

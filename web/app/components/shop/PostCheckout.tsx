@@ -25,10 +25,7 @@ const CheckoutSuccess = () => {
           don’t hesitate to get in touch.
         </p>
         <p>
-          We’d also love to see our typefaces in use, so feel free to send{" "}
-          <a className='underline' href='mailto:info@outline-online.com'>
-            us
-          </a>{" "}
+          We’d also love to see our typefaces in use, so feel free to send us
           images of your work anytime. ❤
         </p>
       </div>

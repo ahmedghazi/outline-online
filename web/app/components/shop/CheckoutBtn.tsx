@@ -9,9 +9,22 @@ import { _licensesTypesToString } from "./utils";
 
 type Props = {
   canCheckout: boolean;
+  shouldApplyDiscount?: boolean;
 };
 
-const CheckoutBtn = ({ canCheckout }: Props) => {
+type CheckoutOpenAttrs = {
+  allowQuantity: boolean;
+  transactionId: string; // adjust type if needed
+  settings: {
+    displayMode: string;
+    theme: string;
+    successUrl: string;
+    variant: string;
+  };
+  discountId?: string; // optional
+};
+
+const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
   const paddle = useContext(PaddleContext);
   const { products } = useShop();
 
@@ -89,6 +102,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
         // use camelCase per Paddle SDK expectations
         customData: {
           foo: "bar",
+          discount_code: shouldApplyDiscount,
           // licenseFor: licenseFor,
           // licenseForData: licenseForData,
         },
@@ -96,7 +110,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
     });
     const data = await response.json();
     console.log("Response from server:", data.tsx);
-    paddle?.Checkout.open({
+    const checkoutOpenAttrs: CheckoutOpenAttrs = {
       allowQuantity: false,
       transactionId: data.tsx,
       // customer: customerInfo,
@@ -106,7 +120,12 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
         successUrl: `${website.url}/post-checkout?status=success`,
         variant: "multi-page",
       },
-    });
+    };
+    if (shouldApplyDiscount) {
+      checkoutOpenAttrs.discountId = `dsc_01kg03763ayf3r8kr4xctzc4hh`;
+    }
+    console.log(checkoutOpenAttrs);
+    paddle?.Checkout.open(checkoutOpenAttrs);
   };
   return (
     <div className='flex justify-center'>

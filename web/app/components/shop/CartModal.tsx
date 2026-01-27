@@ -16,12 +16,24 @@ const CartModal = (props: Props) => {
   const { products, setProducts } = useShop();
   const [canCheckout, setCanCheckout] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(true);
+  const [hasProductsWithMultipleLicenses, setHasProductsWithMultipleLicenses] =
+    useState<boolean>(false);
   const { tab, setTab } = usePageContext();
   const isEmpty = products.length === 0;
+
+  const _hasProductsWithMultipleLicenses = () => {
+    return products.some((product) => {
+      return product.licenseTypes.length > 1;
+    });
+  };
 
   const _delete = (sku: string) => {
     setProducts({ type: "REMOVE_BY_SKU", payload: sku });
   };
+
+  useEffect(() => {
+    setHasProductsWithMultipleLicenses(_hasProductsWithMultipleLicenses());
+  }, [products]);
 
   useEffect(() => {
     setOpen(tab.name === "CART");
@@ -87,7 +99,10 @@ const CartModal = (props: Props) => {
                   />
                 </div>
               </div>
-              <CheckoutBtn canCheckout={products.length > 0} />
+              <CheckoutBtn
+                canCheckout={products.length > 0}
+                shouldApplyDiscount={hasProductsWithMultipleLicenses}
+              />
             </div>
           )}
         </div>

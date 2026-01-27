@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Environment, Paddle } from "@paddle/paddle-node-sdk";
+import { CurrencyCode } from "@paddle/paddle-js";
 
 /*
   interface INonCatalogBasePriceRequestBody {
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest) {
   // console.log(req.body);
   const body = await req.json(); // res now contains body
   const { items, customData } = body as { items?: any[]; customData?: any };
-
+  const { souldApplyDiscount } = customData;
   // Basic validation before calling Paddle API
   if (!Array.isArray(items) || items.length === 0) {
     return new NextResponse(
@@ -42,7 +43,7 @@ export async function POST(req: NextRequest) {
         error: "Validation error",
         details: "The items field is required and must be a non-empty array.",
       }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
   // console.log(items);
@@ -50,11 +51,26 @@ export async function POST(req: NextRequest) {
   //export type TaxCategory = 'digital-goods' | 'ebooks' | 'implementation-services' | 'professional-services' | 'saas' | 'software-programming-services' | 'standard' | 'training-services' | 'website-hosting';
 
   try {
-    const tsx = await paddle.transactions.create({
-      currencyCode: "EUR",
+    const transactionData = {
+      currencyCode: "EUR" as CurrencyCode,
       items: items,
       customData: customData,
-    });
+    };
+    // if (souldApplyDiscount) {
+    //   transactionData.discount = {
+    //     type: "percentage",
+    //     description: "Multiple licenses discount 25%",
+    //     amount: "25",
+    //     recur: true,
+    //     // maximum_recurring_intervals: 6,
+    //   };
+    // }
+    // const tsx = await paddle.transactions.create({
+    //   currencyCode: "EUR",
+    //   items: items,
+    //   customData: customData,
+    // });
+    const tsx = await paddle.transactions.create(transactionData as any);
     // console.log(tsx);
     return NextResponse.json({ tsx: tsx.id });
   } catch (error) {
@@ -65,7 +81,7 @@ export async function POST(req: NextRequest) {
         details: (error as any)?.message || error,
         items,
       }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
 }
