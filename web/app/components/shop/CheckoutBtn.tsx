@@ -124,7 +124,7 @@ const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
     if (shouldApplyDiscount) {
       checkoutOpenAttrs.discountId = `dsc_01kg03763ayf3r8kr4xctzc4hh`;
     }
-    console.log(checkoutOpenAttrs);
+    // console.log(checkoutOpenAttrs);
     paddle?.Checkout.open(checkoutOpenAttrs);
   };
   return (

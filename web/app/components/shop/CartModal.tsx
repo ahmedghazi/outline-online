@@ -9,6 +9,7 @@ import { usePageContext } from "@/app/context/PageContext";
 import { cartTotalPrice } from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
 import Image from "next/image";
+import { div } from "framer-motion/client";
 
 type Props = {};
 
@@ -81,15 +82,22 @@ const CartModal = (props: Props) => {
           </div>
           {!isEmpty && (
             <div className='footer'>
-              <div className='totals mb-lg'>
-                <div className='totals--inner'>
-                  <div className='title '>SUM</div>
-                  <div className='label'>Total</div>
-                  <div className='value'>
-                    <div className='price'>{cartTotalPrice(products)}€ </div>
+              <div className='inner'>
+                {hasProductsWithMultipleLicenses && (
+                  <div className='cart-row'>
+                    <div>Multiple licenses discount 25% TO IMPLEMENT</div>
+                  </div>
+                )}
+                <div className='cart-row totals mb-lg'>
+                  <div className='totals--inner'>
+                    <div className='title '>SUM</div>
+                    <div className='label'>Total</div>
+                    <div className='value'>
+                      <div className='price'>{cartTotalPrice(products)}€ </div>
+                    </div>
                   </div>
                 </div>
-                <div className='reassurances b-b py-05e flex items-center gap-sm justify-end'>
+                <div className='cart-row reassurances  flex items-center gap-sm justify-end'>
                   Secured by{" "}
                   <Image
                     src='/paddle-logo-light.png'
