@@ -6,7 +6,7 @@ import Link from "next/link";
 import { _linkResolver } from "@/app/sanity-api/utils";
 import CartItem from "./CartItem";
 import { usePageContext } from "@/app/context/PageContext";
-import { cartTotalPrice } from "./utils";
+import { cartPriceDiscount, cartTotalPrice } from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
 import Image from "next/image";
 import { div } from "framer-motion/client";
@@ -24,7 +24,9 @@ const CartModal = (props: Props) => {
 
   const _hasProductsWithMultipleLicenses = () => {
     return products.some((product) => {
-      return product.licenseTypes.length > 1;
+      // console.log(product.licenseTypes);
+      const licenseTypes = product.licenseTypes.split("|");
+      return licenseTypes.length > 1;
     });
   };
 
@@ -33,6 +35,7 @@ const CartModal = (props: Props) => {
   };
 
   useEffect(() => {
+    console.log(products);
     setHasProductsWithMultipleLicenses(_hasProductsWithMultipleLicenses());
   }, [products]);
 
@@ -85,15 +88,41 @@ const CartModal = (props: Props) => {
               <div className='inner'>
                 {hasProductsWithMultipleLicenses && (
                   <div className='cart-row'>
-                    <div>Multiple licenses discount 25% TO IMPLEMENT</div>
+                    <div className='inner-grid'>
+                      <div className='label'>Sub Total</div>
+                      <div></div>
+                      <div className='value col-span-2'>
+                        <div className='price'>{cartTotalPrice(products)}€</div>
+                      </div>
+                    </div>
                   </div>
                 )}
-                <div className='cart-row totals mb-lg'>
-                  <div className='totals--inner'>
+                {hasProductsWithMultipleLicenses && (
+                  <div className='cart-row '>
+                    <div className='inner-grid'>
+                      <div className='title '>Discount</div>
+                      <div className='label'>Multiple licenses 25%</div>
+
+                      <div className=' value col-span-2'>
+                        <div className='price'>
+                          -{cartPriceDiscount(cartTotalPrice(products), 25)}€
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className='cart-row cart-row--totals mb-lg'>
+                  <div className='inner-grid'>
                     <div className='title '>SUM</div>
                     <div className='label'>Total</div>
-                    <div className='value'>
-                      <div className='price'>{cartTotalPrice(products)}€ </div>
+                    <div className='value col-span-2'>
+                      <div className='price'>
+                        {cartTotalPrice(
+                          products,
+                          hasProductsWithMultipleLicenses,
+                        )}
+                        €{" "}
+                      </div>
                     </div>
                   </div>
                 </div>

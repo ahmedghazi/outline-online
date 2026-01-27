@@ -1,9 +1,6 @@
 .cart-row {
   padding: 0.5em 0;
   border-bottom: var(--border);
-  & + div {
-    border-top: none;
-  }
 }
 .cart-modal {
   position: fixed;
@@ -104,23 +101,26 @@
     .inner {
       padding: 0 var(--space-sm);
     }
-    .cart-row:first-child {
-      border-top: var(--border);
-    }
-    .totals {
-      //
-      .totals--inner {
+    .cart-row {
+      &:first-child {
+        border-top: var(--border);
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+      .inner-grid {
         display: grid;
-        grid-template-columns: repeat(16, minmax(0, 1fr));
-        // border-top: var(--border);
-        // border-bottom: var(--border);
-        // padding: 0.5em 0;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
       .value {
-        grid-column: span 14 / span 14;
+        // grid-column: span 14 / span 14;
+        &.col-span-2 {
+          grid-column: span 2 / span 2;
+        }
         text-align: right;
       }
     }
+
     button {
       padding: 0.5em;
       display: block;
