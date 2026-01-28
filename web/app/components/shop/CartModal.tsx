@@ -23,8 +23,8 @@ const CartModal = (props: Props) => {
   const isEmpty = products.length === 0;
 
   const _hasProductsWithMultipleLicenses = () => {
+    return false;
     return products.some((product) => {
-      // console.log(product.licenseTypes);
       const licenseTypes = product.licenseTypes.split("|");
       return licenseTypes.length > 1;
     });
@@ -86,7 +86,7 @@ const CartModal = (props: Props) => {
           {!isEmpty && (
             <div className='footer'>
               <div className='inner'>
-                {hasProductsWithMultipleLicenses && (
+                {/* {hasProductsWithMultipleLicenses && (
                   <div className='cart-row'>
                     <div className='inner-grid'>
                       <div className='label'>Sub Total</div>
@@ -110,7 +110,7 @@ const CartModal = (props: Props) => {
                       </div>
                     </div>
                   </div>
-                )}
+                )} */}
                 <div className='cart-row cart-row--totals mb-lg'>
                   <div className='inner-grid'>
                     <div className='title '>SUM</div>
@@ -121,7 +121,7 @@ const CartModal = (props: Props) => {
                           products,
                           hasProductsWithMultipleLicenses,
                         )}
-                        €{" "}
+                        €
                       </div>
                     </div>
                   </div>
