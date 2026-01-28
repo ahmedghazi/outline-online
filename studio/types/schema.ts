@@ -284,6 +284,20 @@ export interface Settings extends SanityDocument {
   licenseTypes?: Array<SanityKeyed<LicenseType>>;
 
   /**
+   * Discount for multiple licenses, provided by Paddle — `string`
+   *
+   *
+   */
+  licenseDiscountID?: string;
+
+  /**
+   * Label for discount message — `string`
+   *
+   *
+   */
+  licenseDiscountLabel?: string;
+
+  /**
    * buyModalNotices — `buyModalNotices`
    *
    *

@@ -15,6 +15,7 @@ type Props = {};
 
 const CartModal = (props: Props) => {
   const { products, setProducts } = useShop();
+  const { settings } = usePageContext();
   const [canCheckout, setCanCheckout] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(true);
   const [hasProductsWithMultipleLicenses, setHasProductsWithMultipleLicenses] =
@@ -86,7 +87,7 @@ const CartModal = (props: Props) => {
           {!isEmpty && (
             <div className='footer'>
               <div className='inner'>
-                {/* {hasProductsWithMultipleLicenses && (
+                {hasProductsWithMultipleLicenses && (
                   <div className='cart-row'>
                     <div className='inner-grid'>
                       <div className='label'>Sub Total</div>
@@ -101,7 +102,9 @@ const CartModal = (props: Props) => {
                   <div className='cart-row '>
                     <div className='inner-grid'>
                       <div className='title '>Discount</div>
-                      <div className='label'>Multiple licenses 25%</div>
+                      <div className='label'>
+                        {settings.licenseDiscountLabel}
+                      </div>
 
                       <div className=' value col-span-2'>
                         <div className='price'>
@@ -110,7 +113,7 @@ const CartModal = (props: Props) => {
                       </div>
                     </div>
                   </div>
-                )} */}
+                )}
                 <div className='cart-row cart-row--totals mb-lg'>
                   <div className='inner-grid'>
                     <div className='title '>SUM</div>

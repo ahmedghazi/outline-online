@@ -28,22 +28,22 @@ get zip
 
 */
 const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
-  const [active, setActive] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const { trials, setTrials } = useShop();
   return (
-    <div className={clsx("item", active && "is-active")}>
+    <div className={clsx("item", open && "is-open")}>
       <div className='_row grid grid-cols-6 md:grid-cols-8 gap-md-'>
         <div
           className={clsx(
-            "flex gap-sm col-span-3 md:col-span-2 cursor-pointer"
+            "flex gap-sm col-span-3 md:col-span-2 cursor-pointer py-05e",
           )}
-          onClick={() => setActive(!active)}>
+          onClick={() => setOpen(!open)}>
           <button className='btn-toggle'>◢</button>
           <h2>{input.title}</h2>
         </div>
 
-        <div className='col-span-2 md:col-span-5'>
-          <div className='grid md:grid-cols-5 gap-sm'>
+        <div className='col-span-2 md:col-span-3 py-05e'>
+          <div className='grid md:grid-cols-4 gap-sm'>
             <div className='label hidden-sm'>Metadata</div>
             {input.singles && (
               <div className='styles sm-only'>
@@ -58,37 +58,22 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
           </div>
         </div>
 
-        <div className='flex justify-end'>
+        <div className='flex justify-end md:col-span-3 '>
           {/* {defaultActive && "defaultActive"} */}
           <Checkbox
             name={input.title?.toLowerCase() || ""}
             checked={defaultActive}
             onChange={(checked: boolean) => {
-              // console.log(checked);
-              // const { singles } = input;
-              // if (!singles) return;
-
-              // console.log({ checked });
               if (checked) {
-                // singles.forEach((el) => {
-                //   const trial: any = el;
-                //   trial.typefaceTitle = input.title;
-                //   trial.productId = input._id;
-                //   setTrials({ type: "ADD", payload: trial });
-                // });
                 setTrials({ type: "ADD", payload: input });
               } else {
                 setTrials({ type: "REMOVE", payload: input });
-                // singles.forEach((el) => {
-                //   // console.log(el);
-                //   setTrials({ type: "REMOVE", payload: el });
-                // });
               }
             }}
           />
         </div>
       </div>
-      {active && (
+      {open && (
         <div className='detail'>
           <div className='grid grid-cols-2- md:grid-cols-8 gap-md-'>
             {input.singles?.map((item, i) => (
@@ -155,7 +140,7 @@ const ContentTrials = ({ input }: Props) => {
       <div
         className={clsx(
           "footer",
-          trials.length > 0 ? "button-submit" : "button-disabled"
+          trials.length > 0 ? "button-submit" : "button-disabled",
         )}>
         {trials.length === 0 && (
           <Checkbox

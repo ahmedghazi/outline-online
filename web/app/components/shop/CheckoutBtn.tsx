@@ -6,6 +6,7 @@ import website from "@/app/config/website";
 import { ProductData } from "@/app/types/extra-types";
 import clsx from "clsx";
 import { _licensesTypesToString } from "./utils";
+import { usePageContext } from "@/app/context/PageContext";
 
 type Props = {
   canCheckout: boolean;
@@ -26,6 +27,7 @@ type CheckoutOpenAttrs = {
 
 const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
   const paddle = useContext(PaddleContext);
+  const { settings } = usePageContext();
   const { products } = useShop();
 
   const storeProducts = (products: ProductData[], ttl: number) => {
@@ -89,7 +91,7 @@ const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
         },
       },
     }));
-    console.log(items);
+    // console.log(items);
     // return;
 
     const response = await fetch("/api/paddle/checkout", {
@@ -122,7 +124,7 @@ const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
       },
     };
     if (shouldApplyDiscount) {
-      checkoutOpenAttrs.discountId = `dsc_01kg03763ayf3r8kr4xctzc4hh`;
+      checkoutOpenAttrs.discountId = settings.licenseDiscountID;
     }
     // console.log(checkoutOpenAttrs);
     paddle?.Checkout.open(checkoutOpenAttrs);

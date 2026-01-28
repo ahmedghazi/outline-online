@@ -51,22 +51,7 @@ export default defineType({
       type: 'string',
       group: 'header',
     }),
-    // defineField({
-    //   name: 'description',
-    //   title: 'Description',
-    //   type: 'localeBlockContent',
-    //   description: "Visible en page d'accueil header",
-    //   group: 'header',
-    // }),
-    // defineField({
-    //   name: 'logo',
-    //   title: 'Logo',
-    //   type: 'image',
-    //   options: {
-    //     accept: 'image/svg+xml',
-    //   },
-    //   group: 'header',
-    // }),
+
     defineField({
       name: 'navPrimary',
       title: 'Naviguation Primary',
@@ -120,6 +105,19 @@ export default defineType({
       name: 'licenseTypes',
       type: 'array',
       of: [{type: 'licenseType'}],
+      group: 'shop',
+    }),
+
+    defineField({
+      name: 'licenseDiscountID',
+      type: 'string',
+      title: 'Discount for multiple licenses, provided by Paddle',
+      group: 'shop',
+    }),
+    defineField({
+      name: 'licenseDiscountLabel',
+      type: 'string',
+      title: 'Label for discount message',
       group: 'shop',
     }),
 

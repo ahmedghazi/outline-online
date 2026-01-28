@@ -7,15 +7,21 @@
     }
   }
   .item {
-    &.is-active {
+    & > ._row {
+      padding: 0 !important;
+    }
+    &.is-open {
       & > ._row {
         border-bottom: var(--border);
+        padding: 0 !important;
       }
       .detail .item:first-child > ._row {
         border-top: none;
       }
     }
     .checkbox-ui {
+      padding: 0.5em;
+      width: 100%;
       .label {
         opacity: 0;
       }
