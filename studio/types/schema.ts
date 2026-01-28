@@ -635,7 +635,8 @@ export interface Typeface extends SanityDocument {
     | "ultraBlack"
     | "ultraBlackItalic"
     | "superBlack"
-    | "superBlackItalic";
+    | "superBlackItalic"
+    | "variable";
 
   /**
    * variableAxe — `variableAxe`

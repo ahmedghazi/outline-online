@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Environment, Paddle } from "@paddle/paddle-node-sdk";
+import {
+  CreateTransactionRequestBody,
+  Environment,
+  Paddle,
+} from "@paddle/paddle-node-sdk";
 import { CurrencyCode } from "@paddle/paddle-js";
 
 /*
@@ -51,11 +55,20 @@ export async function POST(req: NextRequest) {
   //export type TaxCategory = 'digital-goods' | 'ebooks' | 'implementation-services' | 'professional-services' | 'saas' | 'software-programming-services' | 'standard' | 'training-services' | 'website-hosting';
 
   try {
-    const transactionData = {
+    // const tsx = await paddle.transactions.create({
+    //   currencyCode: "EUR",
+    //   items: items,
+    //   customData: customData,
+    // });
+    const transactionData: CreateTransactionRequestBody = {
       currencyCode: "EUR" as CurrencyCode,
       items: items,
       customData: customData,
     };
+
+    /**
+     * This works
+     */
     // if (souldApplyDiscount) {
     //   transactionData.discount = {
     //     type: "percentage",
@@ -65,11 +78,7 @@ export async function POST(req: NextRequest) {
     //     // maximum_recurring_intervals: 6,
     //   };
     // }
-    // const tsx = await paddle.transactions.create({
-    //   currencyCode: "EUR",
-    //   items: items,
-    //   customData: customData,
-    // });
+
     const tsx = await paddle.transactions.create(transactionData as any);
     // console.log(tsx);
     return NextResponse.json({ tsx: tsx.id });

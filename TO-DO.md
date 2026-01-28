@@ -10,5 +10,5 @@ here is a list of tasks I need to do.
   -# paddle checkout
   -# refurb bundles
 - variable font slider
-- trials click
+  #- trials click
   #- discount cart code from sanity

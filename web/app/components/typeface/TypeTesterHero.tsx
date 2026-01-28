@@ -23,12 +23,12 @@ type Item = {
 const TypeTesterHero = ({ input, pangram }: Props) => {
   const [size, setSize] = useState<number>(6);
   const { isMobile } = useDeviceDetect();
-  // console.log("input", input);
+  console.log("input", input);
   const items = useMemo(() => {
     let arr: Item[] = [];
     const allStyles = input.map((item) => item.typeface?.style);
     const filteredStyles = allStyles.filter(
-      (item) => item?.toLowerCase().indexOf("italic") === -1
+      (item) => item?.toLowerCase().indexOf("italic") === -1,
     );
 
     // console.log(allStyles);
@@ -52,19 +52,19 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
 
       // collect corresponding italic items
       const italicItems = input.filter(
-        (item) => item.typeface?.style === `${style}Italic`
+        (item) => item.typeface?.style === `${style}Italic`,
       );
       const itemItalic = italicItems[0];
       if (itemItalic) {
         obj.italic = itemItalic;
       }
-
+      // console.log(obj);
       arr.push(obj);
     });
     // console.log(arr);
     return arr;
   }, [input]);
-  // console.log("output", items);
+  console.log("output", items);
 
   useEffect(() => {
     _format();

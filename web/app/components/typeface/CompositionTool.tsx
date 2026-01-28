@@ -19,7 +19,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const defaultStyle = input.length > 0 ? input[0].typeface?.slug?.current : "";
   const [currentStyle, setCurrentStyle] = useState<string | undefined>(
-    defaultStyle
+    defaultStyle,
   );
 
   useEffect(() => {
@@ -145,7 +145,13 @@ const CompositionTool = ({ input, pangram }: Props) => {
         {ref && ref.current && (
           <div className='footer '>
             <TesterSize initialValue='89' target={ref.current} />
-            <TesterVariable axe='wght' initialValue='50' target={ref.current} />
+            <TesterVariable
+              axe='wght'
+              initialValue='50'
+              min='0'
+              max='1000'
+              target={ref.current}
+            />
             <TesterSpacing initialValue='0' target={ref.current} />
             <TesterLeading initialValue='89' target={ref.current} />
 

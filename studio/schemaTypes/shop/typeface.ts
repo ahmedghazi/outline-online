@@ -60,6 +60,7 @@ export default defineField({
           {title: 'Ultra Black Italic', value: 'ultraBlackItalic'},
           {title: 'Super Black', value: 'superBlack'},
           {title: 'Super Black Italic', value: 'superBlackItalic'},
+          {title: 'Variable', value: 'variable'},
         ],
         layout: 'radio', // <-- defaults to 'dropdown'
         // layout: 'radio', // <-- defaults to 'dropdown'

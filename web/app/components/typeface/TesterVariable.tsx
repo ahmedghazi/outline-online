@@ -4,11 +4,13 @@ type Props = {
   axe: string;
   initialValue: string;
   target: HTMLDivElement;
+  min?: string;
+  max?: string;
 };
 
 export type Ref = HTMLDivElement;
 
-const TesterVariable = ({ axe, initialValue, target }: Props) => {
+const TesterVariable = ({ axe, initialValue, target, min, max }: Props) => {
   const [value, setValue] = useState<string>(initialValue);
 
   useEffect(() => {
@@ -22,10 +24,7 @@ const TesterVariable = ({ axe, initialValue, target }: Props) => {
 
   const _update = () => {
     //font-variation-settings: "wght" 100, "ital" 0;
-    target.style.setProperty(
-      "--font-variation-settings",
-      `"${axe}" ${value}px`
-    );
+    target.style.setProperty("--font-variation-settings", `"${axe}" ${value}`);
   };
 
   return (
@@ -38,8 +37,8 @@ const TesterVariable = ({ axe, initialValue, target }: Props) => {
           type='range'
           name='variable'
           value={value}
-          min='0'
-          max='300'
+          min={min || "60"}
+          max={max || "1250"}
           step='1'
           onChange={(e) => setValue(e.target.value)}
           className='mx-xs'
