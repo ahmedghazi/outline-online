@@ -52,7 +52,7 @@ function licenseTypeReducer(state: any, action: any) {
         : [...state, payload];
     case "REPLACE":
       return state.map((item: any) =>
-        item._key === payload._key ? payload : item
+        item._key === payload._key ? payload : item,
       );
     case "REMOVE":
       return state.filter((item: any) => item.label !== payload.label);
@@ -151,7 +151,7 @@ export const ShopWrapper = ({
   >(defaultLicense);
   const [licenseTypeProfil, setLicenseTypeProfil] = useReducer(
     licenseTypeReducer,
-    initialLicenseTypeState
+    initialLicenseTypeState,
   );
 
   const [isVip, setIsVip] = useState<boolean>(false);
@@ -178,7 +178,7 @@ export const ShopWrapper = ({
    */
   useEffect(() => {
     // return;
-    console.log(status);
+    // console.log(status);
     //preprod-overtype-foundry.vercel.app/post-checkout?status=success
     if (status === "success") return;
 

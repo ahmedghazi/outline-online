@@ -23,7 +23,7 @@ type Item = {
 const TypeTesterHero = ({ input, pangram }: Props) => {
   const [size, setSize] = useState<number>(6);
   const { isMobile } = useDeviceDetect();
-  console.log("input", input);
+  // console.log("input", input);
   const items = useMemo(() => {
     let arr: Item[] = [];
     const allStyles = input.map((item) => item.typeface?.style);
@@ -64,7 +64,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
     // console.log(arr);
     return arr;
   }, [input]);
-  console.log("output", items);
+  // console.log("output", items);
 
   useEffect(() => {
     _format();

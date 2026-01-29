@@ -36,7 +36,7 @@ const CartModal = (props: Props) => {
   };
 
   useEffect(() => {
-    console.log(products);
+    // console.log(products);
     setHasProductsWithMultipleLicenses(_hasProductsWithMultipleLicenses());
   }, [products]);
 

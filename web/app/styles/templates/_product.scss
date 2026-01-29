@@ -102,7 +102,8 @@ body[data-template="is-product"],
           font-family: var(--type-family);
           text-align: var(--type-textAlign);
           text-transform: var(--type-textTransform);
-          font-feature-settings: var(--type-features);
+          // font-feature-settings: var(--type-features);
+          font-feature-settings: var(--font-feature-settings);
           font-variation-settings: var(--font-variation-settings);
           column-count: var(--type-columnCount);
 
@@ -206,7 +207,9 @@ body[data-template="is-product"],
       cursor: pointer;
       // border-right: var(--border);
       // border-bottom: var(--border);
-      transition: font-size 0.2s, transform 0.2s;
+      transition:
+        font-size 0.2s,
+        transform 0.2s;
       @include debugOutline(-0.5px, black);
       &::after {
         z-index: 0;

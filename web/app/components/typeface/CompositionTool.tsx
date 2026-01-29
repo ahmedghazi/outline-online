@@ -55,6 +55,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
 
     return arr;
   }, []);
+  console.log(_stylisticSets);
 
   const _styles = useMemo(() => {
     const arr: KeyValString[] = input.map((item) => {
@@ -66,14 +67,20 @@ const CompositionTool = ({ input, pangram }: Props) => {
     });
     return arr;
   }, []);
-  // console.log(_styles);
+
+  const hasVariable = _styles.some((s) => s.key?.includes("Variable"));
+  const _getVariableStyle = () => {
+    return input.find((item) => item.title?.includes("Variable"))?.typeface;
+  };
+  // console.log({ hasVariable });
+  // console.log(_getVariableStyle());
 
   const _handleStylisticSets = (ss: KeyValString) => {
-    console.log(ss);
+    // console.log(ss);
     if (!ref.current) return;
     if (!ss || !ss.val) return;
 
-    ref.current.style.setProperty("--type-features", `"${ss.val}"`);
+    ref.current.style.setProperty("--font-feature-settings", `"${ss.val}"`);
   };
 
   const _handleStyles = (s: KeyValString) => {
@@ -145,13 +152,16 @@ const CompositionTool = ({ input, pangram }: Props) => {
         {ref && ref.current && (
           <div className='footer '>
             <TesterSize initialValue='89' target={ref.current} />
-            <TesterVariable
-              axe='wght'
-              initialValue='50'
-              min='0'
-              max='1000'
-              target={ref.current}
-            />
+            {hasVariable && (
+              <TesterVariable
+                axe='wght'
+                initialValue='400'
+                min={String(_getVariableStyle()?.variableAxe?.min || "0")}
+                max={String(_getVariableStyle()?.variableAxe?.max || "1000")}
+                target={ref.current}
+              />
+            )}
+            {/*  */}
             <TesterSpacing initialValue='0' target={ref.current} />
             <TesterLeading initialValue='89' target={ref.current} />
 
