@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
 
     /* ---------------------------------------
      * STEP 2 — Apply item-level discount
+     * Uses the combined discount (product + license discount) from frontend
      * ------------------------------------- */
     const itemsWithDiscount = items.filter(
       (item) => item.price.customData?.shouldApplyDiscount,
@@ -65,11 +66,16 @@ export async function POST(req: NextRequest) {
         .map((index) => transaction.items?.[index]?.price?.id)
         .filter((id): id is string => typeof id === "string");
 
+      // Get the discount percentage from the first discounted item
+      // All items should have the same combined discount when multiple licenses are selected
+      const discountPercentage =
+        itemsWithDiscount[0]?.price?.customData?.discountPercentage || 15;
+
       await paddle.transactions.update(transaction.id, {
         discount: {
           type: "percentage",
-          amount: String("15"),
-          description: "Custom line-item discount",
+          amount: String(discountPercentage),
+          description: "Discount",
           restrictTo: priceIds,
         },
       });

@@ -6,7 +6,6 @@ import website from "@/app/config/website";
 import { ProductData } from "@/app/types/extra-types";
 import clsx from "clsx";
 import { _licensesTypesToString } from "./utils";
-import { usePageContext } from "@/app/context/PageContext";
 
 type Props = {
   canCheckout: boolean;
@@ -27,7 +26,6 @@ type CheckoutOpenAttrs = {
 
 const CheckoutBtn = ({ canCheckout }: Props) => {
   const paddle = useContext(PaddleContext);
-  const { settings } = usePageContext();
   const { products } = useShop();
 
   const storeProducts = (products: ProductData[], ttl: number) => {
@@ -43,13 +41,10 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
   };
 
   const _renderItemJson = (product: ProductData) => {
-    // let unitAmount = Math.round(product.finalPrice * 100);
-
-    // // 2. Apply the 15% discount manually if the condition is met
-    // // This ensures ONLY this specific product is discounted
-    // if (product.hasMultipleLicenses) {
-    //   unitAmount = Math.round(unitAmount * 0.85);
-    // }
+    // Send price BEFORE discount to Paddle
+    // Paddle will apply the discount so it appears on the receipt
+    const totalDiscount = product.totalDiscount || 0;
+    const shouldApplyDiscount = totalDiscount > 0;
 
     return {
       quantity: 1,
@@ -66,7 +61,8 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
           maximum: 1,
         },
         unitPrice: {
-          amount: Math.round(product.finalPrice * 100).toString(), // Rounding Protection: In TypeScript, product.finalPrice * 100 can sometimes result in floating point errors (e.g., 19.99 * 100 = 1998.9999). It is safer to use
+          // Send price before discount (product.price has priceMultiplier but no discount)
+          amount: Math.round(product.price * 100).toString(),
           currencyCode: "EUR",
         },
 
@@ -83,10 +79,8 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
           bundleOrSingleKey: product.bundleOrSingleKey,
           licenseSize: product.licenseSize,
           licenseTypes: product.licenseTypes,
-          shouldApplyDiscount: product.hasMultipleLicenses,
-          discountPercentage: product.hasMultipleLicenses
-            ? settings.licenseDiscountPercentage
-            : 0,
+          shouldApplyDiscount: shouldApplyDiscount,
+          discountPercentage: totalDiscount,
         },
       },
     };
