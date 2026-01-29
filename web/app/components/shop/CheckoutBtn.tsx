@@ -84,7 +84,9 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
           licenseSize: product.licenseSize,
           licenseTypes: product.licenseTypes,
           shouldApplyDiscount: product.hasMultipleLicenses,
-          discountPercentage: product.hasMultipleLicenses ? 15 : 0,
+          discountPercentage: product.hasMultipleLicenses
+            ? settings.licenseDiscountPercentage
+            : 0,
         },
       },
     };

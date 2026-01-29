@@ -53,15 +53,8 @@ export async function POST(req: NextRequest) {
     const itemsWithDiscount = items.filter(
       (item) => item.price.customData?.shouldApplyDiscount,
     );
-    console.log(itemsWithDiscount);
 
     if (itemsWithDiscount.length > 0) {
-      // const priceIds = transaction.items?.map((item) => item.price?.id);
-      // console.log("***priceIds***");
-      // console.log(priceIds);
-      // if (!priceIds) {
-      //   throw new Error("Price ID not found on transaction item");
-      // }
       const discountedIndexes = items
         .map((item, index) =>
           item.price?.customData?.shouldApplyDiscount ? index : null,
@@ -81,23 +74,6 @@ export async function POST(req: NextRequest) {
         },
       });
     }
-    // if (customData?.shouldApplyDiscount) {
-    //   const firstItemPriceId =
-    //     transaction.items?.[0]?.price?.id;
-
-    //   if (!firstItemPriceId) {
-    //     throw new Error("Price ID not found on transaction item");
-    //   }
-
-    //   await paddle.transactions.update(transaction.id, {
-    //     discount: {
-    //       type: "percentage",
-    //       amount: String(customData.discountPercentage ?? 0),
-    //       description: "Custom line-item discount",
-    //       restrictTo: [firstItemPriceId],
-    //     },
-    //   });
-    // }
 
     return NextResponse.json({
       transactionId: transaction.id,
