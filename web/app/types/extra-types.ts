@@ -9,14 +9,14 @@ export interface ProductData {
   basePrice: number;
   price: number;
   discount: number;
+  finalPrice: number;
+  priceWithMultipleLicenses?: number;
   applyDiscount?: boolean;
   hasMultipleLicenses?: boolean;
-  finalPrice: number;
   productId: string;
   productTitle: string;
   fullTitle: string;
   description: string;
-  // license: string;
   licenseSize: string;
   licenseTypes: string;
   licenseInfos: string;

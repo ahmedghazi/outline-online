@@ -5,23 +5,38 @@ export const _getPriceWithDiscount = (price: number, discount: number) => {
   return price - (price * discount) / 100;
 };
 
-export const cartTotalPrice = (
-  items: ProductData[],
-  shouldApplyDiscount: boolean = false,
-) => {
+export const cartTotalPrice = (items: ProductData[], discount: number = 0) => {
   let total = 0;
   items.forEach((el) => {
     const price = el.finalPrice || 0;
-    total += price;
+    if (el.hasMultipleLicenses) {
+      total += _getPriceWithDiscount(price, discount);
+    } else {
+      total += price;
+    }
   });
-  if (shouldApplyDiscount) {
-    total = _getPriceWithDiscount(total, 25);
-  }
+
   return total;
 };
 
-export const cartPriceDiscount = (total: number, discount: number) => {
-  return total - _getPriceWithDiscount(total, discount);
+// export const cartPriceDiscount = (
+//   total: number,
+//   discount: number,
+//   applyDiscount: boolean = false,
+// ) => {
+//   if (!applyDiscount) return total;
+//   return total - _getPriceWithDiscount(total, discount);
+// };
+
+export const cartTotalDiscount = (items: ProductData[], discount: number) => {
+  let totalDiscount = 0;
+  items.forEach((el) => {
+    if (el.hasMultipleLicenses) {
+      const price = el.finalPrice || 0;
+      totalDiscount += price - _getPriceWithDiscount(price, discount);
+    }
+  });
+  return totalDiscount;
 };
 
 export const _slugify = (str: string) => {

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { _linkResolver } from "@/app/sanity-api/utils";
 import CartItem from "./CartItem";
 import { usePageContext } from "@/app/context/PageContext";
-import { cartPriceDiscount, cartTotalPrice } from "./utils";
+import { cartTotalDiscount, cartTotalPrice } from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
 import Image from "next/image";
 import { div } from "framer-motion/client";
@@ -26,7 +26,7 @@ const CartModal = (props: Props) => {
   console.log(products);
 
   const _hasProductsWithMultipleLicenses = () => {
-    return false;
+    // return false;
     return products.some((product) => {
       const licenseTypes = product.licenseTypes.split("|");
       return licenseTypes.length > 1;
@@ -45,6 +45,26 @@ const CartModal = (props: Props) => {
   useEffect(() => {
     setOpen(tab.name === "CART");
   }, [tab]);
+
+  const discountPercentage = settings.licenseDiscountPercentage ?? 15;
+
+  const discountedProducts = products.filter(
+    (product) => product.hasMultipleLicenses,
+  );
+
+  const nonDiscountedProducts = products.filter(
+    (product) => !product.hasMultipleLicenses,
+  );
+
+  const discountedSubtotal = discountedProducts.reduce(
+    (sum, p) => sum + p.finalPrice,
+    0,
+  );
+
+  const nonDiscountedSubtotal = nonDiscountedProducts.reduce(
+    (sum, p) => sum + p.finalPrice,
+    0,
+  );
 
   return (
     <div
@@ -110,7 +130,12 @@ const CartModal = (props: Props) => {
 
                       <div className=' value col-span-2'>
                         <div className='price'>
-                          -{cartPriceDiscount(cartTotalPrice(products), 25)}€
+                          -
+                          {cartTotalDiscount(
+                            products,
+                            settings.licenseDiscountPercentage || 15,
+                          )}
+                          €
                         </div>
                       </div>
                     </div>
@@ -122,10 +147,11 @@ const CartModal = (props: Props) => {
                     <div className='label'>Total</div>
                     <div className='value col-span-2'>
                       <div className='price'>
-                        {cartTotalPrice(
-                          products,
-                          hasProductsWithMultipleLicenses,
-                        )}
+                        {cartTotalPrice(products) -
+                          cartTotalDiscount(
+                            products,
+                            settings.licenseDiscountPercentage || 15,
+                          )}
                         €
                       </div>
                     </div>
