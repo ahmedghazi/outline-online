@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
   // console.log(req.body);
   const body = await req.json(); // res now contains body
   const { items, customData } = body as { items?: any[]; customData?: any };
-  const { souldApplyDiscount } = customData;
+  // const { souldApplyDiscount } = customData;
   // Basic validation before calling Paddle API
   if (!Array.isArray(items) || items.length === 0) {
     return new NextResponse(

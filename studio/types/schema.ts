@@ -291,6 +291,13 @@ export interface Settings extends SanityDocument {
   licenseDiscountID?: string;
 
   /**
+   * Discount percentage for multiple licenses — `number`
+   *
+   *
+   */
+  licenseDiscountPercentage?: number;
+
+  /**
    * Label for discount message — `string`
    *
    *

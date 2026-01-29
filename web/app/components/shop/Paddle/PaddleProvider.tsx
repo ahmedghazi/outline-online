@@ -1,7 +1,12 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import { initializePaddle, Paddle, PaddleEventData } from "@paddle/paddle-js";
+import {
+  CheckoutEventsData,
+  initializePaddle,
+  Paddle,
+  PaddleEventData,
+} from "@paddle/paddle-js";
 import { Environment } from "@paddle/paddle-node-sdk";
 
 type PaddleContext = any;
@@ -30,12 +35,28 @@ const PaddleProvider = ({ children }: { children: React.ReactNode }) => {
       }
     });
   };
-  const _handleEvents = (data: PaddleEventData) => {
-    console.log(data.name);
+  const _handleEvents = (event: PaddleEventData) => {
+    console.log(event.name);
 
-    if (data.name === "checkout.completed") {
-      console.log(data);
-      _processOrderCompleted(data);
+    if (event.name === "checkout.completed") {
+      console.log(event);
+      _processOrderCompleted(event);
+    }
+    if (
+      event.name === "checkout.loaded" ||
+      event.name === "checkout.customer.updated"
+    ) {
+      const data = event.data as CheckoutEventsData;
+
+      const totalDiscount = data.totals.discount;
+      const finalTotal = data.totals.total;
+
+      console.log(`********* Discount Applied: ${totalDiscount}`);
+      console.log(`********* Final Amount to Pay: ${finalTotal}`);
+
+      // if (parseInt(totalDiscount) > 0) {
+      //   // You can trigger a UI message like "Savings applied!"
+      // }
     }
   };
 

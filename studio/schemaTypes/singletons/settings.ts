@@ -115,6 +115,12 @@ export default defineType({
       group: 'shop',
     }),
     defineField({
+      name: 'licenseDiscountPercentage',
+      type: 'number',
+      title: 'Discount percentage for multiple licenses',
+      group: 'shop',
+    }),
+    defineField({
       name: 'licenseDiscountLabel',
       type: 'string',
       title: 'Label for discount message',

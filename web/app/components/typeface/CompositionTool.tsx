@@ -55,7 +55,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
 
     return arr;
   }, []);
-  console.log(_stylisticSets);
+  // console.log(_stylisticSets);
 
   const _styles = useMemo(() => {
     const arr: KeyValString[] = input.map((item) => {

@@ -10,7 +10,7 @@ import { usePageContext } from "@/app/context/PageContext";
 
 type Props = {
   canCheckout: boolean;
-  shouldApplyDiscount?: boolean;
+  // shouldApplyDiscount?: boolean;
 };
 
 type CheckoutOpenAttrs = {
@@ -25,7 +25,7 @@ type CheckoutOpenAttrs = {
   discountId?: string; // optional
 };
 
-const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
+const CheckoutBtn = ({ canCheckout }: Props) => {
   const paddle = useContext(PaddleContext);
   const { settings } = usePageContext();
   const { products } = useShop();
@@ -42,6 +42,55 @@ const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
     localStorage.setItem("oo-products", JSON.stringify(item));
   };
 
+  const _renderItemJson = (product: ProductData) => {
+    let unitAmount = Math.round(product.finalPrice * 100);
+
+    // 2. Apply the 15% discount manually if the condition is met
+    // This ensures ONLY this specific product is discounted
+    if (product.hasMultipleLicenses) {
+      unitAmount = Math.round(unitAmount * 0.85);
+    }
+
+    return {
+      quantity: 1,
+      price: {
+        name: `${product.fullTitle} - ${
+          product.bundleOrSingleKey === "single"
+            ? "Single License"
+            : "Bundle License"
+        }, License types: ${_licensesTypesToString(product.licenseTypes)}
+        ${product.hasMultipleLicenses ? " (15% Off Applied)" : ""}`,
+        description: product.sku,
+        quantity: {
+          minimum: 1,
+          maximum: 1,
+        },
+        // unitPrice: {
+        //   amount: Math.round(product.finalPrice * 100).toString(), // Rounding Protection: In TypeScript, product.finalPrice * 100 can sometimes result in floating point errors (e.g., 19.99 * 100 = 1998.9999). It is safer to use
+        //   currencyCode: "EUR",
+        // },
+        unitPrice: {
+          amount: unitAmount.toString(),
+          currencyCode: "EUR",
+        },
+        product: {
+          name: `${product.fullTitle}`,
+          description: product.sku || "sku",
+          taxCategory: "standard",
+        },
+        // use camelCase per Paddle SDK expectations
+        customData: {
+          sku: product.sku,
+          productType: product.productType,
+          productId: product.productId,
+          bundleOrSingleKey: product.bundleOrSingleKey,
+          licenseSize: product.licenseSize,
+          licenseTypes: product.licenseTypes,
+        },
+      },
+    };
+  };
+
   const handleCheckout = async () => {
     if (!paddle) return alert("Paddle not initialized");
 
@@ -56,42 +105,45 @@ const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
     //store products (with custom data) locale storage
     storeProducts(products, 300);
     // then on order completed, get thoses produicts and post to sanity
-    const items = products.map((product) => ({
-      quantity: 1,
-      priceId: null,
-      price: {
-        name: `License size: ${
-          product.licenseSize
-        }, License types: ${_licensesTypesToString(product.licenseTypes)}`,
-        description: product.sku,
-        quantity: {
-          minimum: 1,
-          maximum: 1,
-        },
-        unitPrice: {
-          amount: String(product.finalPrice * 100), // in cents
-          currencyCode: "EUR",
-        },
-        product: {
-          // name: product.fullTitle,
-          name: `${product.fullTitle}`,
-          description: product.sku || "sku",
-          taxCategory: "standard",
-        },
-        // use camelCase per Paddle SDK expectations
-        customData: {
-          sku: product.sku,
-          productType: product.productType,
-          productId: product.productId,
-          bundleOrSingleKey: product.bundleOrSingleKey,
-          licenseSize: product.licenseSize,
-          licenseTypes: product.licenseTypes,
-          // licenseFor,
-          // licenseForData,
-        },
-      },
-    }));
-    // console.log(items);
+    const items = products.map((product) => _renderItemJson(product));
+    // console.log("Items:", items);
+    // const items = products.map((product) => ({
+    //   quantity: 1,
+    //   priceId: null,
+    //   price: {
+    //     name: `License size: ${
+    //       product.licenseSize
+    //     }, License types: ${_licensesTypesToString(product.licenseTypes)}`,
+    //     description: product.sku,
+    //     quantity: {
+    //       minimum: 1,
+    //       maximum: 1,
+    //     },
+    //     unitPrice: {
+    //       amount: Math.round(product.finalPrice * 100).toString(), // Rounding Protection: In TypeScript, product.finalPrice * 100 can sometimes result in floating point errors (e.g., 19.99 * 100 = 1998.9999). It is safer to use
+    //       currencyCode: "EUR",
+    //     },
+    //     product: {
+    //       name: `${product.fullTitle}`,
+    //       description: product.sku || "sku",
+    //       taxCategory: "standard",
+    //     },
+    //     // use camelCase per Paddle SDK expectations
+    //     customData: {
+    //       sku: product.sku,
+    //       productType: product.productType,
+    //       productId: product.productId,
+    //       bundleOrSingleKey: product.bundleOrSingleKey,
+    //       licenseSize: product.licenseSize,
+    //       licenseTypes: product.licenseTypes,
+    //     },
+    //   },
+    //   ...(product.hasMultipleLicenses && {
+    //     // discountId: settings.licenseDiscountID,
+    //     discountId: "dsc_01kg4nh48ftr1hj227v68j2v64",
+    //   }),
+    // }));
+    console.table(items);
     // return;
 
     const response = await fetch("/api/paddle/checkout", {
@@ -104,7 +156,7 @@ const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
         // use camelCase per Paddle SDK expectations
         customData: {
           foo: "bar",
-          discount_code: shouldApplyDiscount,
+          // discount_code: shouldApplyDiscount,
           // licenseFor: licenseFor,
           // licenseForData: licenseForData,
         },
@@ -123,9 +175,9 @@ const CheckoutBtn = ({ canCheckout, shouldApplyDiscount }: Props) => {
         variant: "multi-page",
       },
     };
-    if (shouldApplyDiscount) {
-      checkoutOpenAttrs.discountId = settings.licenseDiscountID;
-    }
+    // if (shouldApplyDiscount) {
+    //   checkoutOpenAttrs.discountId = settings.licenseDiscountID;
+    // }
     // console.log(checkoutOpenAttrs);
     paddle?.Checkout.open(checkoutOpenAttrs);
   };

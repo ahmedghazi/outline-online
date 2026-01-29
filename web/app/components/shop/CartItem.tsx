@@ -2,7 +2,7 @@ import { ProductData } from "@/app/types/extra-types";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import useShop from "./ShopContext";
 import { log } from "console";
-import { _licensesTypesToString } from "./utils";
+import { _getPriceWithDiscount, _licensesTypesToString } from "./utils";
 import Price from "./Price";
 
 type Props = {
@@ -12,7 +12,31 @@ type Props = {
 
 const CartItem = ({ input, _delete }: Props) => {
   const { products, setProducts } = useShop();
-
+  // console.log("CartItem", input);
+  useEffect(() => {
+    // return;
+    const hasMultipleLicenses = input.licenseTypes.split("|").length > 1;
+    if (hasMultipleLicenses) {
+      const upadedProductData = input;
+      // upadedProductData.discount = 15;
+      // upadedProductData.applyDiscount = true;
+      upadedProductData.hasMultipleLicenses = true;
+      // const finalPriceWithDiscount = _getPriceWithDiscount(
+      //   upadedProductData.price,
+      //   upadedProductData.discount,
+      // );
+      // upadedProductData.finalPrice = parseFloat(
+      //   finalPriceWithDiscount.toFixed(2),
+      // );
+      setProducts({ type: "REPLACE", payload: upadedProductData });
+      // console.log(
+      //   "CartItem",
+      //   input.fullTitle,
+      //   hasMultipleLicenses,
+      //   finalPriceWithDiscount,
+      // );
+    }
+  }, []);
   // console.log("CartItem", input);
   return (
     <div className='cart-item '>

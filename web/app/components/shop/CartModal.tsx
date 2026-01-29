@@ -23,6 +23,8 @@ const CartModal = (props: Props) => {
   const { tab, setTab } = usePageContext();
   const isEmpty = products.length === 0;
 
+  console.log(products);
+
   const _hasProductsWithMultipleLicenses = () => {
     return false;
     return products.some((product) => {
@@ -139,10 +141,7 @@ const CartModal = (props: Props) => {
                   />
                 </div>
               </div>
-              <CheckoutBtn
-                canCheckout={products.length > 0}
-                shouldApplyDiscount={hasProductsWithMultipleLicenses}
-              />
+              <CheckoutBtn canCheckout={products.length > 0} />
             </div>
           )}
         </div>

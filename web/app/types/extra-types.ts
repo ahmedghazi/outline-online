@@ -10,6 +10,7 @@ export interface ProductData {
   price: number;
   discount: number;
   applyDiscount?: boolean;
+  hasMultipleLicenses?: boolean;
   finalPrice: number;
   productId: string;
   productTitle: string;
