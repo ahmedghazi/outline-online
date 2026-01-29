@@ -14,6 +14,7 @@ import CartModal from "./components/shop/CartModal";
 import { getProductsCart, getSettings } from "./sanity-api/sanity-queries";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity";
+import { ViewTransitions } from "next-view-transitions";
 
 export const metadata = {
   metadataBase: new URL(website.url),
@@ -43,48 +44,50 @@ export default async function RootLayout({
   // console.log(settings.buyModalNotices);
   // console.log(productsCart);
   return (
-    <html lang='en'>
-      <body className='is-loading'>
-        <div id='page'>
-          <PageContextProvider settings={settings}>
-            <ShopWrapper
-              licenses={settings.licenseSizes}
-              licenseTypes={settings.licenseTypes}
-              licenseSizes={settings.licenseSizes}>
-              <PaddleProvider>
-                <div className='dashes dashes--left'>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <Header settings={settings} productsCart={productsCart} />
-                <BuyModal
-                  productsCart={productsCart}
-                  buyModalNotices={settings.buyModalNotices}
-                />
-                <CartModal />
-                <main>{children}</main>
-                <div className='dashes dashes--right'>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <Footer settings={settings} />
-                {isEnabled && (
-                  <VisualEditing
-                    zIndex={1000} // Optional
+    <ViewTransitions>
+      <html lang='en'>
+        <body className='is-loading'>
+          <div id='page'>
+            <PageContextProvider settings={settings}>
+              <ShopWrapper
+                licenses={settings.licenseSizes}
+                licenseTypes={settings.licenseTypes}
+                licenseSizes={settings.licenseSizes}>
+                <PaddleProvider>
+                  <div className='dashes dashes--left'>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <Header settings={settings} productsCart={productsCart} />
+                  <BuyModal
+                    productsCart={productsCart}
+                    buyModalNotices={settings.buyModalNotices}
                   />
-                )}
-              </PaddleProvider>
-            </ShopWrapper>
-          </PageContextProvider>
-        </div>
-        <GoogleAnalytics gaId='G-57LHXDXJH4' />
-      </body>
-    </html>
+                  <CartModal />
+                  <main>{children}</main>
+                  <div className='dashes dashes--right'>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <Footer settings={settings} />
+                  {isEnabled && (
+                    <VisualEditing
+                      zIndex={1000} // Optional
+                    />
+                  )}
+                </PaddleProvider>
+              </ShopWrapper>
+            </PageContextProvider>
+          </div>
+          <GoogleAnalytics gaId='G-57LHXDXJH4' />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

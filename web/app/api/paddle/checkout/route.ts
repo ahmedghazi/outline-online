@@ -6,20 +6,6 @@ import {
 } from "@paddle/paddle-node-sdk";
 import { CurrencyCode } from "@paddle/paddle-js";
 
-/*
-  interface INonCatalogBasePriceRequestBody {
-      name?: string | null;
-      description: string;
-      unitPrice: IMoney;
-      billingCycle?: ITimePeriod | null;
-      trialPeriod?: ITimePeriod | null;
-      taxMode?: TaxMode;
-      unitPriceOverrides?: IUnitPriceOverride[];
-      quantity?: IPriceQuantity;
-      customData?: ICustomData | null;
-  }
-  */
-
 const paddle = new Paddle(process.env.PADDLE_SECRET_KEY!, {
   environment:
     process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT === "production"
@@ -28,69 +14,103 @@ const paddle = new Paddle(process.env.PADDLE_SECRET_KEY!, {
 });
 
 export async function POST(req: NextRequest) {
-  if (req.method !== "POST") {
-    // res.status(405).json({ message: "INVALID_METHOD" });
-    // return;
-    return new NextResponse(JSON.stringify({ message: "INVALID_METHOD" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-  // console.log(req.body);
-  const body = await req.json(); // res now contains body
-  const { items, customData } = body as { items?: any[]; customData?: any };
-  // const { souldApplyDiscount } = customData;
-  // Basic validation before calling Paddle API
+  const body = await req.json();
+  const { items, customData } = body as {
+    items: any[];
+    customData?: {
+      shouldApplyDiscount?: boolean;
+      discountPercentage?: number;
+    };
+  };
+
   if (!Array.isArray(items) || items.length === 0) {
-    return new NextResponse(
-      JSON.stringify({
+    return NextResponse.json(
+      {
         error: "Validation error",
-        details: "The items field is required and must be a non-empty array.",
-      }),
-      { status: 400, headers: { "Content-Type": "application/json" } },
+        details: "The items field must be a non-empty array.",
+      },
+      { status: 400 },
     );
   }
-  // console.log(items);
-
-  //export type TaxCategory = 'digital-goods' | 'ebooks' | 'implementation-services' | 'professional-services' | 'saas' | 'software-programming-services' | 'standard' | 'training-services' | 'website-hosting';
 
   try {
-    // const tsx = await paddle.transactions.create({
-    //   currencyCode: "EUR",
-    //   items: items,
-    //   customData: customData,
-    // });
+    /* ---------------------------------------
+     * STEP 1 — Create transaction
+     * ------------------------------------- */
     const transactionData: CreateTransactionRequestBody = {
       currencyCode: "EUR" as CurrencyCode,
-      items: items,
-      customData: customData,
+      items,
+      customData,
     };
 
-    /**
-     * This works
-     */
-    // if (souldApplyDiscount) {
-    //   transactionData.discount = {
-    //     type: "percentage",
-    //     description: "Multiple licenses discount 25%",
-    //     amount: "25",
-    //     recur: true,
-    //     // maximum_recurring_intervals: 6,
-    //   };
+    const transaction = await paddle.transactions.create(
+      transactionData as any,
+    );
+
+    /* ---------------------------------------
+     * STEP 2 — Apply item-level discount
+     * ------------------------------------- */
+    const itemsWithDiscount = items.filter(
+      (item) => item.price.customData?.shouldApplyDiscount,
+    );
+    console.log(itemsWithDiscount);
+
+    if (itemsWithDiscount.length > 0) {
+      // const priceIds = transaction.items?.map((item) => item.price?.id);
+      // console.log("***priceIds***");
+      // console.log(priceIds);
+      // if (!priceIds) {
+      //   throw new Error("Price ID not found on transaction item");
+      // }
+      const discountedIndexes = items
+        .map((item, index) =>
+          item.price?.customData?.shouldApplyDiscount ? index : null,
+        )
+        .filter((index): index is number => index !== null);
+
+      const priceIds = discountedIndexes
+        .map((index) => transaction.items?.[index]?.price?.id)
+        .filter((id): id is string => typeof id === "string");
+
+      await paddle.transactions.update(transaction.id, {
+        discount: {
+          type: "percentage",
+          amount: String("15"),
+          description: "Custom line-item discount",
+          restrictTo: priceIds,
+        },
+      });
+    }
+    // if (customData?.shouldApplyDiscount) {
+    //   const firstItemPriceId =
+    //     transaction.items?.[0]?.price?.id;
+
+    //   if (!firstItemPriceId) {
+    //     throw new Error("Price ID not found on transaction item");
+    //   }
+
+    //   await paddle.transactions.update(transaction.id, {
+    //     discount: {
+    //       type: "percentage",
+    //       amount: String(customData.discountPercentage ?? 0),
+    //       description: "Custom line-item discount",
+    //       restrictTo: [firstItemPriceId],
+    //     },
+    //   });
     // }
 
-    const tsx = await paddle.transactions.create(transactionData as any);
-    // console.log(tsx);
-    return NextResponse.json({ tsx: tsx.id });
-  } catch (error) {
-    console.log(error);
-    return new NextResponse(
-      JSON.stringify({
-        error: "Paddle transaction create failed",
-        details: (error as any)?.message || error,
-        items,
-      }),
-      { status: 400, headers: { "Content-Type": "application/json" } },
+    return NextResponse.json({
+      transactionId: transaction.id,
+    });
+  } catch (error: any) {
+    console.error(error);
+
+    return NextResponse.json(
+      {
+        error: "Paddle transaction failed",
+        details: error?.message ?? error,
+      },
+      { status: 400 },
     );
   }
 }

@@ -1,9 +1,33 @@
-main {
-  transition-property: opacity, filter;
-  transition-timing-function: ease-in-out;
-  transition-duration: 500ms;
+header {
+  view-transition-name: anything;
+  /* FIX 08.10 */
+  animation: none;
 }
-.page-transition {
-  opacity: 0;
-  // filter: blur(12px);
+main .template {
+  view-transition-name: the-main;
+}
+
+::view-transition-old(the-main),
+::view-transition-new(the-main) {
+  animation: none !important;
+}
+
+::view-transition-group(the-main) {
+  z-index: auto !important;
+}
+
+::view-transition-image-pair(the-main) {
+  isolation: isolate;
+  will-change: transform, opacity, clip-path;
+  z-index: 1;
+}
+
+::view-transition-old(the-main) {
+  z-index: 1;
+  animation: none !important;
+}
+
+::view-transition-new(the-main) {
+  z-index: 10000;
+  animation: none !important;
 }

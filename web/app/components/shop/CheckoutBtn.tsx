@@ -43,13 +43,13 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
   };
 
   const _renderItemJson = (product: ProductData) => {
-    let unitAmount = Math.round(product.finalPrice * 100);
+    // let unitAmount = Math.round(product.finalPrice * 100);
 
-    // 2. Apply the 15% discount manually if the condition is met
-    // This ensures ONLY this specific product is discounted
-    if (product.hasMultipleLicenses) {
-      unitAmount = Math.round(unitAmount * 0.85);
-    }
+    // // 2. Apply the 15% discount manually if the condition is met
+    // // This ensures ONLY this specific product is discounted
+    // if (product.hasMultipleLicenses) {
+    //   unitAmount = Math.round(unitAmount * 0.85);
+    // }
 
     return {
       quantity: 1,
@@ -59,20 +59,17 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
             ? "Single License"
             : "Bundle License"
         }, License types: ${_licensesTypesToString(product.licenseTypes)}
-        ${product.hasMultipleLicenses ? " (15% Off Applied)" : ""}`,
+        `,
         description: product.sku,
         quantity: {
           minimum: 1,
           maximum: 1,
         },
-        // unitPrice: {
-        //   amount: Math.round(product.finalPrice * 100).toString(), // Rounding Protection: In TypeScript, product.finalPrice * 100 can sometimes result in floating point errors (e.g., 19.99 * 100 = 1998.9999). It is safer to use
-        //   currencyCode: "EUR",
-        // },
         unitPrice: {
-          amount: unitAmount.toString(),
+          amount: Math.round(product.finalPrice * 100).toString(), // Rounding Protection: In TypeScript, product.finalPrice * 100 can sometimes result in floating point errors (e.g., 19.99 * 100 = 1998.9999). It is safer to use
           currencyCode: "EUR",
         },
+
         product: {
           name: `${product.fullTitle}`,
           description: product.sku || "sku",
@@ -86,6 +83,8 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
           bundleOrSingleKey: product.bundleOrSingleKey,
           licenseSize: product.licenseSize,
           licenseTypes: product.licenseTypes,
+          shouldApplyDiscount: product.hasMultipleLicenses,
+          discountPercentage: product.hasMultipleLicenses ? 15 : 0,
         },
       },
     };
@@ -106,43 +105,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
     storeProducts(products, 300);
     // then on order completed, get thoses produicts and post to sanity
     const items = products.map((product) => _renderItemJson(product));
-    // console.log("Items:", items);
-    // const items = products.map((product) => ({
-    //   quantity: 1,
-    //   priceId: null,
-    //   price: {
-    //     name: `License size: ${
-    //       product.licenseSize
-    //     }, License types: ${_licensesTypesToString(product.licenseTypes)}`,
-    //     description: product.sku,
-    //     quantity: {
-    //       minimum: 1,
-    //       maximum: 1,
-    //     },
-    //     unitPrice: {
-    //       amount: Math.round(product.finalPrice * 100).toString(), // Rounding Protection: In TypeScript, product.finalPrice * 100 can sometimes result in floating point errors (e.g., 19.99 * 100 = 1998.9999). It is safer to use
-    //       currencyCode: "EUR",
-    //     },
-    //     product: {
-    //       name: `${product.fullTitle}`,
-    //       description: product.sku || "sku",
-    //       taxCategory: "standard",
-    //     },
-    //     // use camelCase per Paddle SDK expectations
-    //     customData: {
-    //       sku: product.sku,
-    //       productType: product.productType,
-    //       productId: product.productId,
-    //       bundleOrSingleKey: product.bundleOrSingleKey,
-    //       licenseSize: product.licenseSize,
-    //       licenseTypes: product.licenseTypes,
-    //     },
-    //   },
-    //   ...(product.hasMultipleLicenses && {
-    //     // discountId: settings.licenseDiscountID,
-    //     discountId: "dsc_01kg4nh48ftr1hj227v68j2v64",
-    //   }),
-    // }));
+
     console.table(items);
     // return;
 
@@ -163,10 +126,10 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
       }),
     });
     const data = await response.json();
-    console.log("Response from server:", data.tsx);
+    console.log("Response from server:", data);
     const checkoutOpenAttrs: CheckoutOpenAttrs = {
       allowQuantity: false,
-      transactionId: data.tsx,
+      transactionId: data.transactionId,
       // customer: customerInfo,
       settings: {
         displayMode: "overlay",
