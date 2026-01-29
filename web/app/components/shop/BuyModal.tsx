@@ -70,9 +70,7 @@ const ProductSingleOrBundle = ({
 
   return (
     <div
-      className={clsx(
-        "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer",
-      )}
+      className={clsx("item _row grid md:grid-cols-6 md:gap-1e cursor-pointer")}
       onClick={_addOrRemove}>
       <div className='title md:col-span-4'>
         <div className='md:flex md:gap-sm '>
@@ -91,9 +89,6 @@ const ProductSingleOrBundle = ({
             <span className='text-green '>Save {totalDiscount}%</span>
           )}
         </div>
-        {/* {input._type === "productSingle" && (
-          <div>{input.relatedTypeface?.slug?.current}</div>
-        )} */}
 
         <AddToTmpCart
           active={active}
