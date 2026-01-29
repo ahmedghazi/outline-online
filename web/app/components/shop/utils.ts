@@ -1,42 +1,34 @@
 import { ProductData } from "@/app/types/extra-types";
-import { LabelPrice, Product } from "@/app/types/schema";
 
 export const _getPriceWithDiscount = (price: number, discount: number) => {
-  return price - (price * discount) / 100;
+  const total = price - (price * discount) / 100;
+  return parseFloat(total.toFixed(2));
 };
 
-export const cartTotalPrice = (items: ProductData[], discount: number = 0) => {
-  let total = 0;
-  items.forEach((el) => {
-    const price = el.finalPrice || 0;
-    if (el.hasMultipleLicenses) {
-      total += _getPriceWithDiscount(price, discount);
-    } else {
-      total += price;
-    }
-  });
-
-  return total;
+// Calculate total price (all discounts are already applied in finalPrice)
+export const cartTotalPrice = (items: ProductData[]) => {
+  const total = items.reduce((sum, el) => sum + (el.finalPrice || 0), 0);
+  return total.toFixed(2);
 };
 
-// export const cartPriceDiscount = (
-//   total: number,
-//   discount: number,
-//   applyDiscount: boolean = false,
-// ) => {
-//   if (!applyDiscount) return total;
-//   return total - _getPriceWithDiscount(total, discount);
-// };
+// Calculate subtotal before discounts (using price which has priceMultiplier but no discounts)
+export const cartSubtotal = (items: ProductData[]) => {
+  const total = items.reduce((sum, el) => sum + (el.price || 0), 0);
+  return total.toFixed(2);
+};
 
-export const cartTotalDiscount = (items: ProductData[], discount: number) => {
-  let totalDiscount = 0;
-  items.forEach((el) => {
-    if (el.hasMultipleLicenses) {
-      const price = el.finalPrice || 0;
-      totalDiscount += price - _getPriceWithDiscount(price, discount);
-    }
-  });
-  return totalDiscount;
+// Calculate total discount amount saved
+export const cartTotalDiscount = (items: ProductData[]) => {
+  const totalDiscount = items.reduce((sum, el) => {
+    // Discount = price before discount - final price
+    return sum + (el.price - el.finalPrice);
+  }, 0);
+  return totalDiscount.toFixed(2);
+};
+
+// Check if any item has a discount applied
+export const cartHasDiscount = (items: ProductData[]) => {
+  return items.some((el) => (el.totalDiscount || 0) > 0);
 };
 
 export const _slugify = (str: string) => {

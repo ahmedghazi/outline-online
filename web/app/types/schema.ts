@@ -293,13 +293,6 @@ export interface Settings extends SanityDocument {
   licenseTypes?: Array<SanityKeyed<LicenseType>>;
 
   /**
-   * Discount for multiple licenses, provided by Paddle — `string`
-   *
-   *
-   */
-  licenseDiscountID?: string;
-
-  /**
    * Discount percentage for multiple licenses — `number`
    *
    *

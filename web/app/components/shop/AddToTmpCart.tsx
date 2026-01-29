@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Price from "./Price";
 import useShop from "./ShopContext";
-import { usePathname } from "next/navigation";
 import { ProductData } from "@/app/types/extra-types";
 import { _getPriceWithDiscount } from "./utils";
-import { div } from "framer-motion/client";
 import clsx from "clsx";
 import { publish } from "pubsub-js";
+import { usePageContext } from "@/app/context/PageContext";
 
 type Props = {
   productData: ProductData;
@@ -24,39 +23,53 @@ const AddToTmpCart = ({
     useShop();
   const [mounted, setMounted] = useState<boolean>(false);
   const [applyDiscount, setApplyDiscount] = useState<boolean>(false);
+  const { settings } = usePageContext();
 
-  // const pathname = usePathname();
+  // Check if multiple licenses are selected
+  const hasMultipleLicenses = licenseTypeProfil && licenseTypeProfil.length > 1;
 
+  // Calculate the license discount percentage when multiple licenses are selected
+  const licenseDiscountPercentage = hasMultipleLicenses
+    ? settings.licenseDiscountPercentage || 15
+    : 0;
+
+  // Calculate combined discount: product discount + multi-license discount
+  const combinedDiscount = useMemo(() => {
+    let total = 0;
+    // Add product discount if applicable
+    if (discount && applyDiscount) {
+      total += discount;
+    }
+    // Add multi-license discount
+    total += licenseDiscountPercentage;
+    return total;
+  }, [discount, applyDiscount, licenseDiscountPercentage]);
+
+  // Price after priceMultiplier (before any discounts)
   let _price: number = price * (priceMultiplier || 1);
   _price = Math.round(_price * 100) / 100;
-  // let finalPriceWithDiscount: number = _price;
-  // if (discount && applyDiscount) {
-  //   // const discountAmount = (discount * _price) / 100;
-  //   // const discountAmount = _getPriceWithDiscount(_price, discount);
-  //   finalPriceWithDiscount = _getPriceWithDiscount(_price, discount);
-  // }
-  // const _getPrice = () => {
-  //   let _price: number = price * (priceMultiplier || 1);
-  //   _price = Math.round(_price * 100) / 100;
-  //   return _price;
-  // };
+
+  // Calculate final price with combined discount applied
   const _getFinalPrice = () => {
-    let finalPriceWithDiscount: number = _price;
-    if (discount && applyDiscount) {
-      finalPriceWithDiscount = _getPriceWithDiscount(_price, discount);
+    if (combinedDiscount > 0) {
+      return _getPriceWithDiscount(_price, combinedDiscount);
     }
-    return finalPriceWithDiscount;
+    return _price;
   };
 
-  // console.log(title, price);
   const _updatedProductData = {
     basePrice: price,
     price: _price,
-    finalPrice: discount && applyDiscount ? _getFinalPrice() : _price,
+    finalPrice: _getFinalPrice(),
     licenseSize: licenseSizeProfil?.title || "",
     licenseTypes: licenseTypeProfil?.map((e) => e.label).join("|") || "",
     licenseInfos: "",
-    applyDiscount: applyDiscount,
+    applyDiscount: applyDiscount || !!hasMultipleLicenses,
+    hasMultipleLicenses: !!hasMultipleLicenses,
+    // Store the combined discount for display in cart
+    totalDiscount: combinedDiscount,
+    productDiscount: discount || 0,
+    licenseDiscount: licenseDiscountPercentage,
   };
   const _productData: ProductData = {
     ...productData,
@@ -67,6 +80,7 @@ const AddToTmpCart = ({
     if (_productData.discount && _productData.productType === "productBundle") {
       setApplyDiscount(true);
     }
+
     setMounted(true);
   }, []);
 
@@ -98,17 +112,12 @@ const AddToTmpCart = ({
   }, [tmpProducts, _productData.relatedTypefaceSlug]);
 
   useEffect(() => {
-    // console.log(title, active);
     if (!mounted) return;
     if (active && _productData.finalPrice > 0) {
-      // console.log(_productData);
       const exist = tmpProducts.filter((el) => el.sku === _productData.sku);
       if (exist.length === 0)
         setTmpProducts({ type: "ADD", payload: _productData });
       else {
-        console.log("REPLACE", _productData);
-        //need to check if discount changed
-        //if single, and apply discount
         setTmpProducts({ type: "REPLACE", payload: _productData });
       }
     } else {
@@ -119,26 +128,14 @@ const AddToTmpCart = ({
         setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
       }
     }
-  }, [active, applyDiscount, priceMultiplier]);
+  }, [active, applyDiscount, priceMultiplier, hasMultipleLicenses]);
 
   return (
-    <div
-      className={clsx(
-        "add-to-cart cursor-pointer bg-red-",
-        // applyDiscount && "bg-red",
-      )}
-      // onClick={() => {
-      //   setActive(!active);
-      // }}
-    >
+    <div className={clsx("add-to-cart cursor-pointer bg-red-")}>
       <div className='flex justify-between'>
-        <Price
-          discount={discount && applyDiscount ? discount : 0}
-          price={_price}
-        />
+        <Price discount={combinedDiscount} price={_price} />
         <div className='checkbox-ui'>
           <input
-            // onChange={_addToCart}
             checked={active}
             onChange={() => {}}
             type='checkbox'

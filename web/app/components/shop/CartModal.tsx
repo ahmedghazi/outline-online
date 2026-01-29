@@ -2,69 +2,35 @@
 import React, { useEffect, useState } from "react";
 import useShop from "./ShopContext";
 import clsx from "clsx";
-import Link from "next/link";
-import { _linkResolver } from "@/app/sanity-api/utils";
 import CartItem from "./CartItem";
 import { usePageContext } from "@/app/context/PageContext";
-import { cartTotalDiscount, cartTotalPrice } from "./utils";
+import {
+  cartTotalDiscount,
+  cartTotalPrice,
+  cartSubtotal,
+  cartHasDiscount,
+} from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
 import Image from "next/image";
-import { div } from "framer-motion/client";
 
 type Props = {};
 
 const CartModal = (props: Props) => {
   const { products, setProducts } = useShop();
-  const { settings } = usePageContext();
-  const [canCheckout, setCanCheckout] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(true);
-  const [hasProductsWithMultipleLicenses, setHasProductsWithMultipleLicenses] =
-    useState<boolean>(false);
   const { tab, setTab } = usePageContext();
   const isEmpty = products.length === 0;
 
-  console.log(products);
-
-  const _hasProductsWithMultipleLicenses = () => {
-    // return false;
-    return products.some((product) => {
-      const licenseTypes = product.licenseTypes.split("|");
-      return licenseTypes.length > 1;
-    });
-  };
+  // Check if any product has a discount applied
+  const hasAnyDiscount = cartHasDiscount(products);
 
   const _delete = (sku: string) => {
     setProducts({ type: "REMOVE_BY_SKU", payload: sku });
   };
 
   useEffect(() => {
-    // console.log(products);
-    setHasProductsWithMultipleLicenses(_hasProductsWithMultipleLicenses());
-  }, [products]);
-
-  useEffect(() => {
     setOpen(tab.name === "CART");
   }, [tab]);
-
-  const discountPercentage = settings.licenseDiscountPercentage ?? 15;
-
-  const discountedProducts = products.filter(
-    (product) => product.hasMultipleLicenses,
-  );
-
-  const nonDiscountedProducts = products.filter(
-    (product) => !product.hasMultipleLicenses,
-  );
-
-  const discountedSubtotal = discountedProducts.reduce(
-    (sum, p) => sum + p.finalPrice,
-    0,
-  );
-
-  const nonDiscountedSubtotal = nonDiscountedProducts.reduce(
-    (sum, p) => sum + p.finalPrice,
-    0,
-  );
 
   return (
     <div
@@ -109,33 +75,25 @@ const CartModal = (props: Props) => {
           {!isEmpty && (
             <div className='footer'>
               <div className='inner'>
-                {hasProductsWithMultipleLicenses && (
+                {hasAnyDiscount && (
                   <div className='cart-row'>
                     <div className='inner-grid'>
                       <div className='label'>Sub Total</div>
                       <div></div>
                       <div className='value col-span-2'>
-                        <div className='price'>{cartTotalPrice(products)}€</div>
+                        <div className='price'>{cartSubtotal(products)}€</div>
                       </div>
                     </div>
                   </div>
                 )}
-                {hasProductsWithMultipleLicenses && (
+                {hasAnyDiscount && (
                   <div className='cart-row '>
                     <div className='inner-grid'>
                       <div className='title '>Discount</div>
-                      <div className='label'>
-                        {settings.licenseDiscountLabel}
-                      </div>
-
+                      <div className='label'>Savings</div>
                       <div className=' value col-span-2'>
                         <div className='price'>
-                          -
-                          {cartTotalDiscount(
-                            products,
-                            settings.licenseDiscountPercentage || 15,
-                          )}
-                          €
+                          -{cartTotalDiscount(products)}€
                         </div>
                       </div>
                     </div>
@@ -146,14 +104,7 @@ const CartModal = (props: Props) => {
                     <div className='title '>SUM</div>
                     <div className='label'>Total</div>
                     <div className='value col-span-2'>
-                      <div className='price'>
-                        {cartTotalPrice(products) -
-                          cartTotalDiscount(
-                            products,
-                            settings.licenseDiscountPercentage || 15,
-                          )}
-                        €
-                      </div>
+                      <div className='price'>{cartTotalPrice(products)}€</div>
                     </div>
                   </div>
                 </div>

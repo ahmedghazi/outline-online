@@ -13,6 +13,10 @@ export interface ProductData {
   priceWithMultipleLicenses?: number;
   applyDiscount?: boolean;
   hasMultipleLicenses?: boolean;
+  // Combined discount fields (product discount + license discount)
+  totalDiscount?: number;
+  productDiscount?: number;
+  licenseDiscount?: number;
   productId: string;
   productTitle: string;
   fullTitle: string;
@@ -20,5 +24,4 @@ export interface ProductData {
   licenseSize: string;
   licenseTypes: string;
   licenseInfos: string;
-  // isLogo: string | boolean | undefined;
 }
