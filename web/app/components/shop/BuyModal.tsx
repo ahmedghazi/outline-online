@@ -38,6 +38,17 @@ const ProductSingleOrBundle = ({
 }: ProductSingleOrBundleProps) => {
   const [active, setActive] = useState<boolean>(false);
   const [canApplyDiscount, setCanApplyDiscount] = useState<boolean>(false);
+  const { licenseTypeProfil } = useShop();
+  const { settings } = usePageContext();
+
+  // Calculate combined discount for display
+  const hasMultipleLicenses = licenseTypeProfil && licenseTypeProfil.length > 1;
+  const licenseDiscountPercentage = hasMultipleLicenses
+    ? settings.licenseDiscountPercentage || 15
+    : 0;
+  const productDiscount =
+    canApplyDiscount && input.priceDiscount ? input.priceDiscount : 0;
+  const totalDiscount = productDiscount + licenseDiscountPercentage;
 
   useEffect(() => {
     //each tmpProduct tells if apply discount is on/off
@@ -47,15 +58,6 @@ const ProductSingleOrBundle = ({
         setCanApplyDiscount(data.applyDiscount);
       }
     });
-
-    // const tokenB = subscribe("PRODUCT_BUNDLE_IN_TMP_PRODUCTS", (_e, data) => {
-    //   if (input._type === "productBundle") {
-    //     console.log("PRODUCT_BUNDLE_IN_TMP_PRODUCTS", data);
-    //     // @ts-ignore
-    //     const bundleProducts = input.products;
-    //     // @ts-ignore
-    //   }
-    // });
 
     return () => {
       unsubscribe(tokenA);
@@ -70,7 +72,6 @@ const ProductSingleOrBundle = ({
     <div
       className={clsx(
         "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer",
-        // isPriceCrossed && "is-price-crossed"
       )}
       onClick={_addOrRemove}>
       <div className='title md:col-span-4'>
@@ -78,19 +79,16 @@ const ProductSingleOrBundle = ({
           <div className='title'>{input.title}</div>
           <div className='desc flex-2 flex justify-between hidden-sm'>
             <span className='text-gray-100 '>{input.description}</span>
-            {canApplyDiscount && (
-              <span className='text-green '>Save {input.priceDiscount}%</span>
+            {totalDiscount > 0 && (
+              <span className='text-green '>Save {totalDiscount}%</span>
             )}
           </div>
         </div>
       </div>
       <div className='actions md:col-span-2'>
         <div className='sm-only'>
-          {/* {input._type === "productBundle" && input.priceDiscount && (
-            <span className='text-green '>Save {input.priceDiscount}%</span>
-          )} */}
-          {canApplyDiscount && input.priceDiscount && (
-            <span className='text-green '>Save {input.priceDiscount}%</span>
+          {totalDiscount > 0 && (
+            <span className='text-green '>Save {totalDiscount}%</span>
           )}
         </div>
         {/* {input._type === "productSingle" && (

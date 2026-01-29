@@ -108,12 +108,12 @@ export default defineType({
       group: 'shop',
     }),
 
-    defineField({
-      name: 'licenseDiscountID',
-      type: 'string',
-      title: 'Discount for multiple licenses, provided by Paddle',
-      group: 'shop',
-    }),
+    // defineField({
+    //   name: 'licenseDiscountID',
+    //   type: 'string',
+    //   title: 'Discount for multiple licenses, provided by Paddle',
+    //   group: 'shop',
+    // }),
     defineField({
       name: 'licenseDiscountPercentage',
       type: 'number',
