@@ -10,7 +10,7 @@ export interface ProductData {
   price: number;
   discount: number;
   finalPrice: number;
-  priceWithMultipleLicenses?: number;
+  // priceWithMultipleLicenses?: number;
   applyDiscount?: boolean;
   hasMultipleLicenses?: boolean;
   // Combined discount fields (product discount + license discount)
