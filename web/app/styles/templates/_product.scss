@@ -135,7 +135,7 @@ body[data-template="is-product"],
           position: absolute;
           bottom: 0;
           padding: var(--footer-height) var(--space-lg);
-          padding-bottom: toRem(17);
+          // padding-bottom: toRem(17);
         }
       }
     }

@@ -36,9 +36,12 @@ const Select = ({ label, options, onChange, disabled = false }: Props) => {
         onBlur={(e) => setActive(false)}
         disabled={disabled}
         onChange={(e) => {
-          // console.log(e.target.value);
+          console.log(e.target.value);
           if (e.target.value) {
             onChange(JSON.parse(e.target.value));
+            setActive(false);
+          } else {
+            onChange(null);
             setActive(false);
           }
         }}

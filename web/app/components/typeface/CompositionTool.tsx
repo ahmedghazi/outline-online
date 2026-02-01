@@ -78,9 +78,15 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const _handleStylisticSets = (ss: KeyValString) => {
     // console.log(ss);
     if (!ref.current) return;
-    if (!ss || !ss.val) return;
-
-    ref.current.style.setProperty("--font-feature-settings", `"${ss.val}"`);
+    if (!ss || !ss.val) {
+      ref.current.style.setProperty("--font-feature-settings", "normal");
+      return;
+    }
+    //if val === "val" or 'val' or val
+    //make a regex to clean val
+    const val = ss.val.replace(/["']/g, "");
+    console.log("val", val);
+    ref.current.style.setProperty("--font-feature-settings", `'${val}' 1`);
   };
 
   const _handleStyles = (s: KeyValString) => {
