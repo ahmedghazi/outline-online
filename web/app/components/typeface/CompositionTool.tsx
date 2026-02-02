@@ -86,7 +86,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
     //make a regex to clean val
     const val = ss.val.replace(/["']/g, "");
     console.log("val", val);
-    ref.current.style.setProperty("--font-feature-settings", `'${val}' 1`);
+    ref.current.style.setProperty("--font-feature-settings", `'${val}' on`);
   };
 
   const _handleStyles = (s: KeyValString) => {
