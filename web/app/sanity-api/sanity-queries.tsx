@@ -81,7 +81,8 @@ const PRODUCTS_CART_QUERY = groq`
       slug{
         current
       },
-      singles[]{
+
+      singles[title != "Variable"][]{
         _key,
         _type,
         title,

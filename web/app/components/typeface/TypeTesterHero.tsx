@@ -27,8 +27,11 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
   const items = useMemo(() => {
     let arr: Item[] = [];
     const allStyles = input.map((item) => item.typeface?.style);
-    const filteredStyles = allStyles.filter(
+    let filteredStyles = allStyles.filter(
       (item) => item?.toLowerCase().indexOf("italic") === -1,
+    );
+    filteredStyles = filteredStyles.filter(
+      (item) => item?.toLowerCase().indexOf("variable") === -1,
     );
 
     // console.log(allStyles);
