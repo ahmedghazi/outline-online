@@ -128,7 +128,7 @@ function productsReducer(state: any, action: any) {
     case "REMOVE_ALL":
       return [];
     default:
-      throw new Error();
+      throw new Error(type);
   }
 }
 

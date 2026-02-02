@@ -12,17 +12,29 @@ import {
 } from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
 import Image from "next/image";
+import { publish } from "pubsub-js";
 
 type Props = {};
 
 const CartModal = (props: Props) => {
-  const { products, setProducts } = useShop();
+  const { products, setProducts, tmpProducts, setTmpProducts } = useShop();
   const [open, setOpen] = useState<boolean>(true);
   const { tab, setTab } = usePageContext();
   const isEmpty = products.length === 0;
 
   // Check if any product has a discount applied
   const hasAnyDiscount = cartHasDiscount(products);
+
+  useEffect(() => {
+    // RESET BUY MODAL WHEN CART IS OPENED
+    if (tab.name === "CART") {
+      tmpProducts.forEach((item) => {
+        // setTmpProducts({ type: "REMOVE_BY_SKU", payload: item.sku });
+        publish("TMP_PRODUCT_REMOVE", { sku: item.sku });
+      });
+      // setTmpProducts({ type: "REMOVE_ALL" });
+    }
+  }, [tab]);
 
   const _delete = (sku: string) => {
     setProducts({ type: "REMOVE_BY_SKU", payload: sku });
@@ -44,7 +56,7 @@ const CartModal = (props: Props) => {
             {isEmpty && (
               <section className='cart-empty py-xl flex justify-center'>
                 <div className='flex flex-col items-center gap-md'>
-                  <div className=''>Your cart is empty</div>
+                  <div className=''>Your cart is empty.</div>
                   <button
                     className='ui-btn ui-btn__accent'
                     onClick={() => {

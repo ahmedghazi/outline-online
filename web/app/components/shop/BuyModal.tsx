@@ -59,7 +59,15 @@ const ProductSingleOrBundle = ({
       }
     });
 
+    const tokenB = subscribe("TMP_PRODUCT_REMOVE", (_e, data) => {
+      console.log("TMP_PRODUCT_REMOVE", data);
+      if (data.sku === input._key) {
+        setActive(false);
+      }
+    });
+
     return () => {
+      unsubscribe(tokenA);
       unsubscribe(tokenA);
     };
   }, []);
