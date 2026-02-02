@@ -35,7 +35,7 @@ const CartItem = ({ input, _delete }: Props) => {
       </div>
       <div className='cart-item__price'>
         {hasDiscount && (
-          <span className='text-green '>Saving {totalDiscount}%</span>
+          <span className='text-green '>Save {totalDiscount}%</span>
         )}
         {hasDiscount ? (
           <Price price={input.price} discount={totalDiscount} />

@@ -29,7 +29,7 @@ const AddToCart = () => {
       // publish("DIALOG.CLOSE");
     });
     if (tmpProducts.length > 0) {
-      setButtonStatus("Added");
+      setButtonStatus("Adding...");
 
       setTimeout(() => {
         // publish("CART_OPEN");
@@ -46,7 +46,7 @@ const AddToCart = () => {
           "atc-all  block",
           tmpProducts.length > 0
             ? "button-submit"
-            : "button-disabled pointer-events-none"
+            : "button-disabled pointer-events-none",
         )}>
         {buttonStatus}{" "}
         {tmpProducts.length > 0 && (
