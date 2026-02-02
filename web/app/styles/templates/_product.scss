@@ -134,7 +134,8 @@ body[data-template="is-product"],
           // justify-content: space-between;
           position: absolute;
           bottom: 0;
-          padding: var(--footer-height) var(--space-lg);
+          padding: var(--footer-height) var(--space-lg)
+            calc(var(--footer-height) + 11px);
           // padding-bottom: toRem(17);
         }
       }
