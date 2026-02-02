@@ -88,6 +88,31 @@ const CartModal = (props: Props) => {
             <div className='footer'>
               <div className='inner'>
                 {hasAnyDiscount && (
+                  <>
+                    <div className='cart-row'>
+                      <div className='inner-grid'>
+                        <div className='label'>SUM</div>
+                        <div className='label'>Sub Total</div>
+
+                        <div className='value col-span-2'>
+                          <div className='price'>{cartSubtotal(products)}€</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='cart-row '>
+                      <div className='inner-grid'>
+                        <div className='title '></div>
+                        <div className='label'>Discount</div>
+                        <div className=' value col-span-2'>
+                          <div className='price'>
+                            -{cartTotalDiscount(products)}€
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {/* {hasAnyDiscount && (
                   <div className='cart-row'>
                     <div className='inner-grid'>
                       <div className='label'>Sub Total</div>
@@ -97,8 +122,8 @@ const CartModal = (props: Props) => {
                       </div>
                     </div>
                   </div>
-                )}
-                {hasAnyDiscount && (
+                )} */}
+                {/* {hasAnyDiscount && (
                   <div className='cart-row '>
                     <div className='inner-grid'>
                       <div className='title '>Discount</div>
@@ -110,10 +135,10 @@ const CartModal = (props: Props) => {
                       </div>
                     </div>
                   </div>
-                )}
-                <div className='cart-row cart-row--totals mb-lg'>
-                  <div className='inner-grid'>
-                    <div className='title '>SUM</div>
+                )} */}
+                <div className='cart-row cart-row--totals mb-lg '>
+                  <div className='inner-grid text-blue'>
+                    <div className='title '>{!hasAnyDiscount ? "SUM" : ""}</div>
                     <div className='label'>Total</div>
                     <div className='value col-span-2'>
                       <div className='price'>{cartTotalPrice(products)}€</div>
