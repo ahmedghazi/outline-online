@@ -24,6 +24,10 @@
       right: 5px;
     }
   }
+  &--purple {
+    background-color: var(--color-purple);
+    color: white;
+  }
 }
 
 .ui-size-slider {

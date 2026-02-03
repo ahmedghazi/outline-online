@@ -108,7 +108,9 @@ const CompositionTool = ({ input, pangram }: Props) => {
 
   return (
     <div className={clsx("composition-tool", active && "is-active")}>
-      <button className='btn-toggle button-ui' onClick={() => setActive(true)}>
+      <button
+        className='btn-toggle button-ui button-ui--purple'
+        onClick={() => setActive(true)}>
         Composition Tool
       </button>
       <div className='modal'>
