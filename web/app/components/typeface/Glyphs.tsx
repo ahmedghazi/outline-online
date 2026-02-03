@@ -15,7 +15,11 @@ const Glyphs = ({ input }: Props) => {
   const { type } = useType();
 
   return (
-    <section className='glyphs ' onMouseLeave={() => setGlyph("")}>
+    <section
+      className='glyphs '
+      onMouseLeave={() => {
+        //setGlyph("")
+      }}>
       {input.typeface?.glyphs &&
         input.typeface?.glyphs.length > 0 &&
         input.typeface?.glyphs.map((item, i) => (
