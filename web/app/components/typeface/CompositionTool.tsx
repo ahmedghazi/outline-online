@@ -17,7 +17,11 @@ type Props = {
 const CompositionTool = ({ input, pangram }: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
-  const defaultStyle = input.length > 0 ? input[0].typeface?.slug?.current : "";
+  const _defaultStyle = input.filter((el) => el.isDefault);
+  // const defaultStyle = input.length > 0 ? input[0].typeface?.slug?.current : "";
+  const defaultStyle = _defaultStyle
+    ? _defaultStyle[0].typeface?.slug?.current
+    : input[0].typeface?.slug?.current;
   console.log(input);
   const [currentStyle, setCurrentStyle] = useState<string | undefined>(
     defaultStyle,
@@ -87,7 +91,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
     //make a regex to clean val
     const val = ss.val.replace(/["']/g, "");
     console.log("val", val);
-    ref.current.style.setProperty("--font-feature-settings", `'${val}' on`);
+    ref.current.style.setProperty("--font-feature-settings", `"${val}" on`);
   };
 
   const _handleStyles = (s: KeyValString) => {
@@ -172,12 +176,13 @@ const CompositionTool = ({ input, pangram }: Props) => {
                 onChange={_handleStyles}
                 // label='Family'
                 label=''
+                defaultValue={defaultStyle}
               />
             )}
             {hasVariable &&
               currentStyle === _getVariableStyle()?.slug?.current && (
                 <TesterVariable
-                  axe='wght'
+                  axe={_getVariableStyle()?.variableAxe?.name || "wght"}
                   initialValue={String(
                     _getVariableStyle()?.variableAxe?.initialValue || "400",
                   )}

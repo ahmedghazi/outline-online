@@ -8,9 +8,10 @@ type Props = {
   options: LicenseSize[] | KeyValString[];
   onChange: Function;
   disabled?: boolean;
+  defaultValue?: string;
 };
 
-const Select = ({ label, options, onChange, disabled = false }: Props) => {
+const Select = ({ label, options, onChange, disabled = false, defaultValue }: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLElement>(null);
 
@@ -46,9 +47,13 @@ const Select = ({ label, options, onChange, disabled = false }: Props) => {
           }
         }}
         defaultValue={
-          label === "" && options[0] && options[0]._type === "keyValString"
-            ? JSON.stringify(options[0])
-            : ""
+          defaultValue
+            ? JSON.stringify(options.find((item) =>
+                item._type === "keyValString" ? item.val === defaultValue : item.title === defaultValue
+              ) || options[0])
+            : label === "" && options[0] && options[0]._type === "keyValString"
+              ? JSON.stringify(options[0])
+              : ""
         }>
         {label && (
           <option defaultValue='' value=''>
