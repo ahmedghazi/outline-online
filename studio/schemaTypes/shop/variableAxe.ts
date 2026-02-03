@@ -39,6 +39,10 @@ export default {
       name: 'max',
       type: 'number',
     }),
+    defineField({
+      name: 'initialValue',
+      type: 'number',
+    }),
   ],
   preview: {
     select: {

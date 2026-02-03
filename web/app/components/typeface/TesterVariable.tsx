@@ -31,7 +31,7 @@ const TesterVariable = ({ axe, initialValue, target, min, max }: Props) => {
     <div className='range-ui type-variable  controls'>
       <div className='flex items-center'>
         <label htmlFor='variable' className=''>
-          variable
+          Variable
         </label>
         <input
           type='range'

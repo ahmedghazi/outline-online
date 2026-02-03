@@ -18,6 +18,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   const defaultStyle = input.length > 0 ? input[0].typeface?.slug?.current : "";
+  console.log(input);
   const [currentStyle, setCurrentStyle] = useState<string | undefined>(
     defaultStyle,
   );
@@ -160,15 +161,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
         {ref && ref.current && (
           <div className='footer '>
             <TesterSize initialValue='89' target={ref.current} />
-            {hasVariable && (
-              <TesterVariable
-                axe='wght'
-                initialValue='400'
-                min={String(_getVariableStyle()?.variableAxe?.min || "0")}
-                max={String(_getVariableStyle()?.variableAxe?.max || "1000")}
-                target={ref.current}
-              />
-            )}
+
             {/*  */}
             <TesterSpacing initialValue='0' target={ref.current} />
             <TesterLeading initialValue='89' target={ref.current} />
@@ -181,6 +174,18 @@ const CompositionTool = ({ input, pangram }: Props) => {
                 label=''
               />
             )}
+            {hasVariable &&
+              currentStyle === _getVariableStyle()?.slug?.current && (
+                <TesterVariable
+                  axe='wght'
+                  initialValue={String(
+                    _getVariableStyle()?.variableAxe?.initialValue || "400",
+                  )}
+                  min={String(_getVariableStyle()?.variableAxe?.min || "0")}
+                  max={String(_getVariableStyle()?.variableAxe?.max || "1000")}
+                  target={ref.current}
+                />
+              )}
 
             {_stylisticSets && _stylisticSets.length > 0 && (
               <Select

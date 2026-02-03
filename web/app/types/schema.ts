@@ -1205,6 +1205,13 @@ export type VariableAxe = {
    *
    */
   max?: number;
+
+  /**
+   * initialValue — `number`
+   *
+   *
+   */
+  initialValue?: number;
 };
 
 export type BlockContent = Array<SanityKeyed<SanityBlock>>;
