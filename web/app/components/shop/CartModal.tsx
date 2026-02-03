@@ -57,13 +57,13 @@ const CartModal = (props: Props) => {
               <section className='cart-empty py-xl flex justify-center'>
                 <div className='flex flex-col items-center gap-md'>
                   <div className=''>Your cart is empty.</div>
-                  <button
+                  {/* <button
                     className='ui-btn ui-btn__accent'
                     onClick={() => {
                       setTab({ name: "BUY", active: true });
                     }}>
                     Explore our catalogue
-                  </button>
+                  </button> */}
                 </div>
               </section>
             )}
