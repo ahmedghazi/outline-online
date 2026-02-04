@@ -18,7 +18,7 @@ const Glyphs = ({ input }: Props) => {
     <section
       className='glyphs '
       onMouseLeave={() => {
-        //setGlyph("")
+        setGlyph("");
       }}>
       {input.typeface?.glyphs &&
         input.typeface?.glyphs.length > 0 &&
