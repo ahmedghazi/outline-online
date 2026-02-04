@@ -22,8 +22,8 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const defaultStyle = _defaultStyle
     ? _defaultStyle[0].typeface?.slug?.current
     : input[0].typeface?.slug?.current;
-  console.log(input);
-  const [currentStyle, setCurrentStyle] = useState<string | undefined>(
+  // console.log(input);
+  const [currentStyleName, setCurrentStyleName] = useState<string | undefined>(
     defaultStyle,
   );
 
@@ -77,6 +77,24 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const _getVariableStyle = () => {
     return input.find((item) => item.title?.includes("Variable"))?.typeface;
   };
+  const _getCurrentStyleStylisticSets = () => {
+    // console.log({ currentStyleName });
+    const currentStyle = input.find(
+      (item) => item.typeface?.slug?.current === currentStyleName,
+    );
+    // console.log({ currentStyle });
+    if (!currentStyle?.typeface?.stylisticSets) return [];
+
+    let arr: KeyValString[] = [];
+    currentStyle.typeface?.stylisticSets.forEach((s) => {
+      if (arr.some((e) => e.key === s.key)) {
+      } else {
+        arr.push(s);
+      }
+    });
+    return arr;
+    // return currentStyle?.typeface?.stylisticSets;
+  };
   // console.log({ hasVariable });
   // console.log(_getVariableStyle());
 
@@ -100,7 +118,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
     if (!s || !s.val) return;
     // ref.current.style.fontFamily = s.val;
     ref.current.style.setProperty("--type-family", s.val);
-    setCurrentStyle(s.val);
+    setCurrentStyleName(s.val);
   };
 
   const _handleColor = (hex: string) => {
@@ -108,7 +126,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
     if (!hex) return;
     // console.log(hex);
     ref.current.style.setProperty("--type-color", hex);
-    // setCurrentStyle(s.val);
+    // setCurrentStyleName(s.val);
   };
 
   return (
@@ -151,7 +169,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
           <div
             className='text-editor text-lg'
             style={{
-              fontFamily: currentStyle,
+              fontFamily: currentStyleName,
             }}
             ref={ref}
             contentEditable={true}
@@ -165,8 +183,6 @@ const CompositionTool = ({ input, pangram }: Props) => {
         {ref && ref.current && (
           <div className='footer '>
             <TesterSize initialValue='89' target={ref.current} />
-
-            {/*  */}
             <TesterSpacing initialValue='0' target={ref.current} />
             <TesterLeading initialValue='89' target={ref.current} />
 
@@ -180,7 +196,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
               />
             )}
             {hasVariable &&
-              currentStyle === _getVariableStyle()?.slug?.current && (
+              currentStyleName === _getVariableStyle()?.slug?.current && (
                 <TesterVariable
                   axe={_getVariableStyle()?.variableAxe?.name || "wght"}
                   initialValue={String(
@@ -192,13 +208,21 @@ const CompositionTool = ({ input, pangram }: Props) => {
                 />
               )}
 
-            {_stylisticSets && _stylisticSets.length > 0 && (
+            {/* {_stylisticSets && _stylisticSets.length > 0 && (
               <Select
                 options={_stylisticSets}
                 onChange={_handleStylisticSets}
                 label='Stylistic Sets'
               />
-            )}
+            )} */}
+            {_getCurrentStyleStylisticSets() &&
+              _getCurrentStyleStylisticSets().length > 0 && (
+                <Select
+                  options={_getCurrentStyleStylisticSets()}
+                  onChange={_handleStylisticSets}
+                  label='Stylistic Sets'
+                />
+              )}
             <TesterColor onChange={_handleColor} />
             <TesterParagraph target={ref.current} />
           </div>

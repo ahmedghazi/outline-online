@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Product, Typeface } from "../types/schema";
 import useShop from "./shop/ShopContext";
 import TypeTesterHero from "./typeface/TypeTesterHero";
@@ -23,15 +23,25 @@ const ContentProduct = ({ input }: Props) => {
   const { type, dispatchType, dispatchTypes } = useType();
   const [ready, setReady] = useState<boolean>(false);
   // console.log(input);
-  const _gerRandomPangram = (p: string[] | any) => {
-    if (!p)
+  // const _gerRandomPangram = (p: string[] | any) => {
+  //    const len = p.length;
+  //   const rand = Math.round(Math.random() * len);
+  //   console.log(len, rand);
+  //   return p[rand];
+  // };
+  const pangram = useMemo(() => {
+    if (!input.pangrams)
       return "24 wacky bandmates mixed zany rhythms, blowing jazzy saxophones and fixing broken xylophones for a quirky gig.";
-    const len = p.length;
-    const rand = Math.round(Math.random() * len);
-    return p[rand];
-  };
 
-  const pangram = _gerRandomPangram(input.pangrams);
+    const len = input.pangrams.length - 1;
+    const rand = Math.round(Math.random() * len);
+    console.log(len, rand);
+    return input.pangrams[rand] !== ""
+      ? input.pangrams[rand]
+      : "24 wacky bandmates mixed zany rhythms, blowing jazzy saxophones and fixing broken xylophones for a quirky gig.";
+  }, [input.pangrams]);
+
+  // const pangram = _gerRandomPangram;
 
   useEffect(() => {
     setCurrentProduct(input);
@@ -46,7 +56,7 @@ const ContentProduct = ({ input }: Props) => {
   const _setDefaultTypeface = () => {
     // console.log(input.singles);
     const regular = input.singles?.filter(
-      (el) => el.typeface?.style === "regular"
+      (el) => el.typeface?.style === "regular",
     );
     if (regular && regular?.length === 1) {
       // console.log(dispatchType);
