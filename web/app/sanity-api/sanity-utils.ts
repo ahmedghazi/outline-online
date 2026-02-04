@@ -52,7 +52,6 @@ export function urlFor(source: SanityImageAsset, maxWidth: number = 2000): any {
       // .format("webp")
       .auto("format")
       .fit("max")
-      .dpr(2)
       .url()
   );
 }

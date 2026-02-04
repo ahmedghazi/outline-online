@@ -13,7 +13,7 @@ const config: ClientConfig = {
   dataset,
   apiVersion,
   // set CDN to live API in development mode
-  useCdn: process.env.NODE_ENV === "development" ? true : false,
+  useCdn: process.env.NODE_ENV === "development" ? true : true,
   // perspective: draftMode().isEnabled ? "previewDrafts" : "published",
   token,
 };
@@ -55,8 +55,7 @@ export async function sanityFetch<QueryResponse>({
   tags: string[];
 }): Promise<QueryResponse> {
   return client.fetch<QueryResponse>(query, qParams, {
-    // cache: process.env.NODE_ENV === "development" ? "no-store" : "force-cache",
-    cache: "no-store",
+    cache: process.env.NODE_ENV === "development" ? "no-store" : "force-cache",
     next: { tags },
   });
 }

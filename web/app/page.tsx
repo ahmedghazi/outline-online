@@ -26,7 +26,6 @@ export async function generateMetadata({
 }
 
 export const revalidate = 3600; // revalidate every hour
-export const dynamic = "force-dynamic";
 
 type PageProps = {
   params: {
