@@ -175,13 +175,19 @@ body[data-template="is-product"],
     .overview {
       position: fixed;
       inset: 0;
-      @include flex_center_h_v;
+      // @include flex_center_h_v;
+      display: grid;
+      place-items: center;
       pointer-events: none;
-      font-size: 50vh;
+      font-size: 70vh;
       span {
-        line-height: 1;
-        transform: translateY(-3vh);
-        transform: translateY(3vh);
+        display: inline-block;
+        min-width: 50vw;
+        margin: 0 auto;
+        text-align: center;
+        // line-height: 1;
+        // transform: translateY(-3vh);
+        // transform: translateY(3vh);
       }
     }
     .grid {
