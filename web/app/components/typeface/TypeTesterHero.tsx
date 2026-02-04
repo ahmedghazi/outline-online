@@ -96,7 +96,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
             key={i}
             className='item'
             style={{
-              fontSize: `clamp(6vh, ${size}vh, 8vh)`,
+              fontSize: `clamp(5vh, ${size}vh, 8vh)`,
               lineHeight: 1,
             }}>
             <span

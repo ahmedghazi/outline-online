@@ -43,10 +43,15 @@
   padding: 0 7.5px;
   padding: 0.4em 7.5px;
   height: toRem(24);
-  // line-height: toRem(28);
   max-width: 188px;
+  // min-width: 200px;
   display: flex;
   align-items: center;
+  &.type-variable {
+    input[type="number"] {
+      max-width: 2.8em;
+    }
+  }
   .flex {
     // display: block;
     width: 100%;
@@ -57,11 +62,6 @@
       display: inline;
       line-height: 1;
     }
-  }
-  label {
-    // position: absolute;
-    // pointer-events: none;
-    // left: 2.3em;
   }
 
   .value {
