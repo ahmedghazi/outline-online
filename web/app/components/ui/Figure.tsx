@@ -29,6 +29,7 @@ const Figure = ({ asset, width = 1000, alt = website.title }: Props) => {
         blurDataURL={asset?.metadata?.lqip}
         // placeholder='blur'
         placeholder={asset?.metadata?.lqip}
+        unoptimized
       />
     </figure>
   );
