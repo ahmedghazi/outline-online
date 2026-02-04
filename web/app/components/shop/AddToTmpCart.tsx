@@ -111,7 +111,7 @@ const AddToTmpCart = ({
       if (relatedTypefaceRegularIsInTmpProducts) {
         setApplyDiscount(true);
       }
-      console.log(products);
+      // console.log(products);
       const relatedTypefaceRegularIsInProducts = products.some(
         (el) =>
           el.typefaceSlug ===
