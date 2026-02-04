@@ -23,8 +23,6 @@ const Figure = ({ asset, width = 1000, alt = website.title }: Props) => {
           width: "100%",
           height: "auto",
           aspectRatio: `${asset?.metadata?.dimensions.width} / ${asset?.metadata?.dimensions.height}`,
-          // '--aspect-ratio': asset?.metadata?.dimensions.aspectRatio
-          // objectFit: "cover",
         }}
         blurDataURL={asset?.metadata?.lqip}
         // placeholder='blur'
