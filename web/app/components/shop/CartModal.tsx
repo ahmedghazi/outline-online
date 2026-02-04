@@ -27,13 +27,13 @@ const CartModal = (props: Props) => {
 
   useEffect(() => {
     // RESET BUY MODAL WHEN CART IS OPENED
-    if (tab.name === "CART") {
-      tmpProducts.forEach((item) => {
-        // setTmpProducts({ type: "REMOVE_BY_SKU", payload: item.sku });
-        publish("TMP_PRODUCT_REMOVE", { sku: item.sku });
-      });
-      // setTmpProducts({ type: "REMOVE_ALL" });
-    }
+    // if (tab.name === "CART") {
+    //   tmpProducts.forEach((item) => {
+    //     // setTmpProducts({ type: "REMOVE_BY_SKU", payload: item.sku });
+    //     publish("TMP_PRODUCT_REMOVE", { sku: item.sku });
+    //   });
+    //   // setTmpProducts({ type: "REMOVE_ALL" });
+    // }
   }, [tab]);
 
   const _delete = (sku: string) => {

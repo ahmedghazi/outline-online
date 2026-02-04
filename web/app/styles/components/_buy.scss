@@ -8,7 +8,9 @@
   right: 0;
   padding: var(--header-height) 0;
   pointer-events: none;
-  transition: opacity 0.2s, transform 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
   transform: translateY(-100%);
   opacity: 0;
   &.is-open {
@@ -67,6 +69,14 @@
       }
       .btn-toggle {
         transform: rotate(45deg);
+      }
+    }
+    .items .item {
+      &--in-cart {
+        pointer-events: none;
+        & > div {
+          opacity: 0.5;
+        }
       }
     }
     &:last-child .group:last-child {

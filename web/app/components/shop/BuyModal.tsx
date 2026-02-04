@@ -38,7 +38,7 @@ const ProductSingleOrBundle = ({
 }: ProductSingleOrBundleProps) => {
   const [active, setActive] = useState<boolean>(false);
   const [canApplyDiscount, setCanApplyDiscount] = useState<boolean>(false);
-  const { licenseTypeProfil } = useShop();
+  const { licenseTypeProfil, products } = useShop();
   const { settings } = usePageContext();
 
   // Calculate combined discount for display
@@ -50,6 +50,7 @@ const ProductSingleOrBundle = ({
     canApplyDiscount && input.priceDiscount ? input.priceDiscount : 0;
   const totalDiscount = productDiscount + licenseDiscountPercentage;
 
+  const isInCart = products.some((el) => el.sku === input._key);
   useEffect(() => {
     //each tmpProduct tells if apply discount is on/off
     const tokenA = subscribe("TMP_PRODUCT_APPLY_DISCOUNT", (_e, data) => {
@@ -73,12 +74,16 @@ const ProductSingleOrBundle = ({
   }, []);
 
   const _addOrRemove = () => {
+    if (isInCart) return;
     setActive(!active);
   };
 
   return (
     <div
-      className={clsx("item _row grid md:grid-cols-6 md:gap-1e cursor-pointer")}
+      className={clsx(
+        "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer",
+        isInCart && "item--in-cart",
+      )}
       onClick={_addOrRemove}>
       <div className='title md:col-span-4'>
         <div className='md:flex md:gap-sm '>
@@ -100,6 +105,7 @@ const ProductSingleOrBundle = ({
 
         <AddToTmpCart
           active={active}
+          isInCart={isInCart}
           productData={{
             bundleOrSingleKey: input._key || "",
             productType: type,
@@ -256,11 +262,6 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
   useEffect(() => {
     let priceMultiplier = 1;
     if (licenseSizeProfil && licenseTypeProfil) {
-      // here if two licenses for the same product, the second license gets 25% discount
-      // so the priceMultiplier should include 25% discount for the second license
-      // and so on...
-      // TODO: implement this logic
-
       priceMultiplier = licenseSizeProfil.priceMultiplier || 1;
       let counter = 0;
       licenseTypeProfil.forEach((el) => {
@@ -283,10 +284,6 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
       <div className='outter'>
         <div className='inner'>
           <div className='header'>
-            {/* <pre>{priceMultiplier}</pre> */}
-            {/* <pre>{JSON.stringify(tmpProducts, null, 2)}</pre> */}
-            {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
-
             {licenseSizes && licenseTypes && (
               <div className='_row grid md:grid-cols-8 '>
                 <div className='label'>Company Size</div>

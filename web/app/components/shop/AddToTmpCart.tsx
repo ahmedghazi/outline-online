@@ -11,16 +11,23 @@ type Props = {
   productData: ProductData;
   priceMultiplier: number;
   active?: boolean;
+  isInCart?: boolean;
 };
 
 const AddToTmpCart = ({
   productData,
   priceMultiplier,
   active = false,
+  isInCart = false,
 }: Props) => {
   const { price, discount } = productData;
-  const { tmpProducts, setTmpProducts, licenseTypeProfil, licenseSizeProfil } =
-    useShop();
+  const {
+    tmpProducts,
+    setTmpProducts,
+    products,
+    licenseTypeProfil,
+    licenseSizeProfil,
+  } = useShop();
   const [mounted, setMounted] = useState<boolean>(false);
   const [applyDiscount, setApplyDiscount] = useState<boolean>(false);
   const { settings } = usePageContext();
@@ -104,6 +111,16 @@ const AddToTmpCart = ({
       if (relatedTypefaceRegularIsInTmpProducts) {
         setApplyDiscount(true);
       }
+      console.log(products);
+      const relatedTypefaceRegularIsInProducts = products.some(
+        (el) =>
+          el.typefaceSlug ===
+          _productData.relatedTypefaceSlug?.replace("-italic", ""),
+      );
+
+      if (relatedTypefaceRegularIsInProducts) {
+        setApplyDiscount(true);
+      }
 
       if (!relatedTypefaceRegularIsInTmpProducts) {
         setApplyDiscount(false);
@@ -136,7 +153,7 @@ const AddToTmpCart = ({
         <Price discount={combinedDiscount} price={_price} />
         <div className='checkbox-ui'>
           <input
-            checked={active}
+            checked={active || isInCart}
             onChange={() => {}}
             type='checkbox'
             name='atc'
