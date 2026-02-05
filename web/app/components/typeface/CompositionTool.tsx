@@ -46,6 +46,10 @@ const CompositionTool = ({ input, pangram }: Props) => {
     defaultStyle,
   );
 
+  const currentStyle = input.find(
+    (item) => item.typeface?.slug?.current === currentStyleName,
+  );
+
   useEffect(() => {
     ref.current?.addEventListener("paste", _onPaste);
     return () => {
@@ -256,9 +260,6 @@ const CompositionTool = ({ input, pangram }: Props) => {
                 />
               )} */}
             {(() => {
-              const currentStyle = input.find(
-                (item) => item.typeface?.slug?.current === currentStyleName,
-              );
               const fontUrl = getFontUrl(currentStyle?.typeface);
               return fontUrl ? (
                 <TesterOtf fontUrl={fontUrl} target={ref.current} />
