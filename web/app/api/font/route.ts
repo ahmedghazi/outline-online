@@ -10,10 +10,6 @@ function decodeAssetId(encoded: string): string {
   }
 }
 
-export function encodeAssetId(assetRef: string): string {
-  return Buffer.from(assetRef, "utf-8").toString("base64url");
-}
-
 // Allowed origins - add your domains here
 const ALLOWED_ORIGINS = [
   "http://localhost:3000",
