@@ -8,11 +8,30 @@ import clsx from "clsx";
 import TesterColor from "./TesterColor";
 import TesterParagraph from "./TesterParagraph";
 import TesterVariable from "./TesterVariable";
+import TesterOtf from "./TesterOtf";
 
 type Props = {
   input: ProductSingle[];
   pangram: string;
 };
+
+// Encode asset ref for the proxy URL (same logic as TypeContext)
+function encodeAssetId(assetRef: string): string {
+  return btoa(assetRef)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+}
+
+function getFontUrl(typefaceFile: ProductSingle["typeface"]): string | null {
+  if (!typefaceFile?.typefaceFile) return null;
+
+  const assetRef = typefaceFile.typefaceFile.asset?._ref;
+  if (!assetRef) return null;
+
+  const encodedId = encodeAssetId(assetRef);
+  return `/api/font?id=${encodedId}`;
+}
 
 const CompositionTool = ({ input, pangram }: Props) => {
   const [active, setActive] = useState<boolean>(false);
@@ -47,6 +66,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
 
   const _stylisticSets = useMemo(() => {
     let arr: KeyValString[] = [];
+
     input.forEach((el) => {
       if (el.typeface?.stylisticSets && el.typeface?.stylisticSets.length > 0) {
         el.typeface?.stylisticSets.forEach((s) => {
@@ -79,19 +99,31 @@ const CompositionTool = ({ input, pangram }: Props) => {
   };
   const _getCurrentStyleStylisticSets = () => {
     // console.log({ currentStyleName });
+    let resetStylisticSets = "";
     const currentStyle = input.find(
       (item) => item.typeface?.slug?.current === currentStyleName,
     );
     // console.log({ currentStyle });
     if (!currentStyle?.typeface?.stylisticSets) return [];
-
+    console.log(currentStyle.typeface?.stylisticSets);
     let arr: KeyValString[] = [];
     currentStyle.typeface?.stylisticSets.forEach((s) => {
       if (arr.some((e) => e.key === s.key)) {
       } else {
         arr.push(s);
+        const val = s.val?.replace(/["']/g, "");
+        resetStylisticSets += `${resetStylisticSets ? ", " : ""}"${val}" 0`;
       }
     });
+
+    console.log(resetStylisticSets);
+    if (ref.current) {
+      ref.current.style.setProperty(
+        "--font-feature-settings",
+        resetStylisticSets,
+      );
+    }
+
     return arr;
     // return currentStyle?.typeface?.stylisticSets;
   };
@@ -108,8 +140,8 @@ const CompositionTool = ({ input, pangram }: Props) => {
     //if val === "val" or 'val' or val
     //make a regex to clean val
     const val = ss.val.replace(/["']/g, "");
-    console.log("val", val);
-    ref.current.style.setProperty("--font-feature-settings", `"${val}" on`);
+    // console.log("val", val);
+    ref.current.style.setProperty("--font-feature-settings", `"${val}"`);
   };
 
   const _handleStyles = (s: KeyValString) => {
@@ -215,14 +247,23 @@ const CompositionTool = ({ input, pangram }: Props) => {
                 label='Stylistic Sets'
               />
             )} */}
-            {_getCurrentStyleStylisticSets() &&
+            {/* {_getCurrentStyleStylisticSets() &&
               _getCurrentStyleStylisticSets().length > 0 && (
                 <Select
                   options={_getCurrentStyleStylisticSets()}
                   onChange={_handleStylisticSets}
                   label='Stylistic Sets'
                 />
-              )}
+              )} */}
+            {(() => {
+              const currentStyle = input.find(
+                (item) => item.typeface?.slug?.current === currentStyleName,
+              );
+              const fontUrl = getFontUrl(currentStyle?.typeface);
+              return fontUrl ? (
+                <TesterOtf fontUrl={fontUrl} target={ref.current} />
+              ) : null;
+            })()}
             <TesterColor onChange={_handleColor} />
             <TesterParagraph target={ref.current} />
           </div>

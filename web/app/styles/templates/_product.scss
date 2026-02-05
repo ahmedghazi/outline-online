@@ -87,6 +87,7 @@ body[data-template="is-product"],
           }
         }
         .text-editor {
+          font: inherit;
           resize: both;
           overflow: auto;
           overflow: hidden;
@@ -95,22 +96,34 @@ body[data-template="is-product"],
           height: 6em;
           max-height: calc(var(--vh) * 100 - var(--header-height) * 4);
           padding: 0.2em 0;
-
-          color: var(--type-color);
-          font-size: var(--type-textFontSize);
-          letter-spacing: var(--type-textLetterSpacing);
-          line-height: var(--type-textLineHeight);
+          overflow-wrap: break-word;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+          color: var(--type-color, black);
+          font-size: var(--type-textFontSize, 1em);
+          letter-spacing: var(--type-textLetterSpacing, 0);
+          line-height: var(--type-textLineHeight, 1);
           font-family: var(--type-family);
-          text-align: var(--type-textAlign);
-          text-transform: var(--type-textTransform);
+          text-align: var(--type-textAlign, left);
+          text-transform: var(--type-textTransform, none);
           // font-feature-settings: var(--type-features);
-          font-feature-settings: var(--font-feature-settings);
-          font-variation-settings: var(--font-variation-settings);
-          column-count: var(--type-columnCount);
+          font-feature-settings: var(
+            --font-feature-settings,
+            "calt",
+            "kern",
+            "liga",
+            "rclt",
+            "rlig",
+            "rvrn"
+          );
+          font-variation-settings: var(--font-variation-settings, normal);
+          column-count: var(--type-columnCount, 1);
 
-          word-break: break-word;
+          // word-break: break-word;
           -ms-overflow-style: none; /* Internet Explorer 10+ */
           scrollbar-width: none; /* Firefox */
+
           &::selection {
             background-color: var(--color-gray);
           }
