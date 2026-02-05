@@ -614,7 +614,14 @@ export interface Typeface extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
-   * Style — `string`
+   * File — `typefaceFile`
+   *
+   * File displayed on typeface page (comp tool, glyphs), typefaces in home page
+   */
+  typefaceFile?: TypefaceFile;
+
+  /**
+   * Style (weight) — `string`
    *
    * Tell the website what is the style of the typeface, used in the typefaces menu, in the typeface page introduction, in bundles
    */
@@ -653,13 +660,6 @@ export interface Typeface extends SanityDocument {
    * If is a variable typeface? then add the axe
    */
   variableAxe?: VariableAxe;
-
-  /**
-   * File — `typefaceFile`
-   *
-   * File displayed on typeface page (comp tool, glyphs), typefaces in home page
-   */
-  typefaceFile?: TypefaceFile;
 
   /**
    * Zip File — `file`
@@ -948,12 +948,6 @@ export type LicenseSize = {
 export type TypefaceFile = {
   _type: "typefaceFile";
   asset: SanityReference<any>;
-  /**
-   * base64 — `string`
-   *
-   * for the front end (to prevent people from stealing it)
-   */
-  base64?: string;
 };
 
 export type ProductBundle = {

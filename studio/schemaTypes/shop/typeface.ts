@@ -26,9 +26,17 @@ export default defineField({
       group: 'editorial',
     }),
     slug,
+
+    defineField({
+      title: 'File',
+      name: 'typefaceFile',
+      type: 'typefaceFile',
+      description: 'File displayed on typeface page (comp tool, glyphs), typefaces in home page',
+      group: 'editorial',
+    }),
     defineField({
       name: 'style',
-      title: 'Style',
+      title: 'Style (weight)',
       type: 'string',
       description:
         'Tell the website what is the style of the typeface, used in the typefaces menu, in the typeface page introduction, in bundles',
@@ -62,7 +70,7 @@ export default defineField({
           {title: 'Super Black Italic', value: 'superBlackItalic'},
           {title: 'Variable', value: 'variable'},
         ],
-        layout: 'radio', // <-- defaults to 'dropdown'
+        // layout: 'radio', // <-- defaults to 'dropdown'
         // layout: 'radio', // <-- defaults to 'dropdown'
       },
       group: 'editorial',
@@ -71,13 +79,6 @@ export default defineField({
       name: 'variableAxe',
       type: 'variableAxe',
       description: 'If is a variable typeface? then add the axe',
-      group: 'editorial',
-    }),
-    defineField({
-      title: 'File',
-      name: 'typefaceFile',
-      type: 'typefaceFile',
-      description: 'File displayed on typeface page (comp tool, glyphs), typefaces in home page',
       group: 'editorial',
     }),
     defineField({

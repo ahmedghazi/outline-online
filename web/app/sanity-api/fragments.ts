@@ -48,7 +48,7 @@ export const productCard = `
 			_id,
 			title,
 			typefaceFile{
-				base64
+				asset
 			}
 		}
 	}
