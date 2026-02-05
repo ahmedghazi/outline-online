@@ -114,16 +114,13 @@ body[data-template="is-product"],
             background-color: var(--color-gray);
           }
           &::-webkit-scrollbar {
-            display: none; /* Safari and Chrome */
+            display: none;
           }
         }
         .btn-close {
           position: absolute;
           right: var(--space-lg);
           top: calc(var(--header-height) * 2 - 25px);
-          // left: 50%;
-          // bottom: calc(var(--footer-height) - 0.8em);
-          // transform: translateX(-50%);
           color: red;
           z-index: 20;
         }

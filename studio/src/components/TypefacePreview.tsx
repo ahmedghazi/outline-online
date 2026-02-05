@@ -53,7 +53,7 @@ export const TypefacePreview = (props: ObjectInputProps) => {
                   fontSize: `${16 + i * 4}px`,
                 }}
               >
-                {originalFilename} ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                {originalFilename} ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
               </div>
             </Text>
           ))}
