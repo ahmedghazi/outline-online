@@ -80,7 +80,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
   }, [isMobile]);
 
   const _format = () => {
-    const minus = isMobile ? 400 : 200;
+    const minus = isMobile ? 500 : 200;
     const wHeight = window.innerHeight;
     const leftOverHeight = wHeight - minus;
     const length = items.length;

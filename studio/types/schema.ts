@@ -939,6 +939,12 @@ export type LicenseSize = {
 export type TypefaceFile = {
   _type: "typefaceFile";
   asset: SanityReference<any>;
+  /**
+   * base64 — `string`
+   *
+   * for the front end (to prevent people from stealing it)
+   */
+  base64?: string;
 };
 
 export type ProductBundle = {

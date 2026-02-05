@@ -39,7 +39,6 @@ export default defineConfig([
     basePath: '/production',
     projectId: 'ztvzoay0',
     dataset: 'production',
-
     plugins: plugins,
     schema: {
       types: schemaTypes,
