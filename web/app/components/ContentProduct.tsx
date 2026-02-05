@@ -54,20 +54,18 @@ const ContentProduct = ({ input }: Props) => {
   }, [type]);
 
   const _setDefaultTypeface = () => {
-    // console.log(input.singles);
     const regular = input.singles?.filter(
-      (el) => el.typeface?.style === "regular",
+      (el) => (el.typeface as Typeface | undefined)?.style === "regular",
     );
     if (regular && regular?.length === 1) {
-      // console.log(dispatchType);
-      dispatchType(regular[0].typeface);
+      dispatchType((regular[0].typeface as Typeface) ?? null);
     }
   };
 
   const _loadAllTypefaces = () => {
-    let arr: Typeface[] = [];
+    const arr: Typeface[] = [];
     input.singles?.forEach((el) => {
-      if (el.typeface) arr.push(el.typeface);
+      if (el.typeface) arr.push(el.typeface as Typeface);
     });
     dispatchTypes(arr);
   };

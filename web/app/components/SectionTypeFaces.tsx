@@ -28,7 +28,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
   const [text, setText] = useState<string>("");
 
   useEffect(() => {
-    dispatchType(defaultStyle);
+    dispatchType(defaultStyle ?? null);
     if (ref && ref.current) {
       ref.current.addEventListener("input", _cEditableChange);
     }
