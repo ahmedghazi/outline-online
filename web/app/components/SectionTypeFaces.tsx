@@ -23,7 +23,7 @@ type ItemProps = {
 const Item = ({ input, defaultStyle }: ItemProps) => {
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
-  const { type, dispatchType } = useType();
+  const { type, dispatchType, isFontLoaded } = useType();
   // console.log(type);
   const [text, setText] = useState<string>("");
 
@@ -107,6 +107,7 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
         autoCorrect='off'
         style={{
           fontFamily: type?.slug?.current,
+          opacity: isFontLoaded(type?.slug?.current || "") ? 1 : 0,
         }}>
         {text ? text : type?.title}
       </div>

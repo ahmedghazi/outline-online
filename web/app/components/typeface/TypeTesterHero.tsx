@@ -9,6 +9,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 // import { div } from "three/examples/jsm/nodes/Nodes.js";
 import CompositionTool from "./CompositionTool";
 import useDeviceDetect from "@/app/hooks/useDeviceDetect";
+import useType from "./TypeContext";
 
 type Props = {
   input: ProductSingle[];
@@ -23,6 +24,7 @@ type Item = {
 const TypeTesterHero = ({ input, pangram }: Props) => {
   const [size, setSize] = useState<number>(6);
   const { isMobile } = useDeviceDetect();
+  const { isFontLoaded } = useType();
   // console.log("input", input);
   const items = useMemo(() => {
     let arr: Item[] = [];
@@ -98,6 +100,9 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
             style={{
               fontSize: `clamp(5vh, ${size}vh, 8vh)`,
               lineHeight: 1,
+              opacity: isFontLoaded(item.regular?.typeface?.slug?.current || "")
+                ? 1
+                : 0,
             }}>
             <span
               style={{
