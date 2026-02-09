@@ -17,6 +17,7 @@ export default defineField({
       components: {
         input: TypefaceBase64,
       },
+      hidden: true,
     }),
   ],
   components: {

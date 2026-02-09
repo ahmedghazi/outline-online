@@ -1,15 +1,11 @@
 import { draftMode } from "next/headers";
-import Tester from "./components/typeface/TypeTester";
-// import data from "./data.json";
 import { Home } from "./types/schema";
 import { getClient } from "./sanity-api/sanity.client";
-// import { getHome, HOME_QUERY } from "./sanity-api/sanity-queries";
-import Modules from "./components/modules";
 import ContentHome from "./components/ContentHome";
-import Test3d from "./components/trinkets/Test3d";
 import { Metadata } from "next";
 import website from "./config/website";
 import { getHome, HOME_QUERY } from "./sanity-api/sanity-queries";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -41,13 +37,13 @@ const Page: ({ params }: PageProps) => Promise<JSX.Element> = async ({
   if (preview) {
     data = await getClient({ token: process.env.SANITY_API_READ_TOKEN }).fetch(
       HOME_QUERY,
-      params
+      params,
     );
   } else {
     data = (await getHome()) as Home;
   }
 
-  if (!data) return <div>please edit page</div>;
+  if (!data) return notFound();
   return (
     <div className='template template--home' data-template='home'>
       {/* <Test3d /> */}

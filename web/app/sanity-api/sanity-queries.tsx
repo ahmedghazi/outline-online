@@ -253,6 +253,21 @@ export async function getProduct(slug: string): Promise<Product> {
 }
 
 /**
+ * ALL PRODUCTS
+ *
+ */
+export async function getAllProducts(): Promise<Product[]> {
+  return sanityFetch({
+    query: groq`*[_type == "product" && !(_id in path('drafts.**'))]{
+      _type,
+      slug,
+      _updatedAt
+    }`,
+    tags: ["allProducts"],
+  });
+}
+
+/**
  * PAGE
  *
  */
@@ -268,5 +283,20 @@ export async function getPage(slug: string): Promise<Page> {
     query: PAGE_QUERY,
     tags: ["page"],
     qParams: { slug: slug },
+  });
+}
+
+/**
+ * ALL PAGES MODULAIRE
+ *
+ */
+export async function getAllPagesModulaire(): Promise<Page[]> {
+  return sanityFetch({
+    query: groq`*[_type == "page"  && !(_id in path('drafts.**'))]{
+      _type,
+      slug,
+      _updatedAt
+    }`,
+    tags: ["allPagesModulare"],
   });
 }
