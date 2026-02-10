@@ -19,7 +19,7 @@ type Props = {};
 const CartModal = (props: Props) => {
   const { products, setProducts, tmpProducts, setTmpProducts } = useShop();
   const [open, setOpen] = useState<boolean>(true);
-  const { tab, setTab } = usePageContext();
+  const { tab, setTab, settings } = usePageContext();
   const isEmpty = products.length === 0;
 
   // Check if any product has a discount applied
@@ -102,7 +102,9 @@ const CartModal = (props: Props) => {
                     <div className='cart-row '>
                       <div className='inner-grid'>
                         <div className='title '></div>
-                        <div className='label'>Discount</div>
+                        <div className='label'>
+                          {settings.licenseDiscountLabel}
+                        </div>
                         <div className=' value col-span-2'>
                           <div className='price'>
                             -{cartTotalDiscount(products)}€

@@ -40,7 +40,12 @@ const ProductSingleOrBundle = ({
   const [canApplyDiscount, setCanApplyDiscount] = useState<boolean>(false);
   const { licenseTypeProfil, products } = useShop();
   const { settings } = usePageContext();
+  console.log("productTitle", productTitle);
 
+  console.log(
+    "settings.licenseDiscountPercentage",
+    settings.licenseDiscountPercentage,
+  );
   // Calculate combined discount for display
   const hasMultipleLicenses = licenseTypeProfil && licenseTypeProfil.length > 1;
   const licenseDiscountPercentage = hasMultipleLicenses
@@ -49,7 +54,7 @@ const ProductSingleOrBundle = ({
   const productDiscount =
     canApplyDiscount && input.priceDiscount ? input.priceDiscount : 0;
   const totalDiscount = productDiscount + licenseDiscountPercentage;
-
+  console.log("totalDiscount", totalDiscount);
   const isInCart = products.some((el) => el.sku === input._key);
   useEffect(() => {
     //each tmpProduct tells if apply discount is on/off
