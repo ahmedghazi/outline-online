@@ -36,6 +36,6 @@ export const _slugify = (str: string) => {
 };
 
 export const _licensesTypesToString = (str: string) => {
-  const arr = str?.replace("|", " + ") || str;
+  const arr = str?.replace(/\|/g, " + ") || str;
   return arr;
 };
