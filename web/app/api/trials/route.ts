@@ -251,9 +251,10 @@ const _sendEmail = async ({
     },
   });
 
-  var mailOptions = {
+  const mailOptions = {
     from: process.env.SENDER_EMAIL,
     to: destination,
+    cc: "hello@ahmedghazi.com, info@outline-online.com",
     subject: "Outline Online trial fonts",
     // text: "le message: " + JSON.stringify(payload),
     html: `

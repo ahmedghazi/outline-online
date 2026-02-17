@@ -27,6 +27,8 @@ const PaddleProvider = ({ children }: { children: React.ReactNode }) => {
       token: process.env.NEXT_PUBLIC_PADDLE_PUBLIC_KEY!,
       eventCallback: _handleEvents,
     }).then((paddleInstance: Paddle | undefined) => {
+      // console.log("initializePaddle then", paddleInstance);
+
       if (paddleInstance) {
         console.log("Paddle initialized");
         // localStorage.setItem("products", "");
