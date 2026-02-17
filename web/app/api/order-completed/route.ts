@@ -146,6 +146,8 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
         headers: { "Content-Type": "application/json" },
       });
     } else {
+      //here send email to hello@ahmedghazi.com, info@outline-online.com with raw response
+
       const response_error = {
         ok: false,
         status: "error",

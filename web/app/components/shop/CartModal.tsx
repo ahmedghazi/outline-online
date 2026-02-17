@@ -147,16 +147,23 @@ const CartModal = (props: Props) => {
                     </div>
                   </div>
                 </div>
-                <div className='cart-row reassurances  flex items-center gap-sm justify-end'>
-                  Secured by{" "}
-                  <Image
-                    src='/paddle-logo-light.png'
-                    alt='Paddle'
-                    width={50}
-                    height={18}
-                  />
+                <div className='cart-row reassurances  flex items-center gap-sm justify-between'>
+                  <div>
+                    Checkout is temporarily down for maintenance. Contact us at
+                    info[at]outline-online.com
+                  </div>
+                  <div className='whitespace-nowrap flex gap-sm'>
+                    Secured by{" "}
+                    <Image
+                      src='/paddle-logo-light.png'
+                      alt='Paddle'
+                      width={50}
+                      height={18}
+                    />
+                  </div>
                 </div>
               </div>
+
               <CheckoutBtn canCheckout={products.length > 0} />
             </div>
           )}
