@@ -35,7 +35,8 @@ export async function GET(request: NextRequest) {
   const secFetchMode = request.headers.get("sec-fetch-mode");
 
   // In development, be more permissive for testing
-  const isDev = process.env.NODE_ENV === "development";
+  // const isDev = process.env.NODE_ENV === "development";
+  const isDev = true;
 
   // Block direct navigation (typing URL in browser)
   // Allow: font, empty (older browsers), or cors requests
