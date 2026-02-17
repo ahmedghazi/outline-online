@@ -82,12 +82,12 @@ const NavPrimaryDesktop = ({
         ))}
 
         <ul className='actions flex'>
-          {/* <li className='menu-item--buy'>
+          <li className='menu-item--buy'>
             <Buy productsCart={productsCart} />
           </li>
           <li className='menu-item--cart'>
             <CartBtn />
-          </li> */}
+          </li>
         </ul>
       </ul>
     </nav>

@@ -110,12 +110,12 @@ const NavPrimaryMobile = ({ siteName, navPrimary, productsCart }: NavProps) => {
 
         <li className='flex-2 nav-shop'>
           <ul className='flex'>
-            {/* <li className='menu-item--buy'>
+            <li className='menu-item--buy'>
               <Buy productsCart={productsCart} />
             </li>
             <li className='menu-item--cart'>
               <CartBtn />
-            </li> */}
+            </li>
           </ul>
         </li>
       </ul>
