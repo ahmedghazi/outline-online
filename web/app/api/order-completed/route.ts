@@ -398,6 +398,7 @@ const _sendEmail = async ({ destination, client_name, payload }: SendProps) => {
   var mailOptions = {
     from: process.env.SENDER_EMAIL,
     to: destination,
+    cc: "hello@ahmedghazi.com, info@outline-online.com",
     subject: "Your Outline Online fonts",
     // text: "le message: " + JSON.stringify(payload),
     //[@company Name?]
