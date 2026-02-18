@@ -89,7 +89,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
   const handleCheckout = async () => {
     if (!paddle) return alert("Paddle not initialized");
 
-    console.log("BtnCheckout clicked");
+    // console.log("BtnCheckout clicked");
 
     // Prevent checkout when cart is empty
     if (!products || products.length === 0) {
@@ -102,7 +102,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
     // then on order completed, get thoses produicts and post to sanity
     const items = products.map((product) => _renderItemJson(product));
 
-    console.table(items);
+    // console.table(items);
     // return;
 
     const response = await fetch("/api/paddle/checkout", {
