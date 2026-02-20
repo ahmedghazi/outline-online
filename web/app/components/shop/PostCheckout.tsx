@@ -8,9 +8,11 @@ const CheckoutSuccess = () => {
   const [items, setItems] = React.useState<ProductData[]>([]);
 
   useEffect(() => {
-    const raw = localStorage?.getItem("oo-products");
+    const raw = localStorage?.getItem("oo-cart");
     const storedProducts = raw ? JSON.parse(raw) : [];
-    setItems(storedProducts?.value || []);
+    setItems(storedProducts);
+    // Clear cart after successful checkout
+    localStorage.removeItem("oo-cart");
   }, []);
 
   return (

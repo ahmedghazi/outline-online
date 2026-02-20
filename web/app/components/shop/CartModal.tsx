@@ -11,7 +11,6 @@ import {
   cartHasDiscount,
 } from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
-import Image from "next/image";
 import { publish } from "pubsub-js";
 
 type Props = {};
@@ -147,19 +146,9 @@ const CartModal = (props: Props) => {
                     </div>
                   </div>
                 </div>
-                <div className='cart-row reassurances  flex items-center gap-sm justify-between'>
-                  <div>
-                    Checkout is temporarily down for maintenance. Contact us at
-                    info[at]outline-online.com
-                  </div>
+                <div className='cart-row reassurances  flex items-center gap-sm justify-end'>
                   <div className='whitespace-nowrap flex gap-sm'>
-                    Secured by{" "}
-                    <Image
-                      src='/paddle-logo-light.png'
-                      alt='Paddle'
-                      width={50}
-                      height={18}
-                    />
+                    Secure checkout
                   </div>
                 </div>
               </div>

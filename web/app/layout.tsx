@@ -9,7 +9,6 @@ import { ShopWrapper } from "./components/shop/ShopContext";
 import BuyModal from "./components/shop/BuyModal";
 import { Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { PaddleProvider } from "./components/shop/Paddle/PaddleProvider";
 import CartModal from "./components/shop/CartModal";
 import { getProductsCart, getSettings } from "./sanity-api/sanity-queries";
 import { draftMode } from "next/headers";
@@ -53,35 +52,33 @@ export default async function RootLayout({
                 licenses={settings.licenseSizes}
                 licenseTypes={settings.licenseTypes}
                 licenseSizes={settings.licenseSizes}>
-                <PaddleProvider>
-                  <div className='dashes dashes--left'>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                  <Header settings={settings} productsCart={productsCart} />
-                  <BuyModal
-                    productsCart={productsCart}
-                    buyModalNotices={settings.buyModalNotices}
+                <div className='dashes dashes--left'>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <Header settings={settings} productsCart={productsCart} />
+                <BuyModal
+                  productsCart={productsCart}
+                  buyModalNotices={settings.buyModalNotices}
+                />
+                <CartModal />
+                <main>{children}</main>
+                <div className='dashes dashes--right'>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <Footer settings={settings} />
+                {isEnabled && (
+                  <VisualEditing
+                    zIndex={1000} // Optional
                   />
-                  <CartModal />
-                  <main>{children}</main>
-                  <div className='dashes dashes--right'>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                  <Footer settings={settings} />
-                  {isEnabled && (
-                    <VisualEditing
-                      zIndex={1000} // Optional
-                    />
-                  )}
-                </PaddleProvider>
+                )}
               </ShopWrapper>
             </PageContextProvider>
           </div>
