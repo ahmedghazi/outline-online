@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
         },
       }));
 
+    console.log("products", products);
     // Store lean product data in session metadata for webhook fulfillment
     // Stripe limits metadata values to 500 chars, so chunk across multiple keys
     const productsForMetadata = products.map((p) => ({
