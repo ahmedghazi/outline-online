@@ -43,10 +43,36 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ received: true });
       }
 
-      // Extract products from session metadata
-      const products: ProductData[] = JSON.parse(
-        session.metadata?.products_json || "[]",
+      // Reassemble chunked products from session metadata
+      const chunksCount = parseInt(
+        session.metadata?.products_chunks || "0",
+        10,
       );
+      let productsJson = "";
+      for (let i = 0; i < chunksCount; i++) {
+        productsJson += session.metadata?.[`products_${i}`] || "";
+      }
+      const rawProducts = JSON.parse(productsJson || "[]") as Array<{
+        s: string;
+        p: string;
+        t: string;
+        b: string;
+        l: string;
+        z: string;
+        f: number;
+        n: string;
+      }>;
+      // Map back to ProductData shape (only fields needed for fulfillment)
+      const products = rawProducts.map((r) => ({
+        sku: r.s,
+        productId: r.p,
+        productType: r.t as ProductData["productType"],
+        bundleOrSingleKey: r.b,
+        licenseTypes: r.l,
+        licenseSize: r.z,
+        finalPrice: r.f,
+        fullTitle: r.n,
+      })) as ProductData[];
       const customerEmail = session.customer_details?.email || "";
 
       // Fulfillment: fetch zips, save order, send email

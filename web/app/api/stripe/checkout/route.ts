@@ -43,25 +43,35 @@ export async function POST(req: NextRequest) {
       }));
 
     // Store lean product data in session metadata for webhook fulfillment
+    // Stripe limits metadata values to 500 chars, so chunk across multiple keys
     const productsForMetadata = products.map((p) => ({
-      sku: p.sku,
-      productId: p.productId,
-      productType: p.productType,
-      bundleOrSingleKey: p.bundleOrSingleKey,
-      licenseTypes: p.licenseTypes,
-      licenseSize: p.licenseSize,
-      finalPrice: p.finalPrice,
-      fullTitle: p.fullTitle,
+      s: p.sku,
+      p: p.productId,
+      t: p.productType,
+      b: p.bundleOrSingleKey,
+      l: p.licenseTypes,
+      z: p.licenseSize,
+      f: p.finalPrice,
+      n: p.fullTitle,
     }));
+
+    const fullJson = JSON.stringify(productsForMetadata);
+    const metadata: Record<string, string> = {};
+    const chunkSize = 500;
+    for (let i = 0; i < fullJson.length; i += chunkSize) {
+      metadata[`products_${Math.floor(i / chunkSize)}`] = fullJson.slice(
+        i,
+        i + chunkSize,
+      );
+    }
+    metadata.products_chunks = String(Object.keys(metadata).length);
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
       success_url: `${website.url}/post-checkout?status=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${website.url}/post-checkout?status=canceled`,
-      metadata: {
-        products_json: JSON.stringify(productsForMetadata),
-      },
+      metadata,
     });
 
     return NextResponse.json({ url: session.url });
