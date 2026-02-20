@@ -15,8 +15,13 @@
         border-bottom: var(--border);
         padding: 0 !important;
       }
-      .detail .item:first-child > ._row {
-        border-top: none;
+      .detail {
+        .item:first-child > ._row {
+          border-top: none;
+        }
+        ._row {
+          padding: 0.5em 0.5em 0.5em 0 !important;
+        }
       }
     }
     .checkbox-ui {

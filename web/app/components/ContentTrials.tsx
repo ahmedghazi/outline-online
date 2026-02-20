@@ -51,7 +51,7 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
               </div>
             )}
             {input.metadata?.map((item, i) => (
-              <div key={i} className='hidden-sm'>
+              <div key={i} className='hidden-sm ellipsis'>
                 {item}
               </div>
             ))}
