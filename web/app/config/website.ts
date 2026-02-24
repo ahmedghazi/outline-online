@@ -4,7 +4,7 @@ const website = {
   titleAlt: "OO", // Title for JSONLD
   description: "...",
   headline: "", // Headline for schema.org JSONLD
-  url: "https://outline-online.com", // Domain of your site. No trailing slash!
+  url: "https://www.outline-online.com", // Domain of your site. No trailing slash!
   image: "", // Used for SEO
   ogLanguage: "fr_FR", // Facebook Language
 

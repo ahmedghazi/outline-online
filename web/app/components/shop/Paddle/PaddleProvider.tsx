@@ -21,9 +21,12 @@ const PaddleProvider = ({ children }: { children: React.ReactNode }) => {
       // environment: "sandbox",
       // environment,
       environment:
+        // process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT === "production"
+        //   ? Environment.production
+        //   : Environment.sandbox,
         process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT === "production"
-          ? Environment.production
-          : Environment.sandbox,
+          ? "production"
+          : "sandbox",
       token: process.env.NEXT_PUBLIC_PADDLE_PUBLIC_KEY!,
       eventCallback: _handleEvents,
     }).then((paddleInstance: Paddle | undefined) => {
@@ -33,11 +36,12 @@ const PaddleProvider = ({ children }: { children: React.ReactNode }) => {
         console.log("Paddle initialized");
         // localStorage.setItem("products", "");
         setPaddle(paddleInstance);
-        // console.log(paddleInstance);
+        console.log(paddleInstance);
       }
     });
   };
   const _handleEvents = (event: PaddleEventData) => {
+    console.log(event);
     console.log(event.name);
 
     if (event.name === "checkout.completed") {
@@ -68,9 +72,9 @@ const PaddleProvider = ({ children }: { children: React.ReactNode }) => {
 
   const _processOrderCompleted = async (data: PaddleEventData) => {
     const products = JSON.parse(localStorage.getItem("oo-products") || "[]");
-    console.log("_processOrderCompleted");
-    console.log("data", data);
-    console.log("products", products);
+    console.log("Process Order Completed");
+    // console.log("data", data);
+    // console.log("products", products);
     // return;
     /*
     {

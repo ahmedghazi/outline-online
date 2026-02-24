@@ -28,7 +28,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
   const paddle = useContext(PaddleContext);
   const { products } = useShop();
 
-  const storeProducts = (products: ProductData[], ttl: number) => {
+  const localStoreProducts = (products: ProductData[], ttl: number) => {
     const now = new Date();
 
     // `item` is an object which contains the original value
@@ -98,7 +98,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
     }
 
     //store products (with custom data) locale storage
-    storeProducts(products, 300);
+    localStoreProducts(products, 300);
     // then on order completed, get thoses produicts and post to sanity
     const items = products.map((product) => _renderItemJson(product));
 
@@ -137,7 +137,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
     // if (shouldApplyDiscount) {
     //   checkoutOpenAttrs.discountId = settings.licenseDiscountID;
     // }
-    // console.log(checkoutOpenAttrs);
+    console.log(checkoutOpenAttrs);
     paddle?.Checkout.open(checkoutOpenAttrs);
   };
   return (
