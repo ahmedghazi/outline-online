@@ -24,9 +24,9 @@ const PaddleProvider = ({ children }: { children: React.ReactNode }) => {
         // process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT === "production"
         //   ? Environment.production
         //   : Environment.sandbox,
-        process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT === "production"
-          ? "production"
-          : "sandbox",
+
+        "production",
+
       token: process.env.NEXT_PUBLIC_PADDLE_PUBLIC_KEY!,
       eventCallback: _handleEvents,
     }).then((paddleInstance: Paddle | undefined) => {

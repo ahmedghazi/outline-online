@@ -6,11 +6,11 @@ import {
 } from "@paddle/paddle-node-sdk";
 import { CurrencyCode } from "@paddle/paddle-js";
 
+// process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT === "production"
+//   ? Environment.production
+//   : Environment.sandbox,
 const paddle = new Paddle(process.env.PADDLE_SECRET_KEY!, {
-  environment:
-    process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT === "production"
-      ? Environment.production
-      : Environment.sandbox,
+  environment: Environment.production,
 });
 
 export async function POST(req: NextRequest) {
