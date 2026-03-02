@@ -137,7 +137,7 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
     // if (shouldApplyDiscount) {
     //   checkoutOpenAttrs.discountId = settings.licenseDiscountID;
     // }
-    console.log(checkoutOpenAttrs);
+    // console.log(checkoutOpenAttrs);
     paddle?.Checkout.open(checkoutOpenAttrs);
   };
   return (
