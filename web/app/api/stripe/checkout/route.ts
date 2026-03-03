@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: NextRequest) {
   const { products } = (await req.json()) as { products: ProductData[] };
-
+  console.log("req");
   if (!Array.isArray(products) || products.length === 0) {
     return NextResponse.json(
       { error: "The products field must be a non-empty array." },
