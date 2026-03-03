@@ -50,7 +50,7 @@ const CheckoutError = () => {
   return (
     <div className='error'>
       <div className='header mb-1e !p-0'>
-        <h1>Error :(</h1>
+        <h1>Error :/</h1>
       </div>
       <p>Please contact us to investigate the error.</p>
       <a href='mailto:hello@outlineonline.com'>Contact us</a>
