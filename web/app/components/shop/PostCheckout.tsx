@@ -53,7 +53,6 @@ const CheckoutError = () => {
         <h1>Error :(</h1>
       </div>
       <p>Please contact us to investigate the error.</p>
-      {/* <p>display some error message here</p> */}
       <a href='mailto:hello@outlineonline.com'>Contact us</a>
     </div>
   );
