@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
       console.log("Stored order", stored);
 
       const clientName =
-        session.customer_details?.name || customerEmail.split("@")[0];
+        session.customer_details?.name || customerEmail;
 
       await sendEmail({
         destination: customerEmail,
