@@ -65,7 +65,7 @@ const PostCheckoutContent = () => {
   return (
     <>
       {status === "success" && <CheckoutSuccess />}
-      {status === "canceled" && <CheckoutError />}
+      {status === "error" && <CheckoutError />}
     </>
   );
 };

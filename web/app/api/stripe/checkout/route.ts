@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
       line_items,
       allow_promotion_codes: true,
       success_url: `${website.url}/post-checkout?status=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${website.url}/post-checkout?status=canceled`,
+      cancel_url: `${website.url}/`,
       metadata,
     });
 

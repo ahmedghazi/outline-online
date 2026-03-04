@@ -31,13 +31,11 @@ const CheckoutBtn = ({ canCheckout }: Props) => {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert("Checkout failed. Please try again.");
-        setLoading(false);
+        window.location.href = "/post-checkout?status=error";
       }
     } catch (error) {
       console.error("Checkout error:", error);
-      alert("Checkout failed. Please try again.");
-      setLoading(false);
+      window.location.href = "/post-checkout?status=error";
     }
   };
 
