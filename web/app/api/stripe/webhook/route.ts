@@ -83,6 +83,17 @@ export async function POST(req: NextRequest) {
 
       console.log("Got attachments, ready to send email");
 
+      const clientName =
+        session.customer_details?.name || customerEmail;
+
+      let invoicePdfUrl: string | null = null;
+      if (session.invoice) {
+        const invoice = await stripe.invoices.retrieve(
+          session.invoice as string,
+        );
+        invoicePdfUrl = invoice.invoice_pdf ?? null;
+      }
+
       const orderPayload = {
         email: customerEmail,
         invoiceNumber: session.id,
@@ -99,19 +110,8 @@ export async function POST(req: NextRequest) {
           currency: session.currency,
         },
         products,
-      });
+      }, invoicePdfUrl);
       console.log("Stored order", stored);
-
-      const clientName =
-        session.customer_details?.name || customerEmail;
-
-      let invoicePdfUrl: string | null = null;
-      if (session.invoice) {
-        const invoice = await stripe.invoices.retrieve(
-          session.invoice as string,
-        );
-        invoicePdfUrl = invoice.invoice_pdf;
-      }
 
       await sendEmail({
         destination: customerEmail,

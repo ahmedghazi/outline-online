@@ -163,6 +163,7 @@ export const saveOrder = async (
   payload: OrderPayload,
   attachments: any,
   payloadRaw: any,
+  invoicePdfUrl?: string | null,
 ) => {
   const { email, invoiceNumber, creationDate, status } = payload;
   const _attachments = attachments.map((item: any) => {
@@ -182,6 +183,7 @@ export const saveOrder = async (
           creationDate: new Date(creationDate).toISOString(),
           email: email,
           attachments: _attachments,
+          invoicePdfUrl: invoicePdfUrl ?? null,
           json: JSON.stringify(payloadRaw),
         },
       },
