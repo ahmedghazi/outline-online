@@ -105,11 +105,6 @@ export async function POST(req: NextRequest) {
       const clientName =
         session.customer_details?.name || customerEmail;
 
-      if (session.invoice) {
-        await stripe.invoices.sendInvoice(session.invoice as string);
-        console.log("Invoice sent:", session.invoice);
-      }
-
       await sendEmail({
         destination: customerEmail,
         client_name: clientName,
