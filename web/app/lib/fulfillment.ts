@@ -15,6 +15,7 @@ type SendProps = {
   payload: any;
   client_name: string;
   destination: string;
+  invoicePdfUrl?: string | null;
 };
 
 type OrderPayload = {
@@ -204,6 +205,7 @@ export const sendEmail = async ({
   destination,
   client_name,
   payload,
+  invoicePdfUrl,
 }: SendProps) => {
   console.log("_sending to :", destination);
 
@@ -227,7 +229,8 @@ export const sendEmail = async ({
       <p>Dear ${client_name},</p>
       <p>Thank you for your order with Outline Online!</p>
 
-      <p>Your payment has been successfully processed. You'll find the font files here attached. The full order details will also be sent to you shortly. If you run into any issues, please don't hesitate to get in touch.</p>
+      <p>Your payment has been successfully processed. You'll find the font files here attached. If you run into any issues, please don't hesitate to get in touch.</p>
+      ${invoicePdfUrl ? `<p><a href="${invoicePdfUrl}">Download your invoice (PDF)</a></p>` : ""}
 
       <p>Best from,<br />
   Outline Online</p>

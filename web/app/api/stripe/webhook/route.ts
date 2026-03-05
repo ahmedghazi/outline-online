@@ -105,10 +105,19 @@ export async function POST(req: NextRequest) {
       const clientName =
         session.customer_details?.name || customerEmail;
 
+      let invoicePdfUrl: string | null = null;
+      if (session.invoice) {
+        const invoice = await stripe.invoices.retrieve(
+          session.invoice as string,
+        );
+        invoicePdfUrl = invoice.invoice_pdf;
+      }
+
       await sendEmail({
         destination: customerEmail,
         client_name: clientName,
         payload: attachments,
+        invoicePdfUrl,
       });
     } catch (error) {
       console.error("Fulfillment error:", error);
