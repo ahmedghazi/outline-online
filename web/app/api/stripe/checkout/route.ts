@@ -71,6 +71,7 @@ export async function POST(req: NextRequest) {
       mode: "payment",
       line_items,
       billing_address_collection: "required",
+      customer_creation: "always",
       invoice_creation: { enabled: true },
       allow_promotion_codes: true,
       success_url: `${website.url}/post-checkout?status=success&session_id={CHECKOUT_SESSION_ID}`,
