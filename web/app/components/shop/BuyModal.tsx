@@ -74,7 +74,7 @@ const ProductSingleOrBundle = ({
 
     return () => {
       unsubscribe(tokenA);
-      unsubscribe(tokenA);
+      unsubscribe(tokenB);
     };
   }, []);
 

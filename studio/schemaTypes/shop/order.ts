@@ -12,6 +12,21 @@ export default defineType({
   //   noticeInternal:
   //     'ex licence web, desktop, Base price defined here, company size will increment base price, bundle or single style will give the final price',
   // },
+  preview: {
+    select: {
+      attachments: 'attachments',
+      email: `email`,
+      invoiceNumber: 'invoiceNumber',
+    },
+    prepare(selection) {
+      const {attachments, email, invoiceNumber} = selection
+      return {
+        title: `${email} — ${invoiceNumber}`,
+        subtitle: attachments?.length ? `${attachments.length} attachment(s)` : 'No attachments',
+      }
+    },
+  },
+
   fields: [
     defineField({
       name: 'title',
@@ -21,6 +36,12 @@ export default defineType({
     defineField({
       name: 'status',
       title: 'Status',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'invoicePdfUrl',
+      title: 'Invoice PDF URL',
       type: 'string',
     }),
     defineField({
