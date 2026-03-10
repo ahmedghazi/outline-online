@@ -151,17 +151,19 @@ const AddToTmpCart = ({
     <div className={clsx("add-to-cart cursor-pointer bg-red-")}>
       <div className='flex justify-between'>
         <Price discount={combinedDiscount} price={_price} />
-        <div className='checkbox-ui'>
-          <input
-            checked={active || isInCart}
-            onChange={() => {}}
-            type='checkbox'
-            name='atc'
-          />
-          <span className='checkmark'></span>
+        <div className='flex gap-sm'>
+          {isInCart && <span className='nfo text-blue'>In Cart</span>}
+          <div className='checkbox-ui'>
+            <input
+              checked={active || isInCart}
+              onChange={() => {}}
+              type='checkbox'
+              name='atc'
+            />
+            <span className='checkmark'></span>
+          </div>
         </div>
-        {active && <span>active</span>}
-        {isInCart && <span>isInCart</span>}
+        {/* {active && <span>active</span>} */}
       </div>
     </div>
   );
