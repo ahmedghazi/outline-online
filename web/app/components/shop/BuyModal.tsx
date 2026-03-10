@@ -36,16 +36,9 @@ const ProductSingleOrBundle = ({
   type,
   priceMultiplier,
 }: ProductSingleOrBundleProps) => {
-  const [active, setActive] = useState<boolean>(false);
   const [canApplyDiscount, setCanApplyDiscount] = useState<boolean>(false);
   const { licenseTypeProfil, products } = useShop();
   const { settings } = usePageContext();
-  // console.log("productTitle", productTitle);
-
-  // console.log(
-  //   "settings.licenseDiscountPercentage",
-  //   settings.licenseDiscountPercentage,
-  // );
   // Calculate combined discount for display
   const hasMultipleLicenses = licenseTypeProfil && licenseTypeProfil.length > 1;
   const licenseDiscountPercentage = hasMultipleLicenses
@@ -54,8 +47,9 @@ const ProductSingleOrBundle = ({
   const productDiscount =
     canApplyDiscount && input.priceDiscount ? input.priceDiscount : 0;
   const totalDiscount = productDiscount + licenseDiscountPercentage;
-  // console.log("totalDiscount", totalDiscount);
   const isInCart = products.some((el) => el.sku === input._key);
+  const [active, setActive] = useState<boolean>(isInCart);
+
   useEffect(() => {
     //each tmpProduct tells if apply discount is on/off
     const tokenA = subscribe("TMP_PRODUCT_APPLY_DISCOUNT", (_e, data) => {
@@ -79,7 +73,6 @@ const ProductSingleOrBundle = ({
   }, []);
 
   const _addOrRemove = () => {
-    if (isInCart) return;
     setActive(!active);
   };
 
@@ -87,7 +80,7 @@ const ProductSingleOrBundle = ({
     <div
       className={clsx(
         "item _row grid md:grid-cols-6 md:gap-1e cursor-pointer",
-        isInCart && "item--in-cart",
+        // isInCart && "item--in-cart",
       )}
       onClick={_addOrRemove}>
       <div className='title md:col-span-4'>

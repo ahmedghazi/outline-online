@@ -135,7 +135,7 @@ const AddToTmpCart = ({
       if (exist.length === 0)
         setTmpProducts({ type: "ADD", payload: _productData });
       else {
-        // setTmpProducts({ type: "REPLACE", payload: _productData });
+        setTmpProducts({ type: "REPLACE", payload: _productData });
       }
     } else {
       const isInTmpProducts = tmpProducts.some(
@@ -160,6 +160,8 @@ const AddToTmpCart = ({
           />
           <span className='checkmark'></span>
         </div>
+        {active && <span>active</span>}
+        {isInCart && <span>isInCart</span>}
       </div>
     </div>
   );

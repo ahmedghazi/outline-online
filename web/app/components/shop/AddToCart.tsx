@@ -8,31 +8,32 @@ import { usePageContext } from "@/app/context/PageContext";
 
 const AddToCart = () => {
   const { tmpProducts, products, setProducts } = useShop();
-  const [buttonStatus, setButtonStatus] = useState("Add To Cart");
+  const [buttonStatus, setButtonStatus] = useState("");
   const { setTab } = usePageContext();
+
+  const _defaultLabel = useMemo(() => {
+    const hasUpdates = tmpProducts.some((p) =>
+      products.some((cp) => cp.sku === p.sku),
+    );
+    return hasUpdates ? "Update Cart" : "Add To Cart";
+  }, [tmpProducts, products]);
+
   const _addToCart = async () => {
-    //clean
     setButtonStatus("Adding...");
 
-    products.forEach((product) => {
-      if (
-        tmpProducts.some((dialogProduct) => dialogProduct.sku === product.sku)
-      ) {
-        setProducts({ type: "REMOVE", payload: product });
-      }
-    });
-
-    // console.log(uniqueBundlesOrSingles);
     tmpProducts.forEach((item) => {
-      setProducts({ type: "ADD", payload: item });
-      // TOASTER
-      // publish("DIALOG.CLOSE");
+      const alreadyInCart = products.some((p) => p.sku === item.sku);
+      if (alreadyInCart) {
+        setProducts({ type: "REPLACE", payload: item });
+      } else {
+        setProducts({ type: "ADD", payload: item });
+      }
     });
     if (tmpProducts.length > 0) {
       setButtonStatus("Adding...");
 
       setTimeout(() => {
-        // publish("CART_OPEN");
+        setButtonStatus("");
         setTab({ name: "CART", active: true });
       }, 700);
     }
@@ -48,7 +49,7 @@ const AddToCart = () => {
             ? "button-submit"
             : "button-disabled pointer-events-none",
         )}>
-        {buttonStatus}{" "}
+        {buttonStatus || _defaultLabel}{" "}
         {tmpProducts.length > 0 && (
           <span className='length'>
             <span>{tmpProducts.length} </span>
