@@ -9,6 +9,7 @@ import {
   cartTotalPrice,
   cartSubtotal,
   cartHasDiscount,
+  _getPriceWithDiscount,
 } from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
 import { publish } from "pubsub-js";
@@ -36,7 +37,37 @@ const CartModal = (props: Props) => {
   }, [tab]);
 
   const _delete = (sku: string) => {
+    const deletedProduct = products.find((p) => p.sku === sku);
     setProducts({ type: "REMOVE_BY_SKU", payload: sku });
+
+    // If the deleted product was a regular typeface, remove the paired-italic discount
+    // from any italic in the cart that had a discount because of it
+    if (deletedProduct?.typefaceSlug) {
+      products.forEach((p) => {
+        if (
+          p.sku !== sku &&
+          p.relatedTypefaceSlug?.replace("-italic", "") ===
+            deletedProduct.typefaceSlug &&
+          (p.productDiscount || 0) > 0
+        ) {
+          const newTotalDiscount = p.licenseDiscount || 0;
+          const newFinalPrice =
+            newTotalDiscount > 0
+              ? _getPriceWithDiscount(p.price, newTotalDiscount)
+              : p.price;
+          setProducts({
+            type: "REPLACE",
+            payload: {
+              ...p,
+              applyDiscount: false,
+              productDiscount: 0,
+              totalDiscount: newTotalDiscount,
+              finalPrice: newFinalPrice,
+            },
+          });
+        }
+      });
+    }
   };
 
   useEffect(() => {

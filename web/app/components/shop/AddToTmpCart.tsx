@@ -108,25 +108,19 @@ const AddToTmpCart = ({
           _productData.relatedTypefaceSlug?.replace("-italic", ""),
       );
 
-      if (relatedTypefaceRegularIsInTmpProducts) {
-        setApplyDiscount(true);
-      }
-      // console.log(products);
       const relatedTypefaceRegularIsInProducts = products.some(
         (el) =>
           el.typefaceSlug ===
           _productData.relatedTypefaceSlug?.replace("-italic", ""),
       );
 
-      if (relatedTypefaceRegularIsInProducts) {
+      if (relatedTypefaceRegularIsInTmpProducts || relatedTypefaceRegularIsInProducts) {
         setApplyDiscount(true);
-      }
-
-      if (!relatedTypefaceRegularIsInTmpProducts) {
+      } else {
         setApplyDiscount(false);
       }
     }
-  }, [tmpProducts, _productData.relatedTypefaceSlug]);
+  }, [tmpProducts, products, _productData.relatedTypefaceSlug]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -145,7 +139,7 @@ const AddToTmpCart = ({
         setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
       }
     }
-  }, [active, applyDiscount, priceMultiplier, hasMultipleLicenses]);
+  }, [mounted, active, applyDiscount, priceMultiplier, hasMultipleLicenses]);
 
   return (
     <div className={clsx("add-to-cart cursor-pointer bg-red-")}>
