@@ -63,7 +63,7 @@ const ProductSingleOrBundle = ({
       console.log("TMP_PRODUCT_REMOVE", data);
       if (data.sku === input._key) {
         setActive(false);
-        setCanApplyDiscount(false);
+        // setCanApplyDiscount(false);
       }
     });
 
@@ -90,7 +90,9 @@ const ProductSingleOrBundle = ({
           <div className='desc flex-2 flex justify-between hidden-sm'>
             <span className='text-gray-100 '>{input.description}</span>
             {totalDiscount > 0 && (
-              <span className='text-green '>Save {totalDiscount}%</span>
+              <span className='text-green '>
+                {isInCart ? "Save" : "Save"} {totalDiscount}%
+              </span>
             )}
           </div>
         </div>
@@ -98,7 +100,9 @@ const ProductSingleOrBundle = ({
       <div className='actions md:col-span-2'>
         <div className='sm-only'>
           {totalDiscount > 0 && (
-            <span className='text-green '>Save {totalDiscount}%</span>
+            <span className='text-green '>
+              {isInCart ? "Save" : "Save"} {totalDiscount}%
+            </span>
           )}
         </div>
 
