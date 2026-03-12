@@ -323,8 +323,8 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
               <BuyModalNoticesComponent input={buyModalNotices} />
             )}
           </div>
-          <h2>TMP PRODUCT</h2>
-          <pre>{JSON.stringify(tmpProducts, null, 2)}</pre>
+          {/* <h2>TMP PRODUCT</h2> */}
+          {/* <pre>{JSON.stringify(tmpProducts, null, 2)}</pre> */}
           <div className='footer'>
             <AddToCart />
           </div>
