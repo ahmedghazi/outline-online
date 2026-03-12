@@ -63,6 +63,7 @@ const ProductSingleOrBundle = ({
       console.log("TMP_PRODUCT_REMOVE", data);
       if (data.sku === input._key) {
         setActive(false);
+        setCanApplyDiscount(false);
       }
     });
 
@@ -103,7 +104,7 @@ const ProductSingleOrBundle = ({
 
         <AddToTmpCart
           active={active}
-          isInCart={isInCart}
+          // isInCart={isInCart}
           productData={{
             bundleOrSingleKey: input._key || "",
             productType: type,
@@ -322,6 +323,8 @@ const BuyModal = ({ productsCart, buyModalNotices }: Props) => {
               <BuyModalNoticesComponent input={buyModalNotices} />
             )}
           </div>
+          <h2>TMP PRODUCT</h2>
+          <pre>{JSON.stringify(tmpProducts, null, 2)}</pre>
           <div className='footer'>
             <AddToCart />
           </div>
