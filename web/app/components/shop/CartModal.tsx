@@ -39,7 +39,7 @@ const CartModal = (props: Props) => {
   const _delete = (sku: string) => {
     const deletedProduct = products.find((p) => p.sku === sku);
     setProducts({ type: "REMOVE_BY_SKU", payload: sku });
-    publish("TMP_PRODUCT_REMOVE", { sku: deletedProduct });
+    publish("TMP_PRODUCT_REMOVE", { sku: deletedProduct?.sku });
 
     // If the deleted product was a regular typeface, remove the paired-italic discount
     // from any italic in the cart that had a discount because of it
