@@ -63,7 +63,6 @@ const ProductSingleOrBundle = ({
       console.log("TMP_PRODUCT_REMOVE", data);
       if (data.sku === input._key) {
         setActive(false);
-        // setCanApplyDiscount(false);
       }
     });
 
