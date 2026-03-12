@@ -144,11 +144,19 @@
       .cart-item {
         gap: 1rem;
         grid-template-columns: repeat(4, minmax(0, 1fr));
+        row-gap: 0.5rem;
         .cart-item__header {
           grid-column: span 1 / span 1;
         }
-        .cart-item__content {
+        .cart-item__content,
+        .cart-item__price {
           grid-column: span 3 / span 3;
+          position: initial;
+        }
+        .cart-item__price {
+          grid-column-start: 2;
+          border-top: var(--border);
+          padding-bottom: 0;
         }
       }
     }
@@ -156,6 +164,9 @@
       // grid-template-columns: repeat(15, minmax(0, 1fr));
       .title {
         // grid-column: span 3 / span 3;
+      }
+      .label {
+        white-space: nowrap;
       }
     }
   }
