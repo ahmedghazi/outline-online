@@ -4,7 +4,7 @@ import useShop from "./ShopContext";
 import { ProductData } from "@/app/types/extra-types";
 import { _getPriceWithDiscount } from "./utils";
 import clsx from "clsx";
-import { publish } from "pubsub-js";
+import { publish, subscribe, unsubscribe } from "pubsub-js";
 import { usePageContext } from "@/app/context/PageContext";
 
 type Props = {
@@ -89,6 +89,8 @@ const AddToTmpCart = ({
     }
 
     setMounted(true);
+
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -114,7 +116,10 @@ const AddToTmpCart = ({
           _productData.relatedTypefaceSlug?.replace("-italic", ""),
       );
 
-      if (relatedTypefaceRegularIsInTmpProducts || relatedTypefaceRegularIsInProducts) {
+      if (
+        relatedTypefaceRegularIsInTmpProducts ||
+        relatedTypefaceRegularIsInProducts
+      ) {
         setApplyDiscount(true);
       } else {
         setApplyDiscount(false);

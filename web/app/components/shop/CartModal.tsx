@@ -39,6 +39,7 @@ const CartModal = (props: Props) => {
   const _delete = (sku: string) => {
     const deletedProduct = products.find((p) => p.sku === sku);
     setProducts({ type: "REMOVE_BY_SKU", payload: sku });
+    publish("TMP_PRODUCT_REMOVE", { sku: deletedProduct });
 
     // If the deleted product was a regular typeface, remove the paired-italic discount
     // from any italic in the cart that had a discount because of it
@@ -87,13 +88,6 @@ const CartModal = (props: Props) => {
               <section className='cart-empty py-xl flex justify-center'>
                 <div className='flex flex-col items-center gap-md'>
                   <div className=''>Your cart is empty.</div>
-                  {/* <button
-                    className='ui-btn ui-btn__accent'
-                    onClick={() => {
-                      setTab({ name: "BUY", active: true });
-                    }}>
-                    Explore our catalogue
-                  </button> */}
                 </div>
               </section>
             )}
@@ -144,30 +138,7 @@ const CartModal = (props: Props) => {
                     </div>
                   </>
                 )}
-                {/* {hasAnyDiscount && (
-                  <div className='cart-row'>
-                    <div className='inner-grid'>
-                      <div className='label'>Sub Total</div>
-                      <div></div>
-                      <div className='value col-span-2'>
-                        <div className='price'>{cartSubtotal(products)}€</div>
-                      </div>
-                    </div>
-                  </div>
-                )} */}
-                {/* {hasAnyDiscount && (
-                  <div className='cart-row '>
-                    <div className='inner-grid'>
-                      <div className='title '>Discount</div>
-                      <div className='label'>Savings</div>
-                      <div className=' value col-span-2'>
-                        <div className='price'>
-                          -{cartTotalDiscount(products)}€
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )} */}
+
                 <div className='cart-row cart-row--totals mb-lg '>
                   <div className='inner-grid text-blue'>
                     <div className='title '>{!hasAnyDiscount ? "SUM" : ""}</div>
@@ -179,7 +150,7 @@ const CartModal = (props: Props) => {
                 </div>
                 <div className='cart-row reassurances  flex items-center gap-sm justify-end'>
                   <div className='whitespace-nowrap flex gap-sm'>
-                    Secure checkout
+                    Secure checkout with Stripe
                   </div>
                 </div>
               </div>
