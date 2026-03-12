@@ -154,7 +154,7 @@ const AddToTmpCart = ({
           {isInCart && <span className='nfo text-blue'>In Cart</span>}
           <div className='checkbox-ui'>
             <input
-              checked={active || isInCart}
+              checked={active}
               onChange={() => {}}
               type='checkbox'
               name='atc'

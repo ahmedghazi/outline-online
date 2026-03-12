@@ -104,7 +104,7 @@ const ProductSingleOrBundle = ({
 
         <AddToTmpCart
           active={active}
-          // isInCart={isInCart}
+          isInCart={isInCart}
           productData={{
             bundleOrSingleKey: input._key || "",
             productType: type,
