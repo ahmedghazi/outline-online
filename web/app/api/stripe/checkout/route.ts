@@ -4,9 +4,8 @@ import { ProductData } from "@/app/types/extra-types";
 import { _licensesTypesToString } from "@/app/components/shop/utils";
 import website from "@/app/config/website";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export async function POST(req: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const { products } = (await req.json()) as { products: ProductData[] };
   console.log("req");
   if (!Array.isArray(products) || products.length === 0) {
