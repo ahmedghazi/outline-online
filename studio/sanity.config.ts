@@ -11,7 +11,7 @@ import {presentationTool} from 'sanity/presentation'
 import {linkResolverPreview} from './src/linkResolverPreview'
 
 const devOnlyPlugins = [getStartedPlugin()]
-const remoteURL = 'https://preprod-outline-online.vercel.app'
+const remoteURL = 'https://www.outline-online.com'
 const localURL = 'http://localhost:3000'
 const previewURL = window.location.hostname === 'localhost' ? localURL : remoteURL
 

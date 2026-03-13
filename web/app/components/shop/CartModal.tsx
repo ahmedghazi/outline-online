@@ -9,9 +9,9 @@ import {
   cartTotalPrice,
   cartSubtotal,
   cartHasDiscount,
+  _getPriceWithDiscount,
 } from "./utils";
 import CheckoutBtn from "./CheckoutBtn";
-import Image from "next/image";
 import { publish } from "pubsub-js";
 
 type Props = {};
@@ -27,17 +27,48 @@ const CartModal = (props: Props) => {
 
   useEffect(() => {
     // RESET BUY MODAL WHEN CART IS OPENED
-    // if (tab.name === "CART") {
-    //   tmpProducts.forEach((item) => {
-    //     // setTmpProducts({ type: "REMOVE_BY_SKU", payload: item.sku });
-    //     publish("TMP_PRODUCT_REMOVE", { sku: item.sku });
-    //   });
-    //   // setTmpProducts({ type: "REMOVE_ALL" });
-    // }
+    if (tab.name === "CART") {
+      tmpProducts.forEach((item) => {
+        publish("TMP_PRODUCT_REMOVE", { sku: item.sku });
+      });
+      setTmpProducts({ type: "REMOVE_ALL" });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab]);
 
   const _delete = (sku: string) => {
+    const deletedProduct = products.find((p) => p.sku === sku);
     setProducts({ type: "REMOVE_BY_SKU", payload: sku });
+    publish("TMP_PRODUCT_REMOVE", { sku: deletedProduct?.sku });
+
+    // If the deleted product was a regular typeface, remove the paired-italic discount
+    // from any italic in the cart that had a discount because of it
+    if (deletedProduct?.typefaceSlug) {
+      products.forEach((p) => {
+        if (
+          p.sku !== sku &&
+          p.relatedTypefaceSlug?.replace("-italic", "") ===
+            deletedProduct.typefaceSlug &&
+          (p.productDiscount || 0) > 0
+        ) {
+          const newTotalDiscount = p.licenseDiscount || 0;
+          const newFinalPrice =
+            newTotalDiscount > 0
+              ? _getPriceWithDiscount(p.price, newTotalDiscount)
+              : p.price;
+          setProducts({
+            type: "REPLACE",
+            payload: {
+              ...p,
+              applyDiscount: false,
+              productDiscount: 0,
+              totalDiscount: newTotalDiscount,
+              finalPrice: newFinalPrice,
+            },
+          });
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -57,13 +88,6 @@ const CartModal = (props: Props) => {
               <section className='cart-empty py-xl flex justify-center'>
                 <div className='flex flex-col items-center gap-md'>
                   <div className=''>Your cart is empty.</div>
-                  {/* <button
-                    className='ui-btn ui-btn__accent'
-                    onClick={() => {
-                      setTab({ name: "BUY", active: true });
-                    }}>
-                    Explore our catalogue
-                  </button> */}
                 </div>
               </section>
             )}
@@ -114,30 +138,7 @@ const CartModal = (props: Props) => {
                     </div>
                   </>
                 )}
-                {/* {hasAnyDiscount && (
-                  <div className='cart-row'>
-                    <div className='inner-grid'>
-                      <div className='label'>Sub Total</div>
-                      <div></div>
-                      <div className='value col-span-2'>
-                        <div className='price'>{cartSubtotal(products)}€</div>
-                      </div>
-                    </div>
-                  </div>
-                )} */}
-                {/* {hasAnyDiscount && (
-                  <div className='cart-row '>
-                    <div className='inner-grid'>
-                      <div className='title '>Discount</div>
-                      <div className='label'>Savings</div>
-                      <div className=' value col-span-2'>
-                        <div className='price'>
-                          -{cartTotalDiscount(products)}€
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )} */}
+
                 <div className='cart-row cart-row--totals mb-lg '>
                   <div className='inner-grid text-blue'>
                     <div className='title '>{!hasAnyDiscount ? "SUM" : ""}</div>
@@ -147,19 +148,9 @@ const CartModal = (props: Props) => {
                     </div>
                   </div>
                 </div>
-                <div className='cart-row reassurances  flex items-center gap-sm justify-between'>
-                  <div>
-                    Checkout is temporarily down for maintenance. Contact us at
-                    info[at]outline-online.com
-                  </div>
+                <div className='cart-row reassurances  flex items-center gap-sm justify-end'>
                   <div className='whitespace-nowrap flex gap-sm'>
-                    Secured by{" "}
-                    <Image
-                      src='/paddle-logo-light.png'
-                      alt='Paddle'
-                      width={50}
-                      height={18}
-                    />
+                    Secure checkout with Stripe
                   </div>
                 </div>
               </div>

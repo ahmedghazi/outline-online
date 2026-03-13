@@ -8,9 +8,11 @@ const CheckoutSuccess = () => {
   const [items, setItems] = React.useState<ProductData[]>([]);
 
   useEffect(() => {
-    const raw = localStorage?.getItem("oo-products");
+    const raw = localStorage?.getItem("oo-cart");
     const storedProducts = raw ? JSON.parse(raw) : [];
-    setItems(storedProducts?.value || []);
+    setItems(storedProducts);
+    // Clear cart after successful checkout
+    localStorage.removeItem("oo-cart");
   }, []);
 
   return (
@@ -48,9 +50,9 @@ const CheckoutError = () => {
   return (
     <div className='error'>
       <div className='header mb-1e !p-0'>
-        <h1>Error :(</h1>
+        <h1>Error :/</h1>
       </div>
-      <p>display some error message here</p>
+      <p>Please contact us to investigate the error.</p>
       <a href='mailto:hello@outlineonline.com'>Contact us</a>
     </div>
   );
@@ -63,7 +65,7 @@ const PostCheckoutContent = () => {
   return (
     <>
       {status === "success" && <CheckoutSuccess />}
-      {status === "canceled" && <CheckoutError />}
+      {status === "error" && <CheckoutError />}
     </>
   );
 };

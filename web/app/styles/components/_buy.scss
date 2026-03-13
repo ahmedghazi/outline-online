@@ -152,6 +152,20 @@
         &.group--singles {
           ._row.item:not(.is-price-crossed) {
             grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            .actions {
+              grid-column: span 2 / span 2;
+              flex-direction: column;
+              .add-to-cart > .flex {
+                // flex-direction: column;
+                white-space: nowrap;
+                gap: var(--space-sm);
+
+                .text-right {
+                  text-align: left;
+                }
+              }
+            }
           }
           ._row.item.is-price-crossed {
             .price .text-muted {

@@ -41,7 +41,7 @@ const CompositionTool = ({ input, pangram }: Props) => {
   const defaultStyle = _defaultStyle
     ? _defaultStyle[0].typeface?.slug?.current
     : input[0].typeface?.slug?.current;
-  // console.log(input);
+  console.log(defaultStyle);
   const [currentStyleName, setCurrentStyleName] = useState<string | undefined>(
     defaultStyle,
   );

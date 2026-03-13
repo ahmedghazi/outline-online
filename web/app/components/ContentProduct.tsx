@@ -35,13 +35,10 @@ const ContentProduct = ({ input }: Props) => {
 
     const len = input.pangrams.length - 1;
     const rand = Math.round(Math.random() * len);
-    console.log(len, rand);
     return input.pangrams[rand] !== ""
       ? input.pangrams[rand]
       : "24 wacky bandmates mixed zany rhythms, blowing jazzy saxophones and fixing broken xylophones for a quirky gig.";
   }, [input.pangrams]);
-
-  // const pangram = _gerRandomPangram;
 
   useEffect(() => {
     setCurrentProduct(input);

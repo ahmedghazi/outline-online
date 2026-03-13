@@ -4,7 +4,7 @@ import useShop from "./ShopContext";
 import { ProductData } from "@/app/types/extra-types";
 import { _getPriceWithDiscount } from "./utils";
 import clsx from "clsx";
-import { publish } from "pubsub-js";
+import { publish, subscribe, unsubscribe } from "pubsub-js";
 import { usePageContext } from "@/app/context/PageContext";
 
 type Props = {
@@ -89,6 +89,8 @@ const AddToTmpCart = ({
     }
 
     setMounted(true);
+
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -108,25 +110,22 @@ const AddToTmpCart = ({
           _productData.relatedTypefaceSlug?.replace("-italic", ""),
       );
 
-      if (relatedTypefaceRegularIsInTmpProducts) {
-        setApplyDiscount(true);
-      }
-      // console.log(products);
       const relatedTypefaceRegularIsInProducts = products.some(
         (el) =>
           el.typefaceSlug ===
           _productData.relatedTypefaceSlug?.replace("-italic", ""),
       );
 
-      if (relatedTypefaceRegularIsInProducts) {
+      if (
+        relatedTypefaceRegularIsInTmpProducts ||
+        relatedTypefaceRegularIsInProducts
+      ) {
         setApplyDiscount(true);
-      }
-
-      if (!relatedTypefaceRegularIsInTmpProducts) {
+      } else {
         setApplyDiscount(false);
       }
     }
-  }, [tmpProducts, _productData.relatedTypefaceSlug]);
+  }, [tmpProducts, products, _productData.relatedTypefaceSlug]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -145,21 +144,25 @@ const AddToTmpCart = ({
         setTmpProducts({ type: "REMOVE_BY_SKU", payload: _productData.sku });
       }
     }
-  }, [active, applyDiscount, priceMultiplier, hasMultipleLicenses]);
+  }, [mounted, active, applyDiscount, priceMultiplier, hasMultipleLicenses]);
 
   return (
     <div className={clsx("add-to-cart cursor-pointer bg-red-")}>
       <div className='flex justify-between'>
         <Price discount={combinedDiscount} price={_price} />
-        <div className='checkbox-ui'>
-          <input
-            checked={active || isInCart}
-            onChange={() => {}}
-            type='checkbox'
-            name='atc'
-          />
-          <span className='checkmark'></span>
+        <div className='flex gap-sm'>
+          {isInCart && <span className='nfo text-blue'>In Cart</span>}
+          <div className='checkbox-ui'>
+            <input
+              checked={active}
+              onChange={() => {}}
+              type='checkbox'
+              name='atc'
+            />
+            <span className='checkmark'></span>
+          </div>
         </div>
+        {/* {active && <span>active</span>} */}
       </div>
     </div>
   );

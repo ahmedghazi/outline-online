@@ -753,6 +753,13 @@ export interface Order extends SanityDocument {
   status?: string;
 
   /**
+   * Invoice PDF URL — `string`
+   *
+   *
+   */
+  invoicePdfUrl?: string;
+
+  /**
    * Invoice Number — `string`
    *
    *
