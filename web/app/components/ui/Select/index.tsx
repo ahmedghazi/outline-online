@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./index.scss";
 import { KeyValString, LicenseSize } from "@/app/types/schema";
 import clsx from "clsx";
@@ -11,7 +11,13 @@ type Props = {
   defaultValue?: string;
 };
 
-const Select = ({ label, options, onChange, disabled = false, defaultValue }: Props) => {
+const Select = ({
+  label,
+  options,
+  onChange,
+  disabled = false,
+  defaultValue,
+}: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLElement>(null);
 
@@ -36,6 +42,7 @@ const Select = ({ label, options, onChange, disabled = false, defaultValue }: Pr
         onFocus={(e) => setActive(true)}
         onBlur={(e) => setActive(false)}
         disabled={disabled}
+        id={`select-${defaultValue}`}
         onChange={(e) => {
           console.log(e.target.value);
           if (e.target.value) {
@@ -48,9 +55,13 @@ const Select = ({ label, options, onChange, disabled = false, defaultValue }: Pr
         }}
         defaultValue={
           defaultValue
-            ? JSON.stringify(options.find((item) =>
-                item._type === "keyValString" ? item.val === defaultValue : item.title === defaultValue
-              ) || options[0])
+            ? JSON.stringify(
+                options.find((item) =>
+                  item._type === "keyValString"
+                    ? item.key === defaultValue
+                    : item.title === defaultValue,
+                ) || options[0],
+              )
             : label === "" && options[0] && options[0]._type === "keyValString"
               ? JSON.stringify(options[0])
               : ""
@@ -62,14 +73,16 @@ const Select = ({ label, options, onChange, disabled = false, defaultValue }: Pr
         )}
         {options &&
           options.map((item, i) => (
-            <option
-              key={i}
-              value={JSON.stringify(item)}
-              // defaultValue={JSON.stringify(item)}
-            >
-              {item._type === "licenseSize" && item.title}
-              {item._type === "keyValString" && item.key}
-            </option>
+            <Fragment key={i}>
+              <option
+                value={JSON.stringify(item)}
+                // selected={item._type === "licenseSize" && item.title === label}
+                // defaultValue={JSON.stringify(item)}
+              >
+                {item._type === "licenseSize" && item.title}
+                {item._type === "keyValString" && item.key}
+              </option>
+            </Fragment>
           ))}
       </select>
       {!options && <div>Please provide some options</div>}

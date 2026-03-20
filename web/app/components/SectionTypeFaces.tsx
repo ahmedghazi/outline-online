@@ -21,10 +21,11 @@ type ItemProps = {
 };
 
 const Item = ({ input, defaultStyle }: ItemProps) => {
+  // console.log(input);
+
   const [active, setActive] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   const { type, dispatchType, isFontLoaded } = useType();
-  // console.log(type);
   const [text, setText] = useState<string>("");
 
   useEffect(() => {
@@ -95,6 +96,16 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
     }
   }, []);
 
+  const _defaultValue = useMemo(() => {
+    if (!input.singles) return;
+    const item: ProductSingle[] = input.singles.filter((el) => el.isDefault);
+    if (item && item.length === 1) {
+      return item[0].title;
+    } else {
+      return null;
+    }
+  }, []);
+
   return (
     <div className={clsx("typeface--item", active && "is-active")}>
       <div
@@ -119,7 +130,8 @@ const Item = ({ input, defaultStyle }: ItemProps) => {
                 options={_singles}
                 onChange={_handleStyles}
                 // label='Family'
-                label={_defaultLabel}
+                // label={_defaultLabel}
+                defaultValue={_defaultValue ? _defaultValue : undefined}
               />
             )}
           </>
@@ -147,7 +159,6 @@ type Props = {
 const SectionTypeFaces = ({ input }: Props) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const inViewport = useInViewPort(targetRef, { threshold: 0.5 });
-  // console.log(input);
   useEffect(() => {
     publish("IS_PRODUCT", inViewport);
   }, [inViewport]);
