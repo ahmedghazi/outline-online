@@ -73,6 +73,17 @@ export async function POST(req: NextRequest) {
       customer_creation: "always",
       invoice_creation: { enabled: true },
       allow_promotion_codes: true,
+      custom_fields: [
+        {
+          key: "licenseFor",
+          label: {
+            type: "custom",
+            custom: "License holder / Licensee",
+          },
+          type: "text",
+          optional: true,
+        },
+      ],
       success_url: `${website.url}/post-checkout?status=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${website.url}/`,
       metadata,
