@@ -11,11 +11,14 @@ export type ProductOrderData = {
   bundleOrSingleKey: string;
 };
 
+type CustomField = { key: string; val: string };
+
 type SendProps = {
   payload: any;
   client_name: string;
   destination: string;
   invoicePdfUrl?: string | null;
+  customFields?: CustomField[];
 };
 
 type OrderPayload = {
@@ -164,6 +167,7 @@ export const saveOrder = async (
   attachments: any,
   payloadRaw: any,
   invoicePdfUrl?: string | null,
+  customFields?: CustomField[],
 ) => {
   const { email, invoiceNumber, creationDate, status } = payload;
   const _attachments = attachments.map((item: any) => {
@@ -184,6 +188,7 @@ export const saveOrder = async (
           email: email,
           attachments: _attachments,
           invoicePdfUrl: invoicePdfUrl ?? null,
+          custom_fields: customFields ?? [],
           json: JSON.stringify(payloadRaw),
         },
       },
@@ -208,6 +213,7 @@ export const sendEmail = async ({
   client_name,
   payload,
   invoicePdfUrl,
+  customFields,
 }: SendProps) => {
   console.log("_sending to :", destination);
 
@@ -233,6 +239,10 @@ export const sendEmail = async ({
 
       <p>Your payment has been successfully processed. You'll find the font files here attached. If you run into any issues, please don't hesitate to get in touch.</p>
       ${invoicePdfUrl ? `<p><a href="${invoicePdfUrl}">Download your invoice (PDF)</a></p>` : ""}
+      ${customFields && customFields.length > 0 ? `
+      <table style="border-collapse:collapse;margin:16px 0">
+        ${customFields.map((f) => `<tr><td style="padding:4px 12px 4px 0;font-weight:bold">${f.key}</td><td style="padding:4px 0">${f.val}</td></tr>`).join("")}
+      </table>` : ""}
 
       <p>Best from,<br />
   Outline Online</p>

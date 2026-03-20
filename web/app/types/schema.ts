@@ -762,6 +762,13 @@ export interface Order extends SanityDocument {
   status?: string;
 
   /**
+   * Invoice PDF URL — `string`
+   *
+   *
+   */
+  invoicePdfUrl?: string;
+
+  /**
    * Invoice Number — `string`
    *
    *
@@ -788,6 +795,13 @@ export interface Order extends SanityDocument {
    *
    */
   attachments?: Array<SanityKeyed<LinkExternal>>;
+
+  /**
+   * Custom Fields — `array`
+   *
+   *
+   */
+  custom_fields?: Array<SanityKeyed<KeyValString>>;
 
   /**
    * json — `text`
@@ -948,6 +962,12 @@ export type LicenseSize = {
 export type TypefaceFile = {
   _type: "typefaceFile";
   asset: SanityReference<any>;
+  /**
+   * base64 — `string`
+   *
+   * for the front end (to prevent people from stealing it)
+   */
+  base64?: string;
 };
 
 export type ProductBundle = {

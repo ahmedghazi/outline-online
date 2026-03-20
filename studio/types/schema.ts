@@ -788,6 +788,13 @@ export interface Order extends SanityDocument {
   attachments?: Array<SanityKeyed<LinkExternal>>;
 
   /**
+   * Custom Fields — `array`
+   *
+   *
+   */
+  custom_fields?: Array<SanityKeyed<KeyValString>>;
+
+  /**
    * json — `text`
    *
    *

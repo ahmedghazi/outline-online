@@ -66,6 +66,12 @@ export default defineType({
       of: [{type: 'linkExternal'}],
     }),
     defineField({
+      name: 'custom_fields',
+      title: 'Custom Fields',
+      type: 'array',
+      of: [{type: 'keyValString'}],
+    }),
+    defineField({
       name: 'json',
       title: 'json',
       type: 'text',

@@ -99,6 +99,11 @@ export async function POST(req: NextRequest) {
         status: session.payment_status || "paid",
       };
 
+      const customFields = (session.custom_fields ?? []).map((f) => ({
+        key: f.label?.custom ?? f.key,
+        val: f.text?.value ?? f.numeric?.value ?? f.dropdown?.value ?? "",
+      }));
+
       const stored = await saveOrder(
         orderPayload,
         attachments,
@@ -114,6 +119,7 @@ export async function POST(req: NextRequest) {
           products,
         },
         invoicePdfUrl,
+        customFields,
       );
       console.log("Stored order", stored);
 
@@ -122,6 +128,7 @@ export async function POST(req: NextRequest) {
         client_name: clientName,
         payload: attachments,
         invoicePdfUrl,
+        customFields,
       });
     } catch (error) {
       console.error("Fulfillment error:", error);
