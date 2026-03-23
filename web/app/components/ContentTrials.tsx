@@ -42,7 +42,7 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
           <h2>{input.title}</h2>
         </div>
 
-        <div className='col-span-2 md:col-span-3 py-05e'>
+        <div className='col-span-2 md:col-span-4 py-05e'>
           <div className='grid md:grid-cols-4 gap-sm'>
             <div className='label hidden-sm'>Metadata</div>
             {input.singles && (
@@ -58,7 +58,7 @@ const TypeFaceItem = ({ input, defaultActive }: TypeFaceItemProps) => {
           </div>
         </div>
 
-        <div className='flex justify-end md:col-span-3 '>
+        <div className='flex justify-end md:col-span-2 '>
           {/* {defaultActive && "defaultActive"} */}
           <Checkbox
             name={input.title?.toLowerCase() || ""}

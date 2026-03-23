@@ -230,7 +230,7 @@ export const sendEmail = async ({
   const mailOptions = {
     from: process.env.SENDER_EMAIL,
     to: destination,
-    cc: "hello@ahmedghazi.com, info@outline-online.com",
+    // cc: "hello@ahmedghazi.com, info@outline-online.com",
     subject: "Your Outline Online fonts",
     html: `
       <div style="font-family:monospace,sans-serif">
