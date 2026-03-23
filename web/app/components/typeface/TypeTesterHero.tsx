@@ -98,7 +98,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
             key={i}
             className='item'
             style={{
-              fontSize: `clamp(5vh, ${size}vh, 8vh)`,
+              fontSize: `clamp(4vh, ${size}vh, 8vh)`,
               lineHeight: 1,
               opacity: isFontLoaded(item.regular?.typeface?.slug?.current || "")
                 ? 1
