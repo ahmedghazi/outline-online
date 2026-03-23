@@ -239,10 +239,14 @@ export const sendEmail = async ({
 
       <p>Your payment has been successfully processed. You'll find the font files here attached. If you run into any issues, please don't hesitate to get in touch.</p>
       ${invoicePdfUrl ? `<p><a href="${invoicePdfUrl}">Download your invoice (PDF)</a></p>` : ""}
-      ${customFields && customFields.length > 0 ? `
+      ${
+        customFields && customFields.length > 0
+          ? `
       <table style="border-collapse:collapse;margin:16px 0">
-        ${customFields.map((f) => `<tr><td style="padding:4px 12px 4px 0;font-weight:bold">${f.key}</td><td style="padding:4px 0">${f.val}</td></tr>`).join("")}
-      </table>` : ""}
+        ${customFields.map((f) => `<tr><td style="padding:4px 12px 4px 0;">${f.key}:</td><td style="padding:4px 0">${f.val}</td></tr>`).join("")}
+      </table>`
+          : ""
+      }
 
       <p>Best from,<br />
   Outline Online</p>

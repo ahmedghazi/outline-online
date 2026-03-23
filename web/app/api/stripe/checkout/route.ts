@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
             custom: "License holder / Licensee",
           },
           type: "text",
-          optional: true,
+          optional: false,
         },
       ],
       success_url: `${website.url}/post-checkout?status=success&session_id={CHECKOUT_SESSION_ID}`,
