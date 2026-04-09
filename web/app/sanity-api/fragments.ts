@@ -76,8 +76,8 @@ export const productCardLight = `
 	}
 `;
 
-export const moduleText = `
-	_type == 'moduleText' => {
+export const textUI = `
+	_type == 'textUI' => {
 		...,
 		text[]{
 			${blockContent}
@@ -85,15 +85,18 @@ export const moduleText = `
 	}
 `;
 
-export const moduleImage = `
-	_type == 'moduleImage' => {
+export const imageUI = `
+	_type == 'imageUI' => {
+		...,
+		image{
 		${figure}
+		}
 	}
 `;
 
-export const moduleImages = `
-	_type == 'moduleImages' => {
-		images[] {
+export const sliderUI = `
+	_type == 'sliderUI' => {
+		items[] {
 			...,
 			${figure}
 		}

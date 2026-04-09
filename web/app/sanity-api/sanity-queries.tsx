@@ -11,7 +11,15 @@ import {
   Trials,
 } from "../types/schema";
 // import { cache } from "react";
-import { figure, productCard, productCardLight, seo } from "./fragments";
+import {
+  figure,
+  imageUI,
+  productCard,
+  productCardLight,
+  seo,
+  sliderUI,
+  textUI,
+} from "./fragments";
 // import { client } from "./sanity.client";
 
 // export const cachedClient = cache(client.fetch.bind(client));
@@ -232,6 +240,12 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   ...,
   seo{
     ${seo}
+  },
+  content[]{
+    ...,
+    ${imageUI},
+    ${textUI},
+    ${sliderUI}
   },
   singles[]{
 		...,

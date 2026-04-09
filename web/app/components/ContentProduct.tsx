@@ -22,7 +22,6 @@ const ContentProduct = ({ input }: Props) => {
 
   const { type, dispatchType, dispatchTypes } = useType();
   const [ready, setReady] = useState<boolean>(false);
-  // console.log(input);
   // const _gerRandomPangram = (p: string[] | any) => {
   //    const len = p.length;
   //   const rand = Math.round(Math.random() * len);

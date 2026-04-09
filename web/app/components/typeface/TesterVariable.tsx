@@ -24,7 +24,11 @@ const TesterVariable = ({ axe, initialValue, target, min, max }: Props) => {
 
   const _update = () => {
     //font-variation-settings: "wght" 100, "ital" 0;
-    target.style.setProperty("--font-variation-settings", `"${axe}" ${value}`);
+    let axeTmp = axe === "mono" ? "MONO" : axe;
+    target.style.setProperty(
+      "--font-variation-settings",
+      `"${axeTmp}" ${value}`,
+    );
   };
 
   return (
