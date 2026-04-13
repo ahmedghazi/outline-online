@@ -11,7 +11,7 @@ type Props = {
 const ModuleSliderUI = ({ input }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [currentBounding, setCurrentBounding] = useState<DOMRect | undefined>(
-    undefined
+    undefined,
   );
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const ModuleSliderUI = ({ input }: Props) => {
     if (!ref.current) return;
 
     const currentSlide = ref.current?.querySelector(
-      `.slick-slide[data-index='${index}']`
+      `.slick-slide[data-index='${index}']`,
     );
     // console.log(currentSlide);
 
@@ -69,7 +69,7 @@ const ModuleSliderUI = ({ input }: Props) => {
       className={clsx(
         "module module--slider-ui",
         input.size && `md:col-span-${input.size}`,
-        currentBounding && "has-bounding"
+        currentBounding && "has-bounding",
       )}
       style={
         {
@@ -81,7 +81,7 @@ const ModuleSliderUI = ({ input }: Props) => {
       <Slider settingsOverride={settingsOverride}>
         {input.items?.map((item, i) => (
           <div className='slide' key={i}>
-            <Figure asset={item.image?.asset} width={600} />
+            <Figure asset={item.image?.asset} width={2000} />
             <figcaption className='py-2 pr-md'>{item.caption}</figcaption>
           </div>
         ))}
