@@ -76,5 +76,16 @@ export default defineType({
       title: 'json',
       type: 'text',
     }),
+    defineField({
+      name: 'emailSent',
+      title: 'Confirmation email sent',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'emailError',
+      title: 'Last email error',
+      type: 'string',
+    }),
   ],
 })

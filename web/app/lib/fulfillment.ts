@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
 import { Product } from "@/app/types/schema";
 import { ProductData } from "@/app/types/extra-types";
 import { client } from "@/app/sanity-api/sanity.client";
@@ -190,6 +190,7 @@ export const saveOrder = async (
           invoicePdfUrl: invoicePdfUrl ?? null,
           custom_fields: customFields ?? [],
           json: JSON.stringify(payloadRaw),
+          emailSent: false,
         },
       },
     ],
@@ -208,6 +209,58 @@ export const saveOrder = async (
   return result;
 };
 
+/**
+ * Looks up an existing order by Stripe checkout session id.
+ * Used for idempotency: order creation and email sending are tracked
+ * separately so a retried event can resume a failed email send
+ * without re-creating the Sanity order or re-attaching zips.
+ */
+export const getOrderStatus = async (
+  sessionId: string,
+): Promise<{ _id: string; emailSent?: boolean } | null> => {
+  return client.fetch(
+    `*[_type == "order" && invoiceNumber == $inv][0]{ _id, emailSent }`,
+    { inv: `#${sessionId}` },
+  );
+};
+
+export const patchOrderEmailStatus = async (
+  orderId: string,
+  emailSent: boolean,
+  emailError?: string,
+) => {
+  const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
+  await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${process.env.SANITY_API_READ_TOKEN}`,
+    },
+    body: JSON.stringify({
+      mutations: [
+        {
+          patch: {
+            id: orderId,
+            set: {
+              emailSent,
+              emailError: emailError ?? null,
+            },
+          },
+        },
+      ],
+    }),
+  });
+};
+
+const withTimeout = <T>(promise: Promise<T>, ms: number, label: string): Promise<T> => {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms),
+    ),
+  ]);
+};
+
 export const sendEmail = async ({
   destination,
   client_name,
@@ -217,49 +270,71 @@ export const sendEmail = async ({
 }: SendProps) => {
   console.log("_sending to :", destination);
 
-  const transporter = nodemailer.createTransport({
-    host: "asmtp.mail.hostpoint.ch",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.SENDER_EMAIL,
-      pass: process.env.SENDER_PASSWORD,
-    },
-  });
-
-  const mailOptions = {
-    from: process.env.SENDER_EMAIL,
-    to: destination,
-    cc: "info@outline-online.com",
-    subject: "Your Outline Online fonts",
-    html: `
-      <div style="font-family:monospace,sans-serif">
-      <p>Dear ${client_name},</p>
-      <p>Thank you for your order with Outline Online!</p>
-
-      <p>Your payment has been successfully processed. You'll find the font files here attached. If you run into any issues, please don't hesitate to get in touch.</p>
-      ${invoicePdfUrl ? `<p><a href="${invoicePdfUrl}">Download your invoice (PDF)</a></p>` : ""}
-      ${
-        customFields && customFields.length > 0
-          ? `
-      <table style="border-collapse:collapse;margin:16px 0">
-        ${customFields.map((f) => `<tr><td style="padding:4px 12px 4px 0;">${f.key}:</td><td style="padding:4px 0">${f.val}</td></tr>`).join("")}
-      </table>`
-          : ""
-      }
-
-      <p>Best from,<br />
-  Outline Online</p>
-
-      <p>P.S. We'd also love to see our typefaces in use, so feel free to send us images of your work anytime!</p>
-
-      </div>
-    `,
-    attachments: payload,
-  };
+  if (!process.env.SENDGRID_API_KEY) {
+    return {
+      status: "error" as const,
+      raw: new Error("SENDGRID_API_KEY is not configured"),
+    };
+  }
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   try {
-    const res = await transporter.sendMail(mailOptions);
+    const attachments = await Promise.all(
+      (payload as Array<{ filename: string; path: string }>).map(
+        async (item) => {
+          const res = await withTimeout(
+            fetch(item.path),
+            10000,
+            `Download ${item.filename}`,
+          );
+          if (!res.ok) {
+            throw new Error(
+              `Failed to download attachment ${item.filename}: ${res.status}`,
+            );
+          }
+          const buffer = Buffer.from(await res.arrayBuffer());
+          return {
+            filename: item.filename,
+            content: buffer.toString("base64"),
+            type: "application/zip",
+            disposition: "attachment",
+          };
+        },
+      ),
+    );
+
+    const msg = {
+      from: process.env.SENDER_EMAIL!,
+      to: destination,
+      cc: "info@outline-online.com",
+      subject: "Your Outline Online fonts",
+      html: `
+        <div style="font-family:monospace,sans-serif">
+        <p>Dear ${client_name},</p>
+        <p>Thank you for your order with Outline Online!</p>
+
+        <p>Your payment has been successfully processed. You'll find the font files here attached. If you run into any issues, please don't hesitate to get in touch.</p>
+        ${invoicePdfUrl ? `<p><a href="${invoicePdfUrl}">Download your invoice (PDF)</a></p>` : ""}
+        ${
+          customFields && customFields.length > 0
+            ? `
+        <table style="border-collapse:collapse;margin:16px 0">
+          ${customFields.map((f) => `<tr><td style="padding:4px 12px 4px 0;">${f.key}:</td><td style="padding:4px 0">${f.val}</td></tr>`).join("")}
+        </table>`
+            : ""
+        }
+
+        <p>Best from,<br />
+    Outline Online</p>
+
+        <p>P.S. We'd also love to see our typefaces in use, so feel free to send us images of your work anytime!</p>
+
+        </div>
+      `,
+      attachments,
+    };
+
+    const res = await withTimeout(sgMail.send(msg), 15000, "SendGrid send");
     console.log(res);
     return {
       status: "success" as const,

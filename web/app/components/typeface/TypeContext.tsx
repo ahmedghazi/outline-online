@@ -57,23 +57,29 @@ TypeContextProps) => {
 
   const isFontLoaded = useCallback(
     (slug: string) => loadedFonts.has(slug),
-    [loadedFonts]
+    [loadedFonts],
   );
 
-  const loadFont = useCallback(async (item: Typeface) => {
-    if (!item || !item.slug) return;
+  const loadFont = useCallback(
+    async (item: Typeface) => {
+      if (!item || !item.slug) return;
 
-    const slug = item.slug.current || "";
-    if (loadedFonts.has(slug)) return;
+      const slug = item.slug.current || "";
+      if (loadedFonts.has(slug)) return;
+      console.log("Loading font:", slug);
+      const fontUrl = getFontUrl(item.typefaceFile);
+      console.log("fontUrl:", fontUrl);
 
-    const fontUrl = getFontUrl(item.typefaceFile);
-    if (!fontUrl) return;
+      if (!fontUrl) return;
 
-    const font = new FontFace(slug, `url(${fontUrl})`);
-    await font.load();
-    document.fonts.add(font);
-    setLoadedFonts((prev) => new Set(prev).add(slug));
-  }, [loadedFonts]);
+      const font = new FontFace(slug, `url(${fontUrl})`);
+      console.log(font);
+      await font.load();
+      document.fonts.add(font);
+      setLoadedFonts((prev) => new Set(prev).add(slug));
+    },
+    [loadedFonts],
+  );
 
   useEffect(() => {
     if (type) loadFont(type);
@@ -85,7 +91,15 @@ TypeContextProps) => {
   }, [type, types, loadFont]);
 
   return (
-    <TypeContext.Provider value={{ type, dispatchType, types, dispatchTypes, loadedFonts, isFontLoaded }}>
+    <TypeContext.Provider
+      value={{
+        type,
+        dispatchType,
+        types,
+        dispatchTypes,
+        loadedFonts,
+        isFontLoaded,
+      }}>
       {children}
     </TypeContext.Provider>
   );
