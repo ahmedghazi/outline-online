@@ -29,15 +29,17 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
   const items = useMemo(() => {
     let arr: Item[] = [];
 
-    // Script variants (Georgian, Greek, ...) can share a style value
-    // (e.g. "regular") with the base License family. They're distinct
+    // Non-Latin variants (Georgian, Greek, ...) can share a style value
+    // (e.g. "regular") with the base Latin family. They're distinct
     // typefaces, not weight duplicates, so each gets its own row instead
-    // of being deduped away by style.
+    // of being deduped away by style. Checks for the "Non-Latin" tag
+    // specifically (not the absence of "Latin") — see the categories
+    // field description on productSingle in the Studio schema.
     const familyItems = input.filter(
-      (item) => !item.categories?.includes("Scripts"),
+      (item) => !item.categories?.includes("Non-Latin"),
     );
     const scriptItems = input.filter((item) =>
-      item.categories?.includes("Scripts"),
+      item.categories?.includes("Non-Latin"),
     );
 
     const allStyles = familyItems.map((item) => item.typeface?.style);

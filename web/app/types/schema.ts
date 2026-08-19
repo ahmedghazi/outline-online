@@ -809,6 +809,20 @@ export interface Order extends SanityDocument {
    *
    */
   json?: string;
+
+  /**
+   * Confirmation email sent — `boolean`
+   *
+   *
+   */
+  emailSent?: boolean;
+
+  /**
+   * Last email error — `string`
+   *
+   *
+   */
+  emailError?: string;
 }
 
 /**
@@ -1095,9 +1109,9 @@ export type ProductSingle = {
   descriptionAlt?: string;
 
   /**
-   * categories — `array`
+   * Categories — `array`
    *
-   * Used for discounts
+   * "License" = sellable Latin weight (Thin/Light/Regular/...). "Scripts" = non-Latin script variant (Georgian, Greek, ...). "Non-Latin" is the signal the site's type-tester hero uses to keep script variants from collapsing into a Latin weight row of the same style name (e.g. both "Regular") — always tag script variants with it, since they may also carry "Latin" (their glyph set includes Latin characters too, which is not the same as the "License" family membership).
    */
   categories?: Array<SanityKeyed<string>>;
 

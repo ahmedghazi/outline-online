@@ -54,12 +54,29 @@ export default defineField({
     }),
     defineField({
       name: 'categories',
-      description: 'Used for discounts',
+      title: 'Categories',
+      description:
+        '"License" = sellable Latin weight (Thin/Light/Regular/...). "Scripts" = non-Latin script variant (Georgian, Greek, ...). "Non-Latin" is the signal the site\'s type-tester hero uses to keep script variants from collapsing into a Latin weight row of the same style name (e.g. both "Regular") — always tag script variants with it, since they may also carry "Latin" (their glyph set includes Latin characters too, which is not the same as the "License" family membership).',
       type: 'array',
       of: [{type: 'string'}],
       options: {
         layout: 'tags',
+        list: [
+          {title: 'License', value: 'License'},
+          {title: 'Scripts', value: 'Scripts'},
+          {title: 'Latin', value: 'Latin'},
+          {title: 'Non-Latin', value: 'Non-Latin'},
+        ],
       },
+      validation: (Rule) =>
+        Rule.custom((categories?: string[]) => {
+          if (!categories || categories.length === 0) return true
+          const allowed = ['License', 'Scripts', 'Latin', 'Non-Latin']
+          const invalid = categories.filter((c) => !allowed.includes(c))
+          return invalid.length === 0
+            ? true
+            : `Unknown categor${invalid.length > 1 ? 'ies' : 'y'}: ${invalid.join(', ')}. Allowed: ${allowed.join(', ')}`
+        }),
     }),
     defineField({
       title: 'Price',
