@@ -28,7 +28,19 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
   // console.log("input", input);
   const items = useMemo(() => {
     let arr: Item[] = [];
-    const allStyles = input.map((item) => item.typeface?.style);
+
+    // Script variants (Georgian, Greek, ...) can share a style value
+    // (e.g. "regular") with the base License family. They're distinct
+    // typefaces, not weight duplicates, so each gets its own row instead
+    // of being deduped away by style.
+    const familyItems = input.filter(
+      (item) => !item.categories?.includes("Scripts"),
+    );
+    const scriptItems = input.filter((item) =>
+      item.categories?.includes("Scripts"),
+    );
+
+    const allStyles = familyItems.map((item) => item.typeface?.style);
     let filteredStyles = allStyles.filter(
       (item) => item?.toLowerCase().indexOf("italic") === -1,
     );
@@ -49,14 +61,16 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
       };
 
       // matching item with desired style
-      const items = input.filter((item) => item.typeface?.style === style);
+      const items = familyItems.filter(
+        (item) => item.typeface?.style === style,
+      );
       const item = items[0];
       if (item) {
         obj.regular = item;
       }
 
       // collect corresponding italic items
-      const italicItems = input.filter(
+      const italicItems = familyItems.filter(
         (item) => item.typeface?.style === `${style}Italic`,
       );
       const itemItalic = italicItems[0];
@@ -65,6 +79,10 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
       }
       // console.log(obj);
       arr.push(obj);
+    });
+
+    scriptItems.forEach((item) => {
+      arr.push({ regular: item, italic: undefined });
     });
     // console.log(arr);
     return arr;

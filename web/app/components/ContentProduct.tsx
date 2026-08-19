@@ -12,7 +12,7 @@ type Props = {
 };
 
 const ContentProduct = ({ input }: Props) => {
-  console.log(input.singles);
+  // console.log(input.singles);
   const {
     setCurrentProduct,
     // licenseTypeProfil,
@@ -21,7 +21,7 @@ const ContentProduct = ({ input }: Props) => {
   } = useShop();
 
   const { type, dispatchType, dispatchTypes } = useType();
-  console.log("type", type);
+  // console.log("type", type);
   const [ready, setReady] = useState<boolean>(false);
   // const _gerRandomPangram = (p: string[] | any) => {
   //    const len = p.length;
@@ -65,6 +65,7 @@ const ContentProduct = ({ input }: Props) => {
     input.singles?.forEach((el) => {
       if (el.typeface) arr.push(el.typeface as Typeface);
     });
+    console.log(arr);
     dispatchTypes(arr);
   };
 

@@ -66,7 +66,7 @@ TypeContextProps) => {
 
       const slug = item.slug.current || "";
       if (loadedFonts.has(slug)) return;
-      console.log("Loading font:", slug);
+      // console.log("Loading font:", slug);
       const fontUrl = getFontUrl(item.typefaceFile);
       console.log("fontUrl:", fontUrl);
 
