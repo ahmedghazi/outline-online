@@ -4,10 +4,15 @@
 //     url("./fonts/Literature-Regular.woff2") format("woff2");
 //   font-display: swap;
 // }
+// @font-face {
+//   font-family: "OOArketa-Regular";
+//   src: url("./fonts/OOArketa-Regular.woff") format("woff"),
+//     url("./fonts/OOArketa-Regular.woff2") format("woff2");
+//   font-display: swap;
+// }
 @font-face {
   font-family: "OOArketa-Regular";
-  src: url("./fonts/OOArketa-Regular.woff") format("woff"),
-    url("./fonts/OOArketa-Regular.woff2") format("woff2");
+  src: url("./fonts/OOArketaGlobal-Regular.woff2") format("woff2");
   font-display: swap;
 }
 //OOArketa-Regular
