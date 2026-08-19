@@ -1,4 +1,4 @@
-import sgMail from "@sendgrid/mail";
+import { Resend } from "resend";
 import { Product } from "@/app/types/schema";
 import { ProductData } from "@/app/types/extra-types";
 import { client } from "@/app/sanity-api/sanity.client";
@@ -270,13 +270,13 @@ export const sendEmail = async ({
 }: SendProps) => {
   console.log("_sending to :", destination);
 
-  if (!process.env.SENDGRID_API_KEY) {
+  if (!process.env.RESEND_API_KEY) {
     return {
       status: "error" as const,
-      raw: new Error("SENDGRID_API_KEY is not configured"),
+      raw: new Error("RESEND_API_KEY is not configured"),
     };
   }
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
     const attachments = await Promise.all(
@@ -295,9 +295,7 @@ export const sendEmail = async ({
           const buffer = Buffer.from(await res.arrayBuffer());
           return {
             filename: item.filename,
-            content: buffer.toString("base64"),
-            type: "application/zip",
-            disposition: "attachment",
+            content: buffer,
           };
         },
       ),
@@ -334,11 +332,16 @@ export const sendEmail = async ({
       attachments,
     };
 
-    const res = await withTimeout(sgMail.send(msg), 15000, "SendGrid send");
-    console.log(res);
+    const { data, error } = await withTimeout(
+      resend.emails.send(msg),
+      15000,
+      "Resend send",
+    );
+    if (error) throw error;
+    console.log(data);
     return {
       status: "success" as const,
-      raw: res,
+      raw: data,
     };
   } catch (error) {
     console.log(error);
