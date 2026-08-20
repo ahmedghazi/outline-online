@@ -62,6 +62,7 @@ export default defineField({
       options: {
         layout: 'tags',
         list: [
+          {title: 'Language Extensions', value: 'Language-Extensions'},
           {title: 'License', value: 'License'},
           {title: 'Scripts', value: 'Scripts'},
           {title: 'Latin', value: 'Latin'},
@@ -71,7 +72,7 @@ export default defineField({
       validation: (Rule) =>
         Rule.custom((categories?: string[]) => {
           if (!categories || categories.length === 0) return true
-          const allowed = ['License', 'Scripts', 'Latin', 'Non-Latin']
+          const allowed = ['License', 'Scripts', 'Latin', 'Non-Latin', 'Language-Extensions']
           const invalid = categories.filter((c) => !allowed.includes(c))
           return invalid.length === 0
             ? true

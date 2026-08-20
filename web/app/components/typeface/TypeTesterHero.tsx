@@ -29,20 +29,20 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
   const items = useMemo(() => {
     let arr: Item[] = [];
 
-    // Non-Latin variants (Georgian, Greek, ...) can share a style value
+    // Language-Extensions variants (Georgian, Greek, ...) can share a style value
     // (e.g. "regular") with the base Latin family. They're distinct
     // typefaces, not weight duplicates, so each gets its own row instead
-    // of being deduped away by style. Checks for the "Non-Latin" tag
+    // of being deduped away by style. Checks for the "Language-Extensions" tag
     // specifically (not the absence of "Latin") — see the categories
     // field description on productSingle in the Studio schema.
-    const familyItems = input.filter(
-      (item) => !item.categories?.includes("Non-Latin"),
+    const extendedStyles = input.filter(
+      (item) => !item.categories?.includes("Language-Extensions"),
     );
-    const scriptItems = input.filter((item) =>
-      item.categories?.includes("Non-Latin"),
+    const coreStyles = input.filter((item) =>
+      item.categories?.includes("Language-Extensions"),
     );
 
-    const allStyles = familyItems.map((item) => item.typeface?.style);
+    const allStyles = extendedStyles.map((item) => item.typeface?.style);
     let filteredStyles = allStyles.filter(
       (item) => item?.toLowerCase().indexOf("italic") === -1,
     );
@@ -63,7 +63,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
       };
 
       // matching item with desired style
-      const items = familyItems.filter(
+      const items = extendedStyles.filter(
         (item) => item.typeface?.style === style,
       );
       const item = items[0];
@@ -72,7 +72,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
       }
 
       // collect corresponding italic items
-      const italicItems = familyItems.filter(
+      const italicItems = extendedStyles.filter(
         (item) => item.typeface?.style === `${style}Italic`,
       );
       const itemItalic = italicItems[0];
@@ -83,7 +83,7 @@ const TypeTesterHero = ({ input, pangram }: Props) => {
       arr.push(obj);
     });
 
-    scriptItems.forEach((item) => {
+    coreStyles.forEach((item) => {
       arr.push({ regular: item, italic: undefined });
     });
     // console.log(arr);
